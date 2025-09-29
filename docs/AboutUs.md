@@ -9,6 +9,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Yeo Yong Xuan
+
+<img src="images/yoyongxuan.png" width="200px">
+
+[[github](https://github.com/yoyongxuan)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Team Member
+
 ### Rae Yen
 
 <img src="images/meltedham.png" width="200px">
@@ -17,6 +26,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/meltedham.md)]
 
 * Role: Team Member
+
 ### De Heng
 
 <img src="images/ndhhh.png" width="200px">
