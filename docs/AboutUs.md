@@ -9,6 +9,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### De Heng
+
+<img src="images/ndhhh.png" width="200px">
+
+[[github](https://github.com/ndhhh)]
+[[portfolio](team/ndhhh.md)]
+
+* Role: Developer
+
 ### Jotham Wong
 
 <img src="images/jothamwong.png" width="200px">
