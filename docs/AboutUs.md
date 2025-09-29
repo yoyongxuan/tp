@@ -45,3 +45,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI
+
+### Jeremy Ang
+
+<img src="images/jeremy-a-0808.png" width="200px">
+
+[[github](http://github.com/jeremy-a-0808)]
+[[portfolio](team/jeremy-a-0808.md)]
+
+* Role: Developer
+* Responsibilities: UI
+
