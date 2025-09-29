@@ -9,6 +9,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Rae Yen
+
+<img src="images/meltedham.png" width="200px">
+
+[[github](https://github.com/meltedham)]
+[[portfolio](team/meltedham.md)]
+
+* Role: Team Member
 ### De Heng
 
 <img src="images/ndhhh.png" width="200px">
