@@ -17,3 +17,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/ndhhh.md)]
 
 * Role: Developer
+
+### Jotham Wong
+
+<img src="images/jothamwong.png" width="200px">
+
+[[github](http://github.com/jothamwong)]
+[[portfolio](team/jothamwong.md)]
+
+* Role: Developer
+* Responsibilities: UI
