@@ -327,6 +327,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **CLI**: Command-Line Interface - A text-based interface for interacting with the AddressBook by typing commands
+* **GUI**: Graphical User Interface - A visual interface that uses windows, buttons and menus, which is not the primary interface of the app
+* **CS1101S**: Programming Methodology module for NUS Computer Science students.
+* **TA**: Teaching Assistant - The target users of the app
+* **Avenger**: CS1101S TA
+* **Cadet**: CS1101S Student
 
 --------------------------------------------------------------------------------------------------------------------
 
