@@ -296,30 +296,200 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a student contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add student contact, inputting student's ID, name and contact details
+2.  AddressBook creates student contact
+3.  AddressBook displays student contact
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. Student details missing in input.
+    * 1a1. AddressBook shows an error message
+  
+      Use case ends.
+
+* 1b. A contact with the given student ID already exists.
+    * 1b1. AddressBook shows an error message
+
+      Use case ends.
+
+
+
+**Use case: Delete a student contact**
+
+**MSS**
+
+1.  User requests to <u>list students</u>
+2.  User requests to delete a specific student in the list
+3.  AddressBook deletes the student's contact
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 2a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
 
+
+**Use case: View a student contact**
+
+**MSS**
+
+1.  User requests to <u>list students</u>
+2.  User requests to view a specific student in the list
+3.  AddressBook displays the student's contact
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. The given index is invalid.
+
+    * 2a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Record a student's grade**
+
+**MSS**
+
+1.  User requests to <u>list students</u>
+2.  User requests to record grade of a specific student in the list, inputting test name, score and total score
+3.  AddressBook updates student's record
+4.  AddressBook displays student's grade
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. The given index is invalid.
+
+    * 2a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+* 2b. Details missing in input.
+
+    * 2b1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+* 2c. Details are not in an acceptable format.
+
+    * 2c1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: View a student's grade**
+
+**MSS**
+
+1.  User requests to <u>list students</u>
+2.  User requests to view grades of a specific student in the list 
+3.  AddressBook displays all the student's recorded grades
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. The given index is invalid.
+
+    * 2a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Record a student's attendance**
+
+**MSS**
+
+1.  User requests to <u>list students</u>
+2.  User requests to record attendance  of a specific student in the list, inputting class name
+3.  AddressBook updates student's attendance
+4.  AddressBook displays student's attendance
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. The given index is invalid.
+
+    * 2a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+* 2b. Details missing in input.
+
+    * 2b1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: View a student's attendance**
+
+**MSS**
+
+1.  User requests to <u>list students</u>
+2.  User requests to view attendance of a specific student in the list
+3.  AddressBook displays all the student's recorded attendance
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. The given index is invalid.
+
+    * 2a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+    
+**Use case: list all students**
+
+**MSS**
+
+1.  User requests to list students
+2.  AddressBook shows a list of persons
+
+    Use case ends.
+
+
 *{More to be added}*
+
+
+
 
 ### Non-Functional Requirements
 
