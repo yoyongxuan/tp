@@ -9,9 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class StudentId {
 
-    public static final String MESSAGE_CONSTRAINTS = "Student IDs should contain e as their first character and be "
-            + "followed by 7 numeric characters, and it should not be blank.";
-    public static final String VALIDATION_REGEX = "^e\\d{7}$";
+    public static final String MESSAGE_CONSTRAINTS = "Student IDs should contain A as their first character and be "
+            + "followed by 8 numeric characters and ending with an alphabetic character, and it should not be blank.";
+    public static final String VALIDATION_REGEX = "^A\\d{8}[a-zA-Z]$";
 
     public final String value;
 
