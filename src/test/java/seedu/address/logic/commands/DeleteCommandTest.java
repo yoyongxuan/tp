@@ -9,6 +9,8 @@ import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalStudentIds.STUDENT_ID_A;
+import static seedu.address.testutil.TypicalStudentIds.STUDENT_ID_B;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,6 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.StudentId;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -42,11 +45,33 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_validStudentIdUnfilteredList_success() {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(personToDelete.getStudentId());
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete));
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidStudentIdUnfilteredList_throwsCommandException() {
+        StudentId nonExistentStudentId = new StudentId("A9999999A");
+        DeleteCommand deleteCommand = new DeleteCommand(nonExistentStudentId);
+
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_STUDENT_ID_DISPLAYED_INDEX);
     }
 
     @Test
@@ -83,13 +108,19 @@ public class DeleteCommandTest {
     public void equals() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
         DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        DeleteCommand deleteThirdCommand = new DeleteCommand(STUDENT_ID_A);
+        DeleteCommand deleteFourthCommand = new DeleteCommand(STUDENT_ID_B);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+        assertTrue(deleteThirdCommand.equals(deleteThirdCommand));
 
         // same values -> returns true
         DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+
+        DeleteCommand deleteThirdCommandCopy = new DeleteCommand(STUDENT_ID_A);
+        assertTrue(deleteThirdCommand.equals(deleteThirdCommandCopy));
 
         // different types -> returns false
         assertFalse(deleteFirstCommand.equals(1));
@@ -99,6 +130,8 @@ public class DeleteCommandTest {
 
         // different person -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+        // different student id -> returns false
+        assertFalse(deleteThirdCommand.equals(deleteFourthCommand));
     }
 
     @Test
