@@ -45,12 +45,12 @@ public class StudentId {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Email)) {
+        if (!(other instanceof StudentId)) {
             return false;
         }
 
-        Email otherEmail = (Email) other;
-        return value.equals(otherEmail.value);
+        StudentId otherStudentId = (StudentId) other;
+        return value.equals(otherStudentId.value);
     }
 
     @Override
