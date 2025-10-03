@@ -14,8 +14,6 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENT_ID_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENT_ID_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
@@ -134,8 +132,8 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-        assertParseSuccess(parser, STUDENT_ID_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY +
-                        EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
+        assertParseSuccess(parser, STUDENT_ID_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY
+                        + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
                 new AddCommand(expectedPerson));
     }
 
@@ -175,8 +173,8 @@ public class AddCommandParserTest {
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
-        assertParseFailure(parser, STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
-                + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC
+                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
