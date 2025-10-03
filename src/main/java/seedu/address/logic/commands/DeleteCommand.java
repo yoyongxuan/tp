@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_STUDENT_ID_DISPLAYED_INDEX;
 
 import java.util.List;
 
@@ -64,7 +65,7 @@ public class DeleteCommand extends Command {
         Person personToDelete = model.getFilteredPersonList().stream()
                 .filter(person -> person.getStudentId().equals(targetStudentId))
                 .findFirst()
-                .orElseThrow(() -> new CommandException("Person with student id not found!"));
+                .orElseThrow(() -> new CommandException(MESSAGE_INVALID_STUDENT_ID_DISPLAYED_INDEX));
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
