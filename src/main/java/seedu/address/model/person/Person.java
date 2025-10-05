@@ -17,6 +17,15 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
 
+    /**
+     * Comparator of a person through their name
+     */
+    public static final Comparator<Person> NAME_COMPARATOR =
+            Comparator.<Person, String>comparing((Person p) -> p.getName().fullName);
+
+    // TODO: Add comparison by grades when grades are implemented
+    public static final Comparator<Person> GRADE_COMPARATOR = null;
+
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -26,15 +35,6 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-
-    /**
-     * Comparator of a person through their name
-     */
-    public static final Comparator<Person> NAME_COMPARATOR =
-            Comparator.<Person, String>comparing((Person p) -> p.getName().fullName);
-
-    // TODO: Add comparison by grades when grades are implemented
-    public static final Comparator<Person> GRADE_COMPARATOR = null;
 
     /**
      * Every field must be present and not null.
