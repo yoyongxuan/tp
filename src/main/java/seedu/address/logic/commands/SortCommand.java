@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -48,6 +48,8 @@ public class SortCommand extends Command {
         case "g/":
             // TODO: model.sortPersonsByGrade();
             throw new CommandException(MESSAGE_NOT_IMPLEMENTED_YET);
+        default:
+            throw new CommandException(MESSAGE_USAGE);
         }
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
@@ -55,9 +57,13 @@ public class SortCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) return true;
+        if (other == this) {
+            return true;
+        }
 
-        if (!(other instanceof SortCommand)) return false;
+        if (!(other instanceof SortCommand)) {
+            return false;
+        }
 
         SortCommand c = (SortCommand) other;
         return this.prefix.equals(c.prefix);

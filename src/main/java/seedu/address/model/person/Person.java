@@ -28,6 +28,15 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     /**
+     * Comparator of a person through their name
+     */
+    public static final Comparator<Person> NAME_COMPARATOR =
+            Comparator.<Person, String>comparing((Person p) -> p.getName().fullName);
+
+    // TODO: Add comparison by grades when grades are implemented
+    public static final Comparator<Person> GRADE_COMPARATOR = null;
+
+    /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, StudentId studentId, Address address, Set<Tag> tags) {
@@ -39,16 +48,6 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
     }
-
-    /**
-     * Comparator of a person through their name
-     */
-    public static Comparator<Person> NAME_COMPARATOR =
-            Comparator.<Person, String>comparing((Person p) -> p.getName().fullName);
-
-    // TODO: Add comparison by grades when grades are implemented
-    public static Comparator<Person> GRADE_COMPARATOR =
-            null;
 
     public Name getName() {
         return name;
