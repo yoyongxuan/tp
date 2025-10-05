@@ -26,7 +26,8 @@ public class AttendCommandTest {
 
         AttendCommand attendCommand = new AttendCommand(INDEX_FIRST_PERSON, 1);
 
-        String expectedMessage = String.format(AttendCommand.MESSAGE_ADD_ATTENDANCE_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(AttendCommand.MESSAGE_ADD_ATTENDANCE_SUCCESS,
+                Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);

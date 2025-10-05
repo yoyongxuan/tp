@@ -106,6 +106,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Attendance} of the {@code Person} that we are building.
+     */
     public PersonBuilder withAttendance(String attendance) {
         this.attendance = new Attendance(attendance);
         return this;
