@@ -59,8 +59,7 @@ public class AttendCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getStudentId(),
-                personToEdit.getAddress(), personToEdit.getAttendance().addAttendance(tutorial),
-                personToEdit.getTags());
+                personToEdit.getAttendance().addAttendance(tutorial), personToEdit.getTags());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

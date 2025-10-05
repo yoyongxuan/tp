@@ -42,14 +42,13 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, StudentId studentId, Address address, Attendance attendance,
+    public Person(Name name, Phone phone, Email email, StudentId studentId, Attendance attendance,
                   Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, attendance, tags);
+        requireAllNonNull(name, phone, email, attendance, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.studentId = studentId;
-        this.address = address;
         this.attendance = attendance;
         this.tags.addAll(tags);
     }
