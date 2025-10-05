@@ -63,7 +63,7 @@ public class SortCommand extends Command {
         return this.prefix.equals(c.prefix);
     }
 
-    @Override 
+    @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("Prefix", prefix)
