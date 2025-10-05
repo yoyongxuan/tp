@@ -54,6 +54,9 @@ public class Attendance {
         return true;
     }
 
+    /**
+     * Updates attendance for given tutorial number
+     */
     public Attendance addAttendance(int tutorialNumber) {
         String currentAttendance = this.toJson();
         String[] attendanceSplit = currentAttendance.split(" ");
