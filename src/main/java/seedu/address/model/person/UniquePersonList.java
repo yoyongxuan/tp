@@ -97,7 +97,7 @@ public class UniquePersonList implements Iterable<Person> {
 
         internalList.setAll(persons);
     }
-    
+
     /**
      * Sorts the list based on the comparator.
      * @param comparator The comparator to sort the list around.

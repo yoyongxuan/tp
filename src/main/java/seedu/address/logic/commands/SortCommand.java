@@ -19,9 +19,9 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Sorted all persons";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD 
-            + ": Sorts the list of people. Use either " 
-            + PREFIX_NAME + " for sorting by names, or " 
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Sorts the list of people. Use either "
+            + PREFIX_NAME + " for sorting by names, or "
             + PREFIX_GRADE + " for sorting by grades (yet to be implemented)\n"
             + "Examples: sort " + PREFIX_NAME + " or sort " + PREFIX_GRADE;
 
@@ -37,7 +37,7 @@ public class SortCommand extends Command {
     public SortCommand(Prefix prefix) {
         this.prefix = prefix;
     }
-    
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -49,7 +49,6 @@ public class SortCommand extends Command {
             // TODO: model.sortPersonsByGrade();
             throw new CommandException(MESSAGE_NOT_IMPLEMENTED_YET);
         }
-        
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
