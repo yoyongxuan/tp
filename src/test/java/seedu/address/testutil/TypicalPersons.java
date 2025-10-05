@@ -27,7 +27,7 @@ public class TypicalPersons {
             .withEmail("alice@u.nus.edu")
             .withPhone("94351253")
             .withStudentId("A0000000A")
-            .withAttendance("true false false false false false false false false false false")
+            .withAttendance("false false false false false false false false false false false")
             .withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withEmail("johnd@u.nus.edu")

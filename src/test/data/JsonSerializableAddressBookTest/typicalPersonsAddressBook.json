@@ -6,7 +6,7 @@
     "email" : "alice@u.nus.edu",
     "studentId": "A0000000A",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "attendance": "true false false false false false false false false false false",
+    "attendance": "false false false false false false false false false false false",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
