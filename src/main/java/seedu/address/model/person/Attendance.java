@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -101,7 +102,7 @@ public class Attendance {
         }
 
         seedu.address.model.person.Attendance otherAttendance = (seedu.address.model.person.Attendance) other;
-        return attendance.equals(otherAttendance.attendance);
+        return Arrays.equals(attendance, otherAttendance.attendance);
     }
 
     @Override
