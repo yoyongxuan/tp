@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -21,6 +23,22 @@ import seedu.address.testutil.PersonBuilder;
 
 public class AttendCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @Test
+    public void equals_sameObject_success() {
+        AttendCommand attendCommand1 = new AttendCommand(INDEX_FIRST_PERSON, 1);
+        AttendCommand attendCommand2 = new AttendCommand(INDEX_FIRST_PERSON, 1);
+
+        assertEquals(attendCommand1, attendCommand2);
+    }
+
+    @Test
+    public void equals_differentObject_failure() {
+        AttendCommand attendCommand1 = new AttendCommand(INDEX_FIRST_PERSON, 1);
+        AttendCommand attendCommand2 = new AttendCommand(INDEX_SECOND_PERSON, 2);
+
+        assertNotEquals(attendCommand1, attendCommand2);
+    }
 
     @Test
     public void execute_success() {

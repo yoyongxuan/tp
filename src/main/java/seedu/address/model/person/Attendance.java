@@ -9,7 +9,9 @@ import java.util.stream.IntStream;
  * Guarantees: immutable;
  */
 public class Attendance {
-    public static final String MESSAGE_CONSTRAINTS = "Tutorial has to be between 1 and 11 inclusive.";
+    public static final Integer NUMBER_OF_TUTORIALS = 11;
+    public static final String MESSAGE_CONSTRAINTS = "Tutorial has to be between 1 and "
+            + NUMBER_OF_TUTORIALS + " inclusive.";
 
     public final boolean[] attendance;
 
@@ -17,7 +19,7 @@ public class Attendance {
      * Constructs an {@code Attendance}.
      */
     public Attendance() {
-        attendance = new boolean[11];
+        attendance = new boolean[NUMBER_OF_TUTORIALS];
     }
 
     /**
@@ -25,7 +27,7 @@ public class Attendance {
      * @param booleans output from #toJson()
      */
     public Attendance(String booleans) {
-        attendance = new boolean[11];
+        attendance = new boolean[NUMBER_OF_TUTORIALS];
         String[] argsSplit = booleans.split(" ");
         for (int i = 0; i < attendance.length; i++) {
             attendance[i] = Boolean.parseBoolean(argsSplit[i]);
@@ -36,7 +38,7 @@ public class Attendance {
      * returns if a tutorial number is valid
      */
     public static boolean isValidTutorial(Integer test) {
-        return (test > 0) && (test < 12);
+        return (test > 0) && (test < NUMBER_OF_TUTORIALS + 1);
     }
 
     /**
@@ -44,7 +46,7 @@ public class Attendance {
      */
     public static boolean isValidAttendance(String test) {
         String[] argsSplit = test.split(" ");
-        if (argsSplit.length != 11) {
+        if (argsSplit.length != NUMBER_OF_TUTORIALS) {
             return false;
         }
         for (String arg: argsSplit) {
@@ -97,11 +99,11 @@ public class Attendance {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof seedu.address.model.person.Attendance)) {
+        if (!(other instanceof Attendance)) {
             return false;
         }
 
-        seedu.address.model.person.Attendance otherAttendance = (seedu.address.model.person.Attendance) other;
+        Attendance otherAttendance = (Attendance) other;
         return Arrays.equals(attendance, otherAttendance.attendance);
     }
 
