@@ -53,7 +53,7 @@ public class SortCommandTest {
                 SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
-    /** 
+    /**
      * Utility method to verify alphabetical order
      */
     private boolean isSortedByName(List<Person> persons) {
