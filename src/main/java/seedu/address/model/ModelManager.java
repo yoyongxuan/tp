@@ -114,11 +114,13 @@ public class ModelManager implements Model {
     /**
      * Sort address book by name
      */
+    @Override
     public void sortPersonsByName() {
         addressBook.sortPersonsByName();
     }
 
     // TODO
+    @Override
     public void sortPersonsByGrade() {
 
     }

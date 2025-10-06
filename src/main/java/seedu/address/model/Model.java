@@ -69,6 +69,10 @@ public interface Model {
      */
     void addPerson(Person person);
 
+    public void sortPersonsByName();
+
+    public void sortPersonsByGrade();
+
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
