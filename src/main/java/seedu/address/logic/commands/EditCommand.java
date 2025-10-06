@@ -21,6 +21,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ExamScores;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -98,6 +99,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         StudentId oldStudentId = editPersonDescriptor.getStudentId().orElse(personToEdit.getStudentId());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        ExamScores examScores = editPersonDescriptor.getExamScores().orElse(personToEdit.getExamScores());
 
         return new Person(updatedName, updatedPhone, updatedEmail, oldStudentId, updatedTags);
     }
@@ -136,6 +138,7 @@ public class EditCommand extends Command {
         private Email email;
         private StudentId studentId;
         private Set<Tag> tags;
+        private ExamScores examScores;
 
         public EditPersonDescriptor() {
         }
@@ -150,6 +153,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setStudentId(toCopy.studentId);
             setTags(toCopy.tags);
+            setExamScores(toCopy.examScores);
         }
 
         /**
@@ -208,6 +212,15 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setExamScores(ExamScores examScores) {
+            this.examScores = examScores;
+        }
+
+        public Optional<ExamScores> getExamScores() {
+            return Optional.ofNullable(examScores);
+        }
+
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -223,7 +236,8 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(examScores, otherEditPersonDescriptor.examScores);
         }
 
         @Override
@@ -233,6 +247,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("tags", tags)
+                    .add("exam scores", examScores)
                     .toString();
         }
     }
