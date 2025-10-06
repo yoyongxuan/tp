@@ -76,16 +76,6 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    /**
-     * Sorts the persons in the address book by name in ascending order.
-     */
-    void sortPersonsByName();
-
-    /**
-     * Sorts the persons in the address book by grade in ascending order.
-     */
-    void sortPersonsByGrade();
-
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 

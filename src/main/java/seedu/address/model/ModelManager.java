@@ -111,13 +111,14 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    @Override
+    /**
+     * Sort address book by name
+     */
     public void sortPersonsByName() {
         addressBook.sortPersonsByName();
     }
 
     // TODO
-    @Override
     public void sortPersonsByGrade() {
 
     }
