@@ -1,7 +1,5 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -26,45 +24,45 @@ import seedu.address.model.person.Person;
 public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@u.nus.edu")
+            .withEmail("alice@u.nus.edu")
             .withPhone("94351253")
             .withStudentId("A0000000A")
             .withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
-            .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@u.nus.edu").withPhone("98765432")
+            .withEmail("johnd@u.nus.edu")
+            .withPhone("98765432")
             .withStudentId("A0000001A")
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withStudentId("A0000002A")
-            .withEmail("heinz@u.nus.edu").withAddress("wall street").build();
+            .withEmail("heinz@u.nus.edu").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withStudentId("A0000003A")
-            .withEmail("cornelia@u.nus.edu").withAddress("10th street").withTags("friends").build();
+            .withEmail("cornelia@u.nus.edu").withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("94822241")
             .withStudentId("A0000004A")
-            .withEmail("werner@u.nus.edu").withAddress("michegan ave").build();
+            .withEmail("werner@u.nus.edu").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("94824271")
             .withStudentId("A0000005A")
-            .withEmail("lydia@u.nus.edu").withAddress("little tokyo").build();
+            .withEmail("lydia@u.nus.edu").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("94824421")
             .withStudentId("A0000006A")
-            .withEmail("anna@u.nus.edu").withAddress("4th street").build();
+            .withEmail("anna@u.nus.edu").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("84824241")
             .withStudentId("A0000007A")
-            .withEmail("stefan@u.nus.edu").withAddress("little india").build();
+            .withEmail("stefan@u.nus.edu").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("84821311")
             .withStudentId("A0000008A")
-            .withEmail("hans@u.nus.edu").withAddress("chicago ave").build();
+            .withEmail("hans@u.nus.edu").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND)
+            .withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_FRIEND)
             .withStudentId(VALID_STUDENT_ID_AMY).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .withEmail(VALID_EMAIL_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .withStudentId(VALID_STUDENT_ID_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
