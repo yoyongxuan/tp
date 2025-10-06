@@ -69,8 +69,14 @@ public interface Model {
      */
     void addPerson(Person person);
 
+    /**
+     * Sort address book by name
+     */
     public void sortPersonsByName();
 
+    /**
+     * Sort address book by grade
+     */
     public void sortPersonsByGrade();
 
     /**
