@@ -1,11 +1,14 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getUnsortedAddressBook;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +16,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -26,7 +30,7 @@ public class SortCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getUnsortedAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
     }
 
@@ -53,6 +57,36 @@ public class SortCommandTest {
         // Then run the command again
         assertCommandSuccess(new SortCommand(PREFIX_NAME), model,
                 SortCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_sortByGrade_throwsException() {
+        // Make new Sort Command by grade
+        SortCommand c = new SortCommand(PREFIX_GRADE);
+        Exception exception = assertThrows(CommandException.class, () -> {
+            c.execute(model);
+        });
+
+        // Should have same error message
+        String expectedMessage = SortCommand.MESSAGE_NOT_IMPLEMENTED_YET;
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void execute_sortByOtherPrefix_throwsError() {
+        // Make new Sort Command by email
+        SortCommand c = new SortCommand(PREFIX_EMAIL);
+        Exception exception = assertThrows(CommandException.class, () -> {
+            c.execute(model);
+        });
+
+        // Should have the same error message
+        String expectedMessage = SortCommand.MESSAGE_USAGE;
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     /**
@@ -92,6 +126,12 @@ public class SortCommandTest {
         assertFalse(sortByName.equals(sortByGrade));
     }
 
+    @Test
+    public void toStringMethod() {
+        SortCommand sortCommand = new SortCommand(PREFIX_NAME);
+        String expected = SortCommand.class.getCanonicalName() + "{Prefix=" + PREFIX_NAME + "}";
+        assertEquals(expected, sortCommand.toString());
+    }
 
 }
 
