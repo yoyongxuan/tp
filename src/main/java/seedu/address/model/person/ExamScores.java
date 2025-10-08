@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class ExamScores {
 
-    private static final String IS_INTEGER_REGEX = "\\d+";
     public static final int NUM_OF_EXAM = Exam.values().length;
+    private static final String IS_INTEGER_REGEX = "\\d+";
 
     public final Score[] arrayOfScores;
 
@@ -20,6 +20,12 @@ public class ExamScores {
         this.arrayOfScores = arrayOfScores;
     }
 
+    /**
+     * Returns a copy of ExamScores object with appropriate score replaced with new input score
+     *
+     * @param newScore Score object representing new score to update object with
+     * @return new ExamScores object updated with new Score
+     */
     public ExamScores updateScore(Score newScore) {
         Score[] arrayOfScoresCopy = this.arrayOfScores.clone();
         for (int i = 0; i < NUM_OF_EXAM; i++) {

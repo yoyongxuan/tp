@@ -1,18 +1,19 @@
 package seedu.address.logic.parser;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.ScoreCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Score;
-
-import java.util.stream.Stream;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCORE;
 
+import java.util.stream.Stream;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.ScoreCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Score;
+
+/**
+ * Parses input arguments and creates a new ScoreCommand object
+ */
 public class ScoreCommandParser implements Parser<ScoreCommand> {
 
     /**

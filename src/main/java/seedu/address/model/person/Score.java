@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's score for an exam, may represent an unrecorded score.
- * Guarantees: immutable; recorded scores are valid as declared in {@link #exam.isValidScore(String)}
+ * Guarantees: immutable; recorded scores are valid as declared in {@link #isValidScore(String)}
  */
 public abstract class Score {
 
@@ -48,7 +48,7 @@ public abstract class Score {
 
         @Override
         public String toString() {
-            return exam.getName() + ": " + this.score + "/" + exam.getMaxScore() ;
+            return exam.getName() + ": " + this.score + "/" + exam.getMaxScore();
         }
 
         @Override
