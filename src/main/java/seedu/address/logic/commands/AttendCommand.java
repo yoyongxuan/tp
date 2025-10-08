@@ -26,11 +26,11 @@ public class AttendCommand extends Command {
             + ": Adds the attendance of the person identified "
             + "by the index number used in the displayed person list or by student number.\n "
             + "Parameters: INDEX (must be a positive integer) OR STUDENT ID (must be a valid student id in contacts)\n"
-            + "TUTORIAL (must be between 1 and 11) \n"
+            + "TUTORIAL (must be between 1 and " + Attendance.NUMBER_OF_TUTORIALS + ") \n"
             + "Example: " + COMMAND_WORD + " 4 5\n"
             + "Example: " + COMMAND_WORD + " A0000000X 5";
     public static final String MESSAGE_WRONG_TUTORIAL =
-            "Tutorial has to be between 1 and 11";
+            "Tutorial has to be between 1 and " + Attendance.NUMBER_OF_TUTORIALS;
     public static final String MESSAGE_ADD_ATTENDANCE_SUCCESS = "Added tutorial attendance for Person: %1$s";
 
     private final Index index;

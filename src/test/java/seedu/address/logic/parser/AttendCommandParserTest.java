@@ -39,12 +39,17 @@ public class AttendCommandParserTest {
     }
 
     @Test
+    public void parse_moreThanThreeArgs_failure() {
+        assertParseFailure(parser, "arg1" + " arg2" + " arg3" + " arg4", MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
     public void parse_invalidStudentId_failure() {
         assertParseFailure(parser, "B123X" + " 5", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
-    public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + " random words instead of number", MESSAGE_INVALID_FORMAT);
+    public void parse_numberFormatException_failure() {
+        assertParseFailure(parser, "attend" + " 1" + " random words instead of number", MESSAGE_INVALID_FORMAT);
     }
 }
