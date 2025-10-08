@@ -47,6 +47,27 @@ public class ExamScores {
         return out;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ExamScores)) {
+            return false;
+        }
+
+        ExamScores otherExamScores = (ExamScores) other;
+        for (int i = 0; i < NUM_OF_EXAM; i++) {
+            if (!arrayOfScores[i].equals(otherExamScores.arrayOfScores[i])) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     /**
      * Returns true if a given string is a valid tag name.
      */
