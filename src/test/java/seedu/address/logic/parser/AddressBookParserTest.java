@@ -92,6 +92,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_attend() throws Exception {
         assertTrue(parser.parseCommand(AttendCommand.COMMAND_WORD + " 1 1") instanceof AttendCommand);
+        assertTrue(parser.parseCommand(AttendCommand.COMMAND_WORD + " A0000000X 1") instanceof AttendCommand);
     }
 
     @Test

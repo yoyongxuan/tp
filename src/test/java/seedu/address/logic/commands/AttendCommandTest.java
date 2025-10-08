@@ -19,6 +19,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.StudentId;
 import seedu.address.testutil.PersonBuilder;
 
 public class AttendCommandTest {
@@ -68,6 +69,14 @@ public class AttendCommandTest {
         AttendCommand attendCommand = new AttendCommand(outOfBoundIndex, 1);
 
         assertCommandFailure(attendCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_personStudentIdNotInList_failure() {
+        StudentId notInList = new StudentId("A8888888Z");
+        AttendCommand attendCommand = new AttendCommand(notInList, 1);
+
+        assertCommandFailure(attendCommand, model, Messages.MESSAGE_INVALID_STUDENT_ID_DISPLAYED_INDEX);
     }
 
     @Test

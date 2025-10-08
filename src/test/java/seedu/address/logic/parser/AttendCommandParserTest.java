@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
@@ -36,6 +37,11 @@ public class AttendCommandParserTest {
 
         // invalid prefix being parsed as preamble
         assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_invalidStudentId_failure() {
+        assertParseFailure(parser, "B123X" + " 5", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
