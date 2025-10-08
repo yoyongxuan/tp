@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -28,6 +29,9 @@ import seedu.address.testutil.PersonBuilder;
 public class AttendCommandTest {
     private static final Index INDEX_FIRST_TUTORIAL = Index.fromOneBased(1);
     private static final Index INDEX_INVALID_TUTORIAL = Index.fromZeroBased(Attendance.NUMBER_OF_TUTORIALS);
+    private static final StudentId STUDENT_ID_AMY = new StudentId(VALID_STUDENT_ID_AMY);
+    private static final StudentId STUDENT_ID_BOB = new StudentId(VALID_STUDENT_ID_BOB);
+
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
@@ -48,23 +52,23 @@ public class AttendCommandTest {
 
     @Test
     public void equals_sameObjectStudentId_success() {
-        AttendCommand attendCommand1 = new AttendCommand(new StudentId(VALID_STUDENT_ID_AMY), INDEX_FIRST_TUTORIAL);
-        AttendCommand attendCommand2 = new AttendCommand(new StudentId(VALID_STUDENT_ID_AMY), INDEX_FIRST_TUTORIAL);
+        AttendCommand attendCommand1 = new AttendCommand(STUDENT_ID_AMY, INDEX_FIRST_TUTORIAL);
+        AttendCommand attendCommand2 = new AttendCommand(STUDENT_ID_AMY, INDEX_FIRST_TUTORIAL);
 
         assertEquals(attendCommand1, attendCommand2);
     }
 
     @Test
     public void equals_differentObjectStudentId_failure() {
-        AttendCommand attendCommand1 = new AttendCommand(new StudentId(VALID_STUDENT_ID_AMY), INDEX_FIRST_TUTORIAL);
-        AttendCommand attendCommand2 = new AttendCommand(new StudentId(VALID_STUDENT_ID_BOB), INDEX_FIRST_TUTORIAL);
+        AttendCommand attendCommand1 = new AttendCommand(STUDENT_ID_AMY, INDEX_FIRST_TUTORIAL);
+        AttendCommand attendCommand2 = new AttendCommand(STUDENT_ID_BOB, INDEX_FIRST_TUTORIAL);
 
         assertNotEquals(attendCommand1, attendCommand2);
     }
 
     @Test
     public void equals_notAttendCommand_failure() {
-        AttendCommand attendCommand = new AttendCommand(new StudentId(VALID_STUDENT_ID_AMY), INDEX_FIRST_TUTORIAL);
+        AttendCommand attendCommand = new AttendCommand(STUDENT_ID_AMY, INDEX_FIRST_TUTORIAL);
 
         assertNotEquals(10, attendCommand);
     }
@@ -73,10 +77,13 @@ public class AttendCommandTest {
     public void execute_success() {
         Person personToEdit = model.getFilteredPersonList().get(0);
         Person editedPerson = new PersonBuilder(personToEdit)
-                .withAttendance(CommandTestUtil.VALID_ATTENDANCE_AMY)
+                .withStudentId(VALID_STUDENT_ID_AMY)
+                .withAttendance(VALID_ATTENDANCE_AMY)
                 .build();
 
-        AttendCommand attendCommand = new AttendCommand(INDEX_FIRST_PERSON, INDEX_FIRST_TUTORIAL);
+        AttendCommand attendCommandIndex = new AttendCommand(INDEX_FIRST_PERSON, INDEX_FIRST_TUTORIAL);
+        AttendCommand attendCommandStudentId = new AttendCommand(STUDENT_ID_AMY, INDEX_FIRST_TUTORIAL);
+
 
         String expectedMessage = String.format(AttendCommand.MESSAGE_ADD_ATTENDANCE_SUCCESS,
                 Messages.format(editedPerson));
@@ -84,7 +91,8 @@ public class AttendCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
-        assertCommandSuccess(attendCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(attendCommandIndex, model, expectedMessage, expectedModel);
+        assertCommandSuccess(attendCommandStudentId, model, expectedMessage, expectedModel);
     }
 
     @Test
