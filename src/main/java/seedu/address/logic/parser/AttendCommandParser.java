@@ -29,7 +29,7 @@ public class AttendCommandParser implements Parser<AttendCommand> {
 
         Index index;
         StudentId studentId;
-        Integer tutorial;
+        Index tutorial;
 
         try {
             if (argsSplit[1].matches("\\d+")) {
@@ -39,7 +39,7 @@ public class AttendCommandParser implements Parser<AttendCommand> {
                 index = null;
                 studentId = ParserUtil.parseStudentId(argsSplit[1]);
             }
-            tutorial = Integer.valueOf(argsSplit[2]);
+            tutorial = Index.fromOneBased(Integer.parseInt(argsSplit[2]));
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AttendCommand.MESSAGE_USAGE), pe);

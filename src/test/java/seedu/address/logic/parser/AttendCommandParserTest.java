@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AttendCommand;
 import seedu.address.model.person.StudentId;
 
@@ -21,8 +22,8 @@ public class AttendCommandParserTest {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, AttendCommand.MESSAGE_USAGE);
 
     private AttendCommandParser parser = new AttendCommandParser();
-    private AttendCommand attendCommand = new AttendCommand(new StudentId(VALID_STUDENT_ID_AMY), 5);
-
+    private AttendCommand attendCommand = new AttendCommand(new StudentId(VALID_STUDENT_ID_AMY),
+            Index.fromOneBased(5));
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, AttendCommand.MESSAGE_USAGE));

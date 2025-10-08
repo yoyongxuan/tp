@@ -42,12 +42,12 @@ public class AttendCommand extends Command {
      * @param index in the Address Book
      * @param tutorial number attended
      */
-    public AttendCommand(Index index, Integer tutorial) {
+    public AttendCommand(Index index, Index tutorial) {
         requireAllNonNull(index, tutorial);
 
         this.index = index;
         this.studentId = null;
-        this.tutorial = Index.fromOneBased(tutorial);
+        this.tutorial = tutorial;
     }
 
     /**
@@ -55,12 +55,12 @@ public class AttendCommand extends Command {
      * @param studentId in the Address Book
      * @param tutorial number attended
      */
-    public AttendCommand(StudentId studentId, Integer tutorial) {
+    public AttendCommand(StudentId studentId, Index tutorial) {
         requireAllNonNull(studentId, tutorial);
 
         this.index = null;
         this.studentId = studentId;
-        this.tutorial = Index.fromOneBased(tutorial);
+        this.tutorial = tutorial;
     }
 
     /**
