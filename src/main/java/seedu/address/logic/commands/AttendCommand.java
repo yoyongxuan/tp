@@ -24,7 +24,7 @@ public class AttendCommand extends Command {
     public static final String COMMAND_WORD = "attend";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds the attendance of the person identified "
-            + "by the index number used in the displayed person list or by student number.\n "
+            + "by the index number used in the displayed person list or by student number.\n"
             + "Parameters: INDEX (must be a positive integer) OR STUDENT ID (must be a valid student id in contacts)\n"
             + "TUTORIAL (must be between 1 and " + Attendance.NUMBER_OF_TUTORIALS + ") \n"
             + "Example: " + COMMAND_WORD + " 4 5\n"
