@@ -54,9 +54,16 @@ public class AttendCommandTest {
     @Test
     public void equals_differentObjectStudentId_failure() {
         AttendCommand attendCommand1 = new AttendCommand(new StudentId(VALID_STUDENT_ID_AMY), 1);
-        AttendCommand attendCommand2 = new AttendCommand(new StudentId(VALID_STUDENT_ID_BOB), 2);
+        AttendCommand attendCommand2 = new AttendCommand(new StudentId(VALID_STUDENT_ID_BOB), 1);
 
         assertNotEquals(attendCommand1, attendCommand2);
+    }
+
+    @Test
+    public void equals_notAttendCommand_failure() {
+        AttendCommand attendCommand = new AttendCommand(new StudentId(VALID_STUDENT_ID_AMY), 1);
+
+        assertNotEquals(10, attendCommand);
     }
 
     @Test
