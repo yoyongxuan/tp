@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -26,7 +28,7 @@ public class AttendCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void equals_sameObject_success() {
+    public void equals_sameObjectIndex_success() {
         AttendCommand attendCommand1 = new AttendCommand(INDEX_FIRST_PERSON, 1);
         AttendCommand attendCommand2 = new AttendCommand(INDEX_FIRST_PERSON, 1);
 
@@ -34,9 +36,25 @@ public class AttendCommandTest {
     }
 
     @Test
-    public void equals_differentObject_failure() {
+    public void equals_differentObjectIndex_failure() {
         AttendCommand attendCommand1 = new AttendCommand(INDEX_FIRST_PERSON, 1);
         AttendCommand attendCommand2 = new AttendCommand(INDEX_SECOND_PERSON, 2);
+
+        assertNotEquals(attendCommand1, attendCommand2);
+    }
+
+    @Test
+    public void equals_sameObjectStudentId_success() {
+        AttendCommand attendCommand1 = new AttendCommand(new StudentId(VALID_STUDENT_ID_AMY), 1);
+        AttendCommand attendCommand2 = new AttendCommand(new StudentId(VALID_STUDENT_ID_AMY), 1);
+
+        assertEquals(attendCommand1, attendCommand2);
+    }
+
+    @Test
+    public void equals_differentObjectStudentId_failure() {
+        AttendCommand attendCommand1 = new AttendCommand(new StudentId(VALID_STUDENT_ID_AMY), 1);
+        AttendCommand attendCommand2 = new AttendCommand(new StudentId(VALID_STUDENT_ID_BOB), 2);
 
         assertNotEquals(attendCommand1, attendCommand2);
     }

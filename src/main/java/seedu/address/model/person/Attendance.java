@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import seedu.address.commons.core.index.Index;
+
 /**
  * Represents a Person's attendance in the address book.
  * Guarantees: immutable;
@@ -37,8 +39,8 @@ public class Attendance {
     /**
      * returns if a tutorial number is valid
      */
-    public static boolean isValidTutorial(Integer test) {
-        return (test > 0) && (test < NUMBER_OF_TUTORIALS + 1);
+    public static boolean isValidTutorial(Index test) {
+        return (test.getZeroBased() >= 0) && (test.getZeroBased() < NUMBER_OF_TUTORIALS);
     }
 
     /**
@@ -60,16 +62,15 @@ public class Attendance {
     /**
      * Updates attendance for given tutorial number
      */
-    public Attendance addAttendance(int tutorialNumber) {
+    public Attendance addAttendance(Index tutorial) {
         String currentAttendance = this.toJson();
         String[] attendanceSplit = currentAttendance.split(" ");
-        attendanceSplit[tutorialNumber - 1] = "true";
+        attendanceSplit[tutorial.getZeroBased()] = "true";
         return new Attendance(String.join(" ", attendanceSplit));
     }
 
     /**
      * converts Attendance to a JsonAdaptedPerson friendly format
-     * @return
      */
     public String toJson() {
         return IntStream.range(0, attendance.length)
@@ -83,7 +84,7 @@ public class Attendance {
         StringBuilder output = new StringBuilder("Tutorials Attended: ");
         for (int i = 0; i < attendance.length; i++) {
             if (attendance[i]) {
-                output.append((i + 1) + ", ");
+                output.append((i + 1)).append(", ");
             }
         }
         if (output.length() > "Tutorials Attended: ".length()) {
@@ -109,7 +110,7 @@ public class Attendance {
 
     @Override
     public int hashCode() {
-        return attendance.hashCode();
+        return Arrays.hashCode(attendance);
     }
 }
 

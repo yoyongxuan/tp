@@ -35,7 +35,7 @@ public class AttendCommand extends Command {
 
     private final Index index;
     private final StudentId studentId;
-    private final Integer tutorial;
+    private final Index tutorial;
 
     /**
      * updates person's Attendance to include this tutorial
@@ -47,7 +47,7 @@ public class AttendCommand extends Command {
 
         this.index = index;
         this.studentId = null;
-        this.tutorial = tutorial;
+        this.tutorial = Index.fromOneBased(tutorial);
     }
 
     /**
@@ -60,7 +60,7 @@ public class AttendCommand extends Command {
 
         this.index = null;
         this.studentId = studentId;
-        this.tutorial = tutorial;
+        this.tutorial = Index.fromOneBased(tutorial);
     }
 
     /**
