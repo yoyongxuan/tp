@@ -49,7 +49,6 @@ public class ScoreCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        System.out.println("score command executed");
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -69,5 +68,21 @@ public class ScoreCommand extends Command {
         String updateScoreSuccessMessage = "Updated " + editedPerson.getName() + "'s "
                 + score.getExam().getName() + " score";
         return new CommandResult(String.format(updateScoreSuccessMessage, score.toString()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ScoreCommand)) {
+            return false;
+        }
+
+        ScoreCommand otherScoreCommand = (ScoreCommand) other;
+        return index.equals(otherScoreCommand.index)
+                && score.equals(otherScoreCommand.score);
     }
 }
