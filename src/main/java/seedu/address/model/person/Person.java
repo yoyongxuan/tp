@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -15,6 +16,15 @@ import seedu.address.model.tag.Tag;
  * Guarantees: Contact details are present and not null, field values are validated, immutable.
  */
 public class Person {
+
+    /**
+     * Comparator of a person through their name
+     */
+    public static final Comparator<Person> NAME_COMPARATOR =
+            Comparator.<Person, String>comparing((Person p) -> p.getName().fullName);
+
+    // TODO: Add comparison by grades when grades are implemented
+    public static final Comparator<Person> GRADE_COMPARATOR = null;
 
     // Identity fields
     private final Name name;

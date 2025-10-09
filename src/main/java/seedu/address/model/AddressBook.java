@@ -41,6 +41,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
+     * Sorts the UniquePersonList in the AddressBook by name
+     */
+    public void sortPersonsByName() {
+        persons.sort(Person.NAME_COMPARATOR);
+    }
+
+    // TODO: Implement when the grade is done
+    public void sortPersonsByGrade() {
+
+    }
+
+    /**
      * Replaces the contents of the person list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */

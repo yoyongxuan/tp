@@ -88,7 +88,22 @@ public class TypicalPersons {
         return ab;
     }
 
+    /**
+     * Returns an unsorted {@code AddressBook} with typical persons.
+     */
+    public static AddressBook getUnsortedAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getUnsortedTypicalPersons()) {
+            ab.addPerson(person);
+        }
+        return ab;
+    }
+
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Person> getUnsortedTypicalPersons() {
+        return new ArrayList<>(Arrays.asList(BENSON, DANIEL, ALICE, FIONA, ELLE, CARL, GEORGE));
     }
 }
