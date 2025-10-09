@@ -30,14 +30,16 @@ public class TypicalPersons {
             .withEmail("alice@u.nus.edu")
             .withPhone("94351253")
             .withStudentId("A0000000A")
-            .withTags("friends")
             .withExamScores(EXAM_SCORES_C).build();
+            .withAttendance("false false false false false false false false false false false")
+            .withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withEmail("johnd@u.nus.edu")
             .withPhone("98765432")
             .withStudentId("A0000001A")
-            .withTags("owesMoney", "friends")
             .withExamScores(EXAM_SCORES_B).build();
+            .withAttendance("true false false true false true false false true false false")
+            .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withStudentId("A0000002A")
             .withEmail("heinz@u.nus.edu").build();
