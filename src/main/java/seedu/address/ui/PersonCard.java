@@ -42,6 +42,8 @@ public class PersonCard extends UiPart<Region> {
     private Label examScores;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label attendance;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -55,6 +57,7 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         studentId.setText(person.getStudentId().value);
         examScores.setText(person.getExamScores().toString());
+        attendance.setText(person.getAttendance().toString());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
