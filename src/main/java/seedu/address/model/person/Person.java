@@ -23,6 +23,7 @@ public class Person {
     private final StudentId studentId;
 
     // Data fields
+    private final Attendance attendance;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -34,6 +35,21 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.studentId = studentId;
+        this.attendance = new Attendance();
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, StudentId studentId, Attendance attendance,
+                  Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, attendance, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.studentId = studentId;
+        this.attendance = attendance;
         this.tags.addAll(tags);
     }
 
@@ -51,6 +67,10 @@ public class Person {
 
     public StudentId getStudentId() {
         return studentId;
+    }
+
+    public Attendance getAttendance() {
+        return attendance;
     }
 
     /**
@@ -94,13 +114,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && studentId.equals(otherPerson.studentId)
+                && attendance.equals(otherPerson.attendance)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, studentId, tags);
+        return Objects.hash(name, phone, email, studentId, attendance, tags);
     }
 
     @Override
@@ -110,6 +131,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("studentId", studentId)
+                .add("attendance", attendance)
                 .add("tags", tags)
                 .toString();
     }

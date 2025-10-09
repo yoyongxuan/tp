@@ -6,6 +6,7 @@
     "email" : "alice@u.nus.edu",
     "studentId": "A0000000A",
     "address" : "123, Jurong West Ave 6, #08-111",
+    "attendance": "false false false false false false false false false false false",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -13,6 +14,7 @@
     "email" : "johnd@u.nus.edu",
     "studentId": "A0000001A",
     "address" : "311, Clementi Ave 2, #02-25",
+    "attendance": "true false false true false true false false true false false",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -20,6 +22,7 @@
     "email" : "heinz@u.nus.edu",
     "studentId": "A0000002A",
     "address" : "wall street",
+    "attendance": "false false false false false false false false false false false",
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -27,6 +30,7 @@
     "email" : "cornelia@u.nus.edu",
     "studentId": "A0000003A",
     "address" : "10th street",
+    "attendance": "false false false false false false false false false false false",
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -34,6 +38,7 @@
     "email" : "werner@u.nus.edu",
     "studentId": "A0000004A",
     "address" : "michegan ave",
+    "attendance": "false false false false false false false false false false false",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -41,6 +46,7 @@
     "email" : "lydia@u.nus.edu",
     "studentId": "A0000005A",
     "address" : "little tokyo",
+    "attendance": "false false false false false false false false false false false",
     "tags" : [ ]
   }, {
     "name" : "George Best",
@@ -48,6 +54,7 @@
     "email" : "anna@u.nus.edu",
     "studentId": "A0000006A",
     "address" : "4th street",
+    "attendance": "false false false false false false false false false false false",
     "tags" : [ ]
   } ]
 }
