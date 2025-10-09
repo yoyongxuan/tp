@@ -13,7 +13,7 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: Contact details are present and not null, field values are validated, immutable.
  */
 public class Person {
 
@@ -35,6 +35,7 @@ public class Person {
     // Data fields
     private final Attendance attendance;
     private final Set<Tag> tags = new HashSet<>();
+    private final ExamScores examScores;
 
     /**
      * Every field must be present and not null.
@@ -47,6 +48,7 @@ public class Person {
         this.studentId = studentId;
         this.attendance = new Attendance();
         this.tags.addAll(tags);
+        this.examScores = ExamScores.getEmptyExamScores();
     }
 
     /**
@@ -61,6 +63,23 @@ public class Person {
         this.studentId = studentId;
         this.attendance = attendance;
         this.tags.addAll(tags);
+        this.examScores = ExamScores.getEmptyExamScores();
+
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, StudentId studentId, Set<Tag> tags, ExamScores examScores) {
+        requireAllNonNull(name, phone, email, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.studentId = studentId;
+        this.attendance = new Attendance();
+        this.tags.addAll(tags);
+        this.examScores = examScores;
+
     }
 
     public Name getName() {
@@ -89,6 +108,10 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public ExamScores getExamScores() {
+        return this.examScores;
     }
 
     /**
@@ -124,6 +147,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && studentId.equals(otherPerson.studentId)
+                && examScores.equals(otherPerson.examScores)
                 && attendance.equals(otherPerson.attendance)
                 && tags.equals(otherPerson.tags);
     }
@@ -142,6 +166,7 @@ public class Person {
                 .add("email", email)
                 .add("studentId", studentId)
                 .add("attendance", attendance)
+                .add("exam scores", examScores)
                 .add("tags", tags)
                 .toString();
     }

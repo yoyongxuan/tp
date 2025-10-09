@@ -10,6 +10,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.testutil.TypicalExamScores.EXAM_SCORES_A;
+import static seedu.address.testutil.TypicalExamScores.EXAM_SCORES_B;
+import static seedu.address.testutil.TypicalExamScores.EXAM_SCORES_C;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,12 +30,14 @@ public class TypicalPersons {
             .withEmail("alice@u.nus.edu")
             .withPhone("94351253")
             .withStudentId("A0000000A")
+            .withExamScores(EXAM_SCORES_C)
             .withAttendance("false false false false false false false false false false false")
             .withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withEmail("johnd@u.nus.edu")
             .withPhone("98765432")
             .withStudentId("A0000001A")
+            .withExamScores(EXAM_SCORES_B)
             .withAttendance("true false false true false true false false true false false")
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
@@ -40,7 +45,8 @@ public class TypicalPersons {
             .withEmail("heinz@u.nus.edu").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withStudentId("A0000003A")
-            .withEmail("cornelia@u.nus.edu").withTags("friends").build();
+            .withEmail("cornelia@u.nus.edu").withTags("friends")
+            .withExamScores(EXAM_SCORES_A).build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("94822241")
             .withStudentId("A0000004A")
             .withEmail("werner@u.nus.edu").build();

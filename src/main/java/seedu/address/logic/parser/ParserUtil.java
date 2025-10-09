@@ -11,8 +11,10 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Exam;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Score;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.tag.Tag;
 
@@ -137,5 +139,44 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String exam} into a {@code Exam}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code exam} is invalid.
+     */
+    public static Exam parseExam(String examName) throws ParseException {
+        requireNonNull(examName);
+        String trimmedExam = examName.trim();
+        if (!Exam.isValidExamName(trimmedExam)) {
+            throw new ParseException(Exam.MESSAGE_CONSTRAINTS);
+        }
+
+        return Exam.getExamFromName(trimmedExam);
+    }
+
+    /**
+     * Parses a {@code String exam} and {@code int score} into a {@code Score}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code score} is invalid.
+     */
+    public static Score parseScore(String examName, String score) throws ParseException {
+        requireNonNull(examName);
+        String trimmedExam = examName.trim();
+        String trimmedScore = score.trim();
+        if (!Exam.isValidExamName(trimmedExam)) {
+            throw new ParseException(Exam.MESSAGE_CONSTRAINTS);
+        }
+
+        Exam exam = Exam.getExamFromName(trimmedExam);
+
+        if (!exam.isValidScore(trimmedScore)) {
+            throw new ParseException(exam.getMessageConstraints());
+        }
+
+        return Score.getRecordedScore(exam, score);
     }
 }
