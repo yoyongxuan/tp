@@ -38,6 +38,7 @@ public class Person {
         this.studentId = studentId;
         this.attendance = new Attendance();
         this.tags.addAll(tags);
+        this.examScores = ExamScores.getEmptyExamScores();
     }
 
     /**
@@ -65,6 +66,7 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.studentId = studentId;
+        this.attendance = new Attendance();
         this.tags.addAll(tags);
         this.examScores = examScores;
 
@@ -135,7 +137,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && studentId.equals(otherPerson.studentId)
-                && examScores.equals(otherPerson.examScores);
+                && examScores.equals(otherPerson.examScores)
                 && attendance.equals(otherPerson.attendance)
                 && tags.equals(otherPerson.tags);
     }
@@ -154,8 +156,8 @@ public class Person {
                 .add("email", email)
                 .add("studentId", studentId)
                 .add("attendance", attendance)
-                .add("tags", tags)
                 .add("exam scores", examScores)
+                .add("tags", tags)
                 .toString();
     }
 

@@ -102,8 +102,10 @@ public class PersonBuilder {
      */
     public PersonBuilder withExamScores(ExamScores examScores) {
         this.examScores = examScores;
+        return this;
+    }
 
-     /**
+    /**
      * Sets the {@code Attendance} of the {@code Person} that we are building.
      */
     public PersonBuilder withAttendance(String attendance) {
