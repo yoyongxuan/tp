@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ExamScores;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -29,6 +30,7 @@ public class PersonBuilder {
     private StudentId studentId;
     private Address address;
     private Set<Tag> tags;
+    private ExamScores examScores;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,6 +42,7 @@ public class PersonBuilder {
         studentId = new StudentId(DEFAULT_STUDENT_ID);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        examScores = ExamScores.getEmptyExamScores();
     }
 
     /**
@@ -51,6 +54,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         studentId = personToCopy.getStudentId();
         tags = new HashSet<>(personToCopy.getTags());
+        examScores = personToCopy.getExamScores();
     }
 
     /**
@@ -90,6 +94,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withStudentId(String studentId) {
         this.studentId = new StudentId(studentId);
+        return this;
+    }
+
+    /**
+     * Sets the {@code ExamScores} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withExamScores(ExamScores examScores) {
+        this.examScores = examScores;
         return this;
     }
 

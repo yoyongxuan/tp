@@ -93,6 +93,9 @@ public class ExamScores {
 
         Exam[] examArray = Exam.values();
         for (int i = 0; i < NUM_OF_EXAM; i++) {
+            if (arrayOfScores[i] == null) {
+                return false;
+            }
             if (examArray[i] != arrayOfScores[i].getExam()) {
                 return false;
             }

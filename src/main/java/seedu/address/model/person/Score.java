@@ -29,10 +29,6 @@ public abstract class Score {
         return new RecordedScore(exam, score);
     }
 
-    public Score updateScore(String scorestr) {
-        return new RecordedScore(this.exam, scorestr);
-    }
-
     public Exam getExam() {
         return this.exam;
     }
