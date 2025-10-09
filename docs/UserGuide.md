@@ -142,6 +142,18 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Sorting the list : `sort`
+
+Sorts the list based on a parameter.
+The list can currently be sorted by ascending order of name using parameter `n/`.
+It will support sorting of grades by Version 1.3 or earlier using parameter `g/`.
+
+Format: `sort PARAMETER`
+
+Examples:
+* `sort n/` sorts in ascending order of names.
+* `sort g/` sorts in ascending order of names.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.

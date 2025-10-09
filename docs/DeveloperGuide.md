@@ -310,7 +310,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. Student details missing in input.
     * 1a1. AddressBook shows an error message
-  
+
       Use case ends.
 
 * 1b. A contact with the given student ID already exists.
@@ -406,7 +406,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to <u>list students</u>
-2.  User requests to view grades of a specific student in the list 
+2.  User requests to view grades of a specific student in the list
 3.  AddressBook displays all the student's recorded grades
 
     Use case ends.
@@ -475,7 +475,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-    
+
 **Use case: list all students**
 
 **MSS**
