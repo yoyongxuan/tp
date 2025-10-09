@@ -43,4 +43,18 @@ public class SortCommandParserTest {
 
         assertTrue(actualMessage.contains(expectedMessage));
     }
+
+    @Test
+    public void parse_emptyPrefix_throwsException() {
+        // Make new SortCommand with no prefix
+        Exception exception = assertThrows(ParseException.class, () -> {
+            parser.parse("");
+        });
+
+        // Should have same error message
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE);
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
 }

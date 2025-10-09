@@ -17,7 +17,7 @@ public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
 
-    public static final String MESSAGE_SUCCESS = "Sorted all persons";
+    public static final String MESSAGE_SUCCESS = "Sorted all people";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the list of people. Use either "

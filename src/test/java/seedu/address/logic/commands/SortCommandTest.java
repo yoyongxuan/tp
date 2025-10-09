@@ -71,7 +71,7 @@ public class SortCommandTest {
         String expectedMessage = SortCommand.MESSAGE_NOT_IMPLEMENTED_YET;
         String actualMessage = exception.getMessage();
 
-        assertTrue(actualMessage.contains(expectedMessage));
+        assertEquals(expectedMessage, actualMessage);
     }
 
     @Test
@@ -86,7 +86,7 @@ public class SortCommandTest {
         String expectedMessage = SortCommand.MESSAGE_USAGE;
         String actualMessage = exception.getMessage();
 
-        assertTrue(actualMessage.contains(expectedMessage));
+        assertEquals(expectedMessage, actualMessage);
     }
 
     /**
