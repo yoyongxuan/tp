@@ -118,7 +118,10 @@ class JsonAdaptedPerson {
         final Attendance modelAttendance = new Attendance(attendance);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelStudentId, modelAttendance, modelTags);
+        return new Person.PersonBuilder(modelName, modelPhone, modelEmail, modelStudentId)
+                .withAttendance(modelAttendance)
+                .withTags(modelTags)
+                .build();
     }
 
 }
