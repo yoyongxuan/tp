@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 public class IdentifierTest {
 
@@ -87,6 +88,12 @@ public class IdentifierTest {
         studentIdIdentifier = new Identifier(FIONA.getStudentId().toString());
         assertEquals(FIONA, studentIdIdentifier.retrievePerson(model));
 
+        // unable to retrieve Person
+        Identifier nonExistantIndexIdentifier = new Identifier("10000000");
+        assertThrows(PersonNotFoundException.class, () -> nonExistantIndexIdentifier.retrievePerson(model));
+
+        Identifier nonExistantStudentIdIdentifier = new Identifier("A7214535Q");
+        assertThrows(PersonNotFoundException.class, () -> nonExistantStudentIdIdentifier.retrievePerson(model));
     }
 
 
