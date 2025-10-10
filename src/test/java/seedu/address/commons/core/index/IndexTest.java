@@ -38,6 +38,28 @@ public class IndexTest {
     }
 
     @Test
+    public void isValidZeroBasedIndex() {
+        assertTrue(Index.isValidZeroBasedIndex("0"));
+
+        assertTrue(Index.isValidZeroBasedIndex("1"));
+        assertTrue(Index.isValidZeroBasedIndex("12345"));
+
+        assertFalse(Index.isValidZeroBasedIndex("one"));
+        assertFalse(Index.isValidZeroBasedIndex("-1"));
+    }
+
+    @Test
+    public void isValidOneBasedIndex() {
+        assertFalse(Index.isValidOneBasedIndex("0"));
+
+        assertTrue(Index.isValidOneBasedIndex("1"));
+        assertTrue(Index.isValidOneBasedIndex("12345"));
+
+        assertFalse(Index.isValidOneBasedIndex("one"));
+        assertFalse(Index.isValidOneBasedIndex("-1"));
+    }
+
+    @Test
     public void equals() {
         final Index fifthPersonIndex = Index.fromOneBased(5);
 
