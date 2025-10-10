@@ -59,15 +59,16 @@ public class ScoreCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         ExamScores newExamScores = personToEdit.getExamScores().updateScore(this.score);
 
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getStudentId(), personToEdit.getTags(), newExamScores);
+        Person editedPerson = new Person.PersonBuilder(personToEdit.getName(), personToEdit.getPhone(),
+                personToEdit.getEmail(), personToEdit.getStudentId()).withTags(personToEdit.getTags())
+                .withExamScores(newExamScores).build();
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         String updateScoreSuccessMessage = "Updated " + editedPerson.getName() + "'s "
                 + score.getExam().getName() + " score";
-        return new CommandResult(String.format(updateScoreSuccessMessage, score.toString()));
+        return new CommandResult(String.format(updateScoreSuccessMessage, score));
     }
 
     @Override

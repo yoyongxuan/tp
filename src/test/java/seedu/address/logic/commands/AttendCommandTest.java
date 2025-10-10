@@ -24,13 +24,10 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
-import seedu.address.testutil.PersonBuilder;
 
 public class AttendCommandTest {
     private static final Index INDEX_FIRST_TUTORIAL = Index.fromOneBased(1);
     private static final Index INDEX_INVALID_TUTORIAL = Index.fromZeroBased(Attendance.NUMBER_OF_TUTORIALS);
-    private static final StudentId STUDENT_ID_AMY = new StudentId(VALID_STUDENT_ID_AMY);
-    private static final StudentId STUDENT_ID_BOB = new StudentId(VALID_STUDENT_ID_BOB);
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -52,23 +49,23 @@ public class AttendCommandTest {
 
     @Test
     public void equals_sameObjectStudentId_success() {
-        AttendCommand attendCommand1 = new AttendCommand(STUDENT_ID_AMY, INDEX_FIRST_TUTORIAL);
-        AttendCommand attendCommand2 = new AttendCommand(STUDENT_ID_AMY, INDEX_FIRST_TUTORIAL);
+        AttendCommand attendCommand1 = new AttendCommand(VALID_STUDENT_ID_AMY, INDEX_FIRST_TUTORIAL);
+        AttendCommand attendCommand2 = new AttendCommand(VALID_STUDENT_ID_AMY, INDEX_FIRST_TUTORIAL);
 
         assertEquals(attendCommand1, attendCommand2);
     }
 
     @Test
     public void equals_differentObjectStudentId_failure() {
-        AttendCommand attendCommand1 = new AttendCommand(STUDENT_ID_AMY, INDEX_FIRST_TUTORIAL);
-        AttendCommand attendCommand2 = new AttendCommand(STUDENT_ID_BOB, INDEX_FIRST_TUTORIAL);
+        AttendCommand attendCommand1 = new AttendCommand(VALID_STUDENT_ID_AMY, INDEX_FIRST_TUTORIAL);
+        AttendCommand attendCommand2 = new AttendCommand(VALID_STUDENT_ID_BOB, INDEX_FIRST_TUTORIAL);
 
         assertNotEquals(attendCommand1, attendCommand2);
     }
 
     @Test
     public void equals_notAttendCommand_failure() {
-        AttendCommand attendCommand = new AttendCommand(STUDENT_ID_AMY, INDEX_FIRST_TUTORIAL);
+        AttendCommand attendCommand = new AttendCommand(VALID_STUDENT_ID_AMY, INDEX_FIRST_TUTORIAL);
 
         assertNotEquals(10, attendCommand);
     }
@@ -76,14 +73,13 @@ public class AttendCommandTest {
     @Test
     public void execute_success() {
         Person personToEdit = model.getFilteredPersonList().get(0);
-        Person editedPerson = new PersonBuilder(personToEdit)
+        Person editedPerson = new Person.PersonBuilder(personToEdit)
                 .withStudentId(VALID_STUDENT_ID_AMY)
                 .withAttendance(VALID_ATTENDANCE_AMY)
                 .build();
 
         AttendCommand attendCommandIndex = new AttendCommand(INDEX_FIRST_PERSON, INDEX_FIRST_TUTORIAL);
-        AttendCommand attendCommandStudentId = new AttendCommand(STUDENT_ID_AMY, INDEX_FIRST_TUTORIAL);
-
+        AttendCommand attendCommandStudentId = new AttendCommand(VALID_STUDENT_ID_AMY, INDEX_FIRST_TUTORIAL);
 
         String expectedMessage = String.format(AttendCommand.MESSAGE_ADD_ATTENDANCE_SUCCESS,
                 Messages.format(editedPerson));

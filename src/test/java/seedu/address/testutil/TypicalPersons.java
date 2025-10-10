@@ -1,77 +1,127 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY_STR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB_STR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY_STR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB_STR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY_STR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB_STR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY_STR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB_STR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalExamScores.EXAM_SCORES_A;
-import static seedu.address.testutil.TypicalExamScores.EXAM_SCORES_B;
-import static seedu.address.testutil.TypicalExamScores.EXAM_SCORES_C;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.person.Attendance;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentId;
+import seedu.address.model.tag.Tag;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */
 public class TypicalPersons {
 
-    public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withEmail("alice@u.nus.edu")
-            .withPhone("94351253")
-            .withStudentId("A0000000A")
-            .withExamScores(EXAM_SCORES_C)
-            .withAttendance("false false false false false false false false false false false")
-            .withTags("friends").build();
-    public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
-            .withEmail("johnd@u.nus.edu")
-            .withPhone("98765432")
-            .withStudentId("A0000001A")
-            .withExamScores(EXAM_SCORES_B)
-            .withAttendance("true false false true false true false false true false false")
-            .withTags("owesMoney", "friends").build();
-    public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withStudentId("A0000002A")
-            .withEmail("heinz@u.nus.edu").build();
-    public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withStudentId("A0000003A")
-            .withEmail("cornelia@u.nus.edu").withTags("friends")
-            .withExamScores(EXAM_SCORES_A).build();
-    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("94822241")
-            .withStudentId("A0000004A")
-            .withEmail("werner@u.nus.edu").build();
-    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("94824271")
-            .withStudentId("A0000005A")
-            .withEmail("lydia@u.nus.edu").build();
-    public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("94824421")
-            .withStudentId("A0000006A")
-            .withEmail("anna@u.nus.edu").build();
+    public static final Set<Tag> FRIEND_TAG = new HashSet<>(List.of(new Tag("friends")));
+    public static final Set<Tag> OWES_MONEY_FRIENDS_TAGS = new HashSet<>(Arrays.asList(
+            new Tag("owesMoney"), new Tag("friends")));
+
+    public static final Person ALICE = new Person.PersonBuilder(
+            new Name("Alice Pauline"),
+            new Phone("94351253"),
+            new Email("alice@u.nus.edu"),
+            new StudentId("A0000000A"))
+            .withAttendance(new Attendance(
+                    "false false false false false false false false false false false"))
+            .withTags(FRIEND_TAG)
+            .build();
+
+    public static final Person BENSON = new Person.PersonBuilder(
+            new Name("Benson Meier"),
+            new Phone("98765432"),
+            new Email("johnd@u.nus.edu"),
+            new StudentId("A0000001A"))
+            .withAttendance(new Attendance(
+                    "true false false true false true false false true false false"))
+            .withTags(OWES_MONEY_FRIENDS_TAGS)
+            .build();
+
+    public static final Person CARL = new Person.PersonBuilder(
+            new Name("Carl Kurz"),
+            new Phone("95352563"),
+            new Email("heinz@u.nus.edu"),
+            new StudentId("A0000002A"))
+            .build();
+
+    public static final Person DANIEL = new Person.PersonBuilder(
+            new Name("Daniel Meier"),
+            new Phone("87652533"),
+            new Email("cornelia@u.nus.edu"),
+            new StudentId("A0000003A"))
+            .withTags(FRIEND_TAG)
+            .build();
+
+    public static final Person ELLE = new Person.PersonBuilder(
+            new Name("Elle Meyer"),
+            new Phone("94822241"),
+            new Email("werner@u.nus.edu"),
+            new StudentId("A0000004A"))
+            .build();
+
+    public static final Person FIONA = new Person.PersonBuilder(
+            new Name("Fiona Kunz"),
+            new Phone("94824271"),
+            new Email("lydia@u.nus.edu"),
+            new StudentId("A0000005A"))
+            .build();
+
+    public static final Person GEORGE = new Person.PersonBuilder(
+            new Name("George Best"),
+            new Phone("94824421"),
+            new Email("anna@u.nus.edu"),
+            new StudentId("A0000006A"))
+            .build();
 
     // Manually added
-    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("84824241")
-            .withStudentId("A0000007A")
-            .withEmail("stefan@u.nus.edu").build();
-    public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("84821311")
-            .withStudentId("A0000008A")
-            .withEmail("hans@u.nus.edu").build();
+    public static final Person HOON = new Person.PersonBuilder(
+            new Name("Hoon Meier"),
+            new Phone("84824241"),
+            new Email("stefan@u.nus.edu"),
+            new StudentId("A0000007A"))
+            .build();
+
+    public static final Person IDA = new Person.PersonBuilder(
+            new Name("Ida Mueller"),
+            new Phone("84821311"),
+            new Email("hans@u.nus.edu"),
+            new StudentId("A0000008A"))
+            .build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_FRIEND)
-            .withStudentId(VALID_STUDENT_ID_AMY).build();
-    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-            .withStudentId(VALID_STUDENT_ID_BOB).build();
+    public static final Person AMY = new Person.PersonBuilder(
+            new Name(VALID_NAME_AMY_STR),
+            new Phone(VALID_PHONE_AMY_STR),
+            new Email(VALID_EMAIL_AMY_STR),
+            new StudentId(VALID_STUDENT_ID_AMY_STR))
+            .withTags(new HashSet<>(Arrays.asList(new Tag(VALID_TAG_FRIEND))))
+            .build();
+
+    public static final Person BOB = new Person.PersonBuilder(
+            new Name(VALID_NAME_BOB_STR),
+            new Phone(VALID_PHONE_BOB_STR),
+            new Email(VALID_EMAIL_BOB_STR),
+            new StudentId(VALID_STUDENT_ID_BOB_STR))
+            .withTags(new HashSet<>(Arrays.asList(new Tag(VALID_TAG_HUSBAND), new Tag(VALID_TAG_FRIEND))))
+            .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
