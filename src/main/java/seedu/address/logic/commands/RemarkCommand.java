@@ -13,6 +13,7 @@ import seedu.address.model.person.Remark;
 import java.util.List;
 
 
+
 public class RemarkCommand extends Command {
 
     public static final String COMMAND_WORD = "remark";
