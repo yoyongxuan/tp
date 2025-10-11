@@ -60,7 +60,8 @@ public class ScoreCommand extends Command {
         ExamScores newExamScores = personToEdit.getExamScores().updateScore(this.score);
 
         Person editedPerson = new Person.PersonBuilder(personToEdit.getName(), personToEdit.getPhone(),
-                personToEdit.getEmail(), personToEdit.getStudentId()).withTags(personToEdit.getTags())
+                personToEdit.getEmail(), personToEdit.getStudentId(), personToEdit.getTelegramHandle()
+                ).withTags(personToEdit.getTags())
                 .withExamScores(newExamScores).build();
 
         model.setPerson(personToEdit, editedPerson);

@@ -26,6 +26,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentId;
+import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -98,10 +99,12 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         StudentId oldStudentId = editPersonDescriptor.getStudentId().orElse(personToEdit.getStudentId());
+        TelegramHandle updatedTelegramHandle = editPersonDescriptor.getTelegramHandle()
+                .orElse(personToEdit.getTelegramHandle());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         ExamScores examScores = editPersonDescriptor.getExamScores().orElse(personToEdit.getExamScores());
 
-        return new Person.PersonBuilder(updatedName, updatedPhone, updatedEmail, oldStudentId)
+        return new Person.PersonBuilder(updatedName, updatedPhone, updatedEmail, oldStudentId, updatedTelegramHandle)
                 .withTags(updatedTags)
                 .withExamScores(examScores)
                 .build();
@@ -140,6 +143,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private StudentId studentId;
+        private TelegramHandle telegramHandle;
         private Set<Tag> tags;
         private ExamScores examScores;
 
@@ -155,6 +159,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setStudentId(toCopy.studentId);
+            setTelegramHandle(toCopy.telegramHandle);
             setTags(toCopy.tags);
             setExamScores(toCopy.examScores);
         }
@@ -198,6 +203,15 @@ public class EditCommand extends Command {
             return Optional.ofNullable(studentId);
         }
 
+        public void setTelegramHandle(TelegramHandle telegramHandle) {
+            this.telegramHandle = telegramHandle;
+        }
+
+        public Optional<TelegramHandle> getTelegramHandle() {
+            return Optional.ofNullable(telegramHandle);
+        }
+
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -239,6 +253,7 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
+                    && Objects.equals(telegramHandle, otherEditPersonDescriptor.telegramHandle)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(examScores, otherEditPersonDescriptor.examScores);
         }
@@ -249,6 +264,7 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
+                    .add("telegramHandle", telegramHandle)
                     .add("tags", tags)
                     .add("exam scores", examScores)
                     .toString();

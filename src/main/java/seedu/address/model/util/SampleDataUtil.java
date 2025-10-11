@@ -11,6 +11,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentId;
+import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -20,27 +21,27 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[]{
                 new Person.PersonBuilder(new Name("Alex Yeoh"), new Phone("87438807"),
-                        new Email("alexyeoh@u.nus.edu"), new StudentId("A0000000A"))
+                        new Email("alexyeoh@u.nus.edu"), new StudentId("A0000000A"), new TelegramHandle("@AlexYeoh"))
                         .withTags(getTagSet("friends"))
                         .build(),
                 new Person.PersonBuilder(new Name("Bernice Yu"), new Phone("99272758"),
-                        new Email("berniceyu@u.nus.edu"), new StudentId("A0000001A"))
+                        new Email("berniceyu@u.nus.edu"), new StudentId("A0000001A"), new TelegramHandle("@BerniceYu"))
                         .withTags(getTagSet("colleagues", "friends"))
                         .build(),
                 new Person.PersonBuilder(new Name("Charlotte Oliveiro"), new Phone("93210283"),
-                        new Email("charlotte@u.nus.edu"), new StudentId("A0000002A"))
+                        new Email("charlotte@u.nus.edu"), new StudentId("A0000002A"), new TelegramHandle("@CharlotteO"))
                         .withTags(getTagSet("neighbours"))
                         .build(),
                 new Person.PersonBuilder(new Name("David Li"), new Phone("91031282"),
-                        new Email("lidavid@u.nus.edu"), new StudentId("A0000003A"))
+                        new Email("lidavid@u.nus.edu"), new StudentId("A0000003A"), new TelegramHandle("@DavidLi"))
                         .withTags(getTagSet("family"))
                         .build(),
                 new Person.PersonBuilder(new Name("Irfan Ibrahim"), new Phone("92492021"),
-                        new Email("irfan@u.nus.edu"), new StudentId("A0000004A"))
+                        new Email("irfan@u.nus.edu"), new StudentId("A0000004A"), new TelegramHandle("@IrfanI"))
                         .withTags(getTagSet("classmates"))
                         .build(),
                 new Person.PersonBuilder(new Name("Roy Balakrishnan"), new Phone("92624417"),
-                        new Email("royb@u.nus.edu"), new StudentId("A0000005A"))
+                        new Email("royb@u.nus.edu"), new StudentId("A0000005A"), new TelegramHandle("@RoyBalakrishnan"))
                         .withTags(getTagSet("colleagues"))
                         .build()
         };
