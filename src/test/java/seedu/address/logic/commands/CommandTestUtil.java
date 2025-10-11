@@ -27,6 +27,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentId;
+import seedu.address.model.person.TelegramHandle;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -64,6 +65,8 @@ public class CommandTestUtil {
     public static final Address VALID_ADDRESS_BOB = new Address(VALID_ADDRESS_BOB_STR);
     public static final Attendance VALID_ATTENDANCE_AMY = new Attendance(VALID_ATTENDANCE_AMY_STR);
     public static final Attendance VALID_ATTENDANCE_BOB = new Attendance(VALID_ATTENDANCE_BOB_STR);
+    public static final TelegramHandle VALID_TELEGRAM_HANDLE_AMY = new TelegramHandle(VALID_TELEGRAM_HANDLE_AMY_STR);
+    public static final TelegramHandle VALID_TELEGRAM_HANDLE_BOB = new TelegramHandle(VALID_TELEGRAM_HANDLE_BOB_STR);
 
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";

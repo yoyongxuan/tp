@@ -11,7 +11,7 @@ public class TelegramHandle {
 
     public static final String MESSAGE_CONSTRAINTS = "Telegram handles should be of the format @username "
             + "and adhere to the following constraints:\n"
-            + "1. The username should only contain alphanumeric characters and underscores.";
+            + "1. The username should only contain alphanumeric characters and underscores, and cannot be blank.";
     // alphanumeric and special characters
     public static final String VALIDATION_REGEX = "^@\\w+$";
 

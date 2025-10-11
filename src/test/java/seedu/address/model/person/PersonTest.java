@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -62,6 +63,12 @@ public class PersonTest {
                 .build();
         assertTrue(BOB.isSamePerson(editedBob));
 
+        // telegram handle differs, all other attributes same -> returns true
+        // as telegram handle not required for person equality
+        editedBob = new Person.PersonBuilder(BOB)
+                .withTelegramHandle(VALID_TELEGRAM_HANDLE_AMY)
+                .build();
+        assertTrue(BOB.isSamePerson(editedBob));
     }
 
     @Test
