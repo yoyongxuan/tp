@@ -1,5 +1,6 @@
 package seedu.address.commons.core.index;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -31,6 +32,20 @@ public class Index {
 
     public int getOneBased() {
         return zeroBasedIndex + 1;
+    }
+
+    /**
+     * Returns if a given string is a valid zero-based index.
+     */
+    public static boolean isValidZeroBasedIndex(String test) {
+        return StringUtil.isUnsignedInteger(test);
+    }
+
+    /**
+     * Returns if a given string is a valid one-based index.
+     */
+    public static boolean isValidOneBasedIndex(String test) {
+        return StringUtil.isNonZeroUnsignedInteger(test);
     }
 
     /**

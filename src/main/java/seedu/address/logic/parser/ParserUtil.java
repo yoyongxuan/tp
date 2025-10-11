@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.Identifier;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -52,6 +53,21 @@ public class ParserUtil {
             throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
         }
         return new StudentId(trimmedStudentId);
+    }
+
+    /**
+     * Parses {@code identifier} into a {@code Identifier} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     *
+     * @throws ParseException if the specified identifier is invalid (not a valid studentId or index).
+     */
+    public static Identifier parseIdentifier(String identifier) throws ParseException {
+        requireNonNull(identifier);
+        String trimmedIdentifier = identifier.trim();
+        if (!Identifier.isValidIdentifier(trimmedIdentifier)) {
+            throw new ParseException(Identifier.MESSAGE_CONSTRAINTS);
+        }
+        return new Identifier(trimmedIdentifier);
     }
 
     /**
