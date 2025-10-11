@@ -13,7 +13,7 @@ public class TelegramHandle {
             + "and adhere to the following constraints:\n"
             + "1. The username should only contain alphanumeric characters and underscores.";
     // alphanumeric and special characters
-    public static final String VALIDATION_REGEX = "^\\w+$";
+    public static final String VALIDATION_REGEX = "^@\\w+$";
 
     public final String value;
 
