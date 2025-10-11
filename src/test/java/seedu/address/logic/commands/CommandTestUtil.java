@@ -21,10 +21,13 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Exam;
+import seedu.address.model.person.ExamScores;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Score;
 import seedu.address.model.person.StudentId;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
@@ -49,6 +52,7 @@ public class CommandTestUtil {
     public static final String VALID_ATTENDANCE_BOB_STR =
             "true true true true false true false false false false false";
 
+
     public static final Name VALID_NAME_AMY = new Name(VALID_NAME_AMY_STR);
     public static final Name VALID_NAME_BOB = new Name(VALID_NAME_BOB_STR);
     public static final Phone VALID_PHONE_AMY = new Phone(VALID_PHONE_AMY_STR);
@@ -61,6 +65,12 @@ public class CommandTestUtil {
     public static final Address VALID_ADDRESS_BOB = new Address(VALID_ADDRESS_BOB_STR);
     public static final Attendance VALID_ATTENDANCE_AMY = new Attendance(VALID_ATTENDANCE_AMY_STR);
     public static final Attendance VALID_ATTENDANCE_BOB = new Attendance(VALID_ATTENDANCE_BOB_STR);
+    public static final Score VALID_SCORE_MIDTERM = Score.getRecordedScore(Exam.MIDTERM, "50");
+    public static final Score VALID_SCORE_FINAL = Score.getRecordedScore(Exam.FINAL, "80");
+    public static final ExamScores VALID_EXAM_SCORES_AMY = ExamScores.getEmptyExamScores()
+            .updateScore(VALID_SCORE_MIDTERM);
+    public static final ExamScores VALID_EXAM_SCORES_BOB = ExamScores.getEmptyExamScores()
+            .updateScore(VALID_SCORE_FINAL);
 
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
