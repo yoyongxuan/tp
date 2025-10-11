@@ -28,6 +28,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_STUDENT_ID = "A000A";
     private static final String INVALID_ATTENDANCE = "false";
     private static final JsonAdaptedScore INVALID_SCORE = new JsonAdaptedScore("olvl", "a+");
+    private static final JsonAdaptedScore INVALID_SCORE2 = new JsonAdaptedScore("midterm", "700");
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = BENSON.getName().toString();
@@ -153,11 +154,19 @@ public class JsonAdaptedPersonTest {
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
 
         // throws error when the name of exam is wrong
-        invalidScoreList = Arrays.asList(VALID_SCORE, INVALID_SCORE); // both midterm scores
+        invalidScoreList = Arrays.asList(VALID_SCORE, INVALID_SCORE);
         invalidExamScores = new JsonAdaptedExamScores(invalidScoreList);
         person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_STUDENT_ID,
                 VALID_ATTENDANCE, invalidExamScores, VALID_TAGS);
         expectedMessage = Exam.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+
+        // throws error when the value of score is wrong
+        invalidScoreList = Arrays.asList(VALID_SCORE, INVALID_SCORE2);
+        invalidExamScores = new JsonAdaptedExamScores(invalidScoreList);
+        person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_STUDENT_ID,
+                VALID_ATTENDANCE, invalidExamScores, VALID_TAGS);
+        expectedMessage = Exam.MIDTERM.getMessageScoreConstraints();
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
 
         // throws error when the order of scores is wrong
