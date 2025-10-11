@@ -80,10 +80,9 @@ public class AttendCommand extends Command {
 
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = new Person(
-                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getStudentId(),
-                personToEdit.getAttendance().addAttendance(tutorial), personToEdit.getTags());
-
+        Person editedPerson = new Person.PersonBuilder(personToEdit)
+                .withAttendance(personToEdit.getAttendance().addAttendance(tutorial))
+                .build();
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
@@ -100,9 +99,9 @@ public class AttendCommand extends Command {
                 .findFirst()
                 .orElseThrow(() -> new CommandException(MESSAGE_INVALID_STUDENT_ID_DISPLAYED_INDEX));
 
-        Person editedPerson = new Person(
-                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getStudentId(),
-                personToEdit.getAttendance().addAttendance(tutorial), personToEdit.getTags());
+        Person editedPerson = new Person.PersonBuilder(personToEdit)
+                .withAttendance(personToEdit.getAttendance().addAttendance(tutorial))
+                .build();
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

@@ -18,8 +18,14 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Attendance;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentId;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -27,34 +33,49 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-    public static final String VALID_NAME_AMY = "Amy Bee";
-    public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_STUDENT_ID_AMY = "A0000000A";
-    public static final String VALID_STUDENT_ID_BOB = "A0000001B";
-    public static final String VALID_PHONE_AMY = "61111111";
-    public static final String VALID_PHONE_BOB = "61111112";
-    public static final String VALID_EMAIL_AMY = "amy@u.nus.edu";
-    public static final String VALID_EMAIL_ALICE = "alice@u.nus.edu";
-    public static final String VALID_EMAIL_BOB = "bob@u.nus.edu";
-    public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
-    public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_ATTENDANCE_AMY =
+    public static final String VALID_NAME_AMY_STR = "Amy Bee";
+    public static final String VALID_NAME_BOB_STR = "Bob Choo";
+    public static final String VALID_STUDENT_ID_AMY_STR = "A0000000A";
+    public static final String VALID_STUDENT_ID_BOB_STR = "A0000001B";
+    public static final String VALID_PHONE_AMY_STR = "61111111";
+    public static final String VALID_PHONE_BOB_STR = "61111112";
+    public static final String VALID_EMAIL_AMY_STR = "amy@u.nus.edu";
+    public static final String VALID_EMAIL_ALICE_STR = "alice@u.nus.edu";
+    public static final String VALID_EMAIL_BOB_STR = "bob@u.nus.edu";
+    public static final String VALID_ADDRESS_AMY_STR = "Block 312, Amy Street 1";
+    public static final String VALID_ADDRESS_BOB_STR = "Block 123, Bobby Street 3";
+    public static final String VALID_ATTENDANCE_AMY_STR =
             "true false false false false false false false false false false";
-    public static final String VALID_ATTENDANCE_BOB = "true true true true false true false false false false false";
+    public static final String VALID_ATTENDANCE_BOB_STR =
+            "true true true true false true false false false false false";
+
+    public static final Name VALID_NAME_AMY = new Name(VALID_NAME_AMY_STR);
+    public static final Name VALID_NAME_BOB = new Name(VALID_NAME_BOB_STR);
+    public static final Phone VALID_PHONE_AMY = new Phone(VALID_PHONE_AMY_STR);
+    public static final Phone VALID_PHONE_BOB = new Phone(VALID_PHONE_BOB_STR);
+    public static final Email VALID_EMAIL_AMY = new Email(VALID_EMAIL_AMY_STR);
+    public static final Email VALID_EMAIL_BOB = new Email(VALID_EMAIL_BOB_STR);
+    public static final StudentId VALID_STUDENT_ID_AMY = new StudentId(VALID_STUDENT_ID_AMY_STR);
+    public static final StudentId VALID_STUDENT_ID_BOB = new StudentId(VALID_STUDENT_ID_BOB_STR);
+    public static final Address VALID_ADDRESS_AMY = new Address(VALID_ADDRESS_AMY_STR);
+    public static final Address VALID_ADDRESS_BOB = new Address(VALID_ADDRESS_BOB_STR);
+    public static final Attendance VALID_ATTENDANCE_AMY = new Attendance(VALID_ATTENDANCE_AMY_STR);
+    public static final Attendance VALID_ATTENDANCE_BOB = new Attendance(VALID_ATTENDANCE_BOB_STR);
+
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_EXAM = "midterm";
     public static final String VALID_EXAM2 = "final";
     public static final String VALID_SCORE = "0";
 
-    public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
-    public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
-    public static final String STUDENT_ID_DESC_AMY = " " + VALID_STUDENT_ID_AMY;
-    public static final String STUDENT_ID_DESC_BOB = " " + VALID_STUDENT_ID_BOB;
-    public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
-    public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
-    public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
-    public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
+    public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY_STR;
+    public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB_STR;
+    public static final String STUDENT_ID_DESC_AMY = " " + VALID_STUDENT_ID_AMY_STR;
+    public static final String STUDENT_ID_DESC_BOB = " " + VALID_STUDENT_ID_BOB_STR;
+    public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY_STR;
+    public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB_STR;
+    public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY_STR;
+    public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB_STR;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String EXAM_DESC = " " + PREFIX_EXAM + VALID_EXAM;
@@ -75,12 +96,12 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
-                .withStudentId(VALID_STUDENT_ID_AMY).withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withStudentId(VALID_STUDENT_ID_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY_STR)
+                .withPhone(VALID_PHONE_AMY_STR).withEmail(VALID_EMAIL_AMY_STR)
+                .withStudentId(VALID_STUDENT_ID_AMY_STR).withTags(VALID_TAG_FRIEND).build();
+        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB_STR)
+                .withPhone(VALID_PHONE_BOB_STR).withEmail(VALID_EMAIL_BOB_STR)
+                .withStudentId(VALID_STUDENT_ID_BOB_STR).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
     /**

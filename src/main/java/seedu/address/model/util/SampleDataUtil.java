@@ -19,24 +19,30 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[]{
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@u.nus.edu"),
-                    new StudentId("A0000000A"),
-                    getTagSet("friends")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@u.nus.edu"),
-                    new StudentId("A0000001A"),
-                    getTagSet("colleagues", "friends")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@u.nus.edu"),
-                    new StudentId("A0000002A"),
-                    getTagSet("neighbours")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@u.nus.edu"),
-                    new StudentId("A0000003A"),
-                    getTagSet("family")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@u.nus.edu"),
-                    new StudentId("A0000004A"),
-                    getTagSet("classmates")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@u.nus.edu"),
-                    new StudentId("A0000005A"),
-                    getTagSet("colleagues"))
+                new Person.PersonBuilder(new Name("Alex Yeoh"), new Phone("87438807"),
+                        new Email("alexyeoh@u.nus.edu"), new StudentId("A0000000A"))
+                        .withTags(getTagSet("friends"))
+                        .build(),
+                new Person.PersonBuilder(new Name("Bernice Yu"), new Phone("99272758"),
+                        new Email("berniceyu@u.nus.edu"), new StudentId("A0000001A"))
+                        .withTags(getTagSet("colleagues", "friends"))
+                        .build(),
+                new Person.PersonBuilder(new Name("Charlotte Oliveiro"), new Phone("93210283"),
+                        new Email("charlotte@u.nus.edu"), new StudentId("A0000002A"))
+                        .withTags(getTagSet("neighbours"))
+                        .build(),
+                new Person.PersonBuilder(new Name("David Li"), new Phone("91031282"),
+                        new Email("lidavid@u.nus.edu"), new StudentId("A0000003A"))
+                        .withTags(getTagSet("family"))
+                        .build(),
+                new Person.PersonBuilder(new Name("Irfan Ibrahim"), new Phone("92492021"),
+                        new Email("irfan@u.nus.edu"), new StudentId("A0000004A"))
+                        .withTags(getTagSet("classmates"))
+                        .build(),
+                new Person.PersonBuilder(new Name("Roy Balakrishnan"), new Phone("92624417"),
+                        new Email("royb@u.nus.edu"), new StudentId("A0000005A"))
+                        .withTags(getTagSet("colleagues"))
+                        .build()
         };
     }
 
@@ -56,5 +62,4 @@ public class SampleDataUtil {
                 .map(Tag::new)
                 .collect(Collectors.toSet());
     }
-
 }

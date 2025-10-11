@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY_STR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB_STR;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -29,8 +29,8 @@ public class ViewCommandTest {
 
     @Test
     public void equals() {
-        StudentId idAmy = new StudentId(VALID_STUDENT_ID_AMY);
-        StudentId idBob = new StudentId(VALID_STUDENT_ID_BOB);
+        StudentId idAmy = new StudentId(VALID_STUDENT_ID_AMY_STR);
+        StudentId idBob = new StudentId(VALID_STUDENT_ID_BOB_STR);
         ViewCommand viewAmy = new ViewCommand(idAmy);
         ViewCommand viewAmyCopy = new ViewCommand(idAmy);
         ViewCommand viewBob = new ViewCommand(idBob);
@@ -69,7 +69,7 @@ public class ViewCommandTest {
 
     @Test
     public void toStringMethod() {
-        StudentId studentId = new StudentId(VALID_STUDENT_ID_AMY);
+        StudentId studentId = new StudentId(VALID_STUDENT_ID_AMY_STR);
         ViewCommand viewCommand = new ViewCommand(studentId);
         String expected = ViewCommand.class.getCanonicalName() + "{studentId=" + studentId + "}";
         assertEquals(expected, viewCommand.toString());

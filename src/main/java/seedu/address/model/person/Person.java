@@ -2,11 +2,13 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -32,54 +34,136 @@ public class Person {
     private final Email email;
     private final StudentId studentId;
 
-    // Data fields
+    // Data fields (can be optional)
     private final Attendance attendance;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Tag> tags;
     private final ExamScores examScores;
 
-    /**
-     * Every field must be present and not null.
-     */
-    public Person(Name name, Phone phone, Email email, StudentId studentId, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.studentId = studentId;
-        this.attendance = new Attendance();
-        this.tags.addAll(tags);
-        this.examScores = ExamScores.getEmptyExamScores();
+    private Person(PersonBuilder builder) {
+        this.name = builder.name;
+        this.phone = builder.phone;
+        this.email = builder.email;
+        this.studentId = builder.studentId;
+        this.attendance = builder.attendance;
+        this.tags = builder.tags;
+        this.examScores = builder.examScores;
     }
 
     /**
-     * Every field must be present and not null.
+     * Builder class for Person.
      */
-    public Person(Name name, Phone phone, Email email, StudentId studentId, Attendance attendance,
-                  Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, attendance, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.studentId = studentId;
-        this.attendance = attendance;
-        this.tags.addAll(tags);
-        this.examScores = ExamScores.getEmptyExamScores();
+    public static class PersonBuilder {
+        // Required fields
+        private Name name;
+        private Phone phone;
+        private Email email;
+        private StudentId studentId;
+        // Optional fields
+        private Attendance attendance = new Attendance();
+        private Set<Tag> tags = new HashSet<>();
+        private ExamScores examScores = ExamScores.getEmptyExamScores();
 
-    }
+        /**
+         * Constructs the Person class with the Builder pattern.
+         */
+        public PersonBuilder(Name name, Phone phone, Email email, StudentId studentId) {
+            requireAllNonNull(name, phone, email, studentId);
+            this.name = name;
+            this.phone = phone;
+            this.email = email;
+            this.studentId = studentId;
+        }
 
-    /**
-     * Every field must be present and not null.
-     */
-    public Person(Name name, Phone phone, Email email, StudentId studentId, Set<Tag> tags, ExamScores examScores) {
-        requireAllNonNull(name, phone, email, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.studentId = studentId;
-        this.attendance = new Attendance();
-        this.tags.addAll(tags);
-        this.examScores = examScores;
+        /**
+         * Constructs the PersonBuilder class from a Person.
+         */
+        public PersonBuilder(Person person) {
+            requireAllNonNull(person);
+            this.name = person.getName();
+            this.phone = person.getPhone();
+            this.email = person.getEmail();
+            this.studentId = person.getStudentId();
+            this.attendance = person.getAttendance();
+            this.tags = new HashSet<>(person.getTags());
+            this.examScores = person.getExamScores();
+        }
 
+        /**
+         * Changes the name of the PersonBuilder class.
+         */
+        public PersonBuilder withName(Name name) {
+            requireAllNonNull(name);
+            this.name = name;
+            return this;
+        }
+
+        /**
+         * Changes the phone of the PersonBuilder class.
+         */
+        public PersonBuilder withPhone(Phone phone) {
+            requireAllNonNull(phone);
+            this.phone = phone;
+            return this;
+        }
+
+        /**
+         * Changes the email of the PersonBuilder class.
+         */
+        public PersonBuilder withEmail(Email email) {
+            requireAllNonNull(email);
+            this.email = email;
+            return this;
+        }
+
+        /**
+         * Changes the student id of the PersonBuilder class.
+         */
+        public PersonBuilder withStudentId(StudentId studentId) {
+            requireAllNonNull(studentId);
+            this.studentId = studentId;
+            return this;
+        }
+
+        /**
+         * Sets the optional attendance for the person and returns the builder.
+         */
+        public PersonBuilder withAttendance(Attendance attendance) {
+            this.attendance = attendance;
+            return this;
+        }
+
+        /**
+         * Sets the optional tags for the person and returns the builder.
+         */
+        public PersonBuilder withTags(Set<Tag> tags) {
+            this.tags.addAll(tags);
+            return this;
+        }
+
+        /**
+         * Sets the optional tags for the person and returns the builder.
+         */
+        public PersonBuilder withTags(String... tags) {
+            this.tags = Arrays.stream(tags)
+                    .map(Tag::new)
+                    .collect(Collectors.toSet());
+            return this;
+        }
+
+        /**
+         * Sets the optional exam scores for the person and returns the builder.
+         */
+        public PersonBuilder withExamScores(ExamScores examScores) {
+            this.examScores = examScores;
+            return this;
+        }
+
+        /**
+         * Creates and returns the final Person object.
+         */
+        public Person build() {
+            return new Person(this);
+        }
     }
 
     public Name getName() {

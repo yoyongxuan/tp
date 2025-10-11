@@ -48,8 +48,6 @@ public class AddressBookParser {
         }
 
         final String commandWord = matcher.group("commandWord");
-        System.out.println("command word:");
-        System.out.println(commandWord);
         final String arguments = matcher.group("arguments");
 
         // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
@@ -85,6 +83,7 @@ public class AddressBookParser {
 
         case ScoreCommand.COMMAND_WORD:
             return new ScoreCommandParser().parse(arguments);
+
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
 
