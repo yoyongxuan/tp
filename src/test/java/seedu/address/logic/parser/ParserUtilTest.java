@@ -13,6 +13,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Identifier;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -58,6 +59,36 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseIdentifier_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseIdentifier(null));
+    }
+
+    @Test
+    public void parseIdentifier_validInput_success() throws Exception {
+        // index input
+        assertEquals(new Identifier("1"), ParserUtil.parseIdentifier("1"));
+        assertEquals(new Identifier("1"), ParserUtil.parseIdentifier("  1  "));
+
+        // studentId input
+        assertEquals(new Identifier("a0000000z"), ParserUtil.parseIdentifier("a0000000z"));
+        assertEquals(new Identifier("a0000000z"), ParserUtil.parseIdentifier("  a0000000z  "));
+    }
+
+    @Test
+    public void parseIdentifier_invalidInput_throwsParseException() throws Exception {
+        // random input
+        assertThrows(ParseException.class, () -> ParserUtil.parseIdentifier("   Hello World   "));
+
+        // index input
+        assertThrows(ParseException.class, () -> ParserUtil.parseIdentifier("-1"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseIdentifier("   -1   "));
+
+        // studentId input
+        assertThrows(ParseException.class, () -> ParserUtil.parseIdentifier("b1234567c"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseIdentifier("a12345678c"));
     }
 
     @Test
