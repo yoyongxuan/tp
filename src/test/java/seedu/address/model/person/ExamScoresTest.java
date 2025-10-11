@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalExamScores.EMPTY_EXAM_SCORES;
 import static seedu.address.testutil.TypicalScores.FINAL_SCORE_A;
@@ -16,6 +17,19 @@ import org.junit.jupiter.api.Test;
 
 
 public class ExamScoresTest {
+
+    @Test
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new ExamScores(null));
+    }
+
+    @Test
+    public void constructor_invalidEmail_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new ExamScores(
+                new Score[] {null, null}));
+        assertThrows(IllegalArgumentException.class, () -> new ExamScores(
+                new Score[] {MIDTERM_SCORE_A, MIDTERM_SCORE_A}));
+    }
 
     @Test
     public void getEmptyExamScores() {
