@@ -6,6 +6,15 @@
     "studentId": "A0000000A",
     "address": "123, Jurong West Ave 6, #08-111",
     "attendance": "false false false false false false false false false false true",
+    "examScores" : {
+      "scores" : [ {
+        "examName" : "midterm",
+        "score" : "unrecorded"
+      }, {
+        "examName" : "final",
+        "score" : "unrecorded"
+      } ]
+    },
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
@@ -13,6 +22,15 @@
     "email": "pauline@u.nus.edu",
     "studentId": "A0000000A",
     "address": "4th street",
-    "attendance": "false false false true false false false false false false true"
+    "attendance": "false false false true false false false false false false true",
+    "examScores" : {
+      "scores" : [ {
+        "examName" : "midterm",
+        "score" : "unrecorded"
+      }, {
+        "examName" : "final",
+        "score" : "unrecorded"
+      } ]
+    }
   } ]
 }
