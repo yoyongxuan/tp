@@ -40,7 +40,7 @@ public class ScoreCommandTest {
         Person personToEdit = ALICE;
         ExamScores newExamScores = personToEdit.getExamScores().updateScore(FINAL_SCORE_B);
         Person editedPerson = new Person.PersonBuilder(personToEdit.getName(), personToEdit.getPhone(),
-                personToEdit.getEmail(), personToEdit.getStudentId())
+                personToEdit.getEmail(), personToEdit.getStudentId(), personToEdit.getTelegramHandle())
                 .withTags(personToEdit.getTags())
                 .withExamScores(newExamScores)
                 .build();

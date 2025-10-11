@@ -39,6 +39,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label studentId;
     @FXML
+    private Label telegramHandle;
+    @FXML
     private Label examScores;
     @FXML
     private FlowPane tags;
@@ -56,6 +58,7 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
         studentId.setText(person.getStudentId().value);
+        telegramHandle.setText(person.getTelegramHandle().value);
         examScores.setText(person.getExamScores().toString());
         attendance.setText(person.getAttendance().toString());
         person.getTags().stream()

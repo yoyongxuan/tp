@@ -21,7 +21,8 @@ public class Identifier {
 
     private enum IdentifierType {
         INDEX,
-        STUDENT_ID
+        STUDENT_ID,
+        INVALID // Only present in ctor, is never a valid value outside of a failed ctor
     }
 
     public static final String MESSAGE_CONSTRAINTS = "Identifier must be a valid Student ID or index.";
@@ -37,19 +38,25 @@ public class Identifier {
      */
     public Identifier(String input) {
         requireNonNull(input);
-        checkArgument(isValidIdentifier(input), MESSAGE_CONSTRAINTS);
-        if (Index.isValidOneBasedIndex(input)) {
-            source = IdentifierType.INDEX;
-        } else {
-            source = IdentifierType.STUDENT_ID;
-        }
-
+        source = getIdentifierType(input);
         if (source == IdentifierType.INDEX) {
             index = Index.fromOneBased(Integer.parseInt(input));
             studentId = null;
-        } else {
+        } else if (source == IdentifierType.STUDENT_ID) {
             index = null;
             studentId = new StudentId(input);
+        } else {
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    private static IdentifierType getIdentifierType(String input) {
+        if (Index.isValidOneBasedIndex(input)) {
+            return IdentifierType.INDEX;
+        } else if (StudentId.isValidStudentId(input)) {
+            return IdentifierType.STUDENT_ID;
+        } else {
+            return IdentifierType.INVALID;
         }
     }
 
@@ -121,4 +128,8 @@ public class Identifier {
         }
     }
 
+    @Override
+    public String toString() {
+        return (source == IdentifierType.INDEX) ? this.index.toString() : this.studentId.toString();
+    }
 }

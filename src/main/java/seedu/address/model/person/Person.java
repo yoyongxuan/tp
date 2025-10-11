@@ -33,6 +33,7 @@ public class Person {
     private final Phone phone;
     private final Email email;
     private final StudentId studentId;
+    private final TelegramHandle telegramHandle;
 
     // Data fields (can be optional)
     private final Attendance attendance;
@@ -44,6 +45,7 @@ public class Person {
         this.phone = builder.phone;
         this.email = builder.email;
         this.studentId = builder.studentId;
+        this.telegramHandle = builder.telegramHandle;
         this.attendance = builder.attendance;
         this.tags = builder.tags;
         this.examScores = builder.examScores;
@@ -58,6 +60,7 @@ public class Person {
         private Phone phone;
         private Email email;
         private StudentId studentId;
+        private TelegramHandle telegramHandle;
         // Optional fields
         private Attendance attendance = new Attendance();
         private Set<Tag> tags = new HashSet<>();
@@ -66,12 +69,13 @@ public class Person {
         /**
          * Constructs the Person class with the Builder pattern.
          */
-        public PersonBuilder(Name name, Phone phone, Email email, StudentId studentId) {
+        public PersonBuilder(Name name, Phone phone, Email email, StudentId studentId, TelegramHandle telegramHandle) {
             requireAllNonNull(name, phone, email, studentId);
             this.name = name;
             this.phone = phone;
             this.email = email;
             this.studentId = studentId;
+            this.telegramHandle = telegramHandle;
         }
 
         /**
@@ -83,6 +87,7 @@ public class Person {
             this.phone = person.getPhone();
             this.email = person.getEmail();
             this.studentId = person.getStudentId();
+            this.telegramHandle = person.getTelegramHandle();
             this.attendance = person.getAttendance();
             this.tags = new HashSet<>(person.getTags());
             this.examScores = person.getExamScores();
@@ -124,6 +129,14 @@ public class Person {
             return this;
         }
 
+        /**
+         * Changes the telegram handle of the PersonBuilder class.
+         */
+        public PersonBuilder withTelegramHandle(TelegramHandle telegramHandle) {
+            requireAllNonNull(telegramHandle);
+            this.telegramHandle = telegramHandle;
+            return this;
+        }
         /**
          * Sets the optional attendance for the person and returns the builder.
          */
@@ -182,6 +195,10 @@ public class Person {
         return studentId;
     }
 
+    public TelegramHandle getTelegramHandle() {
+        return telegramHandle;
+    }
+
     public Attendance getAttendance() {
         return attendance;
     }
@@ -231,6 +248,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && studentId.equals(otherPerson.studentId)
+                && telegramHandle.equals(otherPerson.telegramHandle)
                 && attendance.equals(otherPerson.attendance)
                 && examScores.equals(otherPerson.examScores)
                 && tags.equals(otherPerson.tags);
@@ -239,7 +257,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, studentId, attendance, examScores, tags);
+        return Objects.hash(name, phone, email, studentId, telegramHandle, attendance, examScores,  tags);
     }
 
     @Override
@@ -249,6 +267,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("studentId", studentId)
+                .add("telegramHandle", telegramHandle)
                 .add("attendance", attendance)
                 .add("exam scores", examScores)
                 .add("tags", tags)

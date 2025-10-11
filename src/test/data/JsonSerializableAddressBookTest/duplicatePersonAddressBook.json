@@ -4,6 +4,7 @@
     "phone": "94351253",
     "email": "alice@u.nus.edu",
     "studentId": "A0000000A",
+    "telegramHandle": "@Alice",
     "address": "123, Jurong West Ave 6, #08-111",
     "attendance": "false false false false false false false false false false true",
     "examScores" : {
@@ -21,6 +22,7 @@
     "phone": "94351253",
     "email": "pauline@u.nus.edu",
     "studentId": "A0000000A",
+    "telegramHandle": "@Alice",
     "address": "4th street",
     "attendance": "false false false true false false false false false false true",
     "examScores" : {

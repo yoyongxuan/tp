@@ -17,6 +17,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentId;
+import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -30,6 +31,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String studentId;
+    private final String telegramHandle;
     private final String attendance;
     private final JsonAdaptedExamScores examScores;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
@@ -40,6 +42,7 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("studentId") String studentId,
+                             @JsonProperty("telegramHandle") String telegramHandle,
                              @JsonProperty("attendance") String attendance,
                              @JsonProperty("examScores") JsonAdaptedExamScores examScores,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
@@ -47,6 +50,7 @@ class JsonAdaptedPerson {
         this.phone = phone;
         this.email = email;
         this.studentId = studentId;
+        this.telegramHandle = telegramHandle;
         this.attendance = attendance;
         this.examScores = examScores;
         if (tags != null) {
@@ -62,6 +66,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         studentId = source.getStudentId().value;
+        telegramHandle = source.getTelegramHandle().value;
         attendance = source.getAttendance().toJson();
         examScores = new JsonAdaptedExamScores(source.getExamScores());
         tags.addAll(source.getTags().stream()
@@ -113,6 +118,15 @@ class JsonAdaptedPerson {
         }
         final StudentId modelStudentId = new StudentId(studentId);
 
+        if (telegramHandle == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    TelegramHandle.class.getSimpleName()));
+        }
+        if (!TelegramHandle.isValidTelegramHandle(telegramHandle)) {
+            throw new IllegalValueException(TelegramHandle.MESSAGE_CONSTRAINTS);
+        }
+        final TelegramHandle modelTelegramHandle = new TelegramHandle(telegramHandle);
+
         if (attendance == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Attendance.class.getSimpleName()));
@@ -129,7 +143,7 @@ class JsonAdaptedPerson {
         final ExamScores modelExamScores = examScores.toModelType();
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person.PersonBuilder(modelName, modelPhone, modelEmail, modelStudentId)
+        return new Person.PersonBuilder(modelName, modelPhone, modelEmail, modelStudentId, modelTelegramHandle)
                 .withAttendance(modelAttendance)
                 .withExamScores(modelExamScores)
                 .withTags(modelTags)
