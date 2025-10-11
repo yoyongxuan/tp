@@ -17,11 +17,18 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  */
 public class Identifier {
 
+    private enum IdentifierType {
+        INDEX,
+        STUDENT_ID
+    }
+
     public static final String MESSAGE_CONSTRAINTS = "Identifier must be a valid Student ID or index.";
 
     private final Index index;
     private final StudentId studentId;
-    private final boolean isIndex;
+    private final IdentifierType source;
+
+
 
 
     /**
@@ -32,9 +39,13 @@ public class Identifier {
     public Identifier(String input) {
         requireNonNull(input);
         checkArgument(isValidIdentifier(input), MESSAGE_CONSTRAINTS);
-        isIndex = Index.isValidOneBasedIndex(input);
+        if (Index.isValidOneBasedIndex(input)) {
+            source = IdentifierType.INDEX;
+        } else {
+            source = IdentifierType.STUDENT_ID;
+        }
 
-        if (isIndex) {
+        if (source == IdentifierType.INDEX) {
             index = Index.fromOneBased(Integer.parseInt(input));
             studentId = null;
         } else {
@@ -61,7 +72,7 @@ public class Identifier {
         List<Person> lastShownList = model.getFilteredPersonList();
         Person out;
 
-        if (isIndex) {
+        if (source == IdentifierType.INDEX) {
             if (index.getZeroBased() >= lastShownList.size()) {
                 throw new PersonNotFoundException();
             }
@@ -89,11 +100,11 @@ public class Identifier {
 
         Identifier otherIdentifier = (Identifier) other;
 
-        if (otherIdentifier.isIndex != this.isIndex) {
+        if (otherIdentifier.source != this.source) {
             return false;
         }
 
-        if (otherIdentifier.isIndex) {
+        if (source == IdentifierType.INDEX) {
             return otherIdentifier.index.equals(this.index);
         } else {
             return otherIdentifier.studentId.equals(this.studentId);
