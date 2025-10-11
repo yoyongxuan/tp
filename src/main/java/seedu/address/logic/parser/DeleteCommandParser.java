@@ -2,10 +2,9 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.address.commons.core.index.Index;
+import seedu.address.commons.core.Identifier;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.StudentId;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
@@ -19,18 +18,11 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        // Try to parse as index if only consists of digits
         try {
-            if (trimmedArgs.matches("\\d+")) {
-                Index index = ParserUtil.parseIndex(args);
-                return new DeleteCommand(index);
-            } else {
-                StudentId studentId = ParserUtil.parseStudentId(trimmedArgs);
-                return new DeleteCommand(studentId);
-            }
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+            Identifier identifier = new Identifier(trimmedArgs);
+            return new DeleteCommand(identifier);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), e);
         }
     }
 }
