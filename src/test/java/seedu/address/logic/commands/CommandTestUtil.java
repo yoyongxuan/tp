@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCORE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentId;
+import seedu.address.model.person.TelegramHandle;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -48,6 +50,8 @@ public class CommandTestUtil {
             "true false false false false false false false false false false";
     public static final String VALID_ATTENDANCE_BOB_STR =
             "true true true true false true false false false false false";
+    public static final String VALID_TELEGRAM_HANDLE_AMY_STR = "@Amy";
+    public static final String VALID_TELEGRAM_HANDLE_BOB_STR = "@Bob";
 
     public static final Name VALID_NAME_AMY = new Name(VALID_NAME_AMY_STR);
     public static final Name VALID_NAME_BOB = new Name(VALID_NAME_BOB_STR);
@@ -61,6 +65,8 @@ public class CommandTestUtil {
     public static final Address VALID_ADDRESS_BOB = new Address(VALID_ADDRESS_BOB_STR);
     public static final Attendance VALID_ATTENDANCE_AMY = new Attendance(VALID_ATTENDANCE_AMY_STR);
     public static final Attendance VALID_ATTENDANCE_BOB = new Attendance(VALID_ATTENDANCE_BOB_STR);
+    public static final TelegramHandle VALID_TELEGRAM_HANDLE_AMY = new TelegramHandle(VALID_TELEGRAM_HANDLE_AMY_STR);
+    public static final TelegramHandle VALID_TELEGRAM_HANDLE_BOB = new TelegramHandle(VALID_TELEGRAM_HANDLE_BOB_STR);
 
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
@@ -80,6 +86,8 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String EXAM_DESC = " " + PREFIX_EXAM + VALID_EXAM;
     public static final String SCORE_DESC = " " + PREFIX_SCORE + VALID_SCORE;
+    public static final String TELEGRAM_HANDLE_DESC_AMY = " " + PREFIX_TELEGRAM_HANDLE + VALID_TELEGRAM_HANDLE_AMY_STR;
+    public static final String TELEGRAM_HANDLE_DESC_BOB = " " + PREFIX_TELEGRAM_HANDLE + VALID_TELEGRAM_HANDLE_BOB_STR;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones

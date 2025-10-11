@@ -10,6 +10,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY_
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB_STR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_AMY_STR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB_STR;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,6 +26,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentId;
+import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -39,7 +42,8 @@ public class TypicalPersons {
             new Name("Alice Pauline"),
             new Phone("94351253"),
             new Email("alice@u.nus.edu"),
-            new StudentId("A0000000A"))
+            new StudentId("A0000000A"),
+            new TelegramHandle("@Alice"))
             .withAttendance(new Attendance(
                     "false false false false false false false false false false false"))
             .withTags(FRIEND_TAG)
@@ -49,7 +53,8 @@ public class TypicalPersons {
             new Name("Benson Meier"),
             new Phone("98765432"),
             new Email("johnd@u.nus.edu"),
-            new StudentId("A0000001A"))
+            new StudentId("A0000001A"),
+            new TelegramHandle("@Benson"))
             .withAttendance(new Attendance(
                     "true false false true false true false false true false false"))
             .withTags(OWES_MONEY_FRIENDS_TAGS)
@@ -59,14 +64,16 @@ public class TypicalPersons {
             new Name("Carl Kurz"),
             new Phone("95352563"),
             new Email("heinz@u.nus.edu"),
-            new StudentId("A0000002A"))
+            new StudentId("A0000002A"),
+            new TelegramHandle("@Carl"))
             .build();
 
     public static final Person DANIEL = new Person.PersonBuilder(
             new Name("Daniel Meier"),
             new Phone("87652533"),
             new Email("cornelia@u.nus.edu"),
-            new StudentId("A0000003A"))
+            new StudentId("A0000003A"),
+            new TelegramHandle("@Daniel"))
             .withTags(FRIEND_TAG)
             .build();
 
@@ -74,21 +81,24 @@ public class TypicalPersons {
             new Name("Elle Meyer"),
             new Phone("94822241"),
             new Email("werner@u.nus.edu"),
-            new StudentId("A0000004A"))
+            new StudentId("A0000004A"),
+            new TelegramHandle("@Elle"))
             .build();
 
     public static final Person FIONA = new Person.PersonBuilder(
             new Name("Fiona Kunz"),
             new Phone("94824271"),
             new Email("lydia@u.nus.edu"),
-            new StudentId("A0000005A"))
+            new StudentId("A0000005A"),
+            new TelegramHandle("@Fiona"))
             .build();
 
     public static final Person GEORGE = new Person.PersonBuilder(
             new Name("George Best"),
             new Phone("94824421"),
             new Email("anna@u.nus.edu"),
-            new StudentId("A0000006A"))
+            new StudentId("A0000006A"),
+            new TelegramHandle("@George"))
             .build();
 
     // Manually added
@@ -96,14 +106,16 @@ public class TypicalPersons {
             new Name("Hoon Meier"),
             new Phone("84824241"),
             new Email("stefan@u.nus.edu"),
-            new StudentId("A0000007A"))
+            new StudentId("A0000007A"),
+            new TelegramHandle("@Hoon"))
             .build();
 
     public static final Person IDA = new Person.PersonBuilder(
             new Name("Ida Mueller"),
             new Phone("84821311"),
             new Email("hans@u.nus.edu"),
-            new StudentId("A0000008A"))
+            new StudentId("A0000008A"),
+            new TelegramHandle("@Ida"))
             .build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
@@ -111,7 +123,8 @@ public class TypicalPersons {
             new Name(VALID_NAME_AMY_STR),
             new Phone(VALID_PHONE_AMY_STR),
             new Email(VALID_EMAIL_AMY_STR),
-            new StudentId(VALID_STUDENT_ID_AMY_STR))
+            new StudentId(VALID_STUDENT_ID_AMY_STR),
+            new TelegramHandle(VALID_TELEGRAM_HANDLE_AMY_STR))
             .withTags(new HashSet<>(Arrays.asList(new Tag(VALID_TAG_FRIEND))))
             .build();
 
@@ -119,7 +132,8 @@ public class TypicalPersons {
             new Name(VALID_NAME_BOB_STR),
             new Phone(VALID_PHONE_BOB_STR),
             new Email(VALID_EMAIL_BOB_STR),
-            new StudentId(VALID_STUDENT_ID_BOB_STR))
+            new StudentId(VALID_STUDENT_ID_BOB_STR),
+            new TelegramHandle(VALID_TELEGRAM_HANDLE_BOB_STR))
             .withTags(new HashSet<>(Arrays.asList(new Tag(VALID_TAG_HUSBAND), new Tag(VALID_TAG_FRIEND))))
             .build();
 
