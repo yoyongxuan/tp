@@ -37,6 +37,9 @@ public class TelegramHandleTest {
         assertFalse(TelegramHandle.isValidTelegramHandle("a@a")); // nothing before @
         assertTrue(TelegramHandle.isValidTelegramHandle("@_")); // underscore allowed
         assertFalse(TelegramHandle.isValidTelegramHandle("@@")); // two @s
+        assertFalse(TelegramHandle.isValidTelegramHandle("@ ")); // space after
+        assertFalse(TelegramHandle.isValidTelegramHandle(" @")); // space before
+        assertFalse(TelegramHandle.isValidTelegramHandle(" @ ")); // space before and after
 
     }
 
