@@ -63,7 +63,7 @@ public class ScoreCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_EXAM_DESC + SCORE_DESC,
                 Exam.MESSAGE_CONSTRAINTS); // invalid exam
         assertParseFailure(parser, "1" + INVALID_SCORE_DESC + EXAM_DESC,
-                Exam.getExamFromName(VALID_EXAM).getMessageConstraints()); // invalid score
+                Exam.getExamFromName(VALID_EXAM).getMessageScoreConstraints()); // invalid score
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_EXAM_DESC + INVALID_SCORE_DESC,
