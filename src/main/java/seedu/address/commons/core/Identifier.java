@@ -108,4 +108,8 @@ public class Identifier {
         }
     }
 
+    @Override
+    public String toString() {
+        return (source == IdentifierType.INDEX) ? this.index.toString() : this.studentId.toString();
+    }
 }
