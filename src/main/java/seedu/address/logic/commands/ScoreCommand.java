@@ -56,7 +56,6 @@ public class ScoreCommand extends Command {
             throw new CommandException(identifier.getMessageIdentifierNotFound());
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
         ExamScores newExamScores = personToEdit.getExamScores().updateScore(this.score);
 
         Person editedPerson = new Person.PersonBuilder(personToEdit).withExamScores(newExamScores).build();

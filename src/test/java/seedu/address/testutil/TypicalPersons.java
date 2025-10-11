@@ -14,10 +14,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY_
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB_STR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalExamScores.EXAM_SCORES_MIDTERM;
-import static seedu.address.testutil.TypicalExamScores.EXAM_SCORES_MIDTERM_FINAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_AMY_STR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB_STR;
+import static seedu.address.testutil.TypicalExamScores.EXAM_SCORES_MIDTERM;
+import static seedu.address.testutil.TypicalExamScores.EXAM_SCORES_MIDTERM_FINAL;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -163,7 +163,7 @@ public class TypicalPersons {
             new Phone(VALID_PHONE_AMY_STR),
             new Email(VALID_EMAIL_AMY_STR),
             new StudentId(VALID_STUDENT_ID_AMY_STR),
-            new TelegramHandle(VALID_TELEGRAM_HANDLE_BOB_STR))
+            new TelegramHandle(VALID_TELEGRAM_HANDLE_AMY_STR))
             .withTags(new HashSet<>(Arrays.asList(new Tag(VALID_TAG_FRIEND))))
             .build();
 
