@@ -28,9 +28,6 @@ public class Identifier {
     private final StudentId studentId;
     private final IdentifierType source;
 
-
-
-
     /**
      * Constructs a {@code Identifier} from either a student ID or an index.
      *
