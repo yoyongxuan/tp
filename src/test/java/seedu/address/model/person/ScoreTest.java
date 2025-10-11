@@ -61,11 +61,11 @@ public class ScoreTest {
 
     @Test
     public void toStringTest() {
-        String UnrecordedScoreString = Score.getUnrecordedScore(Exam.MIDTERM).toString();
-        assertEquals("midterm: unrecorded", UnrecordedScoreString);
+        String unrecordedScoreString = Score.getUnrecordedScore(Exam.MIDTERM).toString();
+        assertEquals("midterm: unrecorded", unrecordedScoreString);
 
-        String RecordedScoreString = Score.getRecordedScore(Exam.MIDTERM, "0").toString();
-        assertEquals("midterm: 0/" + String.valueOf(Exam.MIDTERM.getMaxScore()), RecordedScoreString);
+        String recordedScoreString = Score.getRecordedScore(Exam.MIDTERM, "0").toString();
+        assertEquals("midterm: 0/" + String.valueOf(Exam.MIDTERM.getMaxScore()), recordedScoreString);
     }
 
 }

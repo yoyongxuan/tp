@@ -9,10 +9,10 @@
     "examScores" : {
       "scores" : [ {
         "examName" : "midterm",
-        "score" : "unrecorded"
+        "score" : "50"
       }, {
         "examName" : "final",
-        "score" : "unrecorded"
+        "score" : "50"
       } ]
     },
     "tags" : [ "friends" ]
@@ -25,7 +25,7 @@
     "examScores" : {
       "scores" : [ {
         "examName" : "midterm",
-        "score" : "unrecorded"
+        "score" : "50"
       }, {
         "examName" : "final",
         "score" : "unrecorded"
