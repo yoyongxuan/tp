@@ -37,8 +37,11 @@ public class ScoreCommandTest {
     public void execute_success() {
         Person personToEdit = ALICE;
         ExamScores newExamScores = personToEdit.getExamScores().updateScore(FINAL_SCORE_B);
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getStudentId(), personToEdit.getTags(), newExamScores);
+        Person editedPerson = new Person.PersonBuilder(personToEdit.getName(), personToEdit.getPhone(),
+                personToEdit.getEmail(), personToEdit.getStudentId())
+                .withTags(personToEdit.getTags())
+                .withExamScores(newExamScores)
+                .build();
         ScoreCommand scoreCommand = new ScoreCommand(INDEX_FIRST_PERSON, FINAL_SCORE_B);
 
         String updateScoreSuccessMessage = "Updated " + editedPerson.getName() + "'s "
