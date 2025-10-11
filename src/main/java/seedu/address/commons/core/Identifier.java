@@ -2,6 +2,8 @@ package seedu.address.commons.core;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_STUDENT_ID_DISPLAYED_INDEX;
 
 import java.util.List;
 
@@ -82,6 +84,17 @@ public class Identifier {
         }
 
         return identifiedPerson;
+    }
+
+    /**
+     * Returns an appropriate error message depending on Identifier source.
+     */
+    public String getMessageIdentifierNotFound() {
+        if (source == IdentifierType.INDEX) {
+            return MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        } else {
+            return MESSAGE_INVALID_STUDENT_ID_DISPLAYED_INDEX;
+        }
     }
 
     @Override
