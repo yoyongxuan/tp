@@ -19,7 +19,7 @@ public class Identifier {
     private enum IdentifierType {
         INDEX,
         STUDENT_ID,
-        INVALID
+        INVALID // Only present in ctor, is never a valid value outside of a failed ctor
     }
 
     public static final String MESSAGE_CONSTRAINTS = "Identifier must be a valid Student ID or index.";
