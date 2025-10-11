@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Arrays;
+
 /**
  * Represents a Person's exam scores in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidScore(String, String)}
@@ -102,6 +104,11 @@ public class ExamScores {
         }
 
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(arrayOfScores);
     }
 
 

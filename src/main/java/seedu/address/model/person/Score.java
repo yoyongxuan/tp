@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Objects;
 
 
 /**
@@ -60,6 +61,11 @@ public abstract class Score {
 
             return (score == otherScore.score) && (exam == otherScore.exam);
         }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(recorded, exam, score);
+        }
     }
 
     private static class UnrecordedScore extends Score {
@@ -86,6 +92,10 @@ public abstract class Score {
 
             return (exam == otherScore.exam);
         }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(recorded, exam);
+        }
     }
 }
-
