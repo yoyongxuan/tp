@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SCORE;
 
 import java.util.stream.Stream;
 
-import seedu.address.commons.core.index.Index;
+import seedu.address.commons.core.Identifier;
 import seedu.address.logic.commands.ScoreCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Score;
@@ -30,12 +30,10 @@ public class ScoreCommandParser implements Parser<ScoreCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScoreCommand.MESSAGE_USAGE));
         }
 
-
-
-        Index index;
+        Identifier identifier;
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            identifier = ParserUtil.parseIdentifier(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScoreCommand.MESSAGE_USAGE), pe);
         }
@@ -48,7 +46,7 @@ public class ScoreCommandParser implements Parser<ScoreCommand> {
         Score newScore = ParserUtil.parseScore(examName, score);
 
 
-        return new ScoreCommand(index, newScore);
+        return new ScoreCommand(identifier, newScore);
     }
 
 
