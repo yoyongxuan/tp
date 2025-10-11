@@ -69,22 +69,22 @@ public class Identifier {
      */
     public Person retrievePerson(Model model) throws PersonNotFoundException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-        Person out;
+        List<Person> personList = model.getFilteredPersonList();
+        Person identifiedPerson;
 
         if (source == IdentifierType.INDEX) {
-            if (index.getZeroBased() >= lastShownList.size()) {
+            if (index.getZeroBased() >= personList.size()) {
                 throw new PersonNotFoundException();
             }
-            out = lastShownList.get(index.getZeroBased());
+            identifiedPerson = personList.get(index.getZeroBased());
         } else {
-            out = lastShownList.stream()
+            identifiedPerson = personList.stream()
                     .filter(person -> person.getStudentId().equals(studentId))
                     .findFirst()
                     .orElseThrow(() -> new PersonNotFoundException());
         }
 
-        return out;
+        return identifiedPerson;
     }
 
     @Override
