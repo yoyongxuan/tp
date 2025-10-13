@@ -6,6 +6,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.commons.core.Identifier;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -88,5 +89,12 @@ public class AttendCommand extends Command {
         AttendCommand otherAttendCommand = (AttendCommand) other;
         return identifier.equals(otherAttendCommand.identifier)
                 && tutorial.equals(otherAttendCommand.tutorial);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("identifier", identifier)
+                .toString();
     }
 }
