@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENT_ID_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY_STR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -11,6 +10,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Identifier;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AttendCommand;
 
@@ -21,9 +21,7 @@ public class AttendCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, AttendCommand.MESSAGE_USAGE);
 
-    private AttendCommandParser parser = new AttendCommandParser();
-    private AttendCommand attendCommand = new AttendCommand(VALID_STUDENT_ID_AMY,
-            Index.fromOneBased(5));
+    private final AttendCommandParser parser = new AttendCommandParser();
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, AttendCommand.MESSAGE_USAGE));
@@ -52,6 +50,8 @@ public class AttendCommandParserTest {
 
     @Test
     public void parse_validStudentId_success() {
+        Identifier amyIdentifier = new Identifier(VALID_STUDENT_ID_AMY_STR);
+        AttendCommand attendCommand = new AttendCommand(amyIdentifier, Index.fromOneBased(5));
         assertParseSuccess(parser, AttendCommand.COMMAND_WORD + " " + VALID_STUDENT_ID_AMY_STR + " 5",
                 attendCommand);
     }
