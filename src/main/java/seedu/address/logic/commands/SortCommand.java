@@ -23,8 +23,10 @@ public class SortCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the list of people. Use either "
             + PREFIX_NAME + " for sorting by names, or "
-            + PREFIX_EXAM + " for sorting by grades (yet to be implemented)\n"
-            + "Examples: sort " + PREFIX_NAME + " or sort " + PREFIX_EXAM;
+            + PREFIX_EXAM + " for sorting by exam scores.\n"
+            + "Exams can be sorted by either midterm or final.\n"
+            + "Examples: sort " + PREFIX_NAME + "\nor sort " + PREFIX_EXAM
+            + "midterm or sort " + PREFIX_EXAM + "final";
 
     public static final String MESSAGE_NOT_IMPLEMENTED_YET =
             "Sort command not implemented yet.";
