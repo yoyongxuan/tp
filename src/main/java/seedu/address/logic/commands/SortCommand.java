@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -9,6 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
+import seedu.address.model.person.Exam;
 
 /**
  * Sorts the address book based on a parameter
@@ -22,20 +23,32 @@ public class SortCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the list of people. Use either "
             + PREFIX_NAME + " for sorting by names, or "
-            + PREFIX_GRADE + " for sorting by grades (yet to be implemented)\n"
-            + "Examples: sort " + PREFIX_NAME + " or sort " + PREFIX_GRADE;
+            + PREFIX_EXAM + " for sorting by grades (yet to be implemented)\n"
+            + "Examples: sort " + PREFIX_NAME + " or sort " + PREFIX_EXAM;
 
     public static final String MESSAGE_NOT_IMPLEMENTED_YET =
             "Sort command not implemented yet.";
 
     private final Prefix prefix;
+    private final Exam exam;
 
     /**
      * Creates a new SortCommand to sort the list
-     * @param prefix Prefix to sort by, either PREFIX_NAME or PREFIX_GRADE
+     * @param prefix Prefix to sort by name {@code PREFIX_NAME}
      */
     public SortCommand(Prefix prefix) {
         this.prefix = prefix;
+        this.exam = null;
+    }
+
+    /**
+     * Creates a new SortCommand to sort the list
+     * @param prefix Prefix to sort by exam {@code PREFIX_EXAM}
+     * @param exam Exam to sort by if {@code PREFIX_EXAM}, null otherwise
+     */
+    public SortCommand(Prefix prefix, Exam exam) {
+        this.prefix = prefix;
+        this.exam = exam;
     }
 
     @Override
@@ -43,11 +56,16 @@ public class SortCommand extends Command {
         requireNonNull(model);
         switch (prefix.getPrefix()) {
         case "n/":
+            // If sorting by name, just call model to sort
             model.sortPersonsByName();
             break;
-        case "g/":
-            // TODO: model.sortPersonsByGrade();
-            throw new CommandException(MESSAGE_NOT_IMPLEMENTED_YET);
+        case "ex/":
+            // If sorting by exam, call model to sort based on exam type
+            if (this.exam == null) {
+                throw new CommandException(MESSAGE_USAGE);
+            }
+            model.sortPersonsByExam(this.exam);
+            break;
         default:
             throw new CommandException(MESSAGE_USAGE);
         }
@@ -66,7 +84,16 @@ public class SortCommand extends Command {
         }
 
         SortCommand c = (SortCommand) other;
-        return this.prefix.equals(c.prefix);
+
+        if (this.exam == null && c.exam == null) {
+            return this.prefix.equals(c.prefix);
+        }
+
+        if (this.exam != null && c.exam != null) {
+            return this.prefix.equals(c.prefix) && this.exam.equals(c.exam);
+        }
+        
+        return false;
     }
 
     @Override

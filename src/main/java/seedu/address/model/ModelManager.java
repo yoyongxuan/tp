@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Exam;
 import seedu.address.model.person.Person;
 
 /**
@@ -116,10 +117,14 @@ public class ModelManager implements Model {
         addressBook.sortPersonsByName();
     }
 
-    // TODO
     @Override
-    public void sortPersonsByGrade() {
-
+    public void sortPersonsByExam(Exam exam) {
+        switch (exam) {
+        case MIDTERM:
+            addressBook.sortPersonsByMidterm();
+        case FINAL:
+            addressBook.sortPersonsByFinal();
+        }
     }
 
     //=========== Filtered Person List Accessors =============================================================
