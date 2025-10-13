@@ -80,7 +80,7 @@ public class SortCommandTest {
         expectedModel.sortPersonsByExam(FINAL);
 
         // Make new Sort Command by final
-        assertCommandSuccess(new SortCommand(PREFIX_EXAM, MIDTERM), model,
+        assertCommandSuccess(new SortCommand(PREFIX_EXAM, FINAL), model,
                 SortCommand.MESSAGE_SUCCESS, expectedModel);
         // Verify that the persons are actually in sorted order
         List<Person> persons = new ArrayList<>(model.getFilteredPersonList());
@@ -126,7 +126,7 @@ public class SortCommandTest {
         for (int i = 1; i < persons.size(); i++) {
             String prev = persons.get(i - 1).getName().fullName.toLowerCase();
             String curr = persons.get(i).getName().fullName.toLowerCase();
-            if (prev.compareTo(curr) >= 0) {
+            if (prev.compareTo(curr) > 0) {
                 return false;
             }
         }
@@ -142,7 +142,7 @@ public class SortCommandTest {
         for (int i = 1; i < persons.size(); i++) {
             Integer prev = persons.get(i - 1).getExamScores().getScoreByExam(MIDTERM).orElse(Integer.MAX_VALUE);
             Integer curr = persons.get(i).getExamScores().getScoreByExam(MIDTERM).orElse(Integer.MAX_VALUE);
-            if (prev.compareTo(curr) >= 0) {
+            if (prev.compareTo(curr) > 0) {
                 return false;
             }
         }
@@ -159,7 +159,7 @@ public class SortCommandTest {
         for (int i = 1; i < persons.size(); i++) {
             Integer prev = persons.get(i - 1).getExamScores().getScoreByExam(FINAL).orElse(Integer.MAX_VALUE);
             Integer curr = persons.get(i).getExamScores().getScoreByExam(FINAL).orElse(Integer.MAX_VALUE);
-            if (prev.compareTo(curr) >= 0) {
+            if (prev.compareTo(curr) > 0) {
                 return false;
             }
         }
