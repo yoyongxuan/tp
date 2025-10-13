@@ -4,8 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY_STR;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB_STR;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalIdentifiers.IDENTIFIER_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIdentifiers.IDENTIFIER_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIdentifiers.IDENTIFIER_STUDENT_ID_NOT_FOUND;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -13,13 +15,13 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Identifier;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.StudentId;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code ViewCommand}.
@@ -29,26 +31,25 @@ public class ViewCommandTest {
 
     @Test
     public void equals() {
-        StudentId idAmy = new StudentId(VALID_STUDENT_ID_AMY_STR);
-        StudentId idBob = new StudentId(VALID_STUDENT_ID_BOB_STR);
-        ViewCommand viewAmy = new ViewCommand(idAmy);
-        ViewCommand viewAmyCopy = new ViewCommand(idAmy);
-        ViewCommand viewBob = new ViewCommand(idBob);
+        ViewCommand viewFirst = new ViewCommand(IDENTIFIER_FIRST_PERSON);
+        ViewCommand viewFirstCopy = new ViewCommand(IDENTIFIER_FIRST_PERSON);
+        ViewCommand viewSecond = new ViewCommand(IDENTIFIER_SECOND_PERSON);
 
-        assertTrue(viewAmy.equals(viewAmy));
-        assertTrue(viewAmy.equals(viewAmyCopy));
-        assertFalse(viewAmy.equals(viewBob));
+        assertTrue(viewFirst.equals(viewFirst));
+        assertTrue(viewFirst.equals(viewFirstCopy));
+        assertFalse(viewFirst.equals(viewSecond));
     }
 
     @Test
     public void execute_validStudentId_success() throws CommandException {
         Person targetPerson = model.getFilteredPersonList().get(0);
-        StudentId validStudentId = targetPerson.getStudentId();
-        ViewCommand viewCommand = new ViewCommand(validStudentId);
+        Identifier identifier = new Identifier(targetPerson.getStudentId().toString());
+        ViewCommand viewCommand = new ViewCommand(identifier);
 
-        String expectedMessage = "Viewing " + validStudentId.toString();
+        String expectedMessage = "Viewing " + identifier.toString();
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.updateFilteredPersonList(p -> p.getStudentId().equals(validStudentId));
+        expectedModel.updateFilteredPersonList(p ->
+                new Identifier(p.getStudentId().toString()).equals(identifier));
 
         assertCommandSuccess(viewCommand, model, expectedMessage, expectedModel);
         assertEquals(Collections.singletonList(targetPerson), model.getFilteredPersonList());
@@ -56,12 +57,12 @@ public class ViewCommandTest {
 
     @Test
     public void execute_invalidStudentId_noPersonFound() {
-        StudentId invalidId = new StudentId("A9999999Z");
-        ViewCommand viewCommand = new ViewCommand(invalidId);
+        ViewCommand viewCommand = new ViewCommand(IDENTIFIER_STUDENT_ID_NOT_FOUND);
 
-        String expectedMessage = "Viewing " + invalidId.toString();
+        String expectedMessage = "Viewing " + IDENTIFIER_STUDENT_ID_NOT_FOUND.toString();
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.updateFilteredPersonList(p -> p.getStudentId().equals(invalidId));
+        expectedModel.updateFilteredPersonList(p ->
+                new Identifier(p.getStudentId().toString()).equals(IDENTIFIER_FIRST_PERSON));
 
         assertCommandSuccess(viewCommand, model, expectedMessage, expectedModel);
         assertTrue(model.getFilteredPersonList().isEmpty());
@@ -69,9 +70,9 @@ public class ViewCommandTest {
 
     @Test
     public void toStringMethod() {
-        StudentId studentId = new StudentId(VALID_STUDENT_ID_AMY_STR);
-        ViewCommand viewCommand = new ViewCommand(studentId);
-        String expected = ViewCommand.class.getCanonicalName() + "{studentId=" + studentId + "}";
+        Identifier identifier = new Identifier(VALID_STUDENT_ID_AMY_STR);
+        ViewCommand viewCommand = new ViewCommand(identifier);
+        String expected = ViewCommand.class.getCanonicalName() + "{studentId=" + identifier + "}";
         assertEquals(expected, viewCommand.toString());
     }
 
