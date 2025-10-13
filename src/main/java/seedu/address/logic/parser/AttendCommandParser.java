@@ -3,10 +3,10 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import seedu.address.commons.core.Identifier;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AttendCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.StudentId;
 
 /**
  * Parses the AttendCommand
@@ -27,18 +27,11 @@ public class AttendCommandParser implements Parser<AttendCommand> {
                     AttendCommand.MESSAGE_USAGE));
         }
 
-        Index index;
-        StudentId studentId;
+        Identifier identifier;
         Index tutorial;
 
         try {
-            if (argsSplit[1].matches("\\d+")) {
-                index = ParserUtil.parseIndex(argsSplit[1]);
-                studentId = null;
-            } else {
-                index = null;
-                studentId = ParserUtil.parseStudentId(argsSplit[1]);
-            }
+            identifier = ParserUtil.parseIdentifier(argsSplit[1]);
             tutorial = Index.fromOneBased(Integer.parseInt(argsSplit[2]));
         } catch (ParseException pe) {
             throw new ParseException(
@@ -48,9 +41,6 @@ public class AttendCommandParser implements Parser<AttendCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AttendCommand.MESSAGE_USAGE), nfe);
         }
 
-        if (index != null) {
-            return new AttendCommand(index, tutorial);
-        }
-        return new AttendCommand(studentId, tutorial);
+        return new AttendCommand(identifier, tutorial);
     }
 }
