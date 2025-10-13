@@ -52,10 +52,9 @@ public class ExamScores {
     }
 
     /**
-     * Returns an Optional<Integer> representing
-     * the score of a particular exam (either midterms or finals).
-     * @param exam The exam to search for.
-     * @return The integer exam score, represented as an Optional<Integer>.
+     * Returns an optional integer representing the score of a particular exam.
+     * @param exam The exam to search for, either midterm or final.
+     * @return The optional integer exam score.
      */
     public Optional<Integer> getScoreByExam(Exam exam) {
         Optional<Integer> result = Optional.empty();

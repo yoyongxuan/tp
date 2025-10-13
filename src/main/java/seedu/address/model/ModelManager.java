@@ -126,6 +126,9 @@ public class ModelManager implements Model {
         case FINAL:
             addressBook.sortPersonsByFinal();
             break;
+        default:
+            addressBook.sortPersonsByName();
+            break;
         }
     }
 

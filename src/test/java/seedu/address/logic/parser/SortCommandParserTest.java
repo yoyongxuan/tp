@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.model.person.Exam.MIDTERM;
 import static seedu.address.model.person.Exam.FINAL;
+import static seedu.address.model.person.Exam.MIDTERM;
 
 import org.junit.jupiter.api.Test;
 
@@ -94,7 +94,7 @@ public class SortCommandParserTest {
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
-    }    
+    }
 
     @Test
     public void parse_prefixEmail_throwsException() {

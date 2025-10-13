@@ -1,8 +1,8 @@
 package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.person.Exam.MIDTERM;
 import static seedu.address.model.person.Exam.FINAL;
+import static seedu.address.model.person.Exam.MIDTERM;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -30,14 +30,16 @@ public class Person {
     /**
      * Comparator of a person through their midterm
      */
-    public static final Comparator<Person> MIDTERM_COMPARATOR = 
-            Comparator.<Person, Integer>comparing((Person p) -> p.getExamScores().getScoreByExam(MIDTERM).orElse(Integer.MAX_VALUE));
+    public static final Comparator<Person> MIDTERM_COMPARATOR =
+            Comparator.<Person, Integer>comparing((Person p) ->
+                p.getExamScores().getScoreByExam(MIDTERM).orElse(Integer.MAX_VALUE));
 
     /**
      * Comparator of a person through their final
      */
-    public static final Comparator<Person> FINAL_COMPARATOR = 
-            Comparator.<Person, Integer>comparing((Person p) -> p.getExamScores().getScoreByExam(FINAL).orElse(Integer.MAX_VALUE));
+    public static final Comparator<Person> FINAL_COMPARATOR =
+            Comparator.<Person, Integer>comparing((Person p) ->
+                p.getExamScores().getScoreByExam(FINAL).orElse(Integer.MAX_VALUE));
 
     // Identity fields
     private final Name name;

@@ -28,9 +28,9 @@ public class SortCommandParser implements Parser<SortCommand> {
             return new SortCommand(PREFIX_NAME);
         }
 
-        ArgumentMultimap argMultimap = 
+        ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_EXAM);
-        
+
         if (isPrefixPresent(argMultimap, PREFIX_NAME) && isPrefixPresent(argMultimap, PREFIX_EXAM)) {
             // Cannot have 2 or more existing prefixes!
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));

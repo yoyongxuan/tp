@@ -94,7 +94,7 @@ public class SortCommand extends Command {
         if (this.exam != null && c.exam != null) {
             return this.prefix.equals(c.prefix) && this.exam.equals(c.exam);
         }
-        
+
         return false;
     }
 
