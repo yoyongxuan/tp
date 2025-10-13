@@ -59,8 +59,8 @@ public class ExamScores {
      */
     public Optional<Integer> getScoreByExam(Exam exam) {
         Optional<Integer> result = Optional.empty();
-        Score[] clonedScores = this.getArrayOfScores();
-        for (Score s: clonedScores) {
+        // Score[] clonedScores = this.arrayOfScores;
+        for (Score s: this.arrayOfScores) {
             if (s.getExam().equals(exam)) {
                 result = s.getScore();
                 break;

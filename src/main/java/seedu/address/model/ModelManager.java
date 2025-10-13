@@ -122,8 +122,10 @@ public class ModelManager implements Model {
         switch (exam) {
         case MIDTERM:
             addressBook.sortPersonsByMidterm();
+            break;
         case FINAL:
             addressBook.sortPersonsByFinal();
+            break;
         }
     }
 
