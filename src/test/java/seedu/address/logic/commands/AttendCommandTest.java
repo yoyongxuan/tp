@@ -25,12 +25,13 @@ import seedu.address.model.person.Person;
 
 public class AttendCommandTest {
     private static final Index INDEX_FIRST_TUTORIAL = Index.fromOneBased(1);
+    private static final Index INDEX_SECOND_TUTORIAL = Index.fromOneBased(2);
     private static final Index INDEX_INVALID_TUTORIAL = Index.fromZeroBased(Attendance.NUMBER_OF_TUTORIALS);
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void equals_sameObjectIdentifier_success() {
+    public void equals_sameObject_success() {
         AttendCommand attendCommand1 = new AttendCommand(IDENTIFIER_FIRST_PERSON, INDEX_FIRST_TUTORIAL);
         AttendCommand attendCommand2 = new AttendCommand(IDENTIFIER_FIRST_PERSON, INDEX_FIRST_TUTORIAL);
 
@@ -38,11 +39,13 @@ public class AttendCommandTest {
     }
 
     @Test
-    public void equals_differentObjectIdentifier_failure() {
+    public void equals_differentObject_failure() {
         AttendCommand attendCommand1 = new AttendCommand(IDENTIFIER_FIRST_PERSON, INDEX_FIRST_TUTORIAL);
         AttendCommand attendCommand2 = new AttendCommand(IDENTIFIER_SECOND_PERSON, INDEX_FIRST_TUTORIAL);
+        AttendCommand attendCommand3 = new AttendCommand(IDENTIFIER_FIRST_PERSON, INDEX_SECOND_TUTORIAL);
 
         assertNotEquals(attendCommand1, attendCommand2);
+        assertNotEquals(attendCommand1, attendCommand3);
     }
 
     @Test

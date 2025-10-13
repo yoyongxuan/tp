@@ -90,11 +90,4 @@ public class AttendCommand extends Command {
         return identifier.equals(otherAttendCommand.identifier)
                 && tutorial.equals(otherAttendCommand.tutorial);
     }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("identifier", identifier)
-                .toString();
-    }
 }
