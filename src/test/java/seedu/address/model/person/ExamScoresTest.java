@@ -85,4 +85,17 @@ public class ExamScoresTest {
         newArrayOfScores[0] = MIDTERM_SCORE_UNRECORDED;
         assertTrue(Arrays.equals(originalArrayOfScores, examScores.getArrayOfScores()));
     }
+
+    @Test
+    public void newMaxScoreValid() {
+        Score[] arrayOfScores = new Score[] {MIDTERM_SCORE_A, FINAL_SCORE_A};
+        ExamScores examScores = new ExamScores(arrayOfScores);
+
+        // valid new max score > MIDTERM_SCORE_A = 50
+        assertTrue(examScores.newMaxScoreValid(MIDTERM_SCORE_A.getExam(), 70));
+        assertTrue(examScores.newMaxScoreValid(MIDTERM_SCORE_A.getExam(), 105));
+
+        // invalid new max score < MIDTERM_SCORE_A = 50
+        assertFalse(examScores.newMaxScoreValid(MIDTERM_SCORE_A.getExam(), 40));
+    }
 }
