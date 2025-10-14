@@ -15,8 +15,19 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AttendCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ScoreCommand;
+import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -104,12 +115,6 @@ public class AddressBookParserTest {
         // Can parse PREFIX_NAME and PREFIX_EXAM
         assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " n/") instanceof SortCommand);
         assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " ex/midterm") instanceof SortCommand);
-    }
-
-    @Test
-    public void parseCommand_editScore() throws Exception {
-        assertTrue(parser.parseCommand(
-                EditScoreCommand.COMMAND_WORD + " ex/midterm" + "ms/105") instanceof EditScoreCommand);
     }
 
     @Test
