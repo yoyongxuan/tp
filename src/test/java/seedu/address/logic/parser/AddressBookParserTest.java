@@ -112,9 +112,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_sort() throws Exception {
-        // Can parse PREFIX_NAME and PREFIX_GRADE
+        // Can parse PREFIX_NAME and PREFIX_EXAM
         assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " n/") instanceof SortCommand);
-        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " g/") instanceof SortCommand);
+        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " ex/midterm") instanceof SortCommand);
     }
 
     @Test
