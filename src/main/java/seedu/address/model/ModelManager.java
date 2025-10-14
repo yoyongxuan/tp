@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Exam;
 import seedu.address.model.person.Person;
 
 /**
@@ -120,6 +121,11 @@ public class ModelManager implements Model {
     @Override
     public void sortPersonsByGrade() {
 
+    }
+
+    @Override
+    public boolean isNewMaxScoreValid(Exam exam, int newMaxScore) {
+        return addressBook.isNewMaxScoreValid(exam, newMaxScore);
     }
 
     //=========== Filtered Person List Accessors =============================================================

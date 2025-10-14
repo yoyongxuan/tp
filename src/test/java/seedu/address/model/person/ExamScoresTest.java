@@ -13,10 +13,17 @@ import static seedu.address.testutil.TypicalScores.MIDTERM_SCORE_UNRECORDED;
 
 import java.util.Arrays;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
 public class ExamScoresTest {
+
+    @BeforeEach
+    public void resetExamsBefore() {
+        ExamList.setMaxScore("midterm", 70);
+        ExamList.setMaxScore("final", 100);
+    }
 
     @Test
     public void constructor_null_throwsNullPointerException() {

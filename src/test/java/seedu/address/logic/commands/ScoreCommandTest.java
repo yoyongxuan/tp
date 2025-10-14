@@ -23,14 +23,15 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Exam;
+import seedu.address.model.person.ExamList;
 import seedu.address.model.person.ExamScores;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Score;
 
 public class ScoreCommandTest {
 
-    public static final Score STANDARD_SCORE = Score.getRecordedScore(Exam.getExamFromName(VALID_EXAM), VALID_SCORE);
+    public static final Score STANDARD_SCORE = Score.getRecordedScore(
+            ExamList.getExamFromName(VALID_EXAM), VALID_SCORE);
     public static final ScoreCommand STANDARD_COMMAND = new ScoreCommand(IDENTIFIER_FIRST_PERSON, STANDARD_SCORE);
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -90,7 +91,7 @@ public class ScoreCommandTest {
         assertFalse(STANDARD_COMMAND.equals(commandWithDifferentIndex));
 
         // different score -> returns false
-        Score differentScore = Score.getRecordedScore(Exam.getExamFromName(VALID_EXAM2), VALID_SCORE);
+        Score differentScore = Score.getRecordedScore(ExamList.getExamFromName(VALID_EXAM2), VALID_SCORE);
         ScoreCommand commandWithDifferenScore = new ScoreCommand(IDENTIFIER_SECOND_PERSON, differentScore);
         assertFalse(STANDARD_COMMAND.equals(commandWithDifferenScore));
     }

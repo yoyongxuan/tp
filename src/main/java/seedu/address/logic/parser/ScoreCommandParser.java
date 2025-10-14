@@ -45,7 +45,6 @@ public class ScoreCommandParser implements Parser<ScoreCommand> {
 
         Score newScore = ParserUtil.parseScore(examName, score);
 
-
         return new ScoreCommand(identifier, newScore);
     }
 

@@ -3,19 +3,20 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * An enum class that stores exam information including exam name and maximum score
+ * Represents an exam with an exam name and maximum score.
  */
-public enum Exam {
-    MIDTERM("midterm", 70),
-    FINAL("final", 100);
-
+public class Exam {
     public static final String IS_INTEGER_REGEX = "\\d+";
-    public static final int NUM_OF_EXAM = Exam.values().length;
-    public static final String MESSAGE_CONSTRAINTS = "Exam name must be one of " + Exam.getAllExamName();
     private final String name;
-    private final int maxScore;
+    private int maxScore;
 
-    private Exam(String name, int maxScore) {
+    /**
+     * Constructs an {@code Exam}.
+     *
+     * @param name A valid name.
+     * @param maxScore A valid max score.
+     */
+    public Exam(String name, int maxScore) {
         this.name = name;
         this.maxScore = maxScore;
     }
@@ -26,6 +27,11 @@ public enum Exam {
 
     public String getName() {
         return this.name;
+    }
+
+    public void setMaxScore(int newScore) {
+        checkArgument(newScore >= 0, "Max score must be non-negative");
+        this.maxScore = newScore;
     }
 
     /**
@@ -44,45 +50,4 @@ public enum Exam {
         return "Grade for " + this.name + " should be an integer between 0 and " + this.maxScore;
     }
 
-    /**
-     * Get associated Exam object from input examName.
-     *
-     * @param examName A valid exam name
-     */
-    public static Exam getExamFromName(String examName) {
-        checkArgument(isValidExamName(examName), MESSAGE_CONSTRAINTS);
-        for (int i = 0; i < NUM_OF_EXAM; i++) {
-            Exam currentExam = Exam.values()[i];
-            if (examName.equals(currentExam.name)) {
-                return currentExam;
-            }
-        }
-        return null;
-    }
-
-
-    /**
-     * Returns if a given string is a valid exam name.
-     */
-    public static boolean isValidExamName(String examName) {
-        for (int i = 0; i < NUM_OF_EXAM; i++) {
-            Exam currentExam = Exam.values()[i];
-            if (examName.equals(currentExam.name)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Returns a string with all exam names seperated by commas
-     */
-    public static String getAllExamName() {
-        String out = Exam.values()[0].name;
-        for (int i = 1; i < NUM_OF_EXAM; i++) {
-            out += ", ";
-            out += Exam.values()[i].name;
-        }
-        return out;
-    }
 }

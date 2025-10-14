@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.Identifier;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.ScoreCommand;
-import seedu.address.model.person.Exam;
+import seedu.address.model.person.ExamList;
 import seedu.address.model.person.Score;
 
 public class ScoreCommandParserTest {
@@ -65,13 +65,13 @@ public class ScoreCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_EXAM_DESC + SCORE_DESC,
-                Exam.MESSAGE_CONSTRAINTS); // invalid exam
+                ExamList.MESSAGE_CONSTRAINTS); // invalid exam
         assertParseFailure(parser, "1" + INVALID_SCORE_DESC + EXAM_DESC,
-                Exam.getExamFromName(VALID_EXAM).getMessageScoreConstraints()); // invalid score
+                ExamList.getExamFromName(VALID_EXAM).getMessageScoreConstraints()); // invalid score
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_EXAM_DESC + INVALID_SCORE_DESC,
-                Exam.MESSAGE_CONSTRAINTS);
+                ExamList.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -90,11 +90,11 @@ public class ScoreCommandParserTest {
     public void parse_success() {
         ScoreCommand expectedCommand;
         expectedCommand = new ScoreCommand(IDENTIFIER_FIRST_PERSON,
-                Score.getRecordedScore(Exam.getExamFromName(VALID_EXAM), VALID_SCORE));
+                Score.getRecordedScore(ExamList.getExamFromName(VALID_EXAM), VALID_SCORE));
         assertParseSuccess(parser, "1" + EXAM_DESC + SCORE_DESC, expectedCommand);
 
         expectedCommand = new ScoreCommand(new Identifier(VALID_STUDENT_ID_AMY_STR),
-                Score.getRecordedScore(Exam.getExamFromName(VALID_EXAM), VALID_SCORE));
+                Score.getRecordedScore(ExamList.getExamFromName(VALID_EXAM), VALID_SCORE));
         assertParseSuccess(parser, VALID_STUDENT_ID_AMY_STR + EXAM_DESC + SCORE_DESC, expectedCommand);
     }
 }

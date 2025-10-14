@@ -35,6 +35,21 @@ public abstract class Score {
     }
 
     /**
+     * A new max score is valid if the student's score is unrecorded, or if the new max score is greather than or equal
+     * to the student's recorded score.
+     * @param newMaxScore the new max score to be compared
+     * @return true if the new max score is valid, else false
+     */
+    public boolean isNewMaxScoreValid(int newMaxScore) {
+        if (!this.isRecorded) {
+            return true;
+        } else {
+            RecordedScore recordedScore = (RecordedScore) this;
+            return recordedScore.isLessThanEquals(newMaxScore);
+        }
+    }
+
+    /**
      * Returns an {@Code Optional<Integer>} object representing the recorded score for class
      */
     public abstract Optional<Integer> getScore();
@@ -46,6 +61,10 @@ public abstract class Score {
             super(exam, true);
             checkArgument(exam.isValidScore(strScore), exam.getMessageScoreConstraints());
             this.score = Integer.parseInt(strScore);
+        }
+
+        public boolean isLessThanEquals(int newMaxScore) {
+            return this.score <= newMaxScore;
         }
 
         @Override

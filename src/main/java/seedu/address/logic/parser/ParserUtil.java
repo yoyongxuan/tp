@@ -13,6 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Exam;
+import seedu.address.model.person.ExamList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Score;
@@ -182,11 +183,11 @@ public class ParserUtil {
     public static Exam parseExam(String examName) throws ParseException {
         requireNonNull(examName);
         String trimmedExam = examName.trim();
-        if (!Exam.isValidExamName(trimmedExam)) {
-            throw new ParseException(Exam.MESSAGE_CONSTRAINTS);
+        if (!ExamList.isValidExamName(trimmedExam)) {
+            throw new ParseException(ExamList.MESSAGE_CONSTRAINTS);
         }
 
-        return Exam.getExamFromName(trimmedExam);
+        return ExamList.getExamFromName(trimmedExam);
     }
 
     /**
@@ -199,11 +200,11 @@ public class ParserUtil {
         requireNonNull(examName);
         String trimmedExam = examName.trim();
         String trimmedScore = score.trim();
-        if (!Exam.isValidExamName(trimmedExam)) {
-            throw new ParseException(Exam.MESSAGE_CONSTRAINTS);
+        if (!ExamList.isValidExamName(trimmedExam)) {
+            throw new ParseException(ExamList.MESSAGE_CONSTRAINTS);
         }
 
-        Exam exam = Exam.getExamFromName(trimmedExam);
+        Exam exam = ExamList.getExamFromName(trimmedExam);
 
         if (!exam.isValidScore(trimmedScore)) {
             throw new ParseException(exam.getMessageScoreConstraints());
