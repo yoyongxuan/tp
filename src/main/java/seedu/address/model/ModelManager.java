@@ -119,11 +119,13 @@ public class ModelManager implements Model {
 
     @Override
     public void sortPersonsByExam(Exam exam) {
-        switch (exam) {
-        case MIDTERM:
+        requireNonNull(exam);
+        String examName = exam.toString();
+        switch (examName) {
+        case "midterm":
             addressBook.sortPersonsByMidterm();
             break;
-        case FINAL:
+        case "final":
             addressBook.sortPersonsByFinal();
             break;
         default:
