@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Represents a Person's exam scores in the address book.
@@ -51,6 +52,24 @@ public class ExamScores {
      */
     public Score[] getArrayOfScores() {
         return arrayOfScores.clone();
+    }
+
+    /**
+     * Returns an optional integer representing the score of a particular exam.
+     * @param exam The exam to search for, either midterm or final.
+     * @return The optional integer exam score.
+     */
+    public Optional<Integer> getScoreByExam(Exam exam) {
+        Optional<Integer> result = Optional.empty();
+        // Score[] clonedScores = this.arrayOfScores;
+        for (Score s: this.arrayOfScores) {
+            if (s.getExam().equals(exam)) {
+                result = s.getScore();
+                break;
+            }
+        }
+
+        return result;
     }
 
     @Override

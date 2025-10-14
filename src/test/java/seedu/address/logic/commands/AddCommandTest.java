@@ -156,7 +156,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void sortPersonsByGrade() {
+        public void sortPersonsByExam(Exam exam) {
             throw new AssertionError("This method should not be called.");
         }
 

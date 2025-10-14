@@ -76,9 +76,10 @@ public interface Model {
     public void sortPersonsByName();
 
     /**
-     * Sort address book by grade
+     * Sort address book by exam score
+     * @param exam Exam grades to sort by
      */
-    public void sortPersonsByGrade();
+    public void sortPersonsByExam(Exam exam);
 
     /**
      * Checks if a new max score of an exam is valid, for updating the max score

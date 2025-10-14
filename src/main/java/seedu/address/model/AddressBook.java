@@ -48,9 +48,18 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.sort(Person.NAME_COMPARATOR);
     }
 
-    // TODO: Implement when the grade is done
-    public void sortPersonsByGrade() {
+    /**
+     * Sorts the UniquePersonList in the AddressBook by midterm score
+     */
+    public void sortPersonsByMidterm() {
+        persons.sort(Person.MIDTERM_COMPARATOR);
+    }
 
+    /**
+     * Sorts the UniquePersonList in the AddressBook by final score
+     */
+    public void sortPersonsByFinal() {
+        persons.sort(Person.FINAL_COMPARATOR);
     }
 
     /**

@@ -117,10 +117,19 @@ public class ModelManager implements Model {
         addressBook.sortPersonsByName();
     }
 
-    // TODO
     @Override
-    public void sortPersonsByGrade() {
-
+    public void sortPersonsByExam(Exam exam) {
+        switch (exam) {
+        case MIDTERM:
+            addressBook.sortPersonsByMidterm();
+            break;
+        case FINAL:
+            addressBook.sortPersonsByFinal();
+            break;
+        default:
+            addressBook.sortPersonsByName();
+            break;
+        }
     }
 
     @Override
