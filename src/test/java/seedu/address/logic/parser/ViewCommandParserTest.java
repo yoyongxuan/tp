@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENT_ID_DE
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY_STR;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalIdentifiers.IDENTIFIER_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +17,9 @@ import seedu.address.logic.commands.ViewCommand;
  */
 public class ViewCommandParserTest {
 
+    private static final String INVALID_MESSAGE =
+        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE);
+
     private final ViewCommandParser parser = new ViewCommandParser();
 
     @Test
@@ -26,14 +30,34 @@ public class ViewCommandParserTest {
     }
 
     @Test
+    public void parse_validIndex_returnsViewCommand() {
+        ViewCommand expectedCommand = new ViewCommand(IDENTIFIER_FIRST_PERSON);
+        assertParseSuccess(parser, "1", expectedCommand);
+    }
+
+    @Test
+    public void parse_invalidIndex_throwsParseException() {
+        assertParseFailure(parser, "-5", INVALID_MESSAGE);
+        assertParseFailure(parser, "0", INVALID_MESSAGE);
+    }
+
+    @Test
     public void parse_emptyInput_throwsParseException() {
-        assertParseFailure(parser, "",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "", INVALID_MESSAGE);
     }
 
     @Test
     public void parse_invalidStudentId_throwsParseException() {
-        assertParseFailure(parser, ViewCommand.COMMAND_WORD + " " + INVALID_STUDENT_ID_DESC,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, ViewCommand.COMMAND_WORD + " " + INVALID_STUDENT_ID_DESC, INVALID_MESSAGE);
     }
+
+    @Test
+    public void parse_invalidPreamble_failure() {
+        // invalid arguments being parsed as preamble
+        assertParseFailure(parser, "1 some random string", INVALID_MESSAGE);
+
+        // invalid prefix being parsed as preamble
+        assertParseFailure(parser, "1 i/ string", INVALID_MESSAGE);
+    }
+
 }

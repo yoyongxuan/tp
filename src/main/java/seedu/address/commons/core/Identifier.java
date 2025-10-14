@@ -6,6 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_STUDENT_ID_DISPLAYED_
 
 import java.util.List;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -75,6 +76,33 @@ public class Identifier {
     public Person retrievePerson(Model model) throws PersonNotFoundException {
         requireNonNull(model);
         List<Person> personList = model.getFilteredPersonList();
+        Person identifiedPerson;
+
+        if (source == IdentifierType.INDEX) {
+            if (index.getZeroBased() >= personList.size()) {
+                throw new PersonNotFoundException();
+            }
+            identifiedPerson = personList.get(index.getZeroBased());
+        } else {
+            identifiedPerson = personList.stream()
+                    .filter(person -> person.getStudentId().equals(studentId))
+                    .findFirst()
+                    .orElseThrow(() -> new PersonNotFoundException());
+        }
+
+        return identifiedPerson;
+    }
+
+    /**
+     * Retrieves the {@code Person} object from the input model matching this {@code Identifier}
+     * from the entire addressbook. Used for the view command without using the filtered person list
+     * @param model The model containing the Address Book to retrieve Person from
+     * @return {@code Person} object in Address Book which matches this {@code Identifier}
+     * @throws PersonNotFoundException if no {@code Person} in Address Book matches this {@code Identifier}
+     */
+    public Person retrievePersonFromAddressBook(Model model) throws PersonNotFoundException {
+        requireNonNull(model);
+        ObservableList<Person> personList = model.getAddressBook().getPersonList();
         Person identifiedPerson;
 
         if (source == IdentifierType.INDEX) {
