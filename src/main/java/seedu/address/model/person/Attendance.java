@@ -60,12 +60,26 @@ public class Attendance {
     }
 
     /**
-     * Updates attendance for given tutorial number
+     * gets the current attendance status for a given {@code tutorial}
      */
-    public Attendance addAttendance(Index tutorial) {
+    public boolean getAttendanceForTutorial(Index tutorial) {
         String currentAttendance = this.toJson();
         String[] attendanceSplit = currentAttendance.split(" ");
-        attendanceSplit[tutorial.getZeroBased()] = "true";
+        return Boolean.parseBoolean(attendanceSplit[tutorial.getZeroBased()]);
+    }
+
+    /**
+     * Inverts attendance for given tutorial number
+     */
+    public Attendance invertAttendanceForTutorial(Index tutorial) {
+        String currentAttendance = this.toJson();
+        String[] attendanceSplit = currentAttendance.split(" ");
+        boolean currentStatus = Boolean.parseBoolean(attendanceSplit[tutorial.getZeroBased()]);
+        if (currentStatus) {
+            attendanceSplit[tutorial.getZeroBased()] = "false";
+        } else {
+            attendanceSplit[tutorial.getZeroBased()] = "true";
+        }
         return new Attendance(String.join(" ", attendanceSplit));
     }
 

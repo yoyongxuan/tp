@@ -21,15 +21,17 @@ public class AttendCommand extends Command {
 
     public static final String COMMAND_WORD = "attend";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds the attendance of the person identified "
-            + "by the index number used in the displayed person list or by student number.\n"
+            + ": Updates the attendance of the person identified "
+            + "by the index number used in the displayed person list or by student number\n"
+            + "for the provided tutorial number. If attendance for that tutorial has already been taken,\n"
+            + "attendance for that tutorial will be removed instead.\n"
             + "Parameters: INDEX (must be a positive integer) OR STUDENT ID (must be a valid student id in contacts)\n"
             + "TUTORIAL (must be between 1 and " + Attendance.NUMBER_OF_TUTORIALS + ") \n"
             + "Example: " + COMMAND_WORD + " 4 5\n"
             + "Example: " + COMMAND_WORD + " A0000000X 5";
     public static final String MESSAGE_WRONG_TUTORIAL =
             "Tutorial has to be between 1 and " + Attendance.NUMBER_OF_TUTORIALS;
-    public static final String MESSAGE_ADD_ATTENDANCE_SUCCESS = "Added tutorial attendance for Person: %1$s";
+    public static final String MESSAGE_ADD_ATTENDANCE_SUCCESS = "%1$s tutorial %2$s attendance for Person: %3$s";
 
     private final Identifier identifier;
     private final Index tutorial;
@@ -63,16 +65,20 @@ public class AttendCommand extends Command {
         }
 
         Person editedPerson = new Person.PersonBuilder(personToEdit)
-                .withAttendance(personToEdit.getAttendance().addAttendance(tutorial))
+                .withAttendance(personToEdit.getAttendance().invertAttendanceForTutorial(tutorial))
                 .build();
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(generateSuccessMessage(editedPerson));
+        boolean isTutorialAttendanceTaken = editedPerson.getAttendance().getAttendanceForTutorial(tutorial);
+
+        return new CommandResult(generateSuccessMessage(editedPerson, tutorial, isTutorialAttendanceTaken));
     }
 
-    private String generateSuccessMessage(Person personToEdit) {
-        return String.format(MESSAGE_ADD_ATTENDANCE_SUCCESS, Messages.format(personToEdit));
+    private String generateSuccessMessage(Person personToEdit, Index tutorial, boolean isTutorialAttendanceAdded) {
+        String prefix = isTutorialAttendanceAdded ? "Added" : "Removed";
+        return String.format(
+                MESSAGE_ADD_ATTENDANCE_SUCCESS, prefix, tutorial.getOneBased(), Messages.format(personToEdit));
     }
 
     @Override
