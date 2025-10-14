@@ -66,4 +66,11 @@ public class EditScoreCommandTest {
 
         assertThrows(CommandException.class, () -> command.execute(model));
     }
+
+    @Test
+    public void execute_invalidExam_throwsCommandException() {
+        EditScoreCommand command = new EditScoreCommand("exam", "105");
+
+        assertThrows(CommandException.class, () -> command.execute(model));
+    }
 }

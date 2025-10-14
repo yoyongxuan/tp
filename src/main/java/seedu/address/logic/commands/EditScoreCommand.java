@@ -36,6 +36,7 @@ public class EditScoreCommand extends Command {
     public static final String MESSAGE_MAX_SCORE_INVALID =
             "Max score cannot be less than the recorded score of any student";
     public static final String MESSAGE_SCORE_INVALID_INTEGER = "Max score must be a non-negative integer";
+    public static final String MESSAGE_EXAM_INVALID = ExamList.MESSAGE_CONSTRAINTS;
 
 
     private final String examName;
@@ -56,6 +57,10 @@ public class EditScoreCommand extends Command {
         requireNonNull(model);
         try {
             int newMaxScore = Integer.parseInt(this.score);
+            if (!ExamList.isValidExamName(this.examName)) {
+                throw new CommandException(MESSAGE_EXAM_INVALID);
+            }
+
             Exam exam = ExamList.getExamFromName(this.examName);
 
             if (exam.getMaxScore() == newMaxScore) {
