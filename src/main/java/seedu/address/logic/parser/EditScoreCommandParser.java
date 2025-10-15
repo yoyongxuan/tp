@@ -7,8 +7,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MAX_SCORE;
 
 import java.util.stream.Stream;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.EditScoreCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Exam;
 
 /**
  * Parses input arguments and creates a new EditScoreCommand object
@@ -32,9 +34,16 @@ public class EditScoreCommandParser implements Parser<EditScoreCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EXAM, PREFIX_MAX_SCORE);
 
         String examName = argMultimap.getValue(PREFIX_EXAM).get();
-        String score = argMultimap.getValue(PREFIX_MAX_SCORE).get();
+        Exam exam = ParserUtil.parseExam(examName);
 
-        return new EditScoreCommand(examName, score);
+        String score = argMultimap.getValue(PREFIX_MAX_SCORE).get();
+        if (!StringUtil.isUnsignedInteger(score)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    Exam.MESSAGE_SCORE_INVALID_INTEGER));
+        }
+        int scoreInt = Integer.parseInt(score);
+
+        return new EditScoreCommand(exam, scoreInt);
     }
 
     /**

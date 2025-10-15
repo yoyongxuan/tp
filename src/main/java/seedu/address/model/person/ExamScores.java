@@ -156,6 +156,6 @@ public class ExamScores {
                 return arrayOfScores[i].isNewMaxScoreValid(newMaxScore);
             }
         }
-        return true;
+        throw new IllegalArgumentException("Exam " + exam.getName() + "not found in ExamScores");
     }
 }

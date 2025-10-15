@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 public class ExamScoresTest {
 
     @BeforeEach
-    public void resetExamsBefore() {
+    public void resetExamsList() {
         ExamList.setMaxScore("midterm", 70);
         ExamList.setMaxScore("final", 100);
     }
@@ -92,7 +92,7 @@ public class ExamScoresTest {
         ExamScores examScores = new ExamScores(arrayOfScores);
 
         // valid new max score > MIDTERM_SCORE_A = 50
-        assertTrue(examScores.newMaxScoreValid(MIDTERM_SCORE_A.getExam(), 70));
+        assertTrue(examScores.newMaxScoreValid(MIDTERM_SCORE_A.getExam(), 90));
         assertTrue(examScores.newMaxScoreValid(MIDTERM_SCORE_A.getExam(), 105));
 
         // invalid new max score < MIDTERM_SCORE_A = 50

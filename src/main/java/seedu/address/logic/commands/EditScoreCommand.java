@@ -5,8 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAX_SCORE;
 
-import java.util.function.Predicate;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -31,64 +29,50 @@ public class EditScoreCommand extends Command {
             + PREFIX_EXAM + "midterm "
             + PREFIX_MAX_SCORE + "50";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Exam %1$s max score to %2$d";
+    public static final String MESSAGE_EDIT_MAX_SCORE_SUCCESS = "Edited Exam %1$s max score to %2$d";
     public static final String MESSAGE_DUPLICATE_SCORE = "Given score is the same as the existing score for this exam.";
     public static final String MESSAGE_MAX_SCORE_INVALID =
             "Max score cannot be less than the recorded score of any student";
-    public static final String MESSAGE_SCORE_INVALID_INTEGER = "Max score must be a non-negative integer";
     public static final String MESSAGE_EXAM_INVALID = ExamList.MESSAGE_CONSTRAINTS;
 
 
-    private final String examName;
-    private final String score;
+    private final Exam exam;
+    private final int score;
 
     /**
-     * @param examName String name of the exam to edit
-     * @param score String new max score
+     * @param exam the exam to edit
+     * @param score the new max score
      */
-    public EditScoreCommand(String examName, String score) {
-        requireAllNonNull(examName, score);
-        this.examName = examName;
+    public EditScoreCommand(Exam exam, int score) {
+        requireAllNonNull(exam, score);
+        this.exam = exam;
         this.score = score;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        try {
-            int newMaxScore = Integer.parseInt(this.score);
-            if (!ExamList.isValidExamName(this.examName)) {
-                throw new CommandException(MESSAGE_EXAM_INVALID);
-            }
-
-            Exam exam = ExamList.getExamFromName(this.examName);
-
-            if (exam.getMaxScore() == newMaxScore) {
-                throw new CommandException(MESSAGE_DUPLICATE_SCORE);
-            }
-
-            if (newMaxScore < 0) {
-                throw new CommandException(MESSAGE_SCORE_INVALID_INTEGER);
-            }
-
-            Predicate<Person> predicate = person -> !person.getExamScores().newMaxScoreValid(exam, newMaxScore);
-            if (!model.isNewMaxScoreValid(exam, newMaxScore)) {
-                throw new CommandException(MESSAGE_MAX_SCORE_INVALID);
-            }
-
-            ExamList.setMaxScore(this.examName, newMaxScore);
-
-            for (Person person : model.getFilteredPersonList()) { //to display the new max scores on the person cards
-                ExamScores updateMaxScore = new ExamScores(person.getExamScores().getArrayOfScores());
-                Person updatePerson = new Person.PersonBuilder(person).withExamScores(updateMaxScore).build();
-                model.setPerson(person, updatePerson);
-            }
-
-            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, this.examName, newMaxScore));
-
-        } catch (NumberFormatException e) {
-            throw new CommandException(MESSAGE_SCORE_INVALID_INTEGER);
+        if (!ExamList.isValidExam(this.exam)) {
+            throw new CommandException(MESSAGE_EXAM_INVALID);
         }
+
+        if (exam.getMaxScore() == this.score) {
+            throw new CommandException(MESSAGE_DUPLICATE_SCORE);
+        }
+
+        if (!model.isNewMaxScoreValid(exam, this.score)) {
+            throw new CommandException(MESSAGE_MAX_SCORE_INVALID);
+        }
+
+        this.exam.setMaxScore(this.score);
+
+        for (Person person : model.getFilteredPersonList()) { //to display the new max scores on the person cards
+            ExamScores updateMaxScore = new ExamScores(person.getExamScores().getArrayOfScores());
+            Person updatePerson = new Person.PersonBuilder(person).withExamScores(updateMaxScore).build();
+            model.setPerson(person, updatePerson);
+        }
+
+        return new CommandResult(String.format(MESSAGE_EDIT_MAX_SCORE_SUCCESS, this.exam, this.score));
     }
 
     @Override
@@ -103,15 +87,15 @@ public class EditScoreCommand extends Command {
         }
 
         EditScoreCommand otherEditScoreCommand = (EditScoreCommand) other;
-        return this.examName.equals(otherEditScoreCommand.examName)
-                && this.score.equals(otherEditScoreCommand.score);
+        return this.exam.equals(otherEditScoreCommand.exam)
+                && this.score == otherEditScoreCommand.score;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("examName", examName)
-                .add("score", score)
+                .add("exam", this.exam)
+                .add("score", this.score)
                 .toString();
     }
 }

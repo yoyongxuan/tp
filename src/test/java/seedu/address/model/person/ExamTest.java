@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class ExamTest {
 
     @BeforeEach
-    public void resetExamsBefore() {
+    public void resetExamsList() {
         ExamList.setMaxScore("midterm", 70);
         ExamList.setMaxScore("final", 100);
     }

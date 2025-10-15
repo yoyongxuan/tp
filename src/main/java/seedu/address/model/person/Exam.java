@@ -2,11 +2,16 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Objects;
+
 /**
  * Represents an exam with an exam name and maximum score.
  */
 public class Exam {
+
     public static final String IS_INTEGER_REGEX = "\\d+";
+    public static final String MESSAGE_SCORE_INVALID_INTEGER = "Max score must be a non-negative integer";
+
     private final String name;
     private int maxScore;
 
@@ -30,7 +35,7 @@ public class Exam {
     }
 
     public void setMaxScore(int newScore) {
-        checkArgument(newScore >= 0, "Max score must be non-negative");
+        checkArgument(newScore >= 0, MESSAGE_SCORE_INVALID_INTEGER);
         this.maxScore = newScore;
     }
 
@@ -48,6 +53,31 @@ public class Exam {
 
     public String getMessageScoreConstraints() {
         return "Grade for " + this.name + " should be an integer between 0 and " + this.maxScore;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Exam)) {
+            return false;
+        }
+
+        Exam otherExam = (Exam) other;
+        return this.maxScore == otherExam.maxScore && this.name.equals(otherExam.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.name, this.maxScore);
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 
 }

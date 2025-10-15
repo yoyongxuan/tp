@@ -28,6 +28,7 @@ import java.util.Set;
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ExamList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -208,6 +209,19 @@ public class TypicalPersons {
     public static AddressBook getUnsortedAddressBook() {
         AddressBook ab = new AddressBook();
         for (Person person : getUnsortedTypicalPersons()) {
+            ab.addPerson(person);
+        }
+        return ab;
+    }
+
+    /**
+     * Returns an {@code AddressBook} with typical persons, and modified max exam scores.
+     */
+    public static AddressBook getAddressBookWithModifiedMaxScores() {
+        ExamList.MIDTERM.setMaxScore(85);
+        ExamList.FINAL.setMaxScore(105);
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
         return ab;

@@ -10,7 +10,7 @@ public class ExamListTest {
 
     @BeforeEach
     public void resetExamList() {
-        ExamList.setMaxScore("midterm", 100);
+        ExamList.setMaxScore("midterm", 70);
         ExamList.setMaxScore("final", 100);
     }
 

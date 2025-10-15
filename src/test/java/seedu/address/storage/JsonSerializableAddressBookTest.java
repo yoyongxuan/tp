@@ -19,6 +19,9 @@ public class JsonSerializableAddressBookTest {
     private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsAddressBook.json");
     private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonAddressBook.json");
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonAddressBook.json");
+    private static final Path MODIFIED_EXAM_LIST_FILE = TEST_DATA_FOLDER.resolve("modifiedExamListAddressBook.json");
+    private static final Path INVALID_EXAM_NAME_FILE = TEST_DATA_FOLDER.resolve("invalidExamNameAddressBook.json");
+    private static final Path NEGATIVE_EXAM_SCORE_FILE = TEST_DATA_FOLDER.resolve("negativeExamScoreAddressBook.json");
 
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
@@ -44,4 +47,28 @@ public class JsonSerializableAddressBookTest {
                 dataFromFile::toModelType);
     }
 
+    @Test
+    public void toModelType_modifiedExamListFile_success() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(MODIFIED_EXAM_LIST_FILE,
+                JsonSerializableAddressBook.class).get();
+        AddressBook addressBookFromFile = dataFromFile.toModelType();
+        AddressBook modifiedExamListFileAddressBook = TypicalPersons.getAddressBookWithModifiedMaxScores();
+        assertEquals(addressBookFromFile, modifiedExamListFileAddressBook);
+    }
+
+    @Test
+    public void toModelType_invalidExamName_throwsIllegalValueException() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(INVALID_EXAM_NAME_FILE,
+                JsonSerializableAddressBook.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_INVALID_EXAM_NAME,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_negativeExamScore_throwsIllegalValueException() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(NEGATIVE_EXAM_SCORE_FILE,
+                JsonSerializableAddressBook.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_NEGATIVE_EXAM_SCORE,
+                dataFromFile::toModelType);
+    }
 }

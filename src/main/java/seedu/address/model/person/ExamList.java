@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class ExamList {
 
-    public static final Exam MIDTERM = new Exam("midterm", 100); //default max score is 100
+    public static final Exam MIDTERM = new Exam("midterm", 70); //default max score is 70
     public static final Exam FINAL = new Exam("final", 100); //default max score is 100
     public static final String MESSAGE_CONSTRAINTS;
 
@@ -51,7 +51,7 @@ public class ExamList {
                 return currentExam;
             }
         }
-        return null;
+        return null; //should not be executed due to checkArgument
     }
 
     /**
@@ -64,6 +64,23 @@ public class ExamList {
             for (int i = 0; i < examList.size(); i++) {
                 String currentExamName = examList.get(i).getName();
                 if (examName.equals(currentExamName)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
+    /**
+     * Returns if a given Exam is a valid exam.
+     */
+    public static boolean isValidExam(Exam exam) {
+        if (examList.isEmpty()) {
+            return false;
+        } else {
+            for (int i = 0; i < examList.size(); i++) {
+                Exam currentExam = examList.get(i);
+                if (exam.equals(currentExam)) {
                     return true;
                 }
             }

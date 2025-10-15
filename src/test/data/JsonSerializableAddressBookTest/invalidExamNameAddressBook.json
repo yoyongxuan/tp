@@ -1,0 +1,9 @@
+{
+  "persons": [],
+  "examList": [
+    {
+      "name": "invalidExam",
+      "maxScore": 105
+    }
+  ]
+}

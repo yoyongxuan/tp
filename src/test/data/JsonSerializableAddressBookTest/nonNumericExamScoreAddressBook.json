@@ -1,0 +1,9 @@
+{
+  "persons": [],
+  "examList": [
+    {
+      "name": "midterm",
+      "maxScore": "one"
+    }
+  ]
+}
