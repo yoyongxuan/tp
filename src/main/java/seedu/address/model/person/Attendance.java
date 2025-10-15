@@ -60,7 +60,7 @@ public class Attendance {
     }
 
     /**
-     * gets the current attendance status for a given {@code tutorial}
+     * Gets the current attendance status for a given {@code tutorial}
      */
     public boolean getAttendanceForTutorial(Index tutorial) {
         String currentAttendance = this.toJson();
