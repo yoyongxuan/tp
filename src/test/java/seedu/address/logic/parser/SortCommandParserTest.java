@@ -6,14 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.model.person.Exam.FINAL;
-import static seedu.address.model.person.Exam.MIDTERM;
+import static seedu.address.model.person.ExamList.FINAL;
+import static seedu.address.model.person.ExamList.MIDTERM;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Exam;
+import seedu.address.model.person.ExamList;
 
 
 public class SortCommandParserTest {
@@ -48,7 +48,7 @@ public class SortCommandParserTest {
         });
 
         // Should have same error message
-        String expectedMessage = String.format(Exam.MESSAGE_CONSTRAINTS);
+        String expectedMessage = String.format(ExamList.MESSAGE_CONSTRAINTS);
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
@@ -62,7 +62,7 @@ public class SortCommandParserTest {
         });
 
         // Should have same error message
-        String expectedMessage = String.format(Exam.MESSAGE_CONSTRAINTS);
+        String expectedMessage = String.format(ExamList.MESSAGE_CONSTRAINTS);
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));

@@ -22,7 +22,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Exam;
+import seedu.address.model.person.ExamList;
 import seedu.address.model.person.ExamScores;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -68,8 +68,8 @@ public class CommandTestUtil {
     public static final Address VALID_ADDRESS_BOB = new Address(VALID_ADDRESS_BOB_STR);
     public static final Attendance VALID_ATTENDANCE_AMY = new Attendance(VALID_ATTENDANCE_AMY_STR);
     public static final Attendance VALID_ATTENDANCE_BOB = new Attendance(VALID_ATTENDANCE_BOB_STR);
-    public static final Score VALID_SCORE_MIDTERM = Score.getRecordedScore(Exam.MIDTERM, "50");
-    public static final Score VALID_SCORE_FINAL = Score.getRecordedScore(Exam.FINAL, "80");
+    public static final Score VALID_SCORE_MIDTERM = Score.getRecordedScore(ExamList.MIDTERM, "50");
+    public static final Score VALID_SCORE_FINAL = Score.getRecordedScore(ExamList.FINAL, "80");
     public static final ExamScores VALID_EXAM_SCORES_AMY = ExamScores.getEmptyExamScores()
             .updateScore(VALID_SCORE_MIDTERM);
     public static final ExamScores VALID_EXAM_SCORES_BOB = ExamScores.getEmptyExamScores()

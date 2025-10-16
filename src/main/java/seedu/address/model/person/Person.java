@@ -1,8 +1,8 @@
 package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.person.Exam.FINAL;
-import static seedu.address.model.person.Exam.MIDTERM;
+import static seedu.address.model.person.ExamList.FINAL;
+import static seedu.address.model.person.ExamList.MIDTERM;
 
 import java.util.Arrays;
 import java.util.Collections;

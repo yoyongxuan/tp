@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Exam;
+import seedu.address.model.person.ExamList;
 import seedu.address.model.person.Score;
 
 /**
@@ -42,10 +43,10 @@ public class JsonAdaptedScore {
      * @throws IllegalValueException if there were any data constraints violated in the adapted score.
      */
     public Score toModelType() throws IllegalValueException {
-        if (!Exam.isValidExamName(examName)) {
-            throw new IllegalValueException(Exam.MESSAGE_CONSTRAINTS);
+        if (!ExamList.isValidExamName(examName)) {
+            throw new IllegalValueException(ExamList.MESSAGE_CONSTRAINTS);
         }
-        final Exam modelExam = Exam.getExamFromName(examName);
+        final Exam modelExam = ExamList.getExamFromName(examName);
 
         if (this.score.equals("unrecorded")) {
             return Score.getUnrecordedScore(modelExam);

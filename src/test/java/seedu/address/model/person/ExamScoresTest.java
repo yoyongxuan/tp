@@ -13,10 +13,17 @@ import static seedu.address.testutil.TypicalScores.MIDTERM_SCORE_UNRECORDED;
 
 import java.util.Arrays;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
 public class ExamScoresTest {
+
+    @BeforeEach
+    public void resetExamsList() {
+        ExamList.setMaxScore("midterm", 70);
+        ExamList.setMaxScore("final", 100);
+    }
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -77,5 +84,18 @@ public class ExamScoresTest {
         // modifying output of getArrayOfScores doesnt change original value in examScores
         newArrayOfScores[0] = MIDTERM_SCORE_UNRECORDED;
         assertTrue(Arrays.equals(originalArrayOfScores, examScores.getArrayOfScores()));
+    }
+
+    @Test
+    public void newMaxScoreValid() {
+        Score[] arrayOfScores = new Score[] {MIDTERM_SCORE_A, FINAL_SCORE_A};
+        ExamScores examScores = new ExamScores(arrayOfScores);
+
+        // valid new max score > MIDTERM_SCORE_A = 50
+        assertTrue(examScores.newMaxScoreValid(MIDTERM_SCORE_A.getExam(), 90));
+        assertTrue(examScores.newMaxScoreValid(MIDTERM_SCORE_A.getExam(), 105));
+
+        // invalid new max score < MIDTERM_SCORE_A = 50
+        assertFalse(examScores.newMaxScoreValid(MIDTERM_SCORE_A.getExam(), 40));
     }
 }

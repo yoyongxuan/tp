@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -12,9 +13,7 @@ import java.util.Optional;
  */
 public class ExamScores {
 
-    public static final int NUM_OF_EXAM = Exam.values().length;
     private static final String IS_INTEGER_REGEX = "\\d+";
-
     private final Score[] arrayOfScores;
 
     /**
@@ -26,6 +25,10 @@ public class ExamScores {
         this.arrayOfScores = arrayOfScores;
     }
 
+    public static int getNumOfExams() {
+        return ExamList.numOfExams();
+    }
+
     /**
      * Returns a copy of ExamScores object with appropriate score replaced with new input score
      *
@@ -34,7 +37,7 @@ public class ExamScores {
      */
     public ExamScores updateScore(Score newScore) {
         Score[] arrayOfScoresCopy = this.arrayOfScores.clone();
-        for (int i = 0; i < NUM_OF_EXAM; i++) {
+        for (int i = 0; i < arrayOfScores.length; i++) {
             if (arrayOfScoresCopy[i].getExam() == newScore.getExam()) {
                 arrayOfScoresCopy[i] = newScore;
                 break;
@@ -72,7 +75,7 @@ public class ExamScores {
     @Override
     public String toString() {
         String out = arrayOfScores[0].toString();
-        for (int i = 1; i < NUM_OF_EXAM; i++) {
+        for (int i = 1; i < arrayOfScores.length; i++) {
             out += "\n";
             out += arrayOfScores[i].toString();
         }
@@ -91,7 +94,7 @@ public class ExamScores {
         }
 
         ExamScores otherExamScores = (ExamScores) other;
-        for (int i = 0; i < NUM_OF_EXAM; i++) {
+        for (int i = 0; i < arrayOfScores.length; i++) {
             if (!arrayOfScores[i].equals(otherExamScores.arrayOfScores[i])) {
                 return false;
             }
@@ -104,10 +107,10 @@ public class ExamScores {
      * Returns true if a given string is a valid tag name.
      */
     public static ExamScores getEmptyExamScores() {
-        Score[] arrayOfScores = new Score[NUM_OF_EXAM];
-        Exam[] examArray = Exam.values();
-        for (int i = 0; i < NUM_OF_EXAM; i++) {
-            arrayOfScores[i] = Score.getUnrecordedScore(examArray[i]);
+        Score[] arrayOfScores = new Score[ExamList.numOfExams()];
+        List<Exam> examList = ExamList.values();
+        for (int i = 0; i < arrayOfScores.length; i++) {
+            arrayOfScores[i] = Score.getUnrecordedScore(examList.get(i));
         }
         return new ExamScores(arrayOfScores);
     }
@@ -119,16 +122,16 @@ public class ExamScores {
      */
     public static boolean isValidExamScores(Score[] arrayOfScores) {
 
-        if (arrayOfScores.length != NUM_OF_EXAM) {
+        if (arrayOfScores.length != ExamList.numOfExams()) {
             return false;
         }
 
-        Exam[] examArray = Exam.values();
-        for (int i = 0; i < NUM_OF_EXAM; i++) {
+        List<Exam> examList = ExamList.values();
+        for (int i = 0; i < ExamList.numOfExams(); i++) {
             if (arrayOfScores[i] == null) {
                 return false;
             }
-            if (examArray[i] != arrayOfScores[i].getExam()) {
+            if (examList.get(i) != arrayOfScores[i].getExam()) {
                 return false;
             }
         }
@@ -141,5 +144,18 @@ public class ExamScores {
         return Arrays.hashCode(arrayOfScores);
     }
 
-
+    /**
+     * Checks if the new max score is valid, by comparing it with the corresponding score for the given exam.
+     * @param exam the exam to be edited
+     * @param newMaxScore the new max score to compare the recorded scores against
+     * @return true if the new max score is valid, else false.
+     */
+    public boolean newMaxScoreValid(Exam exam, int newMaxScore) {
+        for (int i = 0; i < arrayOfScores.length; i++) {
+            if (arrayOfScores[i].getExam().equals(exam)) {
+                return arrayOfScores[i].isNewMaxScoreValid(newMaxScore);
+            }
+        }
+        throw new IllegalArgumentException("Exam " + exam.getName() + "not found in ExamScores");
+    }
 }

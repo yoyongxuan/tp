@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Exam;
 import seedu.address.model.person.ExamScores;
 import seedu.address.model.person.Score;
 
@@ -48,12 +47,12 @@ public class JsonAdaptedExamScores {
      */
     public ExamScores toModelType() throws IllegalValueException {
 
-        if (scores.size() != Exam.NUM_OF_EXAM) {
+        if (scores.size() != ExamScores.getNumOfExams()) {
             throw new IllegalValueException(WRONG_NUMBER_OF_SCORES_MESSAGE);
         }
 
-        final Score[] arrayOfScores = new Score[Exam.NUM_OF_EXAM];
-        for (int i = 0; i < Exam.NUM_OF_EXAM; i++) {
+        final Score[] arrayOfScores = new Score[ExamScores.getNumOfExams()];
+        for (int i = 0; i < ExamScores.getNumOfExams(); i++) {
             arrayOfScores[i] = scores.get(i).toModelType();
         }
 

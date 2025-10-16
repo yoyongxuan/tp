@@ -82,6 +82,11 @@ public interface Model {
     public void sortPersonsByExam(Exam exam);
 
     /**
+     * Checks if a new max score of an exam is valid, for updating the max score
+     */
+    public boolean isNewMaxScoreValid(Exam exam, int newMaxScore);
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.

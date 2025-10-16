@@ -116,6 +116,22 @@ public class UniquePersonList implements Iterable<Person> {
         return internalUnmodifiableList;
     }
 
+    /**
+     * Checks if the given max score is valid for the given exam.
+     * @param exam The exam to be updated
+     * @param newMaxScore The new max score to be checked
+     * @return true if the new max score is valid, else false
+     */
+    public boolean isNewMaxScoreValid(Exam exam, int newMaxScore) {
+        requireAllNonNull(exam, newMaxScore);
+        for (int i = 0; i < internalList.size(); i++) {
+            if (!internalList.get(i).getExamScores().newMaxScoreValid(exam, newMaxScore)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     public Iterator<Person> iterator() {
         return internalList.iterator();
