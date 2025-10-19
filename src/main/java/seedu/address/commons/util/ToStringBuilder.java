@@ -12,10 +12,6 @@ public class ToStringBuilder {
     private final StringBuilder stringBuilder = new StringBuilder();
     private boolean hasField;
 
-    private ToStringBuilder() {
-        //Prevent instantiation
-    }
-
     /**
      * Constructs a {@code ToStringBuilder} whose formatted output will be prefixed with {@code objectName}.
      */
