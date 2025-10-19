@@ -54,11 +54,11 @@ public class AttendCommandTest {
     public void equals_notAttendCommand_failure() {
         AttendCommand attendCommand = new AttendCommand(IDENTIFIER_FIRST_PERSON, INDEX_FIRST_TUTORIAL);
 
-        assertNotEquals(10, attendCommand);
+        assertNotEquals(attendCommand, 10);
     }
 
     @Test
-    public void execute_success() {
+    public void execute_add_success() {
         Person personToEdit = model.getFilteredPersonList().get(0);
         Person editedPerson = new Person.PersonBuilder(personToEdit)
                 .withStudentId(VALID_STUDENT_ID_AMY)
@@ -67,13 +67,36 @@ public class AttendCommandTest {
 
         AttendCommand attendCommand = new AttendCommand(IDENTIFIER_FIRST_PERSON, INDEX_FIRST_TUTORIAL);
 
-        String expectedMessage = String.format(AttendCommand.MESSAGE_ADD_ATTENDANCE_SUCCESS, "Added",
+        String expectedMessageAdd = String.format(AttendCommand.MESSAGE_ADD_ATTENDANCE_SUCCESS, "Added",
                 INDEX_FIRST_TUTORIAL.getOneBased(), Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        Model modelToAddAttendance = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
-        assertCommandSuccess(attendCommand, model, expectedMessage, expectedModel);
+        Model expectedModelAdd = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModelAdd.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+
+        assertCommandSuccess(attendCommand, modelToAddAttendance, expectedMessageAdd, expectedModelAdd);
+    }
+
+    @Test
+    public void execute_remove_success() {
+        Person personToEdit = model.getFilteredPersonList().get(0);
+        Person editedPerson = new Person.PersonBuilder(personToEdit)
+                .withStudentId(VALID_STUDENT_ID_AMY)
+                .withAttendance(VALID_ATTENDANCE_AMY)
+                .build();
+
+        AttendCommand attendCommand = new AttendCommand(IDENTIFIER_FIRST_PERSON, INDEX_FIRST_TUTORIAL);
+
+        String expectedMessageRemove = String.format(AttendCommand.MESSAGE_ADD_ATTENDANCE_SUCCESS, "Removed",
+                INDEX_FIRST_TUTORIAL.getOneBased(), Messages.format(editedPerson));
+
+        Model modelToRemoveAttendance = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        modelToRemoveAttendance.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+
+        Model expectedModelRemove = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        assertCommandSuccess(attendCommand, modelToRemoveAttendance, expectedMessageRemove, expectedModelRemove);
     }
 
     @Test
@@ -101,8 +124,6 @@ public class AttendCommandTest {
                 new AttendCommand(IDENTIFIER_SECOND_PERSON, INDEX_FIRST_TUTORIAL);
         AttendCommand attendCommandDifferentTutorial =
                 new AttendCommand(IDENTIFIER_FIRST_PERSON, INDEX_SECOND_TUTORIAL);
-
-
 
         // True if same object
         assertTrue(attendCommand.equals(attendCommand));
