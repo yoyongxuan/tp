@@ -101,6 +101,7 @@ public class AttendCommand extends Command {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("identifier", identifier)
+                .add("tutorial", tutorial)
                 .toString();
     }
 }

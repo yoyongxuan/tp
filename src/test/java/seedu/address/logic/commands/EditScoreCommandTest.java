@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalScores.FINAL_SCORE_B;
@@ -38,12 +40,20 @@ public class EditScoreCommandTest {
 
         assertEquals(newMaxScore, ExamList.getExamFromName("midterm").getMaxScore());
     }
+    @Test
+    public void execute_invalidExam_throwsCommandException() {
+        EditScoreCommand command = new EditScoreCommand(new Exam("o level", 60), 70);
+
+        Exception exception = assertThrows(CommandException.class, () -> command.execute(model));
+        assertEquals(EditScoreCommand.MESSAGE_EXAM_INVALID, exception.getMessage());
+    }
 
     @Test
     public void execute_duplicateScore_throwsCommandException() {
         EditScoreCommand command = new EditScoreCommand(ExamList.getExamFromName("midterm"), 70);
 
-        assertThrows(CommandException.class, () -> command.execute(model));
+        Exception exception = assertThrows(CommandException.class, () -> command.execute(model));
+        assertEquals(EditScoreCommand.MESSAGE_DUPLICATE_SCORE, exception.getMessage());
     }
 
     @Test
@@ -55,6 +65,51 @@ public class EditScoreCommandTest {
         model.setPerson(ALICE, updatedAlice);
         EditScoreCommand command = new EditScoreCommand(ExamList.getExamFromName("final"), 60);
 
-        assertThrows(CommandException.class, () -> command.execute(model));
+        Exception exception = assertThrows(CommandException.class, () -> command.execute(model));
+        assertEquals(EditScoreCommand.MESSAGE_MAX_SCORE_INVALID, exception.getMessage());
+    }
+
+    @Test
+    public void equals() {
+        Exam midtermExam = ExamList.getExamFromName("midterm");
+        Exam finalExam = ExamList.getExamFromName("final");
+
+        EditScoreCommand midtermTo50 = new EditScoreCommand(midtermExam, 50);
+        EditScoreCommand finalTo50 = new EditScoreCommand(finalExam, 50);
+        EditScoreCommand midtermTo200 = new EditScoreCommand(midtermExam, 200);
+        EditScoreCommand finalTo200 = new EditScoreCommand(finalExam, 200);
+
+        // True if same object
+        assertTrue(midtermTo50.equals(midtermTo50));
+        assertTrue(finalTo200.equals(finalTo200));
+
+        // Same values -> returns true
+        assertTrue(midtermTo50.equals(new EditScoreCommand(midtermExam, 50)));
+
+        // different types -> returns false
+        assertFalse(midtermTo50.equals(1));
+
+        // null -> returns false
+        assertFalse(midtermTo50.equals(null));
+
+        // different exam -> returns false
+        assertFalse(midtermTo50.equals(finalTo50));
+        assertFalse(midtermTo200.equals(finalTo200));
+
+        // different score -> returns false
+        assertFalse(midtermTo50.equals(midtermTo200));
+        assertFalse(finalTo50.equals(finalTo200));
+
+    }
+
+    @Test
+    public void toStringMethod() {
+        String examName = "exam name";
+        int examScore = 60;
+        Exam exam = new Exam(examName, 20);
+        EditScoreCommand editScoreCommand = new EditScoreCommand(exam, examScore);
+        String expected =
+                EditScoreCommand.class.getCanonicalName() + "{exam=" + examName + ", score=" + examScore + "}";
+        assertEquals(expected, editScoreCommand.toString());
     }
 }

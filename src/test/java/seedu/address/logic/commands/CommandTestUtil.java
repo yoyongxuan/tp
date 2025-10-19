@@ -115,10 +115,12 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY_STR)
                 .withPhone(VALID_PHONE_AMY_STR).withEmail(VALID_EMAIL_AMY_STR)
-                .withStudentId(VALID_STUDENT_ID_AMY_STR).withTags(VALID_TAG_FRIEND).build();
+                .withStudentId(VALID_STUDENT_ID_AMY_STR).withTags(VALID_TAG_FRIEND)
+                .withTelegramHandle(VALID_TELEGRAM_HANDLE_AMY_STR).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB_STR)
                 .withPhone(VALID_PHONE_BOB_STR).withEmail(VALID_EMAIL_BOB_STR)
-                .withStudentId(VALID_STUDENT_ID_BOB_STR).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withStudentId(VALID_STUDENT_ID_BOB_STR).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+                .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB_STR).build();
     }
 
     /**

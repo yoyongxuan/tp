@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -91,4 +93,42 @@ public class AttendCommandTest {
 
         assertCommandFailure(attendCommand, model, AttendCommand.MESSAGE_WRONG_TUTORIAL);
     }
+
+    @Test
+    public void equals() {
+        AttendCommand attendCommand = new AttendCommand(IDENTIFIER_FIRST_PERSON, INDEX_FIRST_TUTORIAL);
+        AttendCommand attendCommandDifferentIdentifier =
+                new AttendCommand(IDENTIFIER_SECOND_PERSON, INDEX_FIRST_TUTORIAL);
+        AttendCommand attendCommandDifferentTutorial =
+                new AttendCommand(IDENTIFIER_FIRST_PERSON, INDEX_SECOND_TUTORIAL);
+
+
+
+        // True if same object
+        assertTrue(attendCommand.equals(attendCommand));
+
+        // Same values -> returns true
+        assertTrue(attendCommand.equals(new AttendCommand(IDENTIFIER_FIRST_PERSON, INDEX_FIRST_TUTORIAL)));
+
+        // different types -> returns false
+        assertFalse(attendCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(attendCommand.equals(null));
+
+        // different identifier -> returns false
+        assertFalse(attendCommand.equals(attendCommandDifferentIdentifier));
+
+        // different tutorial -> returns false
+        assertFalse(attendCommand.equals(attendCommandDifferentTutorial));
+    }
+
+    @Test
+    public void toStringMethod() {
+        AttendCommand attendCommand = new AttendCommand(IDENTIFIER_FIRST_PERSON, INDEX_FIRST_TUTORIAL);
+        String expected = AttendCommand.class.getCanonicalName()
+                + "{identifier=" + IDENTIFIER_FIRST_PERSON + ", tutorial=" + INDEX_FIRST_TUTORIAL + "}";
+        assertEquals(expected, attendCommand.toString());
+    }
+
 }
