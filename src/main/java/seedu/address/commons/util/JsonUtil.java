@@ -39,6 +39,10 @@ public class JsonUtil {
                     .addSerializer(Level.class, new ToStringSerializer())
                     .addDeserializer(Level.class, new LevelDeserializer(Level.class)));
 
+    private JsonUtil() {
+        //Prevent instantiation
+    }
+
     static <T> void serializeObjectToJsonFile(Path jsonFile, T objectToSerialize) throws IOException {
         FileUtil.writeToFile(jsonFile, toJsonString(objectToSerialize));
     }

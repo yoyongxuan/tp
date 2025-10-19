@@ -10,6 +10,10 @@ import seedu.address.MainApp;
  */
 public class AppUtil {
 
+    private AppUtil() {
+        //Prevent instantiation
+    }
+
     /**
      * Gets an {@code Image} from the specified path.
      */
