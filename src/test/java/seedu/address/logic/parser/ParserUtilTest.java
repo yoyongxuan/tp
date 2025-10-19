@@ -19,21 +19,27 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentId;
+import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_STUDENT_ID = "X033A";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_TELEGRAM_HANDLE = "a@  s-as";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_EXAM_NAME = "olevel";
     private static final String INVALID_EXAM_SCORE = "-1";
 
     private static final String VALID_NAME = "Rachel Walker";
+    private static final String VALID_STUDENT_ID = "A0000000A";
     private static final String VALID_PHONE = "91234567";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@u.nus.edu";
+    private static final String VALID_TELEGRAM_HANDLE = "@rachel";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_EXAM_NAME = "midterm";
@@ -59,6 +65,23 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseStudentId_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseStudentId(INVALID_STUDENT_ID));
+    }
+
+    @Test
+    public void parseStudentId_validInput_success() throws Exception {
+
+        StudentId validStudentId = new StudentId(VALID_STUDENT_ID);
+
+        // No whitespaces
+        assertEquals(validStudentId, ParserUtil.parseStudentId(VALID_STUDENT_ID));
+
+        // Leading and trailing whitespaces
+        assertEquals(validStudentId, ParserUtil.parseStudentId("   " + VALID_STUDENT_ID + "   "));
     }
 
     @Test
@@ -181,6 +204,29 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseTelegramHandle_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTelegramHandle((String) null));
+    }
+
+    @Test
+    public void parseTelegramHandle_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTelegramHandle(INVALID_TELEGRAM_HANDLE));
+    }
+
+    @Test
+    public void parseTelegramHandle_validValueWithoutWhitespace_returnsEmail() throws Exception {
+        TelegramHandle expectedTelegramHandle = new TelegramHandle(VALID_TELEGRAM_HANDLE);
+        assertEquals(expectedTelegramHandle, ParserUtil.parseTelegramHandle(VALID_TELEGRAM_HANDLE));
+    }
+
+    @Test
+    public void parseTelegramHandle_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
+        String telegramHandleWithWhitespace = WHITESPACE + VALID_TELEGRAM_HANDLE + WHITESPACE;
+        TelegramHandle expectedTelegramHandle = new TelegramHandle(VALID_TELEGRAM_HANDLE);
+        assertEquals(expectedTelegramHandle, ParserUtil.parseTelegramHandle(telegramHandleWithWhitespace));
     }
 
     @Test
