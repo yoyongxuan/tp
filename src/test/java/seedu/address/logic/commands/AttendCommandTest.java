@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIdentifiers.IDENTIFIER_FIRST_PERSON;
@@ -61,7 +60,6 @@ public class AttendCommandTest {
     public void execute_add_success() {
         Person personToEdit = model.getFilteredPersonList().get(0);
         Person editedPerson = new Person.PersonBuilder(personToEdit)
-                .withStudentId(VALID_STUDENT_ID_AMY)
                 .withAttendance(VALID_ATTENDANCE_AMY)
                 .build();
 
@@ -82,7 +80,6 @@ public class AttendCommandTest {
     public void execute_remove_success() {
         Person personToEdit = model.getFilteredPersonList().get(0);
         Person editedPerson = new Person.PersonBuilder(personToEdit)
-                .withStudentId(VALID_STUDENT_ID_AMY)
                 .withAttendance(VALID_ATTENDANCE_AMY)
                 .build();
 
