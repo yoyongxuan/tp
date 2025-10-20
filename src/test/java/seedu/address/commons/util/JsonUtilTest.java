@@ -7,6 +7,10 @@ import java.nio.file.Path;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.ExamList;
+import seedu.address.model.person.Score;
+import seedu.address.storage.JsonAdaptedScore;
 import seedu.address.testutil.SerializableTestClass;
 import seedu.address.testutil.TestUtil;
 
@@ -39,7 +43,27 @@ public class JsonUtilTest {
         assertEquals(serializableTestClass.getMapOfIntegerToString(), SerializableTestClass.getHashMapTestValues());
     }
 
-    //TODO: @Test jsonUtil_readJsonStringToObjectInstance_correctObject()
+    @Test
+    public void jsonUtil_readJsonStringToObjectInstance_correctObject() throws IOException, IllegalValueException {
 
-    //TODO: @Test jsonUtil_writeThenReadObjectToJson_correctObject()
+        String scoreJsonStringRepresentation = "{\n"
+                + "        \"examName\" : \"midterm\",\n"
+                + "        \"score\" : \"50\"\n"
+                + "      }";
+        Score score = Score.getRecordedScore(ExamList.getExamFromName("midterm"), "50");
+        JsonAdaptedScore objectInstance = JsonUtil.fromJsonString(
+                scoreJsonStringRepresentation, JsonAdaptedScore.class);
+
+        assertEquals(score, objectInstance.toModelType());
+    }
+
+    @Test
+    public void jsonUtil_writeThenReadObjectToJson_correctObject() throws IOException, IllegalValueException {
+        Score score = Score.getRecordedScore(ExamList.getExamFromName("midterm"), "50");
+        JsonAdaptedScore jsonAdaptedScore = new JsonAdaptedScore(score);
+        String scoreJsonStringRepresentation = JsonUtil.toJsonString(jsonAdaptedScore);
+        JsonAdaptedScore objectInstance = JsonUtil.fromJsonString(
+                scoreJsonStringRepresentation, JsonAdaptedScore.class);
+        assertEquals(score, objectInstance.toModelType());
+    }
 }

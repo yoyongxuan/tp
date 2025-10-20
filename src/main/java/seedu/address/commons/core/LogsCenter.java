@@ -31,6 +31,10 @@ public class LogsCenter {
         logger = LogsCenter.getLogger(LogsCenter.class);
     }
 
+    private LogsCenter() {
+        //Prevent instantiation
+    }
+
     /**
      * Initializes loggers with the log level specified in the {@code config} object. Applies to all loggers created
      * using {@link #getLogger(String)} and {@link #getLogger(Class)} methods except for those that are manually set.
