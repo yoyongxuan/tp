@@ -97,5 +97,29 @@ public class ExamScoresTest {
 
         // invalid new max score < MIDTERM_SCORE_A = 50
         assertFalse(examScores.newMaxScoreValid(MIDTERM_SCORE_A.getExam(), 40));
+
+        // exam name not found throws exception
+        assertThrows(IllegalArgumentException.class, () ->
+                examScores.newMaxScoreValid(new Exam("fake exam", 50), 100));
+    }
+
+    @Test
+    public void equals() {
+        ExamScores examScore = new ExamScores(new Score[] {MIDTERM_SCORE_A, FINAL_SCORE_A});
+
+        // same values -> returns true
+        assertTrue(examScore.equals(new ExamScores(new Score[] {MIDTERM_SCORE_A, FINAL_SCORE_A})));
+
+        // same object -> returns true
+        assertTrue(examScore.equals(examScore));
+
+        // null -> returns false
+        assertFalse(examScore.equals(null));
+
+        // different types -> returns false
+        assertFalse(examScore.equals(5.0f));
+
+        // different values -> returns false
+        assertFalse(examScore.equals(new ExamScores(new Score[] {MIDTERM_SCORE_B, FINAL_SCORE_A})));
     }
 }

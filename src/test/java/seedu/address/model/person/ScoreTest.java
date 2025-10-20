@@ -31,10 +31,12 @@ public class ScoreTest {
 
     @Test
     public void equals() {
-        assertTrue(Score.getUnrecordedScore(ExamList.MIDTERM).equals(Score.getUnrecordedScore(ExamList.MIDTERM)));
-        assertFalse(Score.getUnrecordedScore(ExamList.MIDTERM).equals(Score.getUnrecordedScore(ExamList.FINAL)));
-
-        assertFalse(Score.getUnrecordedScore(ExamList.MIDTERM).equals(Score.getRecordedScore(ExamList.MIDTERM, "0")));
+        Score unrecordedMidtermScore = Score.getUnrecordedScore(ExamList.MIDTERM);
+        assertTrue(unrecordedMidtermScore.equals(unrecordedMidtermScore));
+        assertTrue(unrecordedMidtermScore.equals(Score.getUnrecordedScore(ExamList.MIDTERM)));
+        assertFalse(unrecordedMidtermScore.equals(null));
+        assertFalse(unrecordedMidtermScore.equals(Score.getUnrecordedScore(ExamList.FINAL)));
+        assertFalse(unrecordedMidtermScore.equals(Score.getRecordedScore(ExamList.MIDTERM, "0")));
     }
 
     @Test

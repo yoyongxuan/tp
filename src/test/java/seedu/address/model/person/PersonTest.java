@@ -13,6 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -102,6 +103,14 @@ public class PersonTest {
 
         // different email -> returns false
         editedAlice = new Person.PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different student ID -> returns false
+        editedAlice = new Person.PersonBuilder(ALICE).withStudentId(VALID_STUDENT_ID_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different telegram handle -> returns false
+        editedAlice = new Person.PersonBuilder(ALICE).withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different attendance -> returns false

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -85,6 +86,35 @@ public class AddressBookTest {
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
         assertEquals(expected, addressBook.toString());
+    }
+
+    @Test
+    public void equals() {
+        // same object -> returns true
+        assertTrue(addressBook.equals(addressBook));
+
+        // null -> returns false
+        assertFalse(addressBook.equals(null));
+
+        // different type -> returns false
+        assertFalse(addressBook.equals("Hello"));
+
+        // copy -> returns true
+        AddressBook addressBookCopy = new AddressBook(addressBook);
+        assertTrue(addressBook.equals(addressBookCopy));
+
+        // different persons -> returns false
+        addressBook.addPerson(BOB);
+        assertFalse(addressBook.equals(addressBookCopy));
+
+        // same persons -> returns true
+        addressBookCopy.addPerson(BOB);
+        assertTrue(addressBook.equals(addressBookCopy));
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        assertEquals(addressBook.getPersonList().hashCode(), addressBook.hashCode());
     }
 
     /**
