@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -164,6 +165,42 @@ public class UniquePersonListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniquePersonList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void iterator() {
+        UniquePersonList uniquePersonList = new UniquePersonList();
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(BOB);
+        Iterator<Person> iterator = uniquePersonList.iterator();
+        assertEquals(ALICE, iterator.next());
+        assertEquals(BOB, iterator.next());
+        assertFalse(iterator.hasNext());
+    }
+
+    @Test
+    public void equals() {
+        UniquePersonList uniquePersonListA = new UniquePersonList();
+        uniquePersonListA.add(ALICE);
+        uniquePersonListA.add(BOB);
+        UniquePersonList uniquePersonListB = new UniquePersonList();
+        uniquePersonListB.add(ALICE);
+
+        // same object -> returns true
+        assertTrue(uniquePersonListA.equals(uniquePersonListA));
+
+        // null -> returns false
+        assertFalse(uniquePersonListA.equals(null));
+
+        // different types -> returns false
+        assertFalse(uniquePersonListA.equals(5.0f));
+
+        // different values -> returns false
+        assertFalse(uniquePersonListA.equals(uniquePersonListB));
+
+        // same values -> returns true
+        uniquePersonListB.add(BOB);
+        assertTrue(uniquePersonListA.equals(uniquePersonListB));
     }
 
     @Test
