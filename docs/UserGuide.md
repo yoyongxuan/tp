@@ -160,7 +160,9 @@ Format: `view INDEX` or `view SID`
 
 Examples:
 * `view 2` displays the 2nd person in the address book.
+  ![result for 'view 2'](images/viewIndex.png)
 * `view A0000000A` displays the person with SID A0000000A.
+  ![result for 'view A0000000A'](images/viewSID.png)
 
 ### Marking the attendance for a person: `attend`
 
@@ -177,8 +179,11 @@ Format: `attend INDEX TUTORIAL` or `attend SID TUTORIAL`
 
 Examples:
 * `attend 1 6` adds attendance for tutorial `6` for the 1st person in the address book.
-* `attend A0000000A 4` adds attendance for tutorial `4` for the person with SID `A0000000A`.
+  ![result for 'attend 1 6'](images/attendIndex.png)
+* `attend A0000001A 2` adds attendance for tutorial `2` for the person with SID `A0000001A`.
+  ![result for 'attend A0000001A 2'](images/attendSID.png)
 * `attend 1 6` removes the attendance for tutorial `6` for the 1st person in the address book if attendance has already been taken for this tutorial and this person.
+  ![result for a second 'attend 1 6'](images/removeAttend.png)
 
 ### Adding a score for an exam for a person: `score`
 
@@ -196,8 +201,10 @@ Format: `score INDEX ex/EXAM s/SCORE` or `score SID ex/EXAM s/SCORE`
 * The exam refers to the exam name, and it **must match the exams recorded in the address book exactly**. e.g. If the exam name in the address book is "midterm", the specified exam name must be "midterm" and not "MIDTERM" or "mid term".
 
 Examples:
-* `score 2 ex/midterm s/60` sets the score of the 2nd person in the address book to `60`, for the exam `midterm`.
-* `score A0000000A ex/final s/90` sets the score of the person with SID `A0000000A` in the address book to `90`, for the exam `final`.
+* `score 1 ex/final s/80` sets the score of the 1st person in the address book to `80`, for the exam `final`.
+  ![result for 'score 1 ex/final s/80'](images/scoreIndex.png)
+* `score A0000001A ex/midterm s/70` sets the score of the person with SID `A0000001A` in the address book to `70`, for the exam `midterm`.
+  ![result for 'score A0000001A ex/midterm s/70'](images/scoreSID.png)
 
 ### Editing the max score of an exam: `maxscore`
 
@@ -210,7 +217,8 @@ Format: `maxscore INDEX ex/EXAM ms/MAXSCORE` or `maxscore SID ex/EXAM ms/MAXSCOR
 * The exam refers to the exam name, and it **must match the exams recorded in the address book exactly**. e.g. If the exam name in the address book is "midterm", the specified exam name must be "midterm" and not "MIDTERM" or "mid term".
 
 Examples:
-* `maxscore ex/midterm ms/100` changes the max score of the exam `midterm` to `100`.
+* `maxscore ex/midterm ms/90` changes the max score of the exam `midterm` to `90`.
+  ![result for 'maxscore ex/midterm ms/90'](images/maxscore.png)
 
 ### Sorting the list : `sort`
 
