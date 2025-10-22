@@ -40,7 +40,7 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY_STR = "Amy Bee";
     public static final String VALID_NAME_BOB_STR = "Bob Choo";
-    public static final String VALID_STUDENT_ID_AMY_STR = "A0000000A";
+    public static final String VALID_STUDENT_ID_AMY_STR = "A0000000B";
     public static final String VALID_STUDENT_ID_BOB_STR = "A0000001B";
     public static final String VALID_PHONE_AMY_STR = "61111111";
     public static final String VALID_PHONE_BOB_STR = "61111112";

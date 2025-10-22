@@ -59,7 +59,6 @@ public class AttendCommandTest {
     public void execute_success() {
         Person personToEdit = model.getFilteredPersonList().get(0);
         Person editedPerson = new Person.PersonBuilder(personToEdit)
-                .withStudentId(VALID_STUDENT_ID_AMY)
                 .withAttendance(VALID_ATTENDANCE_AMY)
                 .build();
 
