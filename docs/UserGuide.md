@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+CadetHQ is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -15,7 +15,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-T11-2/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -28,7 +28,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add A1234567A n/John Doe p/98765432 e/johnd@u.nus.edu h/@JohnDoe` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -81,15 +81,26 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add SID n/NAME p/PHONE_NUMBER e/EMAIL h/TELEGRAM_HANDLE [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
+Argument constraints:
+* The SID **must be 9-characters long**, in the format A#######X where # is a digit (0-9) and X is a letter (A-Z). The first letter **must be 'A'**. The letters can be in uppercase or lowercase.
+  e.g. a0000000B
+* The phone number should start with either **8 or 9** and have a length of **8**.
+* The email must be of the format `local-part@domain` and adhere to the following constraints:
+  1. The local-part should only contain **alphanumeric characters** and these special characters, excluding the parentheses **(+_.-)**. The local part **may not start or end with any special characters**.
+  2. The local part is followed by an `@` and the domain name `u.nus.edu`.
+* The telegram handle must be of the format `@username`, with the username containing only **alphanumeric characters and underscores**. It **cannot be blank too**.
+
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add A0123456A n/John Doe p/98765432 e/johnd@u.nus.edu h/@JohnDoe`
+![result for `add A0123456A n/John Doe p/98765432 e/johnd@u.nus.edu h/@JohnDoe`](images/addJohnDoe.png)
+* `add A1234567B n/Betsy Crowe t/friend e/betsycrowe@u.nus.edu p/89891206 t/needshelp h/@BetsyC`
+![result for `add A1234567B n/Betsy Crowe t/friend e/betsycrowe@u.nus.edu p/89891206 t/needshelp h/@BetsyC`](images/addBetsyCrowe.png)
 
 ### Listing all persons : `list`
 
@@ -101,9 +112,18 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: 
+* `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…​`
+* `edit SID [n/NAME] [p/PHONE] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX` or with the given `SID`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* The SID must be 9-characters long, in the format A#######X where # is a digit (0-9) and X is a letter (A-Z). The first letter must be 'A'. The letters can be in uppercase or lowercase.
+  e.g. a0000000B
+* The phone number should start with either **8 or 9** and have a length of **8**.
+* The email must be of the format `local-part@domain` and adhere to the following constraints:
+  1. The local-part should only contain **alphanumeric characters** and these special characters, excluding the parentheses **(+_.-)**. The local part **may not start or end with any special characters**.
+  2. The local-part is followed by an `@` and the domain name `u.nus.edu`.
+* The telegram handle must be of the format `@username`, with the username containing only **alphanumeric characters and underscores**. It **cannot be blank too**.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -111,8 +131,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/alex_yeoh@u.nus.edu` Edits the phone number and email address of the 1st person to be `91234567` and `alex_yeoh@u.nus.edu` respectively.
+![result for `edit 1 p/91234567 e/alex_yeoh@u.nus.edu`](images/editIndex.png)
+*  `edit A0000000A n/Betsy Crower t/ p/92345678 h/@BetsyC` Edits the name of the person with SID `A0000000A` to be `Betsy Crower`, with phone number `92345678` and Telegram handle `@BetsyC`, and clears all existing tags.
+![result for `edit A0000000A n/Betsy Crower t/ p/92345678 h/@BetsyC`](images/editSid.png)
 
 ### Locating persons by name: `find`
 
@@ -136,15 +158,18 @@ Examples:
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: `delete INDEX` or `delete SID`
 
-* Deletes the person at the specified `INDEX`.
+* Deletes the person at the specified `INDEX` or with the given `SID`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* The SID must be 9-characters long, in the format A#######X where # is a digit (0-9) and X is a letter (A-Z). The first letter must be 'A'. The letters can be in uppercase or lowercase.
+  e.g. a0000000B
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete A0123456Z` deletes the person in the address book with the student ID `A0123456Z`.
 
 ### Viewing a person: `view`
 
@@ -155,7 +180,7 @@ Format: `view INDEX` or `view SID`
 * Finds the person at the specified `INDEX` or with the given `SID` and displays their information.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The SID must be 9-characters long, in the format A#######X where X is a digit (0-9) and X is a letter (A-Z). The first letter must be 'A'. The letters can be in uppercase or lowercase.
+* The SID must be 9-characters long, in the format A#######X where # is a digit (0-9) and X is a letter (A-Z). The first letter must be 'A'. The letters can be in uppercase or lowercase.
   e.g. a0000000B
 
 Examples:
@@ -173,7 +198,7 @@ Format: `attend INDEX TUTORIAL` or `attend SID TUTORIAL`
 * Adds the attendance for the specified `TUTORIAL`, for the person at the specified `INDEX` or with the given `SID`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The SID **must be 9-characters long**, in the format A#######X where X is a digit (0-9) and X is a letter (A-Z). The first letter **must be 'A'**. The letters can be in uppercase or lowercase.
+* The SID **must be 9-characters long**, in the format A#######X where # is a digit (0-9) and X is a letter (A-Z). The first letter **must be 'A'**. The letters can be in uppercase or lowercase.
   e.g. a0000000B
 * The tutorial refers to the tutorial number. It **must be within the number of tutorials in the address book**, and **must be a positive integer** 1, 2, 3, …​
 
@@ -194,7 +219,7 @@ Format: `score INDEX ex/EXAM s/SCORE` or `score SID ex/EXAM s/SCORE`
 * Adds the specified score `SCORE` for the specified exam `EXAM`, for the person at the specified `INDEX` or with the given `SID`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The SID **must be 9-characters long**, in the format A#######X where X is a digit (0-9) and X is a letter (A-Z). The first letter **must be 'A'**. The letters can be in uppercase or lowercase.
+* The SID **must be 9-characters long**, in the format A#######X where # is a digit (0-9) and X is a letter (A-Z). The first letter **must be 'A'**. The letters can be in uppercase or lowercase.
   e.g. a0000000B
 * The score refers to the score attained by the specified person for the specified exam.
 * The score **must be a non-negative integer**,  and **not more than the max score** of the specified exam.
@@ -222,15 +247,23 @@ Examples:
 
 ### Sorting the list : `sort`
 
-Sorts the list based on a parameter.
-The list can currently be sorted by ascending order of name using parameter `n/`.
-It will support sorting of grades by Version 1.3 or earlier using parameter `g/`.
+* Sorts the list based either by name or exam score.
+* Using the parameter `n/` with no other arguments sorts the list in ascending order by name.
+* Using the parameter `ex/` with either `midterm` or `final` sorts the list in ascending order by exam score.
 
-Format: `sort PARAMETER`
+Format: `sort PARAMETER/[optional argument]`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+People with no recorded scores when sorting by exam scores will be shifted to the bottom of the list.
+</div>
 
 Examples:
 * `sort n/` sorts in ascending order of names.
-* `sort g/` sorts in ascending order of names.
+![result for `sort n/`](images/sortByName.png)
+* `sort ex/midterm` sorts in ascending order of midterm scores.
+![result for `sort ex/midterm`](images/sortByMidterm.png)
+* `sort ex/final` sorts in ascending order of final scores.
+![result for `sort ex/final`](images/sortByFinal.png)
 
 ### Clearing all entries : `clear`
 
@@ -281,14 +314,15 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add SID n/NAME p/PHONE_NUMBER e/EMAIL h/TELEGRAM_HANDLE [t/TAG]…​` <br> e.g., `add A0123456Y n/James Ho p/98333521 e/jamesho@u.nus.edu h/@JamesHoe t/friend t/colleague`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete INDEX`, `delete SID` <br> e.g., `delete 3`, `delete A1586788G`
 **View** | `view INDEX`, `view SID` <br> e.g. `view 2`, `view A0000000A`
 **Attend** | `attend INDEX TUTORIAL`, `attend SID TUTORIAL` <br> e.g. `attend 1 6`, `attend A0000000A 4`
 **Score** | `score INDEX ex/EXAM s/SCORE`, `score SID ex/EXAM s/SCORE` <br> e.g. `score 2 ex/midterm s/60`, `score A0000000A ex/final s/80`
 **Maxscore** | `maxscore ex/EXAM ms/SCORE` <br> e.g. `maxscore ex/midterm ms/90`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…​`, `edit SID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…​` <br> e.g.,`edit 2 n/James Lee p/95112511 e/jameslee@u.nus.edu h/@JamesLee6969`
+**Sort** | `sort n/`, `sort ex/EXAM` <br> e.g. `sort n/`, `sort ex/final`, `sort ex/midterm`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
