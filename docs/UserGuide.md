@@ -281,15 +281,14 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add SID n/NAME p/PHONE_NUMBER e/EMAIL h/TELEGRAM_HANDLE [t/TAG]…​` <br> e.g., `add A0123456Y n/James Ho p/98333521 e/jamesho@u.nus.edu h/@JamesHoe t/friend t/colleague`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
-**Delete** | `delete INDEX`, `delete SID` <br> e.g., `delete 3`, `delete A1586788G`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
 **View** | `view INDEX`, `view SID` <br> e.g. `view 2`, `view A0000000A`
 **Attend** | `attend INDEX TUTORIAL`, `attend SID TUTORIAL` <br> e.g. `attend 1 6`, `attend A0000000A 4`
 **Score** | `score INDEX ex/EXAM s/SCORE`, `score SID ex/EXAM s/SCORE` <br> e.g. `score 2 ex/midterm s/60`, `score A0000000A ex/final s/80`
 **Maxscore** | `maxscore ex/EXAM ms/SCORE` <br> e.g. `maxscore ex/midterm ms/90`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…​`, `edit SID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…​` <br> e.g.,`edit 2 n/James Lee p/95112511 e/jameslee@u.nus.edu h/@JamesLee6969`
-**Sort** | `sort n/`, `sort ex/EXAM` <br> e.g. `sort n/`, `sort ex/final`, `sort ex/midterm`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
