@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Exam;
 import seedu.address.model.person.Person;
 
 /**
@@ -75,9 +76,15 @@ public interface Model {
     public void sortPersonsByName();
 
     /**
-     * Sort address book by grade
+     * Sort address book by exam score
+     * @param exam Exam grades to sort by
      */
-    public void sortPersonsByGrade();
+    public void sortPersonsByExam(Exam exam);
+
+    /**
+     * Checks if a new max score of an exam is valid, for updating the max score
+     */
+    public boolean isNewMaxScoreValid(Exam exam, int newMaxScore);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

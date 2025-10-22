@@ -4,34 +4,44 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ExamTest {
 
+    @BeforeEach
+    public void resetExamsList() {
+        ExamList.setMaxScore("midterm", 70);
+        ExamList.setMaxScore("final", 100);
+    }
+
     @Test
     public void correctValues() {
-        assertEquals("midterm", Exam.MIDTERM.getName());
-        assertEquals(70, Exam.MIDTERM.getMaxScore());
+        assertEquals("midterm", ExamList.MIDTERM.getName());
+        assertEquals(70, ExamList.MIDTERM.getMaxScore());
 
-        assertEquals("final", Exam.FINAL.getName());
-        assertEquals(100, Exam.FINAL.getMaxScore());
+        assertEquals("final", ExamList.FINAL.getName());
+        assertEquals(100, ExamList.FINAL.getMaxScore());
     }
 
     @Test
     public void isValidScore() {
-        assertTrue(Exam.MIDTERM.isValidScore(Integer.toString(Exam.MIDTERM.getMaxScore())));
-        assertTrue(Exam.FINAL.isValidScore(Integer.toString(Exam.FINAL.getMaxScore())));
+        assertTrue(ExamList.MIDTERM.isValidScore(Integer.toString(ExamList.MIDTERM.getMaxScore())));
+        assertTrue(ExamList.FINAL.isValidScore(Integer.toString(ExamList.FINAL.getMaxScore())));
 
-        assertFalse(Exam.MIDTERM.isValidScore(Integer.toString(Exam.MIDTERM.getMaxScore() + 1)));
-        assertFalse(Exam.FINAL.isValidScore(Integer.toString(Exam.FINAL.getMaxScore() + 1)));
+        assertFalse(ExamList.MIDTERM.isValidScore(Integer.toString(ExamList.MIDTERM.getMaxScore() + 1)));
+        assertFalse(ExamList.FINAL.isValidScore(Integer.toString(ExamList.FINAL.getMaxScore() + 1)));
 
-        assertFalse(Exam.MIDTERM.isValidScore(Integer.toString(-1)));
-        assertFalse(Exam.FINAL.isValidScore(Integer.toString(-1)));
+        assertFalse(ExamList.MIDTERM.isValidScore(Integer.toString(-1)));
+        assertFalse(ExamList.FINAL.isValidScore(Integer.toString(-1)));
     }
 
     @Test
-    public void getExamFromName() {
-        assertEquals(Exam.MIDTERM, Exam.getExamFromName("midterm"));
-        assertEquals(Exam.FINAL, Exam.getExamFromName("final"));
+    public void updateMaxScore() {
+        ExamList.MIDTERM.setMaxScore(120);
+        assertEquals(120, ExamList.MIDTERM.getMaxScore());
+
+        ExamList.FINAL.setMaxScore(80);
+        assertEquals(80, ExamList.FINAL.getMaxScore());
     }
 }

@@ -22,6 +22,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.Exam;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.TestPersonBuilder;
@@ -155,7 +156,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void sortPersonsByGrade() {
+        public void sortPersonsByExam(Exam exam) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isNewMaxScoreValid(Exam exam, int newMaxScore) {
             throw new AssertionError("This method should not be called.");
         }
 

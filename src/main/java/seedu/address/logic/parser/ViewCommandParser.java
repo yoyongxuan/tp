@@ -2,9 +2,9 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import seedu.address.commons.core.Identifier;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.StudentId;
 
 /**
  * Parses input arguments and creates a new {@code ViewCommand} object
@@ -20,8 +20,8 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         String trimmedArgs = args.trim();
 
         try {
-            StudentId studentId = ParserUtil.parseStudentId(trimmedArgs);
-            return new ViewCommand(studentId);
+            Identifier identifier = ParserUtil.parseIdentifier(trimmedArgs);
+            return new ViewCommand(identifier);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE), pe);
         }

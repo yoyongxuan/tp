@@ -21,6 +21,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditScoreCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -112,9 +113,15 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_sort() throws Exception {
-        // Can parse PREFIX_NAME and PREFIX_GRADE
+        // Can parse PREFIX_NAME and PREFIX_EXAM
         assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " n/") instanceof SortCommand);
-        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " g/") instanceof SortCommand);
+        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " ex/midterm") instanceof SortCommand);
+    }
+
+    @Test
+    public void parseCommand_editScore() throws Exception {
+        assertTrue(parser.parseCommand(
+                EditScoreCommand.COMMAND_WORD + " ex/midterm" + " ms/105") instanceof EditScoreCommand);
     }
 
     @Test

@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Exam;
+import seedu.address.model.person.ExamList;
 import seedu.address.model.person.ExamScores;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -162,7 +162,7 @@ public class JsonAdaptedPersonTest {
         invalidExamScores = new JsonAdaptedExamScores(invalidScoreList);
         person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_STUDENT_ID,
                 VALID_TELEGRAM_HANDLE, VALID_ATTENDANCE, invalidExamScores, VALID_TAGS);
-        expectedMessage = Exam.MESSAGE_CONSTRAINTS;
+        expectedMessage = ExamList.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
 
         // throws error when the value of score is wrong
@@ -170,7 +170,7 @@ public class JsonAdaptedPersonTest {
         invalidExamScores = new JsonAdaptedExamScores(invalidScoreList);
         person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_STUDENT_ID,
                 VALID_TELEGRAM_HANDLE, VALID_ATTENDANCE, invalidExamScores, VALID_TAGS);
-        expectedMessage = Exam.MIDTERM.getMessageScoreConstraints();
+        expectedMessage = ExamList.MIDTERM.getMessageScoreConstraints();
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
 
         // throws error when the order of scores is wrong

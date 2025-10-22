@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Exam;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -47,9 +48,18 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.sort(Person.NAME_COMPARATOR);
     }
 
-    // TODO: Implement when the grade is done
-    public void sortPersonsByGrade() {
+    /**
+     * Sorts the UniquePersonList in the AddressBook by midterm score
+     */
+    public void sortPersonsByMidterm() {
+        persons.sort(Person.MIDTERM_COMPARATOR);
+    }
 
+    /**
+     * Sorts the UniquePersonList in the AddressBook by final score
+     */
+    public void sortPersonsByFinal() {
+        persons.sort(Person.FINAL_COMPARATOR);
     }
 
     /**
@@ -104,6 +114,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    public boolean isNewMaxScoreValid(Exam exam, int newMaxScore) {
+        return persons.isNewMaxScoreValid(exam, newMaxScore);
     }
 
     //// util methods

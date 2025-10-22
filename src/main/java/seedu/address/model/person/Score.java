@@ -34,6 +34,8 @@ public abstract class Score {
         return this.exam;
     }
 
+    public abstract boolean isNewMaxScoreValid(int newMaxScore);
+
     /**
      * Returns an {@Code Optional<Integer>} object representing the recorded score for class
      */
@@ -46,6 +48,11 @@ public abstract class Score {
             super(exam, true);
             checkArgument(exam.isValidScore(strScore), exam.getMessageScoreConstraints());
             this.score = Integer.parseInt(strScore);
+        }
+
+        @Override
+        public boolean isNewMaxScoreValid(int newMaxScore) {
+            return this.score <= newMaxScore;
         }
 
         @Override
@@ -82,6 +89,11 @@ public abstract class Score {
 
         public UnrecordedScore(Exam exam) {
             super(exam, false);
+        }
+
+        @Override
+        public boolean isNewMaxScoreValid(int newMaxScore) {
+            return true;
         }
 
         @Override

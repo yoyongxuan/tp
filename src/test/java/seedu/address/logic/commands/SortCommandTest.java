@@ -6,8 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.model.person.ExamList.FINAL;
+import static seedu.address.model.person.ExamList.MIDTERM;
 import static seedu.address.testutil.TypicalPersons.getUnsortedAddressBook;
 
 import java.util.ArrayList;
@@ -35,7 +37,7 @@ public class SortCommandTest {
     }
 
     @Test
-    public void execute_unsortedList_sortsSuccessfully() {
+    public void execute_unsortedList_success() {
         // Sort expectedModel manually using its inbuilt method
         expectedModel.sortPersonsByName();
 
@@ -60,19 +62,46 @@ public class SortCommandTest {
     }
 
     @Test
-    public void execute_sortByGrade_throwsException() {
-        // Make new Sort Command by grade
-        SortCommand c = new SortCommand(PREFIX_GRADE);
+    public void execute_sortByMidterm_success() {
+        // Sort expectedModel manually using its inbuilt method
+        expectedModel.sortPersonsByExam(MIDTERM);
+
+        // Make new Sort Command by midterm
+        assertCommandSuccess(new SortCommand(PREFIX_EXAM, MIDTERM), model,
+                SortCommand.MESSAGE_SUCCESS, expectedModel);
+        // Verify that the persons are actually in sorted order
+        List<Person> persons = new ArrayList<>(model.getFilteredPersonList());
+        assertTrue(isSortedByMidterm(persons));
+    }
+
+    @Test
+    public void execute_sortByFinal_success() {
+        // Sort expectedModel manually using its inbuilt method
+        expectedModel.sortPersonsByExam(FINAL);
+
+        // Make new Sort Command by final
+        assertCommandSuccess(new SortCommand(PREFIX_EXAM, FINAL), model,
+                SortCommand.MESSAGE_SUCCESS, expectedModel);
+        // Verify that the persons are actually in sorted order
+        List<Person> persons = new ArrayList<>(model.getFilteredPersonList());
+        assertTrue(isSortedByFinal(persons));
+    }
+
+    @Test
+    public void execute_sortByNullExam_throwsError() {
+        // Make new Sort Command by exam, with EXAM = null
+        SortCommand c = new SortCommand(PREFIX_EXAM, null);
         Exception exception = assertThrows(CommandException.class, () -> {
             c.execute(model);
         });
 
-        // Should have same error message
-        String expectedMessage = SortCommand.MESSAGE_NOT_IMPLEMENTED_YET;
+        // Should have the same error message
+        String expectedMessage = SortCommand.MESSAGE_USAGE;
         String actualMessage = exception.getMessage();
 
         assertEquals(expectedMessage, actualMessage);
     }
+
 
     @Test
     public void execute_sortByOtherPrefix_throwsError() {
@@ -90,7 +119,8 @@ public class SortCommandTest {
     }
 
     /**
-     * Utility method to verify alphabetical order
+     * Utility method to verify alphabetical order.
+     * @return true if sorted by ascending alphabetical order
      */
     private boolean isSortedByName(List<Person> persons) {
         for (int i = 1; i < persons.size(); i++) {
@@ -103,14 +133,49 @@ public class SortCommandTest {
         return true;
     }
 
+    /**
+     * Utility method to verify midterm score order.
+     * @param persons List of persons sorted by midterm.
+     * @return true if sorted by ascending midterm score.
+     */
+    private boolean isSortedByMidterm(List<Person> persons) {
+        for (int i = 1; i < persons.size(); i++) {
+            Integer prev = persons.get(i - 1).getExamScores().getScoreByExam(MIDTERM).orElse(Integer.MAX_VALUE);
+            Integer curr = persons.get(i).getExamScores().getScoreByExam(MIDTERM).orElse(Integer.MAX_VALUE);
+            if (prev.compareTo(curr) > 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Utility method to verify final score order.
+     * @param persons List of persons sorted by final.
+     * @return true if sorted by ascending final score.
+     */
+    private boolean isSortedByFinal(List<Person> persons) {
+        for (int i = 1; i < persons.size(); i++) {
+            Integer prev = persons.get(i - 1).getExamScores().getScoreByExam(FINAL).orElse(Integer.MAX_VALUE);
+            Integer curr = persons.get(i).getExamScores().getScoreByExam(FINAL).orElse(Integer.MAX_VALUE);
+            if (prev.compareTo(curr) > 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     @Test
     public void equals() {
         SortCommand sortByName = new SortCommand(PREFIX_NAME);
-        SortCommand sortByGrade = new SortCommand(PREFIX_GRADE);
+        SortCommand sortByMidterm = new SortCommand(PREFIX_EXAM, MIDTERM);
+        SortCommand sortByFinal = new SortCommand(PREFIX_EXAM, FINAL);
 
         // True if same object
         assertTrue(sortByName.equals(sortByName));
-        assertTrue(sortByGrade.equals(sortByGrade));
+        assertTrue(sortByMidterm.equals(sortByMidterm));
 
         // Same values -> returns true
         SortCommand sortByNameDuplicate = new SortCommand(PREFIX_NAME);
@@ -123,7 +188,11 @@ public class SortCommandTest {
         assertFalse(sortByName.equals(null));
 
         // different param -> returns false
-        assertFalse(sortByName.equals(sortByGrade));
+        assertFalse(sortByName.equals(sortByFinal));
+        assertFalse(sortByName.equals(sortByMidterm));
+
+        // different exam -> returns false
+        assertFalse(sortByMidterm.equals(sortByFinal));
     }
 
     @Test

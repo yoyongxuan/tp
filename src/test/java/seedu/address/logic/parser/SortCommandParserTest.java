@@ -4,37 +4,103 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.model.person.ExamList.FINAL;
+import static seedu.address.model.person.ExamList.MIDTERM;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.ExamList;
 
 
 public class SortCommandParserTest {
     private SortCommandParser parser = new SortCommandParser();
     private SortCommand sortByNameCommand = new SortCommand(PREFIX_NAME);
-    private SortCommand sortByGradeCommand = new SortCommand(PREFIX_GRADE);
+    private SortCommand sortByMidtermCommand = new SortCommand(PREFIX_EXAM, MIDTERM);
+    private SortCommand sortByFinalCommand = new SortCommand(PREFIX_EXAM, FINAL);
 
     @Test
-    public void parse_prefixName_success() throws ParseException {
-        SortCommand c = parser.parse("n/");
+    public void parse_name_success() throws ParseException {
+        SortCommand c = parser.parse(" n/");
         assertEquals(sortByNameCommand, c);
     }
 
     @Test
-    public void parse_prefixGrade_success() throws ParseException {
-        SortCommand c = parser.parse("g/");
-        assertEquals(sortByGradeCommand, c);
+    public void parse_examMidterm_success() throws ParseException {
+        SortCommand c = parser.parse(" ex/midterm");
+        assertEquals(sortByMidtermCommand, c);
+    }
+
+    @Test
+    public void parse_examFinal_success() throws ParseException {
+        SortCommand c = parser.parse(" ex/final");
+        assertEquals(sortByFinalCommand, c);
+    }
+
+    @Test
+    public void parse_examFinalNoArg_throwsException() {
+        // Make new SortCommand
+        Exception exception = assertThrows(ParseException.class, () -> {
+            parser.parse(" ex/");
+        });
+
+        // Should have same error message
+        String expectedMessage = String.format(ExamList.MESSAGE_CONSTRAINTS);
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void parse_examFinalInvalidArg_throwsException() {
+        // Make new SortCommand
+        Exception exception = assertThrows(ParseException.class, () -> {
+            parser.parse(" ex/practical");
+        });
+
+        // Should have same error message
+        String expectedMessage = String.format(ExamList.MESSAGE_CONSTRAINTS);
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void parse_nameAndExam_throwsException() {
+        // Make new SortCommand
+        Exception exception = assertThrows(ParseException.class, () -> {
+            parser.parse(" n/ ex/midterm");
+        });
+
+        // Should have same error message
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE);
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void parse_examAndName_throwsException() {
+        // Make new SortCommand
+        Exception exception = assertThrows(ParseException.class, () -> {
+            parser.parse(" ex/midterm n/");
+        });
+
+        // Should have same error message
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE);
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
     public void parse_prefixEmail_throwsException() {
         // Make new SortCommand by email
         Exception exception = assertThrows(ParseException.class, () -> {
-            parser.parse("e/");
+            parser.parse(" e/");
         });
 
         // Should have same error message
