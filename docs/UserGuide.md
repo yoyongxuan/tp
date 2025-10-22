@@ -88,7 +88,7 @@ A person can have any number of tags (including 0)
 </div>
 
 Argument constraints:
-* The SID **must be 9-characters long**, in the format A#######X where X is a digit (0-9) and X is a letter (A-Z). The first letter **must be 'A'**. The letters can be in uppercase or lowercase.
+* The SID **must be 9-characters long**, in the format A#######X where # is a digit (0-9) and X is a letter (A-Z). The first letter **must be 'A'**. The letters can be in uppercase or lowercase.
   e.g. a0000000B
 * The phone number should start with either **8 or 9** and have a length of **8**.
 * The email must be of the format `local-part@domain` and adhere to the following constraints:
@@ -98,7 +98,9 @@ Argument constraints:
 
 Examples:
 * `add A0123456A n/John Doe p/98765432 e/johnd@u.nus.edu h/@JohnDoe`
-* `add A1234567B n/Betsy Crowe t/friend e/betsycrowe@u.nus.edu p/89891206 t/needshelp`
+![result for `add A0123456A n/John Doe p/98765432 e/johnd@u.nus.edu h/@JohnDoe`](images/addJohnDoe.png)
+* `add A1234567B n/Betsy Crowe t/friend e/betsycrowe@u.nus.edu p/89891206 t/needshelp h/@BetsyC`
+![result for `add A1234567B n/Betsy Crowe t/friend e/betsycrowe@u.nus.edu p/89891206 t/needshelp h/@BetsyC`](images/addBetsyCrowe.png)
 
 ### Listing all persons : `list`
 
@@ -115,7 +117,7 @@ Format:
 * `edit SID [n/NAME] [p/PHONE] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX` or with the given `SID`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* The SID must be 9-characters long, in the format A#######X where X is a digit (0-9) and X is a letter (A-Z). The first letter must be 'A'. The letters can be in uppercase or lowercase.
+* The SID must be 9-characters long, in the format A#######X where # is a digit (0-9) and X is a letter (A-Z). The first letter must be 'A'. The letters can be in uppercase or lowercase.
   e.g. a0000000B
 * The phone number should start with either **8 or 9** and have a length of **8**.
 * The email must be of the format `local-part@domain` and adhere to the following constraints:
@@ -129,8 +131,10 @@ Format:
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@u.nus.edu` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@u.nus.edu` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/alex_yeoh@u.nus.edu` Edits the phone number and email address of the 1st person to be `91234567` and `alex_yeoh@u.nus.edu` respectively.
+![result for `edit 1 p/91234567 e/alex_yeoh@u.nus.edu`](images/editIndex.png)
+*  `edit A0000000A n/Betsy Crower t/ p/92345678 h/@BetsyC` Edits the name of the person with SID `A0000000A` to be `Betsy Crower`, with phone number `92345678` and Telegram handle `@BetsyC`, and clears all existing tags.
+![result for `edit A0000000A n/Betsy Crower t/ p/92345678 h/@BetsyC`](images/editSid.png)
 
 ### Locating persons by name: `find`
 
@@ -159,7 +163,7 @@ Format: `delete INDEX` or `delete SID`
 * Deletes the person at the specified `INDEX` or with the given `SID`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The SID must be 9-characters long, in the format A#######X where X is a digit (0-9) and X is a letter (A-Z). The first letter must be 'A'. The letters can be in uppercase or lowercase.
+* The SID must be 9-characters long, in the format A#######X where # is a digit (0-9) and X is a letter (A-Z). The first letter must be 'A'. The letters can be in uppercase or lowercase.
   e.g. a0000000B
 
 Examples:
@@ -176,7 +180,7 @@ Format: `view INDEX` or `view SID`
 * Finds the person at the specified `INDEX` or with the given `SID` and displays their information.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The SID must be 9-characters long, in the format A#######X where X is a digit (0-9) and X is a letter (A-Z). The first letter must be 'A'. The letters can be in uppercase or lowercase.
+* The SID must be 9-characters long, in the format A#######X where # is a digit (0-9) and X is a letter (A-Z). The first letter must be 'A'. The letters can be in uppercase or lowercase.
   e.g. a0000000B
 
 Examples:
@@ -194,7 +198,7 @@ Format: `attend INDEX TUTORIAL` or `attend SID TUTORIAL`
 * Adds the attendance for the specified `TUTORIAL`, for the person at the specified `INDEX` or with the given `SID`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The SID **must be 9-characters long**, in the format A#######X where X is a digit (0-9) and X is a letter (A-Z). The first letter **must be 'A'**. The letters can be in uppercase or lowercase.
+* The SID **must be 9-characters long**, in the format A#######X where # is a digit (0-9) and X is a letter (A-Z). The first letter **must be 'A'**. The letters can be in uppercase or lowercase.
   e.g. a0000000B
 * The tutorial refers to the tutorial number. It **must be within the number of tutorials in the address book**, and **must be a positive integer** 1, 2, 3, …​
 
@@ -215,7 +219,7 @@ Format: `score INDEX ex/EXAM s/SCORE` or `score SID ex/EXAM s/SCORE`
 * Adds the specified score `SCORE` for the specified exam `EXAM`, for the person at the specified `INDEX` or with the given `SID`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The SID **must be 9-characters long**, in the format A#######X where X is a digit (0-9) and X is a letter (A-Z). The first letter **must be 'A'**. The letters can be in uppercase or lowercase.
+* The SID **must be 9-characters long**, in the format A#######X where # is a digit (0-9) and X is a letter (A-Z). The first letter **must be 'A'**. The letters can be in uppercase or lowercase.
   e.g. a0000000B
 * The score refers to the score attained by the specified person for the specified exam.
 * The score **must be a non-negative integer**,  and **not more than the max score** of the specified exam.
@@ -255,8 +259,11 @@ People with no recorded scores when sorting by exam scores will be shifted to th
 
 Examples:
 * `sort n/` sorts in ascending order of names.
+![result for `sort n/`](images/sortByName.png)
 * `sort ex/midterm` sorts in ascending order of midterm scores.
+![result for `sort ex/midterm`](images/sortByMidterm.png)
 * `sort ex/final` sorts in ascending order of final scores.
+![result for `sort ex/final`](images/sortByFinal.png)
 
 ### Clearing all entries : `clear`
 
