@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -43,5 +44,32 @@ public class ExamTest {
 
         ExamList.FINAL.setMaxScore(80);
         assertEquals(80, ExamList.FINAL.getMaxScore());
+
+        assertThrows(IllegalArgumentException.class, () -> ExamList.MIDTERM.setMaxScore(-1));
+    }
+
+    @Test
+    public void equals() {
+        String examName = "Exam";
+        int examScore = 80;
+        Exam exam = new Exam(examName, examScore);
+
+        // same name and score -> returns true
+        assertTrue(exam.equals(new Exam(examName, examScore)));
+
+        // same object -> returns true
+        assertTrue(exam.equals(exam));
+
+        // null -> returns false
+        assertFalse(exam.equals(null));
+
+        // different types -> returns false
+        assertFalse(exam.equals(5.0f));
+
+        // different name -> returns false
+        assertFalse(exam.equals(new Exam(examName + "A", examScore)));
+
+        // different score -> returns false
+        assertFalse(exam.equals(new Exam(examName, examScore + 5)));
     }
 }

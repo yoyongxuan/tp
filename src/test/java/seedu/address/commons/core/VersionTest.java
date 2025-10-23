@@ -1,6 +1,7 @@
 package seedu.address.commons.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -94,6 +95,10 @@ public class VersionTest {
         another = new Version(2, 15, 0, false);
         assertTrue(one.compareTo(another) < 0);
 
+        one = new Version(2, 15, 0, false);
+        another = new Version(2, 15, 0, true);
+        assertTrue(one.compareTo(another) == 1);
+
         // Tests early access lower version vs not early access higher version compare by version number first
         one = new Version(2, 15, 0, true);
         another = new Version(2, 15, 5, false);
@@ -121,11 +126,31 @@ public class VersionTest {
 
         one = new Version(0, 0, 0, false);
         another = new Version(0, 0, 0, false);
+        assertTrue(one.equals(one));
         assertTrue(one.equals(another));
 
         one = new Version(100, 191, 275, true);
         another = new Version(100, 191, 275, true);
         assertTrue(one.equals(another));
+
+        another = new Version(0, 191, 275, true);
+        assertFalse(one.equals(another));
+
+        another = new Version(100, 0, 275, true);
+        assertFalse(one.equals(another));
+
+        another = new Version(100, 191, 0, true);
+        assertFalse(one.equals(another));
+
+        another = new Version(100, 191, 275, false);
+        assertFalse(one.equals(another));
+    }
+
+    @Test
+    public void versionComparable_invalidVersion_equalIsCorrect() {
+        Version one = new Version(0, 0, 0, false);
+        assertFalse(one.equals(null));
+        assertFalse(one.equals("test"));
     }
 
     private void verifyVersionParsedCorrectly(String versionString,

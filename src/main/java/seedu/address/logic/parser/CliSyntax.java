@@ -14,4 +14,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_SCORE = new Prefix("s/");
     public static final Prefix PREFIX_TELEGRAM_HANDLE = new Prefix("h/");
     public static final Prefix PREFIX_MAX_SCORE = new Prefix("ms/");
+
+    private CliSyntax() {
+        //Prevent instantiation
+    }
 }
