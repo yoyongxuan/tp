@@ -148,6 +148,7 @@ The `Storage` component,
 Persistent data is stored as local JSON files, located in the same folder where the JAR file for CadetHQ is ran. The following JSON files are created:
 
 - `preferences.json`
+- `config.json`
 - `data/addressbook.json`
 
 [Jackson](https://github.com/FasterXML/jackson) is used for JSON (de)serialization and relies on adapted models via the [Data Transfer Object pattern](https://www.baeldung.com/java-dto-pattern).
@@ -161,6 +162,8 @@ No proactive measures are taken to rectify the issue, such as deleting the file 
 For `data/addressbook.json`, this occurs when adding, editing or deleting the student contact list.
 
 For `preferences.json`, this occurs in the `MainApp#initPrefs` method. 
+
+For `config.json`, this occurs in the `MainApp#initConfig` method.
 
 ### Common classes
 
