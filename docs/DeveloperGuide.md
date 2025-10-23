@@ -145,6 +145,26 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+Persistent data is stored as local JSON files, located in the same folder where the JAR file for CadetHQ is ran. The following JSON files are created:
+
+- `preferences.json`
+- `config.json`
+- `data/addressbook.json`
+
+[Jackson](https://github.com/FasterXML/jackson) is used for JSON (de)serialization and relies on adapted models via the [Data Transfer Object pattern](https://www.baeldung.com/java-dto-pattern).
+
+#### Malformed JSONs
+
+If a JSON file is malformed, the contents will not be loaded and a log message will be printed. A malformed JSON file includes files that have invalid JSON syntax or files that are missing crucial user data.
+
+No proactive measures are taken to rectify the issue, such as deleting the file or fixing the error. This decision was made to avoid prescribing a fixed approach to resolving malformed JSON files. Instead, we simply load sensible defaults, such as an empty address book when the user loads the application, and overwrite the malformed JSON file when the user inputs data.
+
+For `data/addressbook.json`, this occurs when adding, editing or deleting the student contact list.
+
+For `preferences.json`, this occurs in the `MainApp#initPrefs` method. 
+
+For `config.json`, this occurs in the `MainApp#initConfig` method.
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
