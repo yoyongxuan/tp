@@ -39,7 +39,10 @@ public class ViewCommandTest {
 
         assertTrue(viewFirst.equals(viewFirst));
         assertTrue(viewFirst.equals(viewFirstCopy));
+
         assertFalse(viewFirst.equals(viewSecond));
+        assertFalse(viewFirst.equals(1));
+        assertFalse(viewFirst.equals(null));
     }
 
     @Test

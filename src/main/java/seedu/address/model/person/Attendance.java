@@ -40,7 +40,7 @@ public class Attendance {
      * returns if a tutorial number is valid
      */
     public static boolean isValidTutorial(Index test) {
-        return (test.getZeroBased() >= 0) && (test.getZeroBased() < NUMBER_OF_TUTORIALS);
+        return test.getZeroBased() < NUMBER_OF_TUTORIALS;
     }
 
     /**

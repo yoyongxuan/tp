@@ -51,7 +51,6 @@ public class JsonAdaptedScore {
         if (this.score.equals("unrecorded")) {
             return Score.getUnrecordedScore(modelExam);
         }
-        System.out.println(this.score);
 
         if (!modelExam.isValidScore(score)) {
             throw new IllegalValueException(modelExam.getMessageScoreConstraints());
