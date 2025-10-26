@@ -18,6 +18,11 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+
+    private SampleDataUtil() {
+        //Prevent instantiation
+    }
+
     public static Person[] getSamplePersons() {
         return new Person[]{
                 new Person.PersonBuilder(new Name("Alex Yeoh"), new Phone("87438807"),

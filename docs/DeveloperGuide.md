@@ -145,6 +145,26 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+Persistent data is stored as local JSON files, located in the same folder where the JAR file for CadetHQ is ran. The following JSON files are created:
+
+- `preferences.json`
+- `config.json`
+- `data/addressbook.json`
+
+[Jackson](https://github.com/FasterXML/jackson) is used for JSON (de)serialization and relies on adapted models via the [Data Transfer Object pattern](https://www.baeldung.com/java-dto-pattern).
+
+#### Malformed JSONs
+
+If a JSON file is malformed, the contents will not be loaded and a log message will be printed. A malformed JSON file includes files that have invalid JSON syntax or files that are missing crucial user data.
+
+No proactive measures are taken to rectify the issue, such as deleting the file or fixing the error. This decision was made to avoid prescribing a fixed approach to resolving malformed JSON files. Instead, we simply load sensible defaults, such as an empty address book when the user loads the application, and overwrite the malformed JSON file when the user inputs data.
+
+For `data/addressbook.json`, this occurs when adding, editing or deleting the student contact list.
+
+For `preferences.json`, this occurs in the `MainApp#initPrefs` method. 
+
+For `config.json`, this occurs in the `MainApp#initConfig` method.
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
@@ -320,12 +340,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 
-**Use case: Delete a student contact**
+**Use case: Delete a student contact using list index**
 
 **MSS**
 
 1.  User requests to <u>list students</u>
-2.  User requests to delete a specific student in the list
+2.  User requests to delete a specific student in the list using index in list
 3.  AddressBook deletes the student's contact
 
     Use case ends.
@@ -342,8 +362,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Delete a student contact using Student ID**
 
-**Use case: View a student contact**
+**MSS**
+
+1.  User requests to delete a specific student in the list using Student ID
+2.  AddressBook deletes the student's contact
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given Student ID is invalid.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. The given Student ID is not in the list.
+
+    * 1b1. AddressBook shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: View a student contact via list index**
 
 **MSS**
 
@@ -365,12 +407,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Record a student's grade**
+**Use case: View a student contact via Student ID**
+
+**MSS**
+
+1.  User requests to view a specific student using Student ID
+2.  AddressBook displays the student's contact
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given Student ID is invalid.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+* 1b. The given Student ID is not in the list.
+
+    * 1b1. AddressBook shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: Record a student's grade via list index**
 
 **MSS**
 
 1.  User requests to <u>list students</u>
-2.  User requests to record grade of a specific student in the list, inputting test name, score and total score
+2.  User requests to record grade of a specific student in the list, inputting test name and score
 3.  AddressBook updates student's record
 4.  AddressBook displays student's grade
 
@@ -401,35 +466,49 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 
-**Use case: View a student's grade**
+**Use case: Record a student's grade via Student ID**
 
 **MSS**
 
-1.  User requests to <u>list students</u>
-2.  User requests to view grades of a specific student in the list
-3.  AddressBook displays all the student's recorded grades
+1.  User requests to record grade of a specific student using Student ID, inputting test name and score
+2.  AddressBook updates student's record
+3.  AddressBook displays student's grade
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
+* 1a. The given Student ID is invalid.
 
-  Use case ends.
+    * 1a1. AddressBook shows an error message.
 
-* 2a. The given index is invalid.
+      Use case resumes at step 1.
 
-    * 2a1. AddressBook shows an error message.
+* 1b. The given Student ID is not in the list.
 
-      Use case resumes at step 2.
+    * 1b1. AddressBook shows an error message.
 
-**Use case: Record a student's attendance**
+      Use case resumes at step 1.
+
+* 1c. Details missing in input.
+
+    * 1c1. AddressBook shows an error message.
+
+      Use case resumes at step 1.
+
+* 1d. Details are not in an acceptable format.
+
+    * 1d1. AddressBook shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: Record a student's attendance via list index**
 
 **MSS**
 
 1.  User requests to <u>list students</u>
-2.  User requests to record attendance  of a specific student in the list, inputting class name
-3.  AddressBook updates student's attendance
+2.  User requests to record attendance of a specific student in the list, inputting tutorial number
+3.  AddressBook inverts student's attendance
 4.  AddressBook displays student's attendance
 
     Use case ends.
@@ -452,29 +531,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-
-**Use case: View a student's attendance**
+**Use case: Record a student's attendance via Student ID**
 
 **MSS**
 
-1.  User requests to <u>list students</u>
-2.  User requests to view attendance of a specific student in the list
-3.  AddressBook displays all the student's recorded attendance
+1.  User requests to record attendance of a specific student using Student ID, inputting tutorial number
+2.  AddressBook inverts student's attendance 
+3.  AddressBook displays student's attendance
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
+* 1a. The given index is invalid.
 
-  Use case ends.
+    * 1a1. AddressBook shows an error message.
 
-* 2a. The given index is invalid.
+      Use case resumes at step 1.
 
-    * 2a1. AddressBook shows an error message.
+* 1b. Details missing in input.
 
-      Use case resumes at step 2.
+    * 1b1. AddressBook shows an error message.
 
+      Use case resumes at step 1.
 
 **Use case: list all students**
 
@@ -485,6 +564,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+**Use case: sort all students by exam score**
+
+**MSS**
+
+1.  User requests to sort students by a specified exam score
+2.  AddressBook shows a sorted list of persons from highest score to lowest
+
+    Use case ends.
+
+**Use case: sort all students by name**
+
+**MSS**
+
+1.  User requests to sort students by name
+2.  AddressBook shows a sorted list of persons alphabetically
+
+    Use case ends.
 
 *{More to be added}*
 

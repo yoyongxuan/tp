@@ -48,7 +48,7 @@ public class Exam {
         }
 
         int intTest = Integer.parseInt(test);
-        return (intTest >= 0) && (intTest <= this.maxScore);
+        return intTest <= this.maxScore;
     }
 
     public String getMessageScoreConstraints() {

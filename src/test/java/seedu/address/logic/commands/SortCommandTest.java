@@ -181,6 +181,9 @@ public class SortCommandTest {
         SortCommand sortByNameDuplicate = new SortCommand(PREFIX_NAME);
         assertTrue(sortByName.equals(sortByNameDuplicate));
 
+        SortCommand sortByMidtermDuplicate = new SortCommand(PREFIX_EXAM, MIDTERM);
+        assertTrue(sortByMidterm.equals(sortByMidtermDuplicate));
+
         // different types -> returns false
         assertFalse(sortByName.equals(1));
 
