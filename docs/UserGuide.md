@@ -102,6 +102,11 @@ Examples:
 * `add A1234567B n/Betsy Crowe t/friend e/betsycrowe@u.nus.edu p/89891206 t/needshelp h/@BetsyC`
 ![result for `add A1234567B n/Betsy Crowe t/friend e/betsycrowe@u.nus.edu p/89891206 t/needshelp h/@BetsyC`](images/addBetsyCrowe.png)
 
+Important Information:
+* Duplicate students cannot be added to the address book.
+* A student is considered a duplicate student if either the student ID or the student email are the same, where equality on these terms is defined as the literal string equality.
+* In other words, a student is considered a distinct student only if both the student ID and the student email do not match any other existing student in the address book.
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
