@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.AttendCommand.MESSAGE_WRONG_TUTORIAL;
 
 import seedu.address.commons.core.Identifier;
 import seedu.address.commons.core.index.Index;
@@ -29,11 +30,20 @@ public class AttendCommandParser implements Parser<AttendCommand> {
 
         Identifier identifier;
         Index tutorial;
+        String tutorialString = argsSplit[2];
 
         try {
             identifier = ParserUtil.parseIdentifier(argsSplit[1]);
-            tutorial = Index.fromOneBased(Integer.parseInt(argsSplit[2]));
+            if (!Index.isValidOneBasedIndex(tutorialString)) {
+                throw new ParseException(
+                        String.format(MESSAGE_WRONG_TUTORIAL, AttendCommand.MESSAGE_USAGE));
+            }
+            tutorial = Index.fromOneBased(Integer.parseInt(tutorialString));
         } catch (ParseException pe) {
+            if (pe.getMessage().equals(MESSAGE_WRONG_TUTORIAL)) {
+                throw new ParseException(
+                        String.format(MESSAGE_WRONG_TUTORIAL, AttendCommand.MESSAGE_USAGE), pe);
+            }
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AttendCommand.MESSAGE_USAGE), pe);
         } catch (NumberFormatException nfe) {
