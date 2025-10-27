@@ -4,7 +4,7 @@ title: CadetHQ
 ---
 
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
+[![codecov](https://codecov.io/gh/AY2526S1-CS2103T-T11-2/tp/graph/badge.svg?token=I5GZZDHVB2)](https://codecov.io/gh/AY2526S1-CS2103T-T11-2/tp)
 
 ![Ui](images/Ui.png)
 
