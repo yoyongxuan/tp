@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.AttendCommand.MESSAGE_WRONG_TUTORIAL;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENT_ID_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY_STR;
@@ -60,6 +61,12 @@ public class AttendCommandParserTest {
     public void parse_invalidStudentId_failure() {
         assertParseFailure(parser, AttendCommand.COMMAND_WORD + " " + INVALID_STUDENT_ID_DESC + " 5",
                 MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_invalidIndex_failure() {
+        assertParseFailure(parser, AttendCommand.COMMAND_WORD + " " + VALID_STUDENT_ID_AMY_STR + " 0",
+                MESSAGE_WRONG_TUTORIAL);
     }
 
     @Test
