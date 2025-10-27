@@ -30,25 +30,16 @@ public class AttendCommandParser implements Parser<AttendCommand> {
 
         Identifier identifier;
         Index tutorial;
-        String tutorialString = argsSplit[2];
 
         try {
             identifier = ParserUtil.parseIdentifier(argsSplit[1]);
-            if (!Index.isValidOneBasedIndex(tutorialString)) {
-                throw new ParseException(
-                        String.format(MESSAGE_WRONG_TUTORIAL, AttendCommand.MESSAGE_USAGE));
-            }
-            tutorial = Index.fromOneBased(Integer.parseInt(tutorialString));
-        } catch (ParseException pe) {
-            if (pe.getMessage().equals(MESSAGE_WRONG_TUTORIAL)) {
-                throw new ParseException(
-                        String.format(MESSAGE_WRONG_TUTORIAL, AttendCommand.MESSAGE_USAGE), pe);
-            }
+            tutorial = Index.fromOneBased(Integer.parseInt(argsSplit[2]));
+        } catch (ParseException | NumberFormatException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AttendCommand.MESSAGE_USAGE), pe);
-        } catch (NumberFormatException nfe) {
+        } catch (IndexOutOfBoundsException ie) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AttendCommand.MESSAGE_USAGE), nfe);
+                    String.format(MESSAGE_WRONG_TUTORIAL, AttendCommand.MESSAGE_USAGE), ie);
         }
 
         return new AttendCommand(identifier, tutorial);
