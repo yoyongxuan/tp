@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -23,6 +24,7 @@ public class ExamListTest {
     public void getExamFromName_returnsCorrectExam() {
         assertEquals(ExamList.MIDTERM, ExamList.getExamFromName("midterm"));
         assertEquals(ExamList.FINAL, ExamList.getExamFromName("final"));
+        assertThrows(IllegalArgumentException.class, () -> ExamList.getExamFromName("non-existant exam"));
     }
 
     @Test

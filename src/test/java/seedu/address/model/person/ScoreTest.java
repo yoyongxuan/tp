@@ -31,10 +31,26 @@ public class ScoreTest {
 
     @Test
     public void equals() {
-        assertTrue(Score.getUnrecordedScore(ExamList.MIDTERM).equals(Score.getUnrecordedScore(ExamList.MIDTERM)));
-        assertFalse(Score.getUnrecordedScore(ExamList.MIDTERM).equals(Score.getUnrecordedScore(ExamList.FINAL)));
+        Score unrecordedMidtermScore = Score.getUnrecordedScore(ExamList.MIDTERM);
+        Score recordedMidtermScore = Score.getRecordedScore(ExamList.MIDTERM, "50");
 
-        assertFalse(Score.getUnrecordedScore(ExamList.MIDTERM).equals(Score.getRecordedScore(ExamList.MIDTERM, "0")));
+        // same object -> returns true
+        assertTrue(unrecordedMidtermScore.equals(unrecordedMidtermScore));
+
+        // same exam and score -> returns true
+        assertTrue(unrecordedMidtermScore.equals(Score.getUnrecordedScore(ExamList.MIDTERM)));
+        assertTrue(recordedMidtermScore.equals(Score.getRecordedScore(ExamList.MIDTERM, "50")));
+
+        // null -> returuns false
+        assertFalse(unrecordedMidtermScore.equals(null));
+        assertFalse(recordedMidtermScore.equals(null));
+
+        // different exam -> returns false
+        assertFalse(unrecordedMidtermScore.equals(Score.getUnrecordedScore(ExamList.FINAL)));
+        assertFalse(recordedMidtermScore.equals(Score.getRecordedScore(ExamList.FINAL, "50")));
+
+        // different score -> returns false
+        assertFalse(recordedMidtermScore.equals(Score.getRecordedScore(ExamList.MIDTERM, "0")));
     }
 
     @Test

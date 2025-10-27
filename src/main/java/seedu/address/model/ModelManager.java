@@ -129,7 +129,6 @@ public class ModelManager implements Model {
             addressBook.sortPersonsByFinal();
             break;
         default:
-            addressBook.sortPersonsByName();
             break;
         }
     }

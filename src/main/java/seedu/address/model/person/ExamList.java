@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -44,63 +42,51 @@ public class ExamList {
      * @param examName A valid exam name
      */
     public static Exam getExamFromName(String examName) {
-        checkArgument(isValidExamName(examName), MESSAGE_CONSTRAINTS);
         for (int i = 0; i < examList.size(); i++) {
             Exam currentExam = examList.get(i);
             if (examName.equals(currentExam.getName())) {
                 return currentExam;
             }
         }
-        return null; //should not be executed due to checkArgument
+
+        throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
     }
 
     /**
      * Returns if a given string is a valid exam name.
      */
     public static boolean isValidExamName(String examName) {
-        if (examList.isEmpty()) {
-            return false;
-        } else {
-            for (int i = 0; i < examList.size(); i++) {
-                String currentExamName = examList.get(i).getName();
-                if (examName.equals(currentExamName)) {
-                    return true;
-                }
+        for (int i = 0; i < examList.size(); i++) {
+            String currentExamName = examList.get(i).getName();
+            if (examName.equals(currentExamName)) {
+                return true;
             }
-            return false;
         }
+        return false;
     }
 
     /**
      * Returns if a given Exam is a valid exam.
      */
     public static boolean isValidExam(Exam exam) {
-        if (examList.isEmpty()) {
-            return false;
-        } else {
-            for (int i = 0; i < examList.size(); i++) {
-                Exam currentExam = examList.get(i);
-                if (exam.equals(currentExam)) {
-                    return true;
-                }
+        for (int i = 0; i < examList.size(); i++) {
+            Exam currentExam = examList.get(i);
+            if (exam.equals(currentExam)) {
+                return true;
             }
-            return false;
         }
+        return false;
     }
 
     /**
      * Returns a string with all exam names separated by commas.
      */
     public static String getAllExamNames() {
-        if (examList.isEmpty()) {
-            return "";
-        } else {
-            String out = examList.get(0).getName();
-            for (int i = 1; i < examList.size(); i++) {
-                out += ", ";
-                out += examList.get(i).getName();
-            }
-            return out;
+        String out = examList.get(0).getName();
+        for (int i = 1; i < examList.size(); i++) {
+            out += ", ";
+            out += examList.get(i).getName();
         }
+        return out;
     }
 }
