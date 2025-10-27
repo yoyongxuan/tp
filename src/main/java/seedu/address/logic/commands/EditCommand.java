@@ -19,6 +19,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ExamScores;
 import seedu.address.model.person.Name;
@@ -108,10 +109,12 @@ public class EditCommand extends Command {
                 .orElse(personToEdit.getTelegramHandle());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         ExamScores examScores = editPersonDescriptor.getExamScores().orElse(personToEdit.getExamScores());
+        Attendance attendance = editPersonDescriptor.getAttendance().orElse(personToEdit.getAttendance());
 
         return new Person.PersonBuilder(updatedName, updatedPhone, updatedEmail, oldStudentId, updatedTelegramHandle)
                 .withTags(updatedTags)
                 .withExamScores(examScores)
+                .withAttendance(attendance)
                 .build();
     }
 
@@ -151,6 +154,7 @@ public class EditCommand extends Command {
         private TelegramHandle telegramHandle;
         private Set<Tag> tags;
         private ExamScores examScores;
+        private Attendance attendance;
 
         public EditPersonDescriptor() {
         }
@@ -214,6 +218,14 @@ public class EditCommand extends Command {
 
         public Optional<TelegramHandle> getTelegramHandle() {
             return Optional.ofNullable(telegramHandle);
+        }
+
+        public void setAttendance(Attendance attendance) {
+            this.attendance = attendance;
+        }
+
+        public Optional<Attendance> getAttendance() {
+            return Optional.ofNullable(attendance);
         }
 
         /**
