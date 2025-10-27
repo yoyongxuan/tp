@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-CadetHQ is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+CadetHQ is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CadetHQ can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -11,6 +11,8 @@ CadetHQ is a **desktop app for managing contacts, optimized for use via a Comman
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
+
+Note that throughout this document, we will often refer to CadetHQ as Address Book whenever appropriate.
 
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
