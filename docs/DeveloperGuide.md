@@ -10,6 +10,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* The automated GUI tests using TestFX was adapted from the AddressBook-Level4 project by the same creator
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -315,7 +316,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
-
+___
 **Use case: Add a student contact**
 
 **MSS**
@@ -339,7 +340,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-
+___
 **Use case: Delete a student contact using list index**
 
 **MSS**
@@ -361,7 +362,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
-
+___
 **Use case: Delete a student contact using Student ID**
 
 **MSS**
@@ -384,7 +385,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. AddressBook shows an error message.
 
       Use case resumes at step 1.
-
+___
 **Use case: View a student contact via list index**
 
 **MSS**
@@ -406,7 +407,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
-
+___
 **Use case: View a student contact via Student ID**
 
 **MSS**
@@ -429,7 +430,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. AddressBook shows an error message.
 
       Use case resumes at step 1.
-
+___
 **Use case: Record a student's grade via list index**
 
 **MSS**
@@ -465,7 +466,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-
+___
 **Use case: Record a student's grade via Student ID**
 
 **MSS**
@@ -501,7 +502,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1d1. AddressBook shows an error message.
 
       Use case resumes at step 1.
-
+___
 **Use case: Record a student's attendance via list index**
 
 **MSS**
@@ -530,7 +531,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. AddressBook shows an error message.
 
       Use case resumes at step 2.
-
+___
 **Use case: Record a student's attendance via Student ID**
 
 **MSS**
@@ -554,7 +555,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. AddressBook shows an error message.
 
       Use case resumes at step 1.
-
+___
 **Use case: list all students**
 
 **MSS**
@@ -572,7 +573,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  AddressBook shows a sorted list of persons from highest score to lowest
 
     Use case ends.
-
+___
 **Use case: sort all students by name**
 
 **MSS**
@@ -581,7 +582,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  AddressBook shows a sorted list of persons alphabetically
 
     Use case ends.
-
+___
 *{More to be added}*
 
 
