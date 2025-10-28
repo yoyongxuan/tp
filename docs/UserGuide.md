@@ -3,7 +3,9 @@ layout: page
 title: User Guide
 ---
 
-CadetHQ is a **desktop app for managing student contacts for CS1101S TAs, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). For CS1101S TAs that are good at using the Command Line, CadetHQ gives you the power to manage your students' grades, attendance, and contact information quickly, bypassing pesky menus that take ages to load and navigate.
+CadetHQ is a **desktop app for managing student contacts for CS1101S TAs, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+
+For CS1101S TAs that are good at using the Command Line, CadetHQ gives you the power to manage your students' grades, attendance, and contact information quickly, bypassing pesky menus that take ages to load and navigate.
 
 * Table of Contents
 {:toc}
@@ -12,14 +14,16 @@ CadetHQ is a **desktop app for managing student contacts for CS1101S TAs, optimi
 
 ## Quick start
 
+Note that throughout this document, we will often refer to CadetHQ as Address Book whenever appropriate.
+
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-T11-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your CadetHQ.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar cadethq.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -64,7 +68,7 @@ CadetHQ is a **desktop app for managing student contacts for CS1101S TAs, optimi
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-* All formats accept multiple spaces in between parameters. e.g. `score  1   ex/   midterm  s/50` will be interpreted as `score 1 ex/midterm s/50`
+* All formats accept multiple spaces in between parameters. e.g. `score ‎ ‎  1 ‎ ‎ ‎   ex/  ‎ ‎  midterm  s/50` will be interpreted as `score 1 ex/midterm s/50`
 
 * `SID` refers to the Student ID.
 
@@ -101,6 +105,11 @@ Examples:
 ![result for `add A0123456A n/John Doe p/98765432 e/johnd@u.nus.edu h/@JohnDoe`](images/addJohnDoe.png)
 * `add A1234567B n/Betsy Crowe t/friend e/betsycrowe@u.nus.edu p/89891206 t/needshelp h/@BetsyC`
 ![result for `add A1234567B n/Betsy Crowe t/friend e/betsycrowe@u.nus.edu p/89891206 t/needshelp h/@BetsyC`](images/addBetsyCrowe.png)
+
+Important Information:
+* Duplicate students cannot be added to the address book.
+* A student is considered a duplicate student if either the student ID or the student email are the same, where equality on these terms is defined as the literal string equality.
+* In other words, a student is considered a distinct student only if both the student ID and the student email do not match any other existing student in the address book.
 
 ### Listing all persons : `list`
 
@@ -195,12 +204,13 @@ Adds the attendance for the specified tutorial, for the specified person from th
 
 Format: `attend INDEX TUTORIAL` or `attend SID TUTORIAL`
 
-* Adds the attendance for the specified `TUTORIAL`, for the person at the specified `INDEX` or with the given `SID`.
+* Inverts the attendance for the specified `TUTORIAL`, for the person at the specified `INDEX` or with the given `SID`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * The SID **must be 9-characters long**, in the format A#######X where # is a digit (0-9) and X is a letter (A-Z). The first letter **must be 'A'**. The letters can be in uppercase or lowercase.
   e.g. a0000000B
-* The tutorial refers to the tutorial number. It **must be within the number of tutorials in the address book**, and **must be a positive integer** 1, 2, 3, …​
+* The tutorial refers to the tutorial number. It **must be within the range of the number of tutorials specified in the address book.**
+* The tutorial **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `attend 1 6` adds attendance for tutorial `6` for the 1st person in the address book.
@@ -279,15 +289,15 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+CadetHQ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+CadetHQ data are saved automatically as a JSON file `[JAR file location]/data/cadethq.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, cadethq.json will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the cadethq.json to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -299,7 +309,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous cadethq.json home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -12,6 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.TypicalExamScores.EXAM_SCORES_MIDTERM;
 import static seedu.address.testutil.TypicalExamScores.EXAM_SCORES_MIDTERM_FINAL;
 import static seedu.address.testutil.TypicalIdentifiers.IDENTIFIER_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIdentifiers.IDENTIFIER_SECOND_PERSON;
@@ -19,6 +20,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.SECOND_PERSON_STR;
 import static seedu.address.testutil.TypicalPersons.AMY_DEFAULT;
+import static seedu.address.testutil.TypicalPersons.HOON;
+import static seedu.address.testutil.TypicalPersons.OWES_MONEY_FRIENDS_TAGS;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -44,6 +47,26 @@ public class EditCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
+    public void execute_editedPersonAttendanceNoChange_success() {
+        Person editedPerson = new Person.PersonBuilder(HOON)
+                .withAttendance(new Attendance(
+                    "true false false true false true false false true false false"))
+                .withExamScores(EXAM_SCORES_MIDTERM)
+                .withTags(OWES_MONEY_FRIENDS_TAGS).build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
+        EditCommand editCommand = new EditCommand(IDENTIFIER_SECOND_PERSON, descriptor);
+
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(1), editedPerson);
+
+        assertEquals(personToEdit.getAttendance(), editedPerson.getAttendance());
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Person editedPerson = new Person.PersonBuilder(AMY_DEFAULT)
                 .withAttendance(new Attendance(
@@ -52,11 +75,13 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(IDENTIFIER_FIRST_PERSON, descriptor);
 
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
+        assertEquals(personToEdit.getAttendance(), editedPerson.getAttendance());
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
@@ -79,6 +104,7 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
 
+        assertEquals(lastPerson.getAttendance(), editedPerson.getAttendance());
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
