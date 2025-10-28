@@ -4,22 +4,29 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
+Class "<<singleton>>\nExamList" as ExamList
+
 AddressBook *-right-> "1" UniquePersonList
 AddressBook *-right-> "1" UniqueTagList
-AddressBook *-right-> "1" ExamList
-UniqueTagList -[hidden]down- ExamList
+
 ExamList -[hidden]down- UniquePersonList
 
 UniqueTagList -right-> "*" Tag
-ExamList -right-> "*" ExamScores
+ExamList  -down-> "2" Exam
+
+Tag -[hidden]right- ExamList
+
+
 UniquePersonList -right-> Person
 
 Person -up-> "*" Tag
-Person -up-> "*" ExamScores
+Person *-right-> "1" ExamScores
+ExamScores *--> "2" Score
+Score *-right-> "1" Exam
 
-Person *--> Name
-Person *--> StudentId
-Person *--> Phone
-Person *--> Email
-Person *--> TelegramHandle
+Person *--> "1" Name
+Person *--> "1" StudentId
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "1" TelegramHandle
 @enduml
