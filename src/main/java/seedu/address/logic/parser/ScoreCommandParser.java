@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.Identifier;
 import seedu.address.logic.commands.ScoreCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Score;
+import seedu.address.model.person.examscore.Score;
 
 /**
  * Parses input arguments and creates a new ScoreCommand object

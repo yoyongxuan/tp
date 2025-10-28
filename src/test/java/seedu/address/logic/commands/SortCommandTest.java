@@ -8,8 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.model.person.ExamList.FINAL;
-import static seedu.address.model.person.ExamList.MIDTERM;
+import static seedu.address.model.person.examscore.ExamList.FINAL;
+import static seedu.address.model.person.examscore.ExamList.MIDTERM;
 import static seedu.address.testutil.TypicalPersons.getUnsortedAddressBook;
 
 import java.util.ArrayList;

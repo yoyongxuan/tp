@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.person.examscore;
 
 import java.util.ArrayList;
 import java.util.Collections;
