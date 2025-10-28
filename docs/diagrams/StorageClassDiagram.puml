@@ -22,6 +22,7 @@ Class JsonAdaptedPerson
 Class JsonAdaptedTag
 Class JsonAdaptedExam
 Class JsonAdaptedExamScores
+Class JsonAdaptedScore
 }
 
 }
@@ -41,8 +42,9 @@ JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
-JsonAdaptedPerson --> "*" JsonAdaptedExamScores
-JsonSerializableAddressBook --> "*" JsonAdaptedExam
+JsonAdaptedPerson --> "1" JsonAdaptedExamScores
+JsonAdaptedExamScores --> "2" JsonAdaptedScore
+JsonSerializableAddressBook --> "2" JsonAdaptedExam
 
 
 @enduml
