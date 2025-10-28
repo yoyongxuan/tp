@@ -88,7 +88,7 @@ Adds a person to the Address Book.
 Format: `add SID n/NAME p/PHONE_NUMBER e/EMAIL h/TELEGRAM_HANDLE [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A person can have 0 or more tags!
 </div>
 
 Argument constraints:
