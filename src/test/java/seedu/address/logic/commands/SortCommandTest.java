@@ -58,7 +58,7 @@ public class SortCommandTest {
 
         // Execute SortCommand on the real model
         assertCommandSuccess(new SortCommand(PREFIX_NAME), model,
-                SortCommand.MESSAGE_SUCCESS, expectedModel);
+                SortCommand.MESSAGE_SUCCESS_NAME, expectedModel);
 
         // Verify that the persons are actually in sorted order
         List<Person> persons = new ArrayList<>(model.getFilteredPersonList());
@@ -77,7 +77,7 @@ public class SortCommandTest {
 
         // Then run the command again
         assertCommandSuccess(new SortCommand(PREFIX_NAME), model,
-                SortCommand.MESSAGE_SUCCESS, expectedModel);
+                SortCommand.MESSAGE_SUCCESS_NAME, expectedModel);
     }
 
     /**
@@ -91,7 +91,7 @@ public class SortCommandTest {
 
         // Make new Sort Command by midterm
         assertCommandSuccess(new SortCommand(PREFIX_EXAM, MIDTERM), model,
-                SortCommand.MESSAGE_SUCCESS, expectedModel);
+                SortCommand.MESSAGE_SUCCESS_EXAM, expectedModel);
         // Verify that the persons are actually in sorted order
         List<Person> persons = new ArrayList<>(model.getFilteredPersonList());
         assertTrue(isSortedByMidterm(persons));
@@ -108,7 +108,7 @@ public class SortCommandTest {
 
         // Make new Sort Command by final
         assertCommandSuccess(new SortCommand(PREFIX_EXAM, FINAL), model,
-                SortCommand.MESSAGE_SUCCESS, expectedModel);
+                SortCommand.MESSAGE_SUCCESS_EXAM, expectedModel);
         // Verify that the persons are actually in sorted order
         List<Person> persons = new ArrayList<>(model.getFilteredPersonList());
         assertTrue(isSortedByFinal(persons));

@@ -91,7 +91,6 @@ Format: `add SID n/NAME p/PHONE_NUMBER e/EMAIL h/TELEGRAM_HANDLE [t/TAG]…​`
 A person can have 0 or more tags!
 </div>
 
-Argument constraints:
 * The SID **must be 9-characters long**, in the format A#######X where # is a digit (0-9) and X is a letter (A-Z). The first letter **must be 'A'**. The letters can be in uppercase or lowercase.
   e.g. a0000000B
 * The phone number should start with either **8 or 9** and have a length of **8**.
@@ -104,7 +103,6 @@ Examples:
 * `add A0123456A n/John Doe p/98765432 e/johnd@u.nus.edu h/@JohnDoe`
 ![result for `add A0123456A n/John Doe p/98765432 e/johnd@u.nus.edu h/@JohnDoe`](images/addJohnDoe.png)
 * `add A1234567B n/Betsy Crowe t/friend e/betsycrowe@u.nus.edu p/89891206 t/needshelp h/@BetsyC`
-![result for `add A1234567B n/Betsy Crowe t/friend e/betsycrowe@u.nus.edu p/89891206 t/needshelp h/@BetsyC`](images/addBetsyCrowe.png)
 
 Important Information:
 * Duplicate students cannot be added to the Address Book.
@@ -121,9 +119,7 @@ Format: `list`
 
 Edits an existing person in the Address Book.
 
-Format: 
-* `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…​`
-* `edit SID [n/NAME] [p/PHONE] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…​` or `edit SID [n/NAME] [p/PHONE] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX` or with the given `SID`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * The SID must be 9-characters long, in the format A#######X where # is a digit (0-9) and X is a letter (A-Z). The first letter must be 'A'. The letters can be in uppercase or lowercase.
@@ -141,7 +137,6 @@ Format:
 
 Examples:
 *  `edit 1 p/91234567 e/alex_yeoh@u.nus.edu` Edits the phone number and email address of the 1st person to be `91234567` and `alex_yeoh@u.nus.edu` respectively.
-![result for `edit 1 p/91234567 e/alex_yeoh@u.nus.edu`](images/editIndex.png)
 *  `edit A0000000A n/Betsy Crower t/ p/92345678 h/@BetsyC` Edits the name of the person with SID `A0000000A` to be `Betsy Crower`, with phone number `92345678` and Telegram handle `@BetsyC`, and clears all existing tags.
 ![result for `edit A0000000A n/Betsy Crower t/ p/92345678 h/@BetsyC`](images/editSid.png)
 
@@ -196,7 +191,6 @@ Examples:
 * `view 2` displays the 2nd person in the Address Book.
   ![result for 'view 2'](images/viewIndex.png)
 * `view A0000000A` displays the person with SID A0000000A.
-  ![result for 'view A0000000A'](images/viewSID.png)
 
 ### Marking the attendance for a person: `attend`
 
@@ -216,7 +210,6 @@ Examples:
 * `attend 1 6` adds attendance for tutorial `6` for the 1st person in the Address Book.
   ![result for 'attend 1 6'](images/attendIndex.png)
 * `attend A0000001A 2` adds attendance for tutorial `2` for the person with SID `A0000001A`.
-  ![result for 'attend A0000001A 2'](images/attendSID.png)
 * `attend 1 6` removes the attendance for tutorial `6` for the 1st person in the Address Book if attendance has already been taken for this tutorial and this person.
   ![result for a second 'attend 1 6'](images/removeAttend.png)
 
@@ -237,7 +230,6 @@ Format: `score INDEX ex/EXAM s/SCORE` or `score SID ex/EXAM s/SCORE`
 
 Examples:
 * `score 1 ex/final s/80` sets the score of the 1st person in the Address Book to `80`, for the exam `final`.
-  ![result for 'score 1 ex/final s/80'](images/scoreIndex.png)
 * `score A0000001A ex/midterm s/70` sets the score of the person with SID `A0000001A` in the Address Book to `70`, for the exam `midterm`.
   ![result for 'score A0000001A ex/midterm s/70'](images/scoreSID.png)
 
@@ -269,11 +261,10 @@ People with no recorded scores when sorting by exam scores will be shifted to th
 
 Examples:
 * `sort n/` sorts in ascending order of names.
-![result for `sort n/`](images/sortByName.png)
 * `sort ex/midterm` sorts in ascending order of midterm scores.
-![result for `sort ex/midterm`](images/sortByMidterm.png)
 * `sort ex/final` sorts in ascending order of final scores.
-![result for `sort ex/final`](images/sortByFinal.png)
+
+  ![result for `sort ex/final`](images/sortByFinal.png)
 
 ### Clearing all entries : `clear`
 
