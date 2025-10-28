@@ -202,12 +202,13 @@ Adds the attendance for the specified tutorial, for the specified person from th
 
 Format: `attend INDEX TUTORIAL` or `attend SID TUTORIAL`
 
-* Adds the attendance for the specified `TUTORIAL`, for the person at the specified `INDEX` or with the given `SID`.
+* Inverts the attendance for the specified `TUTORIAL`, for the person at the specified `INDEX` or with the given `SID`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * The SID **must be 9-characters long**, in the format A#######X where # is a digit (0-9) and X is a letter (A-Z). The first letter **must be 'A'**. The letters can be in uppercase or lowercase.
   e.g. a0000000B
-* The tutorial refers to the tutorial number. It **must be within the number of tutorials in the address book**, and **must be a positive integer** 1, 2, 3, …​
+* The tutorial refers to the tutorial number. It **must be within the range of the number of tutorials specified in the address book.**
+* The tutorial **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `attend 1 6` adds attendance for tutorial `6` for the 1st person in the address book.
