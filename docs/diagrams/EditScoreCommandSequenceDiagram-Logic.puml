@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditScoreCommandParser" as EditScoreCommandParser LOGIC_COLOR
+participant "e:EditScoreCommand" as EditScoreCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("maxscore 1 ex/midterm ms/90")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("maxscore 1 ex/midterm ms/90")
+activate AddressBookParser
+
+create EditScoreCommandParser
+AddressBookParser -> EditScoreCommandParser
+activate EditScoreCommandParser
+
+EditScoreCommandParser --> AddressBookParser
+deactivate EditScoreCommandParser
+
+AddressBookParser -> EditScoreCommandParser : parse("1 ex/midterm ms/90")
+activate EditScoreCommandParser
+
+create EditScoreCommand
+EditScoreCommandParser -> EditScoreCommand
+activate EditScoreCommand
+
+EditScoreCommand --> EditScoreCommandParser :
+deactivate EditScoreCommand
+
+EditScoreCommandParser --> AddressBookParser : e
+deactivate EditScoreCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditScoreCommandParser -[hidden]-> AddressBookParser
+destroy EditScoreCommandParser
+
+AddressBookParser --> LogicManager : e
+deactivate AddressBookParser
+
+LogicManager -> EditScoreCommand : execute(m)
+activate EditScoreCommand
+
+EditScoreCommand -> Model
+activate Model
+
+Model --> EditScoreCommand
+deactivate Model
+
+create CommandResult
+EditScoreCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditScoreCommand
+deactivate CommandResult
+
+EditScoreCommand --> LogicManager : r
+deactivate EditScoreCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
