@@ -20,7 +20,8 @@ public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
 
-    public static final String MESSAGE_SUCCESS = "Sorted all people";
+    public static final String MESSAGE_SUCCESS_NAME = "Sorted all people by name";
+    public static final String MESSAGE_SUCCESS_EXAM = "Sorted all people by exam score";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the list of people. Use either "
@@ -29,9 +30,6 @@ public class SortCommand extends Command {
             + "Exams can be sorted by either midterm or final.\n"
             + "Examples: sort " + PREFIX_NAME + "\nor sort " + PREFIX_EXAM
             + "midterm or sort " + PREFIX_EXAM + "final";
-
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET =
-            "Sort command not implemented yet.";
 
     private final Prefix prefix;
     private final Exam exam;
@@ -63,19 +61,19 @@ public class SortCommand extends Command {
         case "n/":
             // If sorting by name, just call model to sort
             model.sortPersonsByName();
-            break;
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(MESSAGE_SUCCESS_NAME);
         case "ex/":
             // If sorting by exam, call model to sort based on exam type
             if (this.exam == null) {
                 throw new CommandException(MESSAGE_USAGE);
             }
             model.sortPersonsByExam(this.exam);
-            break;
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(MESSAGE_SUCCESS_EXAM);
         default:
             throw new CommandException(MESSAGE_USAGE);
         }
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     @Override
