@@ -3,7 +3,9 @@ layout: page
 title: User Guide
 ---
 
-CadetHQ is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CadetHQ can get your contact management tasks done faster than traditional GUI apps.
+CadetHQ is a **desktop app for managing student contacts for CS1101S TAs, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+
+For CS1101S TAs that are good at using the Command Line, CadetHQ gives you the power to manage your students' grades, attendance, and contact information quickly, bypassing pesky menus that take ages to load and navigate.
 
 * Table of Contents
 {:toc}
