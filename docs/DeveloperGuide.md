@@ -653,6 +653,28 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Sorting the list
+
+1. Sorting the list of people
+
+    1. Test case: `sort n/`
+      Expected: List is sorted in ascending alphabetical order. Details of sort shown in the status message. Timestamps in the status bar are updated.
+    
+    2. Test case: `sort ex/midterm`
+      Expected: List is sorted in ascending order of midterm scores, students with no recorded scores are pushed to the end of the list. Status message and timestamps in the status bar are updated as above.
+    
+    3. Test case: `sort ex/final`
+      Expected: List is sorted similar to midterm above, but sorted by final scores instead. Status message and timestamps in the status bar are updated as above.
+
+    4. Test case: `sort`
+      Expected: No sorting is done. Error details shown in the status message, status bar remains the same.
+
+    5. Test case: `sort ex/invalid exam`
+      Expected: No sorting is done. Error details shown in the status message, status bar remains the same.
+
+    6. Other incorrect sort commands to try: `sort x`, `sort ex/`, `...` (where x is any arbitrary argument/word not mentioned above)
+      Expected: Similar to previous.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
