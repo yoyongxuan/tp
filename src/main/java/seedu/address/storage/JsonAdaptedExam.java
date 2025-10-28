@@ -3,7 +3,7 @@ package seedu.address.storage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import seedu.address.model.person.Exam;
+import seedu.address.model.person.examscore.Exam;
 
 /**
  * Jackson-friendly version of {@link Exam}.

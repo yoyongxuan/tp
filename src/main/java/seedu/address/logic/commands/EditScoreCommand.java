@@ -8,10 +8,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MAX_SCORE;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Exam;
-import seedu.address.model.person.ExamList;
-import seedu.address.model.person.ExamScores;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.examscore.Exam;
+import seedu.address.model.person.examscore.ExamList;
+import seedu.address.model.person.examscore.ExamScores;
 
 /**
  * Edits the max score of an existing exam.

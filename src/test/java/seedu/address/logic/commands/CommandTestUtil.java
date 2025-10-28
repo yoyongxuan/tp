@@ -22,15 +22,15 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.ExamList;
-import seedu.address.model.person.ExamScores;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Score;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.person.TelegramHandle;
+import seedu.address.model.person.examscore.ExamList;
+import seedu.address.model.person.examscore.ExamScores;
+import seedu.address.model.person.examscore.Score;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**

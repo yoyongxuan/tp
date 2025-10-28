@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Exam;
-import seedu.address.model.person.ExamList;
-import seedu.address.model.person.Score;
+import seedu.address.model.person.examscore.Exam;
+import seedu.address.model.person.examscore.ExamList;
+import seedu.address.model.person.examscore.Score;
 
 /**
  * Jackson-friendly version of {@link Score}.
