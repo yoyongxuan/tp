@@ -66,7 +66,7 @@ Note that throughout this document, we will often refer to CadetHQ as Address Bo
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-* All formats accept multiple spaces in between parameters. e.g. `score  1   ex/   midterm  s/50` will be interpreted as `score 1 ex/midterm s/50`
+* All formats accept multiple spaces in between parameters. e.g. `score ‎ ‎  1 ‎ ‎ ‎   ex/  ‎ ‎  midterm  s/50` will be interpreted as `score 1 ex/midterm s/50`
 
 * `SID` refers to the Student ID.
 
