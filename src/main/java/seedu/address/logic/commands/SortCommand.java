@@ -12,7 +12,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Exam;
 
 /**
- * Sorts the address book based on a parameter
+ * Sorts the address book based on a parameter.
+ * Parameter can be either name or exam scores (midterm/final).
+ * @author ndhhh
  */
 public class SortCommand extends Command {
 
@@ -44,7 +46,8 @@ public class SortCommand extends Command {
     }
 
     /**
-     * Creates a new SortCommand to sort the list
+     * Creates a new SortCommand to sort the list.
+     * @author ndhhh
      * @param prefix Prefix to sort by exam {@code PREFIX_EXAM}
      * @param exam Exam to sort by if {@code PREFIX_EXAM}, null otherwise
      */
