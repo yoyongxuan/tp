@@ -31,7 +31,7 @@ public class AttendCommand extends Command {
             + "Example: " + COMMAND_WORD + " A0000000X 5";
     public static final String MESSAGE_WRONG_TUTORIAL =
             "Tutorial has to be between 1 and " + Attendance.NUMBER_OF_TUTORIALS;
-    public static final String MESSAGE_ADD_ATTENDANCE_SUCCESS = "%1$s tutorial %2$s attendance for Person: %3$s";
+    public static final String MESSAGE_ADD_ATTENDANCE_SUCCESS = "%1$s tutorial %2$s attendance for %3$s";
 
     private final Identifier identifier;
     private final Index tutorial;
