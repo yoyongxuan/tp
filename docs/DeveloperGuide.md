@@ -10,6 +10,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* The automated GUI tests using TestFX was adapted from the AddressBook-Level4 project by the same creator
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -315,7 +316,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
-
+___
 **Use case: Add a student contact**
 
 **MSS**
@@ -339,7 +340,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-
+___
 **Use case: Delete a student contact using list index**
 
 **MSS**
@@ -361,7 +362,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
-
+___
 **Use case: Delete a student contact using Student ID**
 
 **MSS**
@@ -384,7 +385,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. AddressBook shows an error message.
 
       Use case resumes at step 1.
-
+___
 **Use case: View a student contact via list index**
 
 **MSS**
@@ -406,7 +407,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
-
+___
 **Use case: View a student contact via Student ID**
 
 **MSS**
@@ -429,7 +430,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. AddressBook shows an error message.
 
       Use case resumes at step 1.
-
+___
 **Use case: Record a student's grade via list index**
 
 **MSS**
@@ -465,7 +466,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-
+___
 **Use case: Record a student's grade via Student ID**
 
 **MSS**
@@ -501,7 +502,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1d1. AddressBook shows an error message.
 
       Use case resumes at step 1.
-
+___
 **Use case: Record a student's attendance via list index**
 
 **MSS**
@@ -530,7 +531,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. AddressBook shows an error message.
 
       Use case resumes at step 2.
-
+___
 **Use case: Record a student's attendance via Student ID**
 
 **MSS**
@@ -554,7 +555,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. AddressBook shows an error message.
 
       Use case resumes at step 1.
-
+___
 **Use case: list all students**
 
 **MSS**
@@ -572,7 +573,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  AddressBook shows a sorted list of persons from highest score to lowest
 
     Use case ends.
-
+___
 **Use case: sort all students by name**
 
 **MSS**
@@ -581,7 +582,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  AddressBook shows a sorted list of persons alphabetically
 
     Use case ends.
-
+___
 *{More to be added}*
 
 
@@ -652,6 +653,28 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Sorting the list
+
+1. Sorting the list of people
+
+    1. Test case: `sort n/`
+      Expected: List is sorted in ascending alphabetical order. Details of sort shown in the status message. Timestamps in the status bar are updated.
+    
+    2. Test case: `sort ex/midterm`
+      Expected: List is sorted in ascending order of midterm scores, students with no recorded scores are pushed to the end of the list. Status message and timestamps in the status bar are updated as above.
+    
+    3. Test case: `sort ex/final`
+      Expected: List is sorted similar to midterm above, but sorted by final scores instead. Status message and timestamps in the status bar are updated as above.
+
+    4. Test case: `sort`
+      Expected: No sorting is done. Error details shown in the status message, status bar remains the same.
+
+    5. Test case: `sort ex/invalid exam`
+      Expected: No sorting is done. Error details shown in the status message, status bar remains the same.
+
+    6. Other incorrect sort commands to try: `sort x`, `sort ex/`, `...` (where x is any arbitrary argument/word not mentioned above)
+      Expected: Similar to previous.
 
 ### Saving data
 

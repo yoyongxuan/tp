@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
-import seedu.address.model.person.ExamList;
-import seedu.address.model.person.Score;
+import seedu.address.model.person.examscore.ExamList;
+import seedu.address.model.person.examscore.Score;
 
 /**
  * A utility class containing a list of {@code ExamScore} objects to be used in tests.

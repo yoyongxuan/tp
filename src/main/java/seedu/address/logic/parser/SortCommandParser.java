@@ -6,10 +6,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Exam;
+import seedu.address.model.person.examscore.Exam;
 
 /**
- * Parses input arguments and creates a new SortCommand object
+ * Parses input arguments and creates a new SortCommand object.
+ * @author ndhhh
  */
 public class SortCommandParser implements Parser<SortCommand> {
     /**
@@ -45,6 +46,7 @@ public class SortCommandParser implements Parser<SortCommand> {
 
     /**
      * Returns true if the prefix in check exists in the given {@code ArgumentMultimap}.
+     * @author ndhhh
      * @param argumentMultimap map containing prefixes
      * @param prefix to be checked
      * @return true if prefix exists in map.

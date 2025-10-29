@@ -8,6 +8,7 @@ Package Model as ModelPackage <<Rectangle>>{
 Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
+Class "<<singleton>>\nExamList" as ExamList
 Class AddressBook
 Class ModelManager
 Class UserPrefs
@@ -22,6 +23,8 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class Score
+Class Exam
 
 Class I #FFFFFF
 }
@@ -40,14 +43,17 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> StudentId
-Person *--> Phone
-Person *--> Email
-Person *--> TelegramHandle
-Person *--> "2" ExamScores
-Person *--> Attendance
+Person *--> "1" Name
+Person *--> "1" StudentId
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "1" TelegramHandle
+Person *--> "1" Attendance
 Person *--> "*" Tag
+Person *-right-> "1" ExamScores
+ExamScores *--> "2" Score
+Score *-up-> "1" Exam
+ExamList  -down-> "2" Exam
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -56,8 +62,11 @@ Name -[hidden]right-> StudentId
 StudentId -[hidden]right-> Phone
 Phone -[hidden]right-> Email
 Email -[hidden]right-> TelegramHandle
-TelegramHandle -[hidden]right-> ExamScores
-ExamScores -[hidden]right-> Attendance
+TelegramHandle -[hidden]right-> Attendance
+Attendance -[hidden]right-> Tag
+UserPrefs -[hidden]right-> ExamList
+
+ExamScores -[hidden]down-> Attendance
 
 ModelManager --> "~* filtered" Person
 @enduml

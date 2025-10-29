@@ -8,9 +8,9 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import seedu.address.commons.core.Identifier;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.ExamScores;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Score;
+import seedu.address.model.person.examscore.ExamScores;
+import seedu.address.model.person.examscore.Score;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 

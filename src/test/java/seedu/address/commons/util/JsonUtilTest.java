@@ -8,8 +8,8 @@ import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.ExamList;
-import seedu.address.model.person.Score;
+import seedu.address.model.person.examscore.ExamList;
+import seedu.address.model.person.examscore.Score;
 import seedu.address.storage.JsonAdaptedScore;
 import seedu.address.testutil.SerializableTestClass;
 import seedu.address.testutil.TestUtil;
