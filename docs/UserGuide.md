@@ -44,6 +44,23 @@ Note that throughout this document, we will often refer to CadetHQ as Address Bo
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Contact Details
+A table of all the information that can be associated with a contact
+
+| Name             | Prefix | Example         | Constraints                                                                                                                                                                                                            |
+|------------------|--------|-----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Index            |        | 1               | - Must be a positive integer <br> - Must correspond to a student on the displayed list                                                                                                                                 |
+| Student ID (SID) |        | A0123456A       | - Must be 9-characters long <br> - First character must be "A" or “a” <br> - Second to eighth characters must be a number<br> - Last character must be an alphabet <br> (case-insensitive)                             |
+| Name             | n/     | John Doe        | - Only alphanumeric characters and spaces                                                                                                                                                                              |
+| Phone number     | p/     | 98765432        | - Must consist of 8 digits <br> - Must start with the number "8" or "9"                                                                                                                                                |
+| Email            | e/     | johnd@u.nus.edu | - Must be of the format *local-part* @u.nus.edu<br>  - *local-part* should only contain alphanumeric characters  and these special characters:  + _ . - <br> - *local-part* may not start or end with special characters |
+| Telegram handle  | h/     | JohnDoe         | - Must start with "@" <br> - Remaining characters must be alphanumeric or underscores                                                                                                                                  |
+| Tag              | t/     | Friend          | - Should be alphanumeric                                                                                                                                                                                               |
+
+When entering a contact detail as a parameter for any command:
+- Input parameter should be preceded by its associated prefix.
+- Input parameter must adhere to listed constraints, the command will not execute otherwise.
+
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -52,7 +69,6 @@ Note that throughout this document, we will often refer to CadetHQ as Address Bo
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
