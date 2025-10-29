@@ -138,7 +138,7 @@ Format:
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/alexyeoh@u.nus.edu` Edits the phone number and email address of the 1st person to be `91234567` and `alexyeoh@u.nus.edu` respectively.
+*  `edit 1 p/91234567 e/alexyeohh@u.nus.edu` Edits the phone number and email address of the 1st person to be `91234567` and `alexyeohh@u.nus.edu` respectively.
 ![result for `edit 1 p/91234567 e/alexyeoh@u.nus.edu`](images/editIndex.png)
 *  `edit A0000000A n/Betsy Crower t/ p/92345678 h/@BetsyC` Edits the name of the person with SID `A0000000A` to be `Betsy Crower`, with phone number `92345678` and Telegram handle `@BetsyC`, and clears all existing tags.
 ![result for `edit A0000000A n/Betsy Crower t/ p/92345678 h/@BetsyC`](images/editSid.png)
