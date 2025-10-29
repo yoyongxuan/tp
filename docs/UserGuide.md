@@ -15,10 +15,12 @@ Main features:
  - [Tracking Attendance](#tracking-attendance) - Record students' attendance.
  - [Handling Scores](#handling-scores) - Manage students' scores and modify exam scoring details.
 
-Table of Contents
-{:toc}
-
 [Skip to Command Summary](#command-summary)
+
+---
+
+Table of Contents 
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -200,7 +202,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can use the `list` command to restore the full list of students after a `view` command.
+You can use the `list` command to restore the full list of students after a `find` command.
 </div>
 
 Examples:
