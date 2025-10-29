@@ -42,6 +42,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentId;
 import seedu.address.model.tag.Tag;
 
 public class AddCommandParserTest {
@@ -168,7 +169,7 @@ public class AddCommandParserTest {
         // invalid student id
         assertParseFailure(parser, INVALID_STUDENT_ID_DESC + NAME_DESC_BOB + PHONE_DESC_BOB
                         + TELEGRAM_HANDLE_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                StudentId.MESSAGE_CONSTRAINTS);
 
         // invalid name
         assertParseFailure(parser, STUDENT_ID_DESC_BOB + INVALID_NAME_DESC + PHONE_DESC_BOB
