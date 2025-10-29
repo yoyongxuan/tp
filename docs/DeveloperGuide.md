@@ -199,7 +199,8 @@ The sequence diagrams below illustrates the interactions within the `Logic` and 
 
 **Details**:
 1. The `execute` method in `EditScoreCommand` runs.
-2. The `EditScoreCommand` object calls `isValidExam` and `isNewMaxScoreValid` to verify that `midterm` exists, and that the new max score meets all constraints. 
+2. The `EditScoreCommand` object calls `isValidExam` and `isNewMaxScoreValid` to verify that `midterm` exists, and that the new max score meets all constraints.
+- (Not shown in diagram) The `isNewMaxScoreValid` method compares the new max score `90` against all the recorded scores for all students, for the exam `midterm`. The new max score must be greater than or equal to all recorded scores for it to be valid.
 3. The `EditScoreCommand` object calls `setMaxScore` on `Exam` to change the max score.
 4. The `EditScoreCommand` object calls `getFilteredPersonList` on `Model` to retrieve all displayed people.
 5. (Simplified in diagram) For each `Person` in the person list, a clone is created with the same information. The method `setPerson` of `Model` replaces each `Person` with the cloned `Person`, ensuring that the updated max score is reflected in the UI.

@@ -49,11 +49,7 @@ deactivate AddressBookParser
 LogicManager -> EditScoreCommand : execute(m)
 activate EditScoreCommand
 
-EditScoreCommand -> Model
-activate Model
-
-Model --> EditScoreCommand
-deactivate Model
+ref over EditScoreCommand, Model : Model Component Sequence
 
 create CommandResult
 EditScoreCommand -> CommandResult

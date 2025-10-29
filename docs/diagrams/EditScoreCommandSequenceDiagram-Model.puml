@@ -1,6 +1,7 @@
 @startuml
 !include style.puml
 skinparam ArrowFontStyle plain
+mainframe sd Model Component Sequence
 
 box Logic LOGIC_COLOR_T1
 participant "e:EditScoreCommand" as EditScoreCommand LOGIC_COLOR
@@ -12,7 +13,6 @@ participant "midterm:Exam" as Exam MODEL_COLOR
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> EditScoreCommand : execute(m)
 activate EditScoreCommand
 
 EditScoreCommand -> ExamList : isValidExam(midterm)
@@ -47,6 +47,6 @@ Model --> EditScoreCommand
 deactivate Model
 end
 
-[<--EditScoreCommand
+
 deactivate EditScoreCommand
 @enduml
