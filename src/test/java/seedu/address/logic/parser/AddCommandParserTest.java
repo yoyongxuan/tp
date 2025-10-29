@@ -24,6 +24,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB_STR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB_STR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB_STR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -129,25 +130,29 @@ public class AddCommandParserTest {
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
+        // missing student ID but has all prefixes
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + TELEGRAM_HANDLE_DESC_BOB, expectedMessage);
+
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB_STR + PHONE_DESC_BOB + EMAIL_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, STUDENT_ID_DESC_BOB + VALID_NAME_BOB_STR + PHONE_DESC_BOB
+                        + EMAIL_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB, expectedMessage);
 
         // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB_STR + EMAIL_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, STUDENT_ID_DESC_BOB + NAME_DESC_BOB + VALID_PHONE_BOB_STR + EMAIL_DESC_BOB
+                + TELEGRAM_HANDLE_DESC_BOB, expectedMessage);
 
         // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB_STR,
-                expectedMessage);
+        assertParseFailure(parser, STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB_STR
+                + TELEGRAM_HANDLE_DESC_BOB, expectedMessage);
 
-        // missing address prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB_STR,
-                expectedMessage);
+        // missing telegram handle prefix
+        assertParseFailure(parser, STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
+                + EMAIL_DESC_BOB + VALID_TELEGRAM_HANDLE_BOB_STR, expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB_STR + VALID_PHONE_BOB_STR + VALID_EMAIL_BOB_STR
-                        + VALID_ADDRESS_BOB_STR, expectedMessage);
+        assertParseFailure(parser, STUDENT_ID_DESC_BOB + VALID_NAME_BOB_STR + VALID_PHONE_BOB_STR
+                + VALID_EMAIL_BOB_STR + VALID_TELEGRAM_HANDLE_BOB_STR, expectedMessage);
     }
 
     @Test
