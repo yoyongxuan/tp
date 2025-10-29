@@ -91,18 +91,21 @@ Format: `add SID n/NAME p/PHONE_NUMBER e/EMAIL h/TELEGRAM_HANDLE [t/TAG]…​`
 A person can have 0 or more tags!
 </div>
 
+Argument constraints:
 * The SID **must be 9-characters long**, in the format A#######X where # is a digit (0-9) and X is a letter (A-Z). The first letter **must be 'A'**. The letters can be in uppercase or lowercase.
   e.g. a0000000B
+* The name should only contain alphanumeric characters and spaces, and it should not be blank.
 * The phone number should start with either **8 or 9** and have a length of **8**.
 * The email must be of the format `local-part@domain` and adhere to the following constraints:
-  1. The local-part should only contain **alphanumeric characters** and these special characters, excluding the parentheses **(+_.-)**. The local part **may not start or end with any special characters**.
-  2. The local part is followed by an `@` and the domain name `u.nus.edu`.
+  1. The local-part should only contain **alphanumeric characters**.
+  2. The local-part is followed by an `@` and the domain name `u.nus.edu`.
 * The telegram handle must be of the format `@username`, with the username containing only **alphanumeric characters and underscores**. It **cannot be blank too**.
 
 Examples:
 * `add A0123456A n/John Doe p/98765432 e/johnd@u.nus.edu h/@JohnDoe`
 ![result for `add A0123456A n/John Doe p/98765432 e/johnd@u.nus.edu h/@JohnDoe`](images/addJohnDoe.png)
 * `add A1234567B n/Betsy Crowe t/friend e/betsycrowe@u.nus.edu p/89891206 t/needshelp h/@BetsyC`
+![result for `add A1234567B n/Betsy Crowe t/friend e/betsycrowe@u.nus.edu p/89891206 t/needshelp h/@BetsyC`](images/addBetsyCrowe.png)
 
 Important Information:
 * Duplicate students cannot be added to the Address Book.
@@ -136,7 +139,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…�
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/alex_yeoh@u.nus.edu` Edits the phone number and email address of the 1st person to be `91234567` and `alex_yeoh@u.nus.edu` respectively.
+*  `edit 1 p/91234567 e/alexyeohh@u.nus.edu` Edits the phone number and email address of the 1st person to be `91234567` and `alexyeohh@u.nus.edu` respectively.
+![result for `edit 1 p/91234567 e/alexyeoh@u.nus.edu`](images/editIndex.png)
 *  `edit A0000000A n/Betsy Crower t/ p/92345678 h/@BetsyC` Edits the name of the person with SID `A0000000A` to be `Betsy Crower`, with phone number `92345678` and Telegram handle `@BetsyC`, and clears all existing tags.
 ![result for `edit A0000000A n/Betsy Crower t/ p/92345678 h/@BetsyC`](images/editSid.png)
 
@@ -191,6 +195,7 @@ Examples:
 * `view 2` displays the 2nd person in the Address Book.
   ![result for 'view 2'](images/viewIndex.png)
 * `view A0000000A` displays the person with SID A0000000A.
+  ![result for 'view A0000000A'](images/viewSID.png)
 
 ### Marking the attendance for a person: `attend`
 

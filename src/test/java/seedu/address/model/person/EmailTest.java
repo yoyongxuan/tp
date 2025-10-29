@@ -32,38 +32,28 @@ public class EmailTest {
         assertFalse(Email.isValidEmail("@u.nus.edu")); // missing local part
         assertFalse(Email.isValidEmail("peterjacku.nus.edu")); // missing '@' symbol
         assertFalse(Email.isValidEmail("peterjack@")); // missing domain name
+        assertFalse(Email.isValidEmail("@")); // missing local and domain
 
-        // invalid parts
-        assertFalse(Email.isValidEmail("peterjack@-")); // invalid domain name
-        assertFalse(Email.isValidEmail("peterjack@exam_ple.com")); // underscore in domain name
-        assertFalse(Email.isValidEmail("peter jack@u.nus.edu")); // spaces in local part
-        assertFalse(Email.isValidEmail("peterjack@exam ple.com")); // spaces in domain name
-        assertFalse(Email.isValidEmail(" peterjack@u.nus.edu")); // leading space
+        // positive tests for local and u.nus.edu domain
+        assertTrue(Email.isValidEmail("peterjack@u.nus.edu"));
+        assertTrue(Email.isValidEmail("jothamwong@u.nus.edu"));
+        // negative tests for local
+        assertFalse(Email.isValidEmail(" jothamwong@u.nus.edu")); // leading space
+        assertFalse(Email.isValidEmail("jotham-wong@u.nus.edu")); // dash not allowed
+        assertFalse(Email.isValidEmail("jothamwong@u.nus.edu ")); // trailing space
+        assertFalse(Email.isValidEmail("jotham+wong@u.nus.edu")); // + in local
+        assertFalse(Email.isValidEmail("jotham@wong@u.nus.edu")); // additional @
+        assertFalse(Email.isValidEmail("jotham//wong@u.nus.edu")); // // in local
+        // negative tests for u.nus.edu domain
         assertFalse(Email.isValidEmail("peterjack@u.nus.edu ")); // trailing space
-        assertFalse(Email.isValidEmail("peterjack@@u.nus.edu")); // double '@' symbol
-        assertFalse(Email.isValidEmail("peter@jack@u.nus.edu")); // '@' symbol in local part
-        assertFalse(Email.isValidEmail("-peterjack@u.nus.edu")); // local part starts with a hyphen
-        assertFalse(Email.isValidEmail("peterjack-@u.nus.edu")); // local part ends with a hyphen
-        assertFalse(Email.isValidEmail("peter..jack@u.nus.edu")); // local part has two consecutive periods
-        assertFalse(Email.isValidEmail("peterjack@example@com")); // '@' symbol in domain name
-        assertFalse(Email.isValidEmail("peterjack@.u.nus.edu")); // domain name starts with a period
-        assertFalse(Email.isValidEmail("peterjack@u.nus.edu.")); // domain name ends with a period
-        assertFalse(Email.isValidEmail("peterjack@-u.nus.edu")); // domain name starts with a hyphen
-        assertFalse(Email.isValidEmail("peterjack@u.nus.edu-")); // domain name ends with a hyphen
-        assertFalse(Email.isValidEmail("peterjack@example.c")); // top level domain has less than two chars
+        assertFalse(Email.isValidEmail("peterjack@.u.nus.edu")); // not nus domain
+        assertFalse(Email.isValidEmail("peterjack@example.c")); // not nus domain
 
         // valid email
-        assertTrue(Email.isValidEmail("PeterJack_1190@u.nus.edu")); // underscore in local part
-        assertTrue(Email.isValidEmail("PeterJack.1190@u.nus.edu")); // period in local part
-        assertTrue(Email.isValidEmail("PeterJack+1190@u.nus.edu")); // '+' symbol in local part
-        assertTrue(Email.isValidEmail("PeterJack-1190@u.nus.edu")); // hyphen in local part
         assertTrue(Email.isValidEmail("a@u.nus.edu")); // minimal
         assertTrue(Email.isValidEmail("test@u.nus.edu")); // alphabets only
         assertTrue(Email.isValidEmail("123@u.nus.edu")); // numeric local part and domain name
-        assertTrue(Email.isValidEmail("a1+be.d@u.nus.edu")); // mixture of alphanumeric and special characters
-        assertTrue(Email.isValidEmail("peter_jack@u.nus.edu")); // long domain name
-        assertTrue(Email.isValidEmail("if.you.dream.it_you.can.do.it@u.nus.edu")); // long local part
-        assertTrue(Email.isValidEmail("e1234567@u.nus.edu")); // more than one period in domain
+        assertTrue(Email.isValidEmail("e1234567@u.nus.edu"));
     }
 
     @Test
@@ -86,6 +76,6 @@ public class EmailTest {
         assertFalse(email.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(email.equals(new Email("other.valid@u.nus.edu")));
+        assertFalse(email.equals(new Email("othervalid@u.nus.edu")));
     }
 }
