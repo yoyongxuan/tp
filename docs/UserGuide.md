@@ -49,13 +49,16 @@ A table of all the information that can be associated with a contact
 
 | Name             | Prefix | Example         | Constraints                                                                                                                                                                                                            |
 |------------------|--------|-----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Index            |        | 1               | - Must be a positive integer <br> - Must correspond to a student on the displayed list                                                                                                                                 |
+| Index            |        | 1               | - Must be a positive integer                                                                                                                                 |
 | Student ID (SID) |        | A0123456A       | - Must be 9-characters long <br> - First character must be "A" or “a” <br> - Second to eighth characters must be a number<br> - Last character must be an alphabet <br> (case-insensitive)                             |
 | Name             | n/     | John Doe        | - Only alphanumeric characters and spaces                                                                                                                                                                              |
 | Phone number     | p/     | 98765432        | - Must consist of 8 digits <br> - Must start with the number "8" or "9"                                                                                                                                                |
 | Email            | e/     | johnd@u.nus.edu | - Must be of the format *local-part* @u.nus.edu<br>  - *local-part* should only contain alphanumeric characters  and these special characters:  + _ . - <br> - *local-part* may not start or end with special characters |
 | Telegram handle  | h/     | JohnDoe         | - Must start with "@" <br> - Remaining characters must be alphanumeric or underscores                                                                                                                                  |
 | Tag              | t/     | Friend          | - Should be alphanumeric                                                                                                                                                                                               |
+
+
+The index refers to the index number shown in the displayed person list.
 
 When entering a contact detail as a parameter for any command:
 - Input parameter should be preceded by its associated prefix.
@@ -107,13 +110,8 @@ Format: `add SID n/NAME p/PHONE_NUMBER e/EMAIL h/TELEGRAM_HANDLE [t/TAG]…​`
 A person can have 0 or more tags!
 </div>
 
-* The SID **must be 9-characters long**, in the format A#######X where # is a digit (0-9) and X is a letter (A-Z). The first letter **must be 'A'**. The letters can be in uppercase or lowercase.
-  e.g. a0000000B
-* The phone number should start with either **8 or 9** and have a length of **8**.
-* The email must be of the format `local-part@domain` and adhere to the following constraints:
-  1. The local-part should only contain **alphanumeric characters** and these special characters, excluding the parentheses **(+_.-)**. The local part **may not start or end with any special characters**.
-  2. The local part is followed by an `@` and the domain name `u.nus.edu`.
-* The telegram handle must be of the format `@username`, with the username containing only **alphanumeric characters and underscores**. It **cannot be blank too**.
+* All parameters must not be blank
+* All parameters must adhere to constraints detailed in [Contact Details](#contact-details)
 
 Examples:
 * `add A0123456A n/John Doe p/98765432 e/johnd@u.nus.edu h/@JohnDoe`
@@ -137,14 +135,9 @@ Edits an existing person in the Address Book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…​` or `edit SID [n/NAME] [p/PHONE] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX` or with the given `SID`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* The SID must be 9-characters long, in the format A#######X where # is a digit (0-9) and X is a letter (A-Z). The first letter must be 'A'. The letters can be in uppercase or lowercase.
-  e.g. a0000000B
-* The phone number should start with either **8 or 9** and have a length of **8**.
-* The email must be of the format `local-part@domain` and adhere to the following constraints:
-  1. The local-part should only contain **alphanumeric characters** and these special characters, excluding the parentheses **(+_.-)**. The local part **may not start or end with any special characters**.
-  2. The local-part is followed by an `@` and the domain name `u.nus.edu`.
-* The telegram handle must be of the format `@username`, with the username containing only **alphanumeric characters and underscores**. It **cannot be blank too**.
+* Edits the person at the specified `INDEX` or with the given `SID`. 
+* All parameters must not be blank
+* All parameters must adhere to constraints detailed in [Contact Details](#contact-details)
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -181,10 +174,8 @@ Deletes the specified person from the Address Book.
 Format: `delete INDEX` or `delete SID`
 
 * Deletes the person at the specified `INDEX` or with the given `SID`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* The SID must be 9-characters long, in the format A#######X where # is a digit (0-9) and X is a letter (A-Z). The first letter must be 'A'. The letters can be in uppercase or lowercase.
-  e.g. a0000000B
+* `INDEX` and `SID` parameters must adhere to constraints detailed in [Contact Details](#contact-details)
+
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the Address Book.
@@ -198,10 +189,7 @@ Finds and displays the specified person from the Address Book.
 Format: `view INDEX` or `view SID`
 
 * Finds the person at the specified `INDEX` or with the given `SID` and displays their information.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* The SID must be 9-characters long, in the format A#######X where # is a digit (0-9) and X is a letter (A-Z). The first letter must be 'A'. The letters can be in uppercase or lowercase.
-  e.g. a0000000B
+* `INDEX` and `SID` parameters must adhere to constraints detailed in [Contact Details](#contact-details)
 
 Examples:
 * `view 2` displays the 2nd person in the Address Book.
@@ -215,12 +203,9 @@ Adds the attendance for the specified tutorial, for the specified person from th
 Format: `attend INDEX TUTORIAL` or `attend SID TUTORIAL`
 
 * Inverts the attendance for the specified `TUTORIAL`, for the person at the specified `INDEX` or with the given `SID`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* The SID **must be 9-characters long**, in the format A#######X where # is a digit (0-9) and X is a letter (A-Z). The first letter **must be 'A'**. The letters can be in uppercase or lowercase.
-  e.g. a0000000B
-* The tutorial refers to the tutorial number. It **must be within the range of the number of tutorials specified in the Address Book.**
-* The tutorial **must be a positive integer** 1, 2, 3, …​
+* `INDEX` and `SID` parameters must adhere to constraints detailed in [Contact Details](#contact-details)
+* `TUTORIAL` refers to the tutorial number. It **must be within the range of the number of tutorials specified in the Address Book.**
+* `TUTORIAL` **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `attend 1 6` adds attendance for tutorial `6` for the 1st person in the Address Book.
@@ -236,10 +221,7 @@ Adds the specified score for the specified exam for the specified person from th
 Format: `score INDEX ex/EXAM s/SCORE` or `score SID ex/EXAM s/SCORE`
 
 * Adds the specified score `SCORE` for the specified exam `EXAM`, for the person at the specified `INDEX` or with the given `SID`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* The SID **must be 9-characters long**, in the format A#######X where # is a digit (0-9) and X is a letter (A-Z). The first letter **must be 'A'**. The letters can be in uppercase or lowercase.
-  e.g. a0000000B
+* `INDEX` and `SID` parameters must adhere to constraints detailed in [Contact Details](#contact-details)
 * The score refers to the score attained by the specified person for the specified exam.
 * The score **must be a non-negative integer**,  and **not more than the max score** of the specified exam.
 * The exam refers to the exam name, and it **must match the exams recorded in the Address Book exactly**. e.g. If the exam name in the Address Book is "midterm", the specified exam name must be "midterm" and not "MIDTERM" or "mid term".
@@ -256,6 +238,7 @@ Changes the max score of the specified exam to the specified max score. It overw
 Format: `maxscore INDEX ex/EXAM ms/MAXSCORE` or `maxscore SID ex/EXAM ms/MAXSCORE`
 
 * Changes the max score of the specified exam `EXAM` to the specified max score `MAXSCORE`.
+* `INDEX` and `SID` parameters must adhere to constraints detailed in [Contact Details](#contact-details)
 * The max score **must be a non-negative integer**, and it **must be more than or equal to any recorded score** for the specified exam. e.g. If a person has score 70/80 for the exam, the new max score must be at least 70.
 * The exam refers to the exam name, and it **must match the exams recorded in the Address Book exactly**. e.g. If the exam name in the Address Book is "midterm", the specified exam name must be "midterm" and not "MIDTERM" or "mid term".
 
