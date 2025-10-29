@@ -41,6 +41,13 @@ public class StudentIdTest {
 
         // incorrect prefix
         assertFalse(StudentId.isValidStudentId("b0000000z"));
+        assertFalse(StudentId.isValidStudentId("@0000000z"));
+        assertFalse(StudentId.isValidStudentId("^0000000z"));
+
+        // incorrect suffix
+        assertFalse(StudentId.isValidStudentId("a0000000@"));
+        assertFalse(StudentId.isValidStudentId("a0000000&"));
+        assertFalse(StudentId.isValidStudentId("a00000007"));
 
         // supports upper and lower case
         assertTrue(StudentId.isValidStudentId("a0000000z"));
@@ -55,6 +62,24 @@ public class StudentIdTest {
         assertTrue(StudentId.isValidStudentId("a0000000a"));
         assertTrue(StudentId.isValidStudentId("a0000000b"));
         assertTrue(StudentId.isValidStudentId("a0000000c"));
+
+        // boundary value: 6 numbers
+        assertFalse(StudentId.isValidStudentId("a123456a"));
+
+        // boundary value: 8 numbers
+        assertFalse(StudentId.isValidStudentId("a12345678a"));
+
+        // boundary value: 2 prefix letters
+        assertFalse(StudentId.isValidStudentId("aa1234567a"));
+
+        // boundary value: 0 prefix letters
+        assertFalse(StudentId.isValidStudentId("1234567a"));
+
+        // boundary value: 2 suffix letters
+        assertFalse(StudentId.isValidStudentId("a1234567aa"));
+
+        // boundary value: 0 prefix letters
+        assertFalse(StudentId.isValidStudentId("a1234567"));
     }
 
     @Test

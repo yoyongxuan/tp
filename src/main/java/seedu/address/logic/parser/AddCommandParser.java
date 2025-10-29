@@ -45,7 +45,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         try {
             studentId = ParserUtil.parseStudentId(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM_HANDLE);

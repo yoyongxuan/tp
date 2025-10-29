@@ -117,6 +117,7 @@ Examples:
 * `add A0123456A n/John Doe p/98765432 e/johnd@u.nus.edu h/@JohnDoe`
 ![result for `add A0123456A n/John Doe p/98765432 e/johnd@u.nus.edu h/@JohnDoe`](images/addJohnDoe.png)
 * `add A1234567B n/Betsy Crowe t/friend e/betsycrowe@u.nus.edu p/89891206 t/needshelp h/@BetsyC`
+![result for `add A1234567B n/Betsy Crowe t/friend e/betsycrowe@u.nus.edu p/89891206 t/needshelp h/@BetsyC`](images/addBetsyCrowe.png)
 
 Important Information:
 * Duplicate students cannot be added to the Address Book.
@@ -145,7 +146,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]â€¦â
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/alex_yeoh@u.nus.edu` Edits the phone number and email address of the 1st person to be `91234567` and `alex_yeoh@u.nus.edu` respectively.
+*  `edit 1 p/91234567 e/alexyeohh@u.nus.edu` Edits the phone number and email address of the 1st person to be `91234567` and `alexyeohh@u.nus.edu` respectively.
+![result for `edit 1 p/91234567 e/alexyeoh@u.nus.edu`](images/editIndex.png)
 *  `edit A0000000A n/Betsy Crower t/ p/92345678 h/@BetsyC` Edits the name of the person with SID `A0000000A` to be `Betsy Crower`, with phone number `92345678` and Telegram handle `@BetsyC`, and clears all existing tags.
 ![result for `edit A0000000A n/Betsy Crower t/ p/92345678 h/@BetsyC`](images/editSid.png)
 
@@ -195,6 +197,7 @@ Examples:
 * `view 2` displays the 2nd person in the Address Book.
   ![result for 'view 2'](images/viewIndex.png)
 * `view A0000000A` displays the person with SID A0000000A.
+  ![result for 'view A0000000A'](images/viewSID.png)
 
 ### Marking the attendance for a person: `attend`
 
