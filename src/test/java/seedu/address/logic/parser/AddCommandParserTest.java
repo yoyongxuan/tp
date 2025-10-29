@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENT_ID_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TELEGRAM_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
@@ -18,7 +19,6 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_HANDLE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_HANDLE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB_STR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB_STR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB_STR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB_STR;
@@ -81,6 +81,10 @@ public class AddCommandParserTest {
         assertParseFailure(parser, validExpectedPersonString + EMAIL_DESC_AMY,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
+        // multiple telegram handles
+        assertParseFailure(parser, validExpectedPersonString + TELEGRAM_HANDLE_DESC_AMY,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TELEGRAM_HANDLE));
+
         // multiple fields repeated
         assertParseFailure(parser,
                 validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY
@@ -101,6 +105,10 @@ public class AddCommandParserTest {
         // invalid phone
         assertParseFailure(parser, validExpectedPersonString + INVALID_PHONE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
+
+        // invalid telegram handle
+        assertParseFailure(parser, validExpectedPersonString + INVALID_TELEGRAM_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TELEGRAM_HANDLE));
 
         // valid value followed by invalid value
 

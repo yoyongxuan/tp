@@ -105,6 +105,7 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_EXAM_DESC = " " + PREFIX_EXAM + "olevel";
     public static final String INVALID_SCORE_DESC = " " + PREFIX_SCORE + "-1";
+    public static final String INVALID_TELEGRAM_DESC = " " + PREFIX_TELEGRAM_HANDLE + "%^&";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
