@@ -176,6 +176,26 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Sort Command
+
+Sort command sorts the list of students according to the argument `n/` or `ex/`.
+
+Below is the sequence diagram that describes how sorting is done. The example below uses `sort ex/midterm` as an example:
+
+![SortSequenceDiagram](images/SortSequenceDiagram.png)
+
+Sorting is implemented through 3 comparators (`Comparator<Person>`) in the `Person` class as below:
+* `NAME_COMPARATOR`: Used to sort in ascending alphabetical order.
+* `MIDTERM_COMPARATOR`: Used to sort in ascending midterm score order. Students with no recorded midterm scores will be flushed to the end of the list.
+* `FINAL_COMPARATOR`: Same as MIDTERM_COMPARATOR, but compares final score instead
+
+`Model` also contains a method to sort by exam (`sortPersonsByExam(EXAM)`) and by name (`sortPersonsByName()`).
+
+`AddressBook` has 3 sorting methods that utilise the 3 `Comparator<Person>` above for sorting:
+* `sortPersonsbyName()`
+* `sortPersonsByMidterm()`
+* `sortPersonsByFinal()`
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -569,8 +589,8 @@ ___
 
 **MSS**
 
-1.  User requests to sort students by a specified exam score
-2.  AddressBook shows a sorted list of persons from highest score to lowest
+1.  User requests to sort students by a specified exam.
+2.  AddressBook shows a sorted list of persons from lowest score to highest. Those with unrecorded scores for the specified exam will have their names pushed to the bottom of the list.
 
     Use case ends.
 ___
@@ -579,7 +599,7 @@ ___
 **MSS**
 
 1.  User requests to sort students by name
-2.  AddressBook shows a sorted list of persons alphabetically
+2.  AddressBook shows a sorted list of persons in ascending alphabetical order
 
     Use case ends.
 ___
