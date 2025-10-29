@@ -9,7 +9,7 @@ It is optimized for use via a **Command Line Interface** (CLI) while still havin
 
 For CS1101S TAs that are good at using the Command Line, CadetHQ gives you the power to manage your students' grades, attendance, and contact information quickly, bypassing pesky menus that take ages to load and navigate.
 
-Main features:
+#### Main features:
  - [Managing Students](#managing-students) - Add, edit or delete student records.
  - [Viewing Students](#viewing-students) - View, search or sort student information.
  - [Tracking Attendance](#tracking-attendance) - Record students' attendance.
@@ -19,8 +19,32 @@ Main features:
 
 ---
 
-Table of Contents 
-{:toc}
+### Table of Contents:
+- [Quick start](#quick-start)
+- [Features](#features)
+  - [Managing Students](#managing-students)
+    - [Adding a student](#adding-a-student-add)
+    - [Editing a student](#editing-a-student--edit)
+    - [Deleting a student](#deleting-a-student--delete)
+  - [Viewing Students](#viewing-students)
+    - [Listing all students](#listing-all-students--list)
+    - [Locating students by name](#locating-students-by-name-find)
+    - [Viewing a student](#viewing-a-student-view)
+    - [Sorting students](#sorting-students--sort)
+  - [Tracking Attendance](#tracking-attendance)
+    - [Marking the attendance for a student](#marking-the-attendance-for-a-student-attend)
+  - [Handling Scores](#handling-scores)
+    - [Adding a score for an exam for a student](#adding-a-score-for-an-exam-for-a-student-score)
+    - [Editing the max score of an exam](#editing-the-max-score-of-an-exam-maxscore)
+  - [Miscellaneous](#miscellaneous)
+    - [Clearing all entries](#clearing-all-entries--clear)
+    - [Exiting the program](#exiting-the-program--exit)
+    - [Saving the data](#saving-the-data)
+    - [Editing the data file](#editing-the-data-file)
+    - [Archiving data files](#archiving-data-files-coming-in-v20)
+- [FAQ](#faq)
+- [Known issues](#known-issues)
+- [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -86,7 +110,7 @@ Note that throughout this document, we will often refer to CadetHQ as Address Bo
 
 ---
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
@@ -124,7 +148,7 @@ Duplicate students cannot be added to the Address Book. A student is considered 
 A student can have 0 or more tags!
 </div>
 
-### Editing a student : `edit`
+### Editing a student: `edit`
 
 Edits an existing student in the Address Book.
 
@@ -161,7 +185,7 @@ Examples:
 *  `edit A0000000A n/Betsy Crower t/ p/92345678 h/@BetsyC` Edits the name of the student with SID `A0000000A` to be `Betsy Crower`, with phone number `92345678` and Telegram handle `@BetsyC`, and clears all existing tags.
 ![result for `edit A0000000A n/Betsy Crower t/ p/92345678 h/@BetsyC`](images/editSid.png)
 
-### Deleting a student : `delete`
+### Deleting a student: `delete`
 
 Deletes the specified student from the Address Book.
 
@@ -182,7 +206,7 @@ Examples:
 ---
 ## Viewing Students
 
-### Listing all students : `list`
+### Listing all students: `list`
 
 Shows a list of all students in the Address Book.
 
@@ -232,17 +256,17 @@ Examples:
   ![result for 'view 2'](images/viewIndex.png)
 * `view A0000000A` displays the student with SID A0000000A.
 
-### Sorting the list : `sort`
+### Sorting students: `sort`
 
-Sorts the list based either by name or exam score.
+Sorts the students either by name or exam score.
 
 Format: `sort n/` or `sort ex/EXAM`
 
-* `sort n/` sorts the list in ascending order by name.
-* `sort ex/` sorts the list in ascending order by exam score for the specified exam.
+* `sort n/` sorts the students in ascending order by name.
+* `sort ex/` sorts the students in ascending order by exam score for the specified exam.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-People with no recorded scores when sorting by exam scores will be shifted to the bottom of the list.
+Students with no recorded scores will be shifted to the bottom of the displayed student list when sorted by exam scores.
 </div>
 
 Examples:
@@ -323,21 +347,19 @@ Examples:
 
 ---
 
-## General Commands
+## Miscellaneous
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 
 Clears all entries from the Address Book.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
 Format: `exit`
-
----
 
 ### Saving the data
 
@@ -390,4 +412,4 @@ Action | Format, Examples
 **Clear** | `clear`
 **Exit** | `exit`
 
-[Back to the top](#quick-start)
+[Back to the top](#main-features)
