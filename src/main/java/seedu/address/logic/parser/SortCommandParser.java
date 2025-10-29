@@ -52,6 +52,6 @@ public class SortCommandParser implements Parser<SortCommand> {
      * @return true if prefix exists in map.
      */
     private static boolean isPrefixPresent(ArgumentMultimap argumentMultimap, Prefix prefix) {
-        return argumentMultimap.getAllValues(prefix) != null && !argumentMultimap.getAllValues(prefix).isEmpty();
+        return !argumentMultimap.getAllValues(prefix).isEmpty();
     }
 }
