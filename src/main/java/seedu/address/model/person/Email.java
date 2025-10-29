@@ -14,7 +14,7 @@ public class Email {
             + "1. The local-part should only contain alphanumeric characters and underscores\n"
             + "2. This is followed by a '@' and then the domain name u.nus.edu.\n";
     // alphanumeric and underscores only
-    private static final String LOCAL_PART_REGEX = "[^\\W]+";
+    private static final String LOCAL_PART_REGEX = "[^\\W_]+";
     private static final String DOMAIN_REGEX = "u\\.nus\\.edu$";
     public static final String VALIDATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
 

@@ -36,8 +36,6 @@ public class EmailTest {
         // positive tests for local and u.nus.edu domain
         assertTrue(Email.isValidEmail("peterjack@u.nus.edu"));
         assertTrue(Email.isValidEmail("jothamwong@u.nus.edu"));
-        assertTrue(Email.isValidEmail("jotham_wong@u.nus.edu")); // underscore is allowed
-        assertTrue(Email.isValidEmail("jotham__wong@u.nus.edu")); // many underscore is allowed
         // negative tests for local
         assertFalse(Email.isValidEmail(" jothamwong@u.nus.edu")); // leading space
         assertFalse(Email.isValidEmail("jotham-wong@u.nus.edu")); // dash not allowed
@@ -74,6 +72,6 @@ public class EmailTest {
         assertFalse(email.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(email.equals(new Email("other_valid@u.nus.edu")));
+        assertFalse(email.equals(new Email("othervalid@u.nus.edu")));
     }
 }
