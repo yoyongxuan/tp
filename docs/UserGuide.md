@@ -107,7 +107,7 @@ Format: `add SID n/NAME p/PHONE_NUMBER e/EMAIL h/TELEGRAM_HANDLE [t/TAG]…​`
 | SID  | Format **A#######X (1st letter 'A'), where # is a digit (0-9) and X is a letter (A-Z)**. <br> Must be **9-characters long**. <br> Letters can be in uppercase or lowercase.                                                                                                         |
 | Phone | Starts with **8 or 9**, and must be **8 digits long**.                                                                                                                                                                                                                              |
 | Email | Format `local-part@domain`. <br> `local-part` contains only **alphanumeric characters** and these special characters`+`, `_`, `.`, `-`. <br> `local-part` cannot start or end with the special characters. <br> `local-part` is followed by an `@` and the domain name `u.nus.edu`. |
-| Telegram handle | Format `@username`. `username` contains only **alphanumeric characters and underscores**, and **cannot be blank**.                                                                                                                                                                                                                                    
+| Telegram handle | Format `@username`. `username` contains only **alphanumeric characters and underscores**, and **cannot be blank**. |
 
 Examples:
 * `add A0123456A n/John Doe p/98765432 e/johnd@u.nus.edu h/@JohnDoe`
@@ -128,7 +128,7 @@ Edits an existing student in the Address Book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…​` or `edit SID [n/NAME] [p/PHONE] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…​`
 
-* Edits the student at the specified `INDEX` or with the given `SID`. 
+* Edits the student at the specified `INDEX` or with the given `SID`.
 
 | Field | Requirement                                                                                                                                                                 |
 |------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -136,7 +136,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…�
 | SID  | Format **A#######X (1st letter 'A'), where # is a digit (0-9) and X is a letter (A-Z)**. <br> Must be **9-characters long**. <br> Letters can be in uppercase or lowercase. |
 | Phone | Starts with **8 or 9**, and must be **8 digits long**.                                                                                                                                                                                                                              |
 | Email | Format `local-part@domain`. <br> `local-part` contains only **alphanumeric characters** and these special characters`+`, `_`, `.`, `-`. <br> `local-part` cannot start or end with the special characters. <br> `local-part` is followed by an `@` and the domain name `u.nus.edu`. |
-| Telegram handle | Format `@username`. `username` contains only **alphanumeric characters and underscores**, and **cannot be blank**.                                                                                                                                                                  
+| Telegram handle | Format `@username`. `username` contains only **alphanumeric characters and underscores**, and **cannot be blank**. |
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
 At least one of the optional fields must be provided.
@@ -263,7 +263,7 @@ Format: `attend INDEX TUTORIAL` or `attend SID TUTORIAL`
 |------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Index | Refers to the index number shown in the displayed student list. <br> Must be a **positive integer** 1, 2, 3, …​                                                             |
 | SID  | Format **A#######X (1st letter 'A'), where # is a digit (0-9) and X is a letter (A-Z)**. <br> Must be **9-characters long**. <br> Letters can be in uppercase or lowercase. |
-| Tutorial | Refers to the tutorial number. <br> Must be **within the range of the number of tutorials specified in the Address Book**. <br> Must be a **positive integer** 1, 2, 3, …​  
+| Tutorial | Refers to the tutorial number. <br> Must be **within the range of the number of tutorials specified in the Address Book**. <br> Must be a **positive integer** 1, 2, 3, …​  |
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Entering the same `attend` command inverts the attendance for the given `TUTORIAL` and student at `INDEX` or with `SID`.
@@ -292,7 +292,7 @@ Format: `score INDEX ex/EXAM s/SCORE` or `score SID ex/EXAM s/SCORE`
 |------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Index | Refers to the index number shown in the displayed student list. <br> Must be a **positive integer** 1, 2, 3, …​                                                             |
 | SID  | Format **A#######X (1st letter 'A'), where # is a digit (0-9) and X is a letter (A-Z)**. <br> Must be **9-characters long**. <br> Letters can be in uppercase or lowercase. |
-| Score | Refers to the score attained by the specified student for the specified exam. <br> Must be a **non-negative integer that is not larger than the max score** of the specified exam.
+| Score | Refers to the score attained by the specified student for the specified exam. <br> Must be a **non-negative integer that is not larger than the max score** of the specified exam. |
 | Exam | Refers to the exam name. <br> Must **match the exams recorded in the Address Book exactly**. <br> e.g. If the exam name in the Address Book is `midterm`, the specified exam name must be `midterm`, not `MIDTERM` or `mid term`. |
 
 Examples:
