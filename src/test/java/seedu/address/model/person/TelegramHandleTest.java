@@ -40,7 +40,11 @@ public class TelegramHandleTest {
         assertFalse(TelegramHandle.isValidTelegramHandle("@ ")); // space after
         assertFalse(TelegramHandle.isValidTelegramHandle(" @")); // space before
         assertFalse(TelegramHandle.isValidTelegramHandle(" @ ")); // space before and after
+        assertFalse(TelegramHandle.isValidTelegramHandle("@Jotham_()")); // only alphanumeric and underscores
 
+        // valid parts
+        assertTrue(TelegramHandle.isValidTelegramHandle("@Jotham"));
+        assertTrue(TelegramHandle.isValidTelegramHandle("@Jotham_"));
     }
 
     @Test
