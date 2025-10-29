@@ -94,6 +94,7 @@ A person can have 0 or more tags!
 Argument constraints:
 * The SID **must be 9-characters long**, in the format A#######X where # is a digit (0-9) and X is a letter (A-Z). The first letter **must be 'A'**. The letters can be in uppercase or lowercase.
   e.g. a0000000B
+* The name should only contain alphanumeric characters and spaces, and it should not be blank.
 * The phone number should start with either **8 or 9** and have a length of **8**.
 * The email must be of the format `local-part@domain` and adhere to the following constraints:
   1. The local-part should only contain **alphanumeric characters**.
