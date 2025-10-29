@@ -1,0 +1,52 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+mainframe sd Model Component Sequence
+
+box Logic LOGIC_COLOR_T1
+participant "e:EditScoreCommand" as EditScoreCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "el:ExamList" as ExamList MODEL_COLOR
+participant "midterm:Exam" as Exam MODEL_COLOR
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+activate EditScoreCommand
+
+EditScoreCommand -> ExamList : isValidExam(midterm)
+activate ExamList
+
+ExamList --> EditScoreCommand
+deactivate ExamList
+
+EditScoreCommand -> Model : isNewMaxScoreValid(midterm, 90)
+activate Model
+
+Model --> EditScoreCommand
+deactivate Model
+
+EditScoreCommand -> Exam : setMaxScore(90)
+activate Exam
+
+Exam --> EditScoreCommand
+deactivate Exam
+
+EditScoreCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> EditScoreCommand : Persons
+deactivate Model
+
+loop for each Person in Persons
+EditScoreCommand -> Model : refresh Person to update max score
+activate Model
+
+Model --> EditScoreCommand
+deactivate Model
+end
+
+
+deactivate EditScoreCommand
+@enduml

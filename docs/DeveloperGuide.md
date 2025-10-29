@@ -176,6 +176,36 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Edit the maximum score of an exam
+**Overview**
+
+The `maxscore` command allows the user to edit the maximum score of an exam in the address book.
+
+The sequence diagrams below illustrates the interactions within the `Logic` and `Model` components, taking `execute("maxscore 1 ex/midterm ms/90")` API call as an example.
+
+**Logic Component**
+
+![EditScoreCommand Sequence Diagram Logic Component](images/EditScoreCommandSequenceDiagram-Logic.png)
+
+**Details**:
+1. The `LogicManager` object will be called to execute the input.
+2. The `AddressBookParser` object will identify the command as `EditScoreCommand`, and create an `EditScoreCommandParser`.
+3. The `EditScoreCommandParser` will parse `1 ex/midterm ms/90` and create an `EditCommand` which is returned to the `LogicManager`.
+4. The `LogicManager` calls `execute` on the `EditScoreCommand` object, which interacts with the Model component. (drawn as a single step for simplicity)
+5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`. 
+
+**Model Component**
+
+![EditScoreCommand Sequence Diagram Model Component](images/EditScoreCommandSequenceDiagram-Model.png)
+
+**Details**:
+1. The `execute` method in `EditScoreCommand` runs.
+2. The `EditScoreCommand` object calls `isValidExam` and `isNewMaxScoreValid` to verify that `midterm` exists, and that the new max score meets all constraints.
+- (Not shown in diagram) The `isNewMaxScoreValid` method compares the new max score `90` against all the recorded scores for all students, for the exam `midterm`. The new max score must be greater than or equal to all recorded scores for it to be valid.
+3. The `EditScoreCommand` object calls `setMaxScore` on `Exam` to change the max score.
+4. The `EditScoreCommand` object calls `getFilteredPersonList` on `Model` to retrieve all displayed people.
+5. (Simplified in diagram) For each `Person` in the person list, a clone is created with the same information. The method `setPerson` of `Model` replaces each `Person` with the cloned `Person`, ensuring that the updated max score is reflected in the UI.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -606,8 +636,6 @@ ___
 * **GUI**: Graphical User Interface - A visual interface that uses windows, buttons and menus, which is not the primary interface of the app
 * **CS1101S**: Programming Methodology module for NUS Computer Science students.
 * **TA**: Teaching Assistant - The target users of the app
-* **Avenger**: CS1101S TA
-* **Cadet**: CS1101S Student
 
 --------------------------------------------------------------------------------------------------------------------
 
