@@ -59,6 +59,31 @@ public class SortCommandParserTest {
     }
 
     /**
+     * Tests parsing a sort command by name with spaces around the 'n/' prefix.
+     * @author ndhhh
+     * @throws ParseException
+     */
+    @Test
+    public void parse_nameWithSpaces_success() throws ParseException {
+        SortCommand c = parser.parse("    n/   ");
+        assertEquals(sortByNameCommand, c);
+    }
+
+    @Test
+    public void parse_nameWithExtraArgs_throwsException() {
+        // Make new SortCommand
+        Exception exception = assertThrows(ParseException.class, () -> {
+            parser.parse(" n/aeiou");
+        });
+
+        // Should have same error message
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE);
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    /**
      * Tests parsing a sort command by exam scores with no argument.
      * Test should throw an ParseException
      * @author ndhhh
@@ -144,6 +169,25 @@ public class SortCommandParserTest {
         // Make new SortCommand by email
         Exception exception = assertThrows(ParseException.class, () -> {
             parser.parse(" e/");
+        });
+
+        // Should have same error message
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE);
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    /**
+     * Tests parsing a sort command with random gibberish prefix.
+     * Test should throw a ParseException
+     * @author ndhhh
+     */
+    @Test
+    public void parse_randomPrefix_throwsException() {
+        // Make new SortCommand with random prefix
+        Exception exception = assertThrows(ParseException.class, () -> {
+            parser.parse(" aeiou/");
         });
 
         // Should have same error message

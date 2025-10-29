@@ -119,7 +119,7 @@ public class SortCommandTest {
      * @author ndhhh
      */
     @Test
-    public void execute_sortByNullExam_throwsError() {
+    public void execute_sortByNullExam_throwsException() {
         // Make new Sort Command by exam, with EXAM = null
         SortCommand c = new SortCommand(PREFIX_EXAM, null);
         Exception exception = assertThrows(CommandException.class, () -> {
@@ -138,7 +138,7 @@ public class SortCommandTest {
      * @author ndhhh
      */
     @Test
-    public void execute_sortByOtherPrefix_throwsError() {
+    public void execute_sortByOtherPrefix_throwsException() {
         // Make new Sort Command by email
         SortCommand c = new SortCommand(PREFIX_EMAIL);
         Exception exception = assertThrows(CommandException.class, () -> {
@@ -150,6 +150,29 @@ public class SortCommandTest {
         String actualMessage = exception.getMessage();
 
         assertEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
+    public void execute_nullPrefix_throwsException() {
+        // Make new Sort Command with null prefix
+        SortCommand c = new SortCommand(null);
+        assertThrows(NullPointerException.class, () -> {
+            c.execute(model);
+        });
+    }
+
+    /**
+     * Tests executing sort command with null model.
+     * @author ndhhh
+     */
+    @Test
+    public void execute_nullModel_throwsException() {
+        SortCommand sortByName = new SortCommand(PREFIX_NAME);
+        SortCommand sortByMidterm = new SortCommand(PREFIX_EXAM, MIDTERM);
+        SortCommand sortByFinal = new SortCommand(PREFIX_EXAM, FINAL);
+        assertThrows(NullPointerException.class, () -> sortByName.execute(null));
+        assertThrows(NullPointerException.class, () -> sortByMidterm.execute(null));
+        assertThrows(NullPointerException.class, () -> sortByFinal.execute(null));
     }
 
     /**
@@ -214,13 +237,6 @@ public class SortCommandTest {
         assertTrue(sortByName.equals(sortByName));
         assertTrue(sortByMidterm.equals(sortByMidterm));
 
-        // Same values -> returns true
-        SortCommand sortByNameDuplicate = new SortCommand(PREFIX_NAME);
-        assertTrue(sortByName.equals(sortByNameDuplicate));
-
-        SortCommand sortByMidtermDuplicate = new SortCommand(PREFIX_EXAM, MIDTERM);
-        assertTrue(sortByMidterm.equals(sortByMidtermDuplicate));
-
         // different types -> returns false
         assertFalse(sortByName.equals(1));
 
@@ -230,9 +246,32 @@ public class SortCommandTest {
         // different param -> returns false
         assertFalse(sortByName.equals(sortByFinal));
         assertFalse(sortByName.equals(sortByMidterm));
+        assertFalse(sortByMidterm.equals(sortByName));
+        assertFalse(sortByFinal.equals(sortByName));
 
         // different exam -> returns false
         assertFalse(sortByMidterm.equals(sortByFinal));
+        assertFalse(sortByFinal.equals(sortByMidterm));
+
+        // Same exam and prefix -> returns true
+        SortCommand sortByNameDuplicate = new SortCommand(PREFIX_NAME);
+        assertTrue(sortByName.equals(sortByNameDuplicate));
+
+        SortCommand sortByMidtermDuplicate = new SortCommand(PREFIX_EXAM, MIDTERM);
+        assertTrue(sortByMidterm.equals(sortByMidtermDuplicate));
+
+        SortCommand sortByFinalDuplicate = new SortCommand(PREFIX_EXAM, FINAL);
+        assertTrue(sortByFinal.equals(sortByFinalDuplicate));
+
+        // Sort by name but with exam param -> returns false
+        SortCommand sortByNameWithMidterm = new SortCommand(PREFIX_NAME, MIDTERM);
+        SortCommand sortByNameWithFinal = new SortCommand(PREFIX_NAME, FINAL);
+        assertFalse(sortByName.equals(sortByNameWithMidterm));
+        assertFalse(sortByName.equals(sortByNameWithFinal));
+        assertFalse(sortByMidterm.equals(sortByNameWithMidterm));
+        assertFalse(sortByFinal.equals(sortByNameWithFinal));
+        assertFalse(sortByMidterm.equals(sortByNameWithFinal));
+        assertFalse(sortByFinal.equals(sortByNameWithMidterm));
     }
 
     @Test
