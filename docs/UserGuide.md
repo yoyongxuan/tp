@@ -60,7 +60,7 @@ Note that throughout this document, we will often refer to CadetHQ as Address Bo
 1. Copy the file to the folder you want to use as the _home folder_ for your CadetHQ.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar cadethq.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some placeholder data.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -88,7 +88,7 @@ A table of all the information that can be associated with a contact
 | Index            |        | 1               | - Must be a positive integer                                                                                                                                                               |
 | Student ID (SID) |        | A0123456A       | - Must be 9-characters long <br> - First character must be "A" or “a” <br> - Second to eighth characters must be a number<br> - Last character must be an alphabet <br> (case-insensitive) |
 | Name             | n/     | John Doe        | - Only alphanumeric characters and spaces                                                                                                                                                  |
-| Phone number     | p/     | 98765432        | - Must consist of 8 digits <br> - Must start with the number "8" or "9"                                                                                                                    |
+| Phone number     | p/     | 98765432        | - Must consist of 8 digits <br> - Must start with the number "6", "8" or "9"                                                                                                                    |
 | Email            | e/     | johnd@u.nus.edu | - Must be of the format *local-part* @u.nus.edu<br>  - *local-part* should only contain alphanumeric characters                                                           |
 | Telegram handle  | h/     | JohnDoe         | - Must start with "@" <br> - Remaining characters must be alphanumeric or underscores                                                                                                      |
 | Tag              | t/     | Friend          | - Should be alphanumeric                                                                                                                                                                   |
@@ -165,10 +165,6 @@ Examples:
 Duplicate students cannot be added to the Address Book. A student is considered a duplicate student if either the SID or the email are the same as another existing student in the Address Book.
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A student can have 0 or more tags!
-</div>
-
 ### Editing a student: `edit`
 
 Edits an existing student in the Address Book.
@@ -185,6 +181,10 @@ At least one of the optional fields must be provided.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
 Existing values will be updated to the input values.
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
+If email is being edited, it must be a unique email not currently present in the Address Book.
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
