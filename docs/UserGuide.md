@@ -131,6 +131,7 @@ Format: `add SID n/NAME p/PHONE_NUMBER e/EMAIL h/TELEGRAM_HANDLE [t/TAG]…​`
 | Field | Requirement                                                                                                                                                                                                                                                                         |
 |------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | SID  | Format **A#######X (1st letter 'A'), where # is a digit (0-9) and X is a letter (A-Z)**. <br> Must be **9-characters long**. <br> Letters can be in uppercase or lowercase.                                                                                                         |
+| Name  | Contains only alphanumeric characters with spaces. Cannot contain special characters such as, but not limited to: `+-()*&^%$#@!<>?:"{}/\;.,~`  |
 | Phone | Starts with **8 or 9**, and must be **8 digits long**.                                                                                                                                                                                                                              |
 | Email | Format `local-part@domain`. <br> `local-part` contains only **alphanumeric characters** and these special characters`+`, `_`, `.`, `-`. <br> `local-part` cannot start or end with the special characters. <br> `local-part` is followed by an `@` and the domain name `u.nus.edu`. |
 | Telegram handle | Format `@username`. `username` contains only **alphanumeric characters and underscores**, and **cannot be blank**. |
@@ -160,6 +161,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…�
 |------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Index | Refers to the index number shown in the displayed student list. <br> Must be a **positive integer** 1, 2, 3, …​                                                             |
 | SID  | Format **A#######X (1st letter 'A'), where # is a digit (0-9) and X is a letter (A-Z)**. <br> Must be **9-characters long**. <br> Letters can be in uppercase or lowercase. |
+| Name  | Contains only alphanumeric characters with spaces. Cannot contain special characters such as, but not limited to: `+-()*&^%$#@!<>?:"{}/\;.,~`  |
 | Phone | Starts with **8 or 9**, and must be **8 digits long**.                                                                                                                                                                                                                              |
 | Email | Format `local-part@domain`. <br> `local-part` contains only **alphanumeric characters** and these special characters`+`, `_`, `.`, `-`. <br> `local-part` cannot start or end with the special characters. <br> `local-part` is followed by an `@` and the domain name `u.nus.edu`. |
 | Telegram handle | Format `@username`. `username` contains only **alphanumeric characters and underscores**, and **cannot be blank**. |
@@ -374,10 +376,6 @@ If your changes to the data file makes its format invalid, cadethq.json will dis
 Furthermore, certain edits can cause the cadethq.json to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -391,6 +389,17 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **When a person's details are very long**, e.g. their name, telegram handle, and **CadetHQ is set to a small window width size**, some details may be truncated `(...)` as the text does not wrap around. The remedy is to expand the window width to see the full details.
+4. **Names that contain `/` characters cannot be added** in CadetHQ. An error message will be shown instead. CadetHQ uses `/` characters in the internal implementation of command parsing.
+    <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+    A remedy is to save the name without the `/` characters. For example, `Sumail S/O Subramaniam` can be saved as `Sumail SO Subramaniam` instead.
+    </div>
+
+5. **Names that contain `,`, `-`, `@`, or other special characters cannot be added in CadetHQ. An error message will be shown instead. CadetHQ currently does not support the use of special characters in names. 
+
+    <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+    A remedy is to save the name without the special characters. For example, `Tan Ah Meng, John` can be saved as `Tan Ah Meng John` instead. `Al-Amaan` can be saved as `AlAmaan` instead. `Tan Kah Ming @ Cheng Jia Ming` can be saved simply as `Tan Kah Ming`, or however the user decides to.
+    </div>
 
 --------------------------------------------------------------------------------------------------------------------
 
