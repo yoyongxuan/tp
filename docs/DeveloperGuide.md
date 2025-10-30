@@ -305,7 +305,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | CS1101S TA                                | delete a student's profile                   | remove it when it is not needed anymore                               |
 | `* * *`  | CS1101S TA                                | list out all students                        | see whose contacts I have saved                                       |
 | `* * *`  | CS1101S TA                                | view students' attendance                    | keep track of when a student has not shown up to class                |
-| `* * *`  | CS1101S TA                                | mark students' attendance                    | keep track of who goes to class                                       |
+| `* * *`  | CS1101S TA                                | mark students' attendance                    | keep track of who goes to class        |
+| `* * *`  | CS1101S TA                                | edit the maximum score of different exams    | change the maximum score of exams if there are any changes to the format made by the professors |
 | `* *`    | first time user                           | view a help message with all commands        | learn how to use the app                                              |
 | `* *`    | concerned TA                              | sort my students by grade                    | easily identify who needs more support                                |
 | `*`      | concerned TA                              | set up alerts for low participation          | help struggling students                                              |
