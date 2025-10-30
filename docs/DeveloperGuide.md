@@ -737,29 +737,26 @@ testers are expected to do more *exploratory* testing.
 1. Adding a person
 
    1. Test case: `add A0235410A n/John Doe p/98765432 e/johnd@u.nus.edu h/@John t/friends t/owesMoney`<br>
-      Expected: Contact is added to the list. Details of added contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: Contact is added to the list. Details of added contact shown in the status message.
 
    2. Test case: `add A0235411A n/Jon Doe p/98765431 e/jond@u.nus.edu t/friends t/owesMoney`<br>
-      Expected: Contact is not added to the list. Error details shown in the status message. Status bar remains the same.
+      Expected: Contact is not added to the list. Error details shown in the status message.
 
    3. Test case: `add A0235411A n/Jon Doe p/98765431 e/jond@gmail.com`<br>
-      Expected: Contact is not added to the list. Error details shown in the status message. Status bar remains the same.
+      Expected: Contact is not added to the list. Error details shown in the status message.
 
    4. Other incorrect add commands to try: `add`, `add ...`(Any combination of missing fields), `...`<br>
       Expected: Similar to previous.
 
 2. Adding a person with non-unique fields
 
-   1. Prerequisites: List all persons using the `list` command. Person with Student ID 'A0000000A', email 'alexyeoh@u.nus.edu', telegram handle '@AlexYeoh' in the list.
+   1. Prerequisites: List all persons using the `list` command. Person with Student ID 'A0000000A', email 'alexyeoh@u.nus.edu' in the list.
 
    2. Test case: `add A0000000A n/Billy p/98765432 e/billybatson@u.nus.edu h/@Billy123`<br>
-      Expected: Contact is not added to the list. Error details shown in the status message. Status bar remains the same.
+      Expected: Contact is not added to the list. Error details shown in the status message.
 
    3. Test case: `add A1234567B n/Billy p/98765432 e/alexyeoh@u.nus.edu h/@Billy123`<br>
-      Expected: Contact is not added to the list. Error details shown in the status message. Status bar remains the same.
-
-   4. Test case: `add A1234567B n/Billy p/98765432 e/billybatson@u.nus.edu h/@AlexYeoh`<br>
-      Expected: Contact is not added to the list. Error details shown in the status message. Status bar remains the same.
+      Expected: Contact is not added to the list. Error details shown in the status message.
 
 ### Deleting a person
 
@@ -768,10 +765,10 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No person is deleted. Error details shown in the status message.
 
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
@@ -783,10 +780,10 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all persons using the `list` command. One person in list with Student ID 'A0000000A'. Another person in list with email 'berniceyu@u.nus.edu'.
 
     2. Test case: `edit A0000000A p/98765432`<br>
-       Expected: Contact with Student ID A0000000A is edited. Details of edited contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: Contact with Student ID A0000000A is edited. Details of edited contact shown in the status message.
 
     3. Test case: `edit A0000000A e/berniceyu@u.nus.edu`<br>
-       Expected: Contact is not edited. Error details shown in the status message. Status bar remains the same.
+       Expected: Contact is not edited. Error details shown in the status message.
 
     4. Other incorrect edit commands to try: `edit`, `edit 1 e/abc@gmail.com`, `...`<br>
        Expected: Similar to previous.
@@ -798,13 +795,13 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. At least one person in the list
 
    2. Test case: `attend 1 1`<br>
-      Expected: Attendance is inverted for Tutorial 1 for the first contact. Details of attend shown in the status message. Timestamps in the status bar are updated.
+      Expected: Attendance is inverted for Tutorial 1 for the first contact. Details of attend shown in the status message.
 
    3. Test case: `attend 1 0`<br>
-      Expected: No attendance is taken. Error details shown in the status message. Status bar remains the same.
+      Expected: No attendance is taken. Error details shown in the status message.
     
    4. Test case: `attend`<br>
-      Expected: No attendance is taken. Error details shown in the status message. Status bar remains the same.
+      Expected: No attendance is taken. Error details shown in the status message.
 
    5. Other incorrect attend commands to try: `attend 1 x`, `attend y 1`, `...` (where x is larger than the number of tutorials and y is larger than the list size)<br>
       Expected: Similar to previous.
@@ -814,10 +811,10 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. One person with Student ID 'A0000000A'
 
    2. Test case: `attend A0000000A 1`<br>
-      Expected: Attendance is inverted for Tutorial 1 for the contact with Student ID A0000000A. Details of attend shown in the status message. Timestamps in the status bar are updated.
+      Expected: Attendance is inverted for Tutorial 1 for the contact with Student ID A0000000A. Details of attend shown in the status message.
 
    3. Test case: `attend A0000000A 0`<br>
-      Expected: No attendance is taken. Error details shown in the status message. Status bar remains the same.
+      Expected: No attendance is taken. Error details shown in the status message.
 
    4. Other incorrect attend commands to try: `attend A0000000A x`, `attend y 1`, `...` (where x is larger than the number of tutorials and y is a Student ID not belonging to any contact)<br>
       Expected: Similar to previous.
@@ -829,13 +826,13 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all persons using the `list` command. At least one person in the list. Midterm max score is at least 1.
 
     2. Test case: `score 1 ex/midterm s/1`<br>
-       Expected: Midterm exam score of first contact is updated to 1. Details of score shown in the status message. Timestamps in the status bar are updated.
+       Expected: Midterm exam score of first contact is updated to 1. Details of score shown in the status message.
 
     3. Test case: `score 1 ex/midterm s/-1`<br>
-       Expected: No score is updated. Error details shown in the status message. Status bar remains the same.
+       Expected: No score is updated. Error details shown in the status message.
 
     4. Test case: `score`<br>
-       Expected: No score is taken. Error details shown in the status message. Status bar remains the same.
+       Expected: No score is taken. Error details shown in the status message.
 
     5. Other incorrect attend commands to try: `score x ex/midterm s/0`, `score 1 ex/y s/0`, `score 1 ex/midterm s/z`, `...` 
        (where x is larger than the list size, y is not in the exam list and z is a score above the max score)<br>
@@ -846,13 +843,13 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all persons using the `list` command. One person with Student ID 'A0000000A'
 
     2. Test case: `score A0000000A ex/midterm s/1`<br>
-       Expected: Midterm exam score of contact with Student ID A0000000A is updated to 1. Details of score shown in the status message. Timestamps in the status bar are updated.
+       Expected: Midterm exam score of contact with Student ID A0000000A is updated to 1. Details of score shown in the status message.
 
     3. Test case: `score A0000000A ex/midterm s/-1`<br>
-       Expected: No score is updated. Error details shown in the status message. Status bar remains the same.
+       Expected: No score is updated. Error details shown in the status message.
 
     4. Test case: `score`<br>
-       Expected: No score is taken. Error details shown in the status message. Status bar remains the same.
+       Expected: No score is taken. Error details shown in the status message.
 
     5. Other incorrect attend commands to try: `score x ex/midterm s/0`, `score A0000000A ex/y s/0`, `score A0000000A ex/midterm s/z`, `...`
        (where x is a Student ID not belonging to any contact, y is not in the exam list and z is a score above the max score)<br>
@@ -865,32 +862,32 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Current max score of midterm is 70. One student in contacts has a midterm score of 60.
 
    2. Test case: `maxscore ex/midterm ms/100`<br>
-      Expected: Max score of Midterm exam is updated to 100. Details of maxscore shown in the status message. Timestamps in the status bar are updated.
+      Expected: Max score of Midterm exam is updated to 100. Details of maxscore shown in the status message.
 
    3. Test case: `maxscore ex/midterm ms/50` <br>
-      Expected: Max score is not updated. Error details shown in the status message. Status bar remains the same.
+      Expected: Max score is not updated. Error details shown in the status message.
 
    4. Test case: `maxscore ex/midterm ms/-1` <br>
-      Expected: Max score is not updated. Error details shown in the status message. Status bar remains the same.
+      Expected: Max score is not updated. Error details shown in the status message.
 
 ### Sorting the list
 
 1. Sorting the list of people
 
     1. Test case: `sort n/`<br>
-       Expected: List is sorted in ascending alphabetical order. Details of sort shown in the status message. Timestamps in the status bar are updated.
+       Expected: List is sorted in ascending alphabetical order. Details of sort shown in the status message.
     
     2. Test case: `sort ex/midterm`<br>
-       Expected: List is sorted in ascending order of midterm scores, students with no recorded scores are pushed to the end of the list. Status message and timestamps in the status bar are updated as above.
+       Expected: List is sorted in ascending order of midterm scores, students with no recorded scores are pushed to the end of the list. Details of sort shown in the status message.
     
     3. Test case: `sort ex/final`<br>
-       Expected: List is sorted similar to midterm above, but sorted by final scores instead. Status message and timestamps in the status bar are updated as above.
+       Expected: List is sorted similar to midterm above, but sorted by final scores instead. Details of sort shown in the status message.
 
     4. Test case: `sort`<br>
-       Expected: No sorting is done. Error details shown in the status message. status bar remains the same.
+       Expected: No sorting is done. Error details shown in the status message.
 
     5. Test case: `sort ex/invalid exam`<br>
-       Expected: No sorting is done. Error details shown in the status message. status bar remains the same.
+       Expected: No sorting is done. Error details shown in the status message.
 
     6. Other incorrect sort commands to try: `sort x`, `sort ex/`, `...` (where x is any arbitrary argument/word not mentioned above)
        Expected: Similar to previous.
