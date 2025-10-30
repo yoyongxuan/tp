@@ -230,10 +230,13 @@ public class EditCommandTest {
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
 
-        // different index -> returns false
+        // different identifier -> returns false
         assertFalse(standardCommand.equals(new EditCommand(IDENTIFIER_SECOND_PERSON, DESC_AMY)));
 
         // different descriptor -> returns false
+        assertFalse(standardCommand.equals(new EditCommand(IDENTIFIER_FIRST_PERSON, DESC_BOB)));
+
+        // different identifier and descriptor -> returns false
         assertFalse(standardCommand.equals(new EditCommand(IDENTIFIER_SECOND_PERSON, DESC_BOB)));
     }
 
