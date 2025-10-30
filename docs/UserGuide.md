@@ -80,6 +80,26 @@ Note that throughout this document, we will often refer to CadetHQ as Address Bo
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Contact Details
+A table of all the information that can be associated with a contact
+
+| Name             | Prefix | Example         | Constraints                                                                                                                                                                                                            |
+|------------------|--------|-----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Index            |        | 1               | - Must be a positive integer                                                                                                                                 |
+| Student ID (SID) |        | A0123456A       | - Must be 9-characters long <br> - First character must be "A" or “a” <br> - Second to eighth characters must be a number<br> - Last character must be an alphabet <br> (case-insensitive)                             |
+| Name             | n/     | John Doe        | - Only alphanumeric characters and spaces                                                                                                                                                                              |
+| Phone number     | p/     | 98765432        | - Must consist of 8 digits <br> - Must start with the number "8" or "9"                                                                                                                                                |
+| Email            | e/     | johnd@u.nus.edu | - Must be of the format *local-part* @u.nus.edu<br>  - *local-part* should only contain alphanumeric characters  and these special characters:  + _ . - <br> - *local-part* may not start or end with special characters |
+| Telegram handle  | h/     | JohnDoe         | - Must start with "@" <br> - Remaining characters must be alphanumeric or underscores                                                                                                                                  |
+| Tag              | t/     | Friend          | - Should be alphanumeric                                                                                                                                                                                               |
+
+
+The index refers to the index number shown in the displayed person list.
+
+When entering a contact detail as a parameter for any command:
+- Input parameter should be preceded by its associated prefix.
+- Input parameter must adhere to listed constraints, the command will not execute otherwise.
+
 # Features
 
 <div markdown="block" class="alert alert-info">
@@ -128,18 +148,18 @@ Adds a student to the Address Book.
 
 Format: `add SID n/NAME p/PHONE_NUMBER e/EMAIL h/TELEGRAM_HANDLE [t/TAG]…​`
 
-| Field | Requirement                                                                                                                                                                                                                                                                         |
-|------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| SID  | Format **A#######X (1st letter 'A'), where # is a digit (0-9) and X is a letter (A-Z)**. <br> Must be **9-characters long**. <br> Letters can be in uppercase or lowercase.                                                                                                         |
-| Name  | Contains only alphanumeric characters with spaces. Cannot contain special characters such as, but not limited to: `+-()*&^%$#@!<>?:"{}/\;.,~`  |
-| Phone | Starts with **8 or 9**, and must be **8 digits long**.                                                                                                                                                                                                                              |
-| Email | Format `local-part@domain`. <br> `local-part` contains only **alphanumeric characters** and these special characters`+`, `_`, `.`, `-`. <br> `local-part` cannot start or end with the special characters. <br> `local-part` is followed by an `@` and the domain name `u.nus.edu`. |
-| Telegram handle | Format `@username`. `username` contains only **alphanumeric characters and underscores**, and **cannot be blank**. |
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A person can have 0 or more tags!
+</div>
+
+* All parameters must not be blank
+* All parameters must adhere to constraints detailed in [Contact Details](#contact-details)
 
 Examples:
 * `add A0123456A n/John Doe p/98765432 e/johnd@u.nus.edu h/@JohnDoe`
 ![result for `add A0123456A n/John Doe p/98765432 e/johnd@u.nus.edu h/@JohnDoe`](images/addJohnDoe.png)
 * `add A1234567B n/Betsy Crowe t/friend e/betsycrowe@u.nus.edu p/89891206 t/needshelp h/@BetsyC`
+![result for `add A1234567B n/Betsy Crowe t/friend e/betsycrowe@u.nus.edu p/89891206 t/needshelp h/@BetsyC`](images/addBetsyCrowe.png)
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
 Duplicate students cannot be added to the Address Book. A student is considered a duplicate student if either the SID or the email are the same as another existing student in the Address Book.
@@ -155,16 +175,9 @@ Edits an existing student in the Address Book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…​` or `edit SID [n/NAME] [p/PHONE] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…​`
 
-* Edits the student at the specified `INDEX` or with the given `SID`.
-
-| Field | Requirement                                                                                                                                                                 |
-|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Index | Refers to the index number shown in the displayed student list. <br> Must be a **positive integer** 1, 2, 3, …​                                                             |
-| SID  | Format **A#######X (1st letter 'A'), where # is a digit (0-9) and X is a letter (A-Z)**. <br> Must be **9-characters long**. <br> Letters can be in uppercase or lowercase. |
-| Name  | Contains only alphanumeric characters with spaces. Cannot contain special characters such as, but not limited to: `+-()*&^%$#@!<>?:"{}/\;.,~`  |
-| Phone | Starts with **8 or 9**, and must be **8 digits long**.                                                                                                                                                                                                                              |
-| Email | Format `local-part@domain`. <br> `local-part` contains only **alphanumeric characters** and these special characters`+`, `_`, `.`, `-`. <br> `local-part` cannot start or end with the special characters. <br> `local-part` is followed by an `@` and the domain name `u.nus.edu`. |
-| Telegram handle | Format `@username`. `username` contains only **alphanumeric characters and underscores**, and **cannot be blank**. |
+* Edits the person at the specified `INDEX` or with the given `SID`. 
+* All parameters must not be blank
+* All parameters must adhere to constraints detailed in [Contact Details](#contact-details)
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
 At least one of the optional fields must be provided.
@@ -194,11 +207,7 @@ Deletes the specified student from the Address Book.
 Format: `delete INDEX` or `delete SID`
 
 * Deletes the student at the specified `INDEX` or with the given `SID`.
-
-| Field | Requirement                                                                                                                                                                 |
-|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Index | Refers to the index number shown in the displayed student list. <br> Must be a **positive integer** 1, 2, 3, …​                                                             |
-| SID  | Format **A#######X (1st letter 'A'), where # is a digit (0-9) and X is a letter (A-Z)**. <br> Must be **9-characters long**. <br> Letters can be in uppercase or lowercase. |
+* `INDEX` and `SID` parameters must adhere to constraints detailed in [Contact Details](#contact-details)
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the Address Book.
@@ -243,11 +252,7 @@ Finds and displays the specified student from the Address Book.
 Format: `view INDEX` or `view SID`
 
 * Finds the student at the specified `INDEX` or with the given `SID` and displays their information.
-
-| Field | Requirement                                                                                                                                                                 |
-|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Index | Refers to the index number shown in the displayed student list. <br> Must be a **positive integer** 1, 2, 3, …​                                                             |
-| SID  | Format **A#######X (1st letter 'A'), where # is a digit (0-9) and X is a letter (A-Z)**. <br> Must be **9-characters long**. <br> Letters can be in uppercase or lowercase. |
+* `INDEX` and `SID` parameters must adhere to constraints detailed in [Contact Details](#contact-details)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can use the `list` command to restore the full list of students after a `view` command.
@@ -287,10 +292,10 @@ Adds the attendance for the specified tutorial, for the specified student from t
 
 Format: `attend INDEX TUTORIAL` or `attend SID TUTORIAL`
 
+* `INDEX` and `SID` parameters must adhere to constraints detailed in [Contact Details](#contact-details)
+
 | Field | Requirement                                                                                                                                                                 |
 |------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Index | Refers to the index number shown in the displayed student list. <br> Must be a **positive integer** 1, 2, 3, …​                                                             |
-| SID  | Format **A#######X (1st letter 'A'), where # is a digit (0-9) and X is a letter (A-Z)**. <br> Must be **9-characters long**. <br> Letters can be in uppercase or lowercase. |
 | Tutorial | Refers to the tutorial number. <br> Must be **within the range of the number of tutorials specified in the Address Book**. <br> Must be a **positive integer** 1, 2, 3, …​  |
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -314,12 +319,12 @@ Adds the specified score for the specified exam for the specified student from t
 
 Format: `score INDEX ex/EXAM s/SCORE` or `score SID ex/EXAM s/SCORE`
 
-* Adds the specified score `SCORE` for the specified exam `EXAM`, for the student at the specified `INDEX` or with the given `SID`.
+* Adds the specified score `SCORE` for the specified exam `EXAM`, for the person at the specified `INDEX` or with the given `SID`.
+* `INDEX` and `SID` parameters must adhere to constraints detailed in [Contact Details](#contact-details)
+
 
 | Field | Requirement                                                                                                                                                                 |
 |------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Index | Refers to the index number shown in the displayed student list. <br> Must be a **positive integer** 1, 2, 3, …​                                                             |
-| SID  | Format **A#######X (1st letter 'A'), where # is a digit (0-9) and X is a letter (A-Z)**. <br> Must be **9-characters long**. <br> Letters can be in uppercase or lowercase. |
 | Score | Refers to the score attained by the specified student for the specified exam. <br> Must be a **non-negative integer that is not larger than the max score** of the specified exam. |
 | Exam | Refers to the exam name. <br> Must **match the exams recorded in the Address Book exactly**. <br> e.g. If the exam name in the Address Book is `midterm`, the specified exam name must be `midterm`, not `MIDTERM` or `mid term`. |
 
@@ -335,11 +340,10 @@ Changes the max score of the specified exam to the specified max score. It overw
 Format: `maxscore INDEX ex/EXAM ms/MAXSCORE` or `maxscore SID ex/EXAM ms/MAXSCORE`
 
 * Changes the max score of the specified exam `EXAM` to the specified max score `MAXSCORE`.
+* `INDEX` and `SID` parameters must adhere to constraints detailed in [Contact Details](#contact-details)
 
 | Field | Requirement                                                                                                                                                                 |
 |------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Index | Refers to the index number shown in the displayed student list. <br> Must be a **positive integer** 1, 2, 3, …​                                                             |
-| SID  | Format **A#######X (1st letter 'A'), where # is a digit (0-9) and X is a letter (A-Z)**. <br> Must be **9-characters long**. <br> Letters can be in uppercase or lowercase. |
 | Exam | Refers to the exam name. <br> Must **match the exams recorded in the Address Book exactly**. <br> e.g. If the exam name in the Address Book is `midterm`, the specified exam name must be `midterm`, not `MIDTERM` or `mid term`. |
 | Max Score | Must be a **non-negative integer**, and it **must be more than or equal to any recorded score** for the specified exam. <br> e.g. If a student has score `70/80` for the exam, the new max score must be at least `70`. |
 
@@ -375,6 +379,10 @@ CadetHQ data are saved automatically as a JSON file `[JAR file location]/data/ca
 If your changes to the data file makes its format invalid, cadethq.json will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the cadethq.json to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
+
+### Archiving data files `[coming in v2.0]`
+
+_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
