@@ -23,13 +23,22 @@ public class AttendanceTest {
     }
 
     @Test
-    public void isInvalidAttendance() {
-        String invalidAttendanceNotEnoughTutorials = "true false";
-        String invalidAttendanceTooManyTutorials = "true false true false true false true false true false true false";
-        String invalidAttendanceNotBoolean = "true 1 2 3 4 5 6 7 8 9 10";
-        assertFalse(Attendance.isValidAttendance(invalidAttendanceNotEnoughTutorials));
-        assertFalse(Attendance.isValidAttendance(invalidAttendanceTooManyTutorials));
+    public void isValidAttendance() {
+        // not boolean value
+        String invalidAttendanceNotBoolean = "rue false true false true false true false true false 1";
         assertFalse(Attendance.isValidAttendance(invalidAttendanceNotBoolean));
+
+        // one below boundary -> return false
+        String invalidAttendanceNotEnoughTutorials = "true false true false true false true false true false";
+        assertFalse(Attendance.isValidAttendance(invalidAttendanceNotEnoughTutorials));
+
+        // one above boundary -> return true
+        String invalidAttendanceTooManyTutorials = "true false true false true false true false true false true false";
+        assertFalse(Attendance.isValidAttendance(invalidAttendanceTooManyTutorials));
+
+        // valid attendance -> return true
+        String validAttendance = "true false true false true false true false true false true";
+        assertTrue(Attendance.isValidAttendance(validAttendance));
     }
 
     @Test

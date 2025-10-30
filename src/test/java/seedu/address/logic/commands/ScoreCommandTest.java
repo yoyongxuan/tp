@@ -29,7 +29,6 @@ import seedu.address.model.person.examscore.ExamScores;
 import seedu.address.model.person.examscore.Score;
 
 public class ScoreCommandTest {
-
     public static final Score STANDARD_SCORE = Score.getRecordedScore(
             ExamList.getExamFromName(VALID_EXAM), VALID_SCORE);
     public static final ScoreCommand STANDARD_COMMAND = new ScoreCommand(IDENTIFIER_FIRST_PERSON, STANDARD_SCORE);
@@ -71,8 +70,6 @@ public class ScoreCommandTest {
 
     @Test
     public void equals() {
-
-
         // same values -> returns true
         ScoreCommand commandWithSameValues = new ScoreCommand(IDENTIFIER_FIRST_PERSON, STANDARD_SCORE);
         assertTrue(STANDARD_COMMAND.equals(commandWithSameValues));
@@ -86,13 +83,19 @@ public class ScoreCommandTest {
         // different types -> returns false
         assertFalse(STANDARD_COMMAND.equals(new ClearCommand()));
 
-        // different index -> returns false
+        // different identifier -> returns false
         ScoreCommand commandWithDifferentIndex = new ScoreCommand(IDENTIFIER_SECOND_PERSON, STANDARD_SCORE);
         assertFalse(STANDARD_COMMAND.equals(commandWithDifferentIndex));
 
         // different score -> returns false
         Score differentScore = Score.getRecordedScore(ExamList.getExamFromName(VALID_EXAM2), VALID_SCORE);
-        ScoreCommand commandWithDifferenScore = new ScoreCommand(IDENTIFIER_SECOND_PERSON, differentScore);
-        assertFalse(STANDARD_COMMAND.equals(commandWithDifferenScore));
+        ScoreCommand commandWithDifferentScore = new ScoreCommand(IDENTIFIER_FIRST_PERSON, differentScore);
+        assertFalse(STANDARD_COMMAND.equals(commandWithDifferentScore));
+
+        //different score and identifier -> returns false
+        ScoreCommand commandWithDifferentScoreAndIdentifier = new ScoreCommand(IDENTIFIER_SECOND_PERSON,
+                differentScore);
+        assertFalse(STANDARD_COMMAND.equals(commandWithDifferentScoreAndIdentifier));
+
     }
 }

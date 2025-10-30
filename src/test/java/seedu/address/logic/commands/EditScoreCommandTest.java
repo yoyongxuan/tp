@@ -100,6 +100,10 @@ public class EditScoreCommandTest {
         assertFalse(midtermTo50.equals(midtermTo200));
         assertFalse(finalTo50.equals(finalTo200));
 
+        // different exam and score -> returns false
+        assertFalse(midtermTo50.equals(finalTo200));
+        assertFalse(finalTo50.equals(midtermTo200));
+
     }
 
     @Test

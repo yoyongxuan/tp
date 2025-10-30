@@ -27,13 +27,19 @@ public class PhoneTest {
         // invalid phone numbers
         assertFalse(Phone.isValidPhone("")); // empty string
         assertFalse(Phone.isValidPhone(" ")); // spaces only
-        assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
         assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
 
+        assertFalse(Phone.isValidPhone("9123456")); // 1 below boundary
+        assertFalse(Phone.isValidPhone("912345678")); // 1 above boundary
+        assertFalse(Phone.isValidPhone("12345678")); // does not start with 6,8 or 9
+
+
         // valid phone numbers
         assertTrue(Phone.isValidPhone("91234567"));
+        assertTrue(Phone.isValidPhone("61234567"));
+        assertTrue(Phone.isValidPhone("81234567"));
     }
 
     @Test
