@@ -158,7 +158,7 @@ Persistent data is stored as local JSON files, located in the same folder where 
 
 If a JSON file is malformed, the contents will not be loaded and a log message will be printed. A malformed JSON file includes files that have invalid JSON syntax or files that are missing crucial user data.
 
-No proactive measures are taken to rectify the issue, such as deleting the file or fixing the error. This decision was made to avoid prescribing a fixed approach to resolving malformed JSON files. Instead, we simply load sensible defaults, such as an empty Address Book when the user loads the application, and overwrite the malformed JSON file when the user inputs data.
+No proactive measures are taken to rectify the issue, such as deleting the file or fixing the error. This decision was made to avoid prescribing a fixed approach to resolving malformed JSON files. Instead, we simply load sensible defaults, such as placeholder data when the user loads the application, and overwrite the malformed JSON file when the user inputs data.
 
 For `data/cadethq.json`, this occurs when adding, editing or deleting the student contact list.
 
