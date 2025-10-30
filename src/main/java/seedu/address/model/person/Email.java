@@ -9,17 +9,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Email {
 
-    private static final String SPECIAL_CHARACTERS = "+_.-";
     public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format local-part@domain "
             + "and adhere to the following constraints:\n"
-            + "1. The local-part should only contain alphanumeric characters and these special characters, excluding "
-            + "the parentheses, (" + SPECIAL_CHARACTERS + "). The local-part may not start or end with any special "
-            + "characters.\n"
+            + "1. The local-part should only contain alphanumeric characters and underscores\n"
             + "2. This is followed by a '@' and then the domain name u.nus.edu.\n";
-    // alphanumeric and special characters
-    private static final String ALPHANUMERIC_NO_UNDERSCORE = "[^\\W_]+"; // alphanumeric characters except underscore
-    private static final String LOCAL_PART_REGEX = "^" + ALPHANUMERIC_NO_UNDERSCORE + "([" + SPECIAL_CHARACTERS + "]"
-            + ALPHANUMERIC_NO_UNDERSCORE + ")*";
+    // alphanumeric and underscores only
+    private static final String LOCAL_PART_REGEX = "[^\\W_]+";
     private static final String DOMAIN_REGEX = "u\\.nus\\.edu$";
     public static final String VALIDATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
 
@@ -33,7 +28,7 @@ public class Email {
     public Email(String email) {
         requireNonNull(email);
         checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
-        value = email;
+        value = email.toLowerCase();
     }
 
     /**

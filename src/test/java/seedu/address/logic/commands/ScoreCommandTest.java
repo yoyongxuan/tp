@@ -23,10 +23,10 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.ExamList;
-import seedu.address.model.person.ExamScores;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Score;
+import seedu.address.model.person.examscore.ExamList;
+import seedu.address.model.person.examscore.ExamScores;
+import seedu.address.model.person.examscore.Score;
 
 public class ScoreCommandTest {
 

@@ -19,8 +19,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.Identifier;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.ScoreCommand;
-import seedu.address.model.person.ExamList;
-import seedu.address.model.person.Score;
+import seedu.address.model.person.examscore.ExamList;
+import seedu.address.model.person.examscore.Score;
 
 public class ScoreCommandParserTest {
 

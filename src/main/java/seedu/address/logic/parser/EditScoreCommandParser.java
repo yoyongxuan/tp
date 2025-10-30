@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.EditScoreCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Exam;
+import seedu.address.model.person.examscore.Exam;
 
 /**
  * Parses input arguments and creates a new EditScoreCommand object

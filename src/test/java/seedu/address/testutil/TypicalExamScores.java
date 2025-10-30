@@ -3,7 +3,7 @@ package seedu.address.testutil;
 import static seedu.address.testutil.TypicalScores.FINAL_SCORE_A;
 import static seedu.address.testutil.TypicalScores.MIDTERM_SCORE_A;
 
-import seedu.address.model.person.ExamScores;
+import seedu.address.model.person.examscore.ExamScores;
 
 /**
  * A utility class containing a list of {@code ExamScore} objects to be used in tests.
