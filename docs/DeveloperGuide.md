@@ -31,7 +31,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of CadetHQ.
 
 Given below is a quick overview of main components and how they interact with each other.
 
@@ -43,9 +43,9 @@ Given below is a quick overview of main components and how they interact with ea
 
 The bulk of the app's work is done by the following four components:
 
-* [**`UI`**](#ui-component): The UI of the App.
+* [**`UI`**](#ui-component): The UI of CadetHQ.
 * [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`Model`**](#model-component): Holds the data of the CadetHQ in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
@@ -337,35 +337,40 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: CS1101S TAs
 
-* CS1101S tutors who need to manage a significant number of student contacts
-* are more active on their laptops/desktops than other devices
+* has a need to manage a significant number of student contacts, attendance and grades
+* is more active on their laptop/desktop than other devices
 * can type fast
 * prefers typing to mouse interactions
-* is very comfortable using CLI apps
+* is very comfortable using CLI applications
 * enjoy a minimalistic GUI
 
-**Value proposition**: Our app can help busy CS1101S tutors manage their students' contacts, submissions, and exam scores. The mix of CLI and GUI allows information to be delivered clearly and for quick interaction with the app.
+**Value proposition**: CadetHQ can help busy CS1101S TAs manage their students' contacts, tutorial attendance, and exam scores. The mix of CLI and GUI allows information to be delivered clearly and for quick interaction with CadetHQ.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                  | So that I can…​                                                        |
-| -------- | ----------------------------------------- | -------------------------------------------- | --------------------------------------------------------------------- |
-| `* * *`  | CS1101S TA                                | add a new student's contact                  | keep track of all my students in my course                            |
-| `* * *`  | CS1101S TA                                | view a student's contact information         | contact a student directly if needed                                  |
-| `* * *`  | CS1101S TA                                | view a student's grades                      | have a comprehensive overview of each student's performance           |
-| `* * *`  | CS1101S TA                                | record a student's grades                    | keep accurate records of their performance                            |
-| `* * *`  | CS1101S TA                                | delete a student's profile                   | remove it when it is not needed anymore                               |
-| `* * *`  | CS1101S TA                                | list out all students                        | see whose contacts I have saved                                       |
-| `* * *`  | CS1101S TA                                | view students' attendance                    | keep track of when a student has not shown up to class                |
-| `* * *`  | CS1101S TA                                | mark students' attendance                    | keep track of who goes to class                                       |
-| `* *`    | first time user                           | view a help message with all commands        | learn how to use the app                                              |
-| `* *`    | concerned TA                              | sort my students by grade                    | easily identify who needs more support                                |
-| `*`      | concerned TA                              | set up alerts for low participation          | help struggling students                                              |
+| Priority | As a …​              | I want to …​                                                | So that I can…​                                                        |
+|----------|----------------------|-------------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | CS1101S TA           | add a new student's profile                                 | keep track of all my students in my course                             |
+| `* * *`  | CS1101S TA           | edit a student's profile                                    | update the records when corrections are needed                         |
+| `* * *`  | CS1101S TA           | delete a student's profile                                  | remove the student's profile when it is not needed anymore             |
+| `* * *`  | CS1101S TA           | list out all students                                       | see whose contacts I have saved                                        |
+| `* * *`  | CS1101S TA           | view a student's contact information                        | contact a student directly if needed                                   |
+| `* * *`  | CS1101S TA           | view a student's grades                                     | have a comprehensive overview of each student's performance            |
+| `* * *`  | CS1101S TA           | view students' attendance                                   | keep track of when a student has not shown up to class                 |
+| `* * *`  | CS1101S TA           | search for a student's profile by name, index or student ID | quickly locate a student and access their information                  |
+| `* * *`  | CS1101S TA           | record a student's grades                                   | keep accurate records of their performance                             |
+| `* * *`  | CS1101S TA           | mark students' attendance                                   | keep track of who attends the tutorial class                           |
+| `* * *`  | CS1101S TA           | backup the recorded student information                     | retain the data I recorded after the application is closed             |
+| `* *`    | first time user      | view a help message with all commands                       | easily learn how to use CadetHQ                                        |
+| `* *`    | concerned CS1101S TA | sort my students by grade                                   | easily identify which students need more support                       |
+| `* *`    | concerned CS1101S TA | tag students with labels                                    | keep track of which students need more help with particular topics     |
+| `*`      | CS1101S TA           | use CadetHQ to manage my students contacts                  | keep my work and personal contacts separate                            |
+| `*`      | first time user      | view CadetHQ populated with sample data                     | understand how CadetHQ is structured before I customise it to my needs |
 
 *{More to be added}*
 
@@ -626,7 +631,7 @@ ___
 **MSS**
 
 1.  User requests to sort students by a specified exam.
-2.  Address Book shows a sorted list of persons from lowest score to highest. Those with unrecorded scores for the specified exam will have their names pushed to the bottom of the list.
+2.  Address Book shows a sorted list of persons from the lowest score to highest. Those with unrecorded scores for the specified exam will have their names pushed to the bottom of the list.
 
     Use case ends.
 ___
@@ -656,19 +661,25 @@ ___
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Mainstream OS**: Windows, Linux, Unix, MacOS.
+* **Private contact detail**: A contact detail that is not meant to be shared with others.
 * **Address Book**: The application used to manage student contacts, attendance and grades. In this document, it refers specifically to the CadetHQ system.
-* **CLI**: Command-Line Interface - A text-based interface for interacting with the Address Book by typing commands
-* **GUI**: Graphical User Interface - A visual interface that uses windows, buttons and menus, which is not the primary interface of the app
+* **CLI**: Command-Line Interface - A text-based interface for interacting with the Address Book by typing commands.
+* **GUI**: Graphical User Interface - A visual interface that uses windows, buttons and menus, which is not the primary interface of the app.
+* **NUS**: National University of Singapore.
 * **CS1101S**: Programming Methodology module for NUS Computer Science students.
-* **TA**: Teaching Assistant - The target users of the app
+* **TA**: Teaching Assistant - The target users of CadetHQ.
+* **Avenger**: Alternative name for CS1101S TAs.
+* **Student ID**: A unique identifier assigned to each student in NUS.
+* **Index**: The position of the student in the displayed list, starting from 1.
+* **JSON**: JavaScript Object Notation - A data format used to store and transfer information. CadetHQ stores data in JSON files.
+* **JAR**: Java Archive - The packaged form of the application that can be distributed and executed.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
 
-Given below are instructions to test the app manually.
+Given below are instructions to test the application manually.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
@@ -687,7 +698,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   1. Re-launch the application by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
