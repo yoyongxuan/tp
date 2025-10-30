@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENT_ID_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TELEGRAM_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
@@ -18,12 +19,12 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_HANDLE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_HANDLE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB_STR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB_STR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB_STR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB_STR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB_STR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -41,6 +42,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentId;
 import seedu.address.model.tag.Tag;
 
 public class AddCommandParserTest {
@@ -80,6 +82,10 @@ public class AddCommandParserTest {
         assertParseFailure(parser, validExpectedPersonString + EMAIL_DESC_AMY,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
+        // multiple telegram handles
+        assertParseFailure(parser, validExpectedPersonString + TELEGRAM_HANDLE_DESC_AMY,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TELEGRAM_HANDLE));
+
         // multiple fields repeated
         assertParseFailure(parser,
                 validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY
@@ -100,6 +106,10 @@ public class AddCommandParserTest {
         // invalid phone
         assertParseFailure(parser, validExpectedPersonString + INVALID_PHONE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
+
+        // invalid telegram handle
+        assertParseFailure(parser, validExpectedPersonString + INVALID_TELEGRAM_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TELEGRAM_HANDLE));
 
         // valid value followed by invalid value
 
@@ -129,25 +139,29 @@ public class AddCommandParserTest {
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
+        // missing student ID but has all prefixes
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + TELEGRAM_HANDLE_DESC_BOB, expectedMessage);
+
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB_STR + PHONE_DESC_BOB + EMAIL_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, STUDENT_ID_DESC_BOB + VALID_NAME_BOB_STR + PHONE_DESC_BOB
+                        + EMAIL_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB, expectedMessage);
 
         // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB_STR + EMAIL_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, STUDENT_ID_DESC_BOB + NAME_DESC_BOB + VALID_PHONE_BOB_STR + EMAIL_DESC_BOB
+                + TELEGRAM_HANDLE_DESC_BOB, expectedMessage);
 
         // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB_STR,
-                expectedMessage);
+        assertParseFailure(parser, STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB_STR
+                + TELEGRAM_HANDLE_DESC_BOB, expectedMessage);
 
-        // missing address prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB_STR,
-                expectedMessage);
+        // missing telegram handle prefix
+        assertParseFailure(parser, STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
+                + EMAIL_DESC_BOB + VALID_TELEGRAM_HANDLE_BOB_STR, expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB_STR + VALID_PHONE_BOB_STR + VALID_EMAIL_BOB_STR
-                        + VALID_ADDRESS_BOB_STR, expectedMessage);
+        assertParseFailure(parser, STUDENT_ID_DESC_BOB + VALID_NAME_BOB_STR + VALID_PHONE_BOB_STR
+                + VALID_EMAIL_BOB_STR + VALID_TELEGRAM_HANDLE_BOB_STR, expectedMessage);
     }
 
     @Test
@@ -155,7 +169,7 @@ public class AddCommandParserTest {
         // invalid student id
         assertParseFailure(parser, INVALID_STUDENT_ID_DESC + NAME_DESC_BOB + PHONE_DESC_BOB
                         + TELEGRAM_HANDLE_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                StudentId.MESSAGE_CONSTRAINTS);
 
         // invalid name
         assertParseFailure(parser, STUDENT_ID_DESC_BOB + INVALID_NAME_DESC + PHONE_DESC_BOB

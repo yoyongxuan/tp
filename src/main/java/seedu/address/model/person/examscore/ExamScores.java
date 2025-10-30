@@ -13,7 +13,6 @@ import java.util.Optional;
  */
 public class ExamScores {
 
-    private static final String IS_INTEGER_REGEX = "\\d+";
     private final Score[] arrayOfScores;
 
     /**
@@ -61,7 +60,6 @@ public class ExamScores {
      */
     public Optional<Integer> getScoreByExam(Exam exam) {
         Optional<Integer> result = Optional.empty();
-        // Score[] clonedScores = this.arrayOfScores;
         for (Score s: this.arrayOfScores) {
             if (s.getExam().equals(exam)) {
                 result = s.getScore();
@@ -121,7 +119,6 @@ public class ExamScores {
      * @param arrayOfScores
      */
     public static boolean isValidExamScores(Score[] arrayOfScores) {
-
         if (arrayOfScores.length != ExamList.numOfExams()) {
             return false;
         }

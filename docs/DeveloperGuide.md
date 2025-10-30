@@ -123,7 +123,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the Address Book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -142,7 +142,7 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both Address Book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -158,11 +158,11 @@ Persistent data is stored as local JSON files, located in the same folder where 
 
 If a JSON file is malformed, the contents will not be loaded and a log message will be printed. A malformed JSON file includes files that have invalid JSON syntax or files that are missing crucial user data.
 
-No proactive measures are taken to rectify the issue, such as deleting the file or fixing the error. This decision was made to avoid prescribing a fixed approach to resolving malformed JSON files. Instead, we simply load sensible defaults, such as an empty address book when the user loads the application, and overwrite the malformed JSON file when the user inputs data.
+No proactive measures are taken to rectify the issue, such as deleting the file or fixing the error. This decision was made to avoid prescribing a fixed approach to resolving malformed JSON files. Instead, we simply load sensible defaults, such as an empty Address Book when the user loads the application, and overwrite the malformed JSON file when the user inputs data.
 
 For `data/cadethq.json`, this occurs when adding, editing or deleting the student contact list.
 
-For `preferences.json`, this occurs in the `MainApp#initPrefs` method. 
+For `preferences.json`, this occurs in the `MainApp#initPrefs` method.
 
 For `config.json`, this occurs in the `MainApp#initConfig` method.
 
@@ -177,12 +177,17 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Sort Command
+**Overview**
 
 Sort command sorts the list of students according to the argument `n/` or `ex/`.
 
 Below is the sequence diagram that describes how sorting is done. The example below uses `sort ex/midterm` as an example:
 
+**Logic Component**
+
 ![SortSequenceDiagram](images/SortSequenceDiagram.png)
+
+**Details of implementation**
 
 Sorting is implemented through 3 comparators (`Comparator<Person>`) in the `Person` class as below:
 * `NAME_COMPARATOR`: Used to sort in ascending alphabetical order.
@@ -196,37 +201,67 @@ Sorting is implemented through 3 comparators (`Comparator<Person>`) in the `Pers
 * `sortPersonsByMidterm()`
 * `sortPersonsByFinal()`
 
+### Edit the maximum score of an exam
+**Overview**
+
+The `maxscore` command allows the user to edit the maximum score of an exam in the Address Book.
+
+The sequence diagrams below illustrates the interactions within the `Logic` and `Model` components, taking `execute("maxscore 1 ex/midterm ms/90")` API call as an example.
+
+**Logic Component**
+
+![EditScoreCommand Sequence Diagram Logic Component](images/EditScoreCommandSequenceDiagram-Logic.png)
+
+**Details**:
+1. The `LogicManager` object will be called to execute the input.
+2. The `AddressBookParser` object will identify the command as `EditScoreCommand`, and create an `EditScoreCommandParser`.
+3. The `EditScoreCommandParser` will parse `1 ex/midterm ms/90` and create an `EditCommand` which is returned to the `LogicManager`.
+4. The `LogicManager` calls `execute` on the `EditScoreCommand` object, which interacts with the Model component. (drawn as a single step for simplicity)
+5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+**Model Component**
+
+![EditScoreCommand Sequence Diagram Model Component](images/EditScoreCommandSequenceDiagram-Model.png)
+
+**Details**:
+1. The `execute` method in `EditScoreCommand` runs.
+2. The `EditScoreCommand` object calls `isValidExam` and `isNewMaxScoreValid` to verify that `midterm` exists, and that the new max score meets all constraints.
+- (Not shown in diagram) The `isNewMaxScoreValid` method compares the new max score `90` against all the recorded scores for all students, for the exam `midterm`. The new max score must be greater than or equal to all recorded scores for it to be valid.
+3. The `EditScoreCommand` object calls `setMaxScore` on `Exam` to change the max score.
+4. The `EditScoreCommand` object calls `getFilteredPersonList` on `Model` to retrieve all displayed people.
+5. (Simplified in diagram) For each `Person` in the person list, a clone is created with the same information. The method `setPerson` of `Model` replaces each `Person` with the cloned `Person`, ensuring that the updated max score is reflected in the UI.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedAddressBook#commit()` — Saves the current Address Book state in its history.
+* `VersionedAddressBook#undo()` — Restores the previous Address Book state from its history.
+* `VersionedAddressBook#redo()` — Restores a previously undone Address Book state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial Address Book state, and the `currentStatePointer` pointing to that single Address Book state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the Address Book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the Address Book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted Address Book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified Address Book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the Address Book state will not be saved into the `addressBookStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous Address Book state, and restores the Address Book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -247,17 +282,18 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the Address Book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest Address Book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the Address Book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all Address Book
+states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -269,7 +305,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire Address Book.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
@@ -335,27 +371,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Address Book` and the **Actor** is the `user`, unless specified otherwise)
 ___
 **Use case: Add a student contact**
 
 **MSS**
 
 1.  User requests to add student contact, inputting student's ID, name and contact details
-2.  AddressBook creates student contact
-3.  AddressBook displays student contact
+2.  Address Book creates student contact
+3.  Address Book displays student contact
 
     Use case ends.
 
 **Extensions**
 
 * 1a. Student details missing in input.
-    * 1a1. AddressBook shows an error message
+    * 1a1. Address Book shows an error message
 
       Use case ends.
 
 * 1b. A contact with the given student ID already exists.
-    * 1b1. AddressBook shows an error message
+    * 1b1. Address Book shows an error message
 
       Use case ends.
 
@@ -367,7 +403,7 @@ ___
 
 1.  User requests to <u>list students</u>
 2.  User requests to delete a specific student in the list using index in list
-3.  AddressBook deletes the student's contact
+3.  Address Book deletes the student's contact
 
     Use case ends.
 
@@ -379,7 +415,7 @@ ___
 
 * 2a. The given index is invalid.
 
-    * 2a1. AddressBook shows an error message.
+    * 2a1. Address Book shows an error message.
 
       Use case resumes at step 2.
 ___
@@ -388,7 +424,7 @@ ___
 **MSS**
 
 1.  User requests to delete a specific student in the list using Student ID
-2.  AddressBook deletes the student's contact
+2.  Address Book deletes the student's contact
 
     Use case ends.
 
@@ -396,13 +432,13 @@ ___
 
 * 1a. The given Student ID is invalid.
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. Address Book shows an error message.
 
       Use case resumes at step 1.
 
 * 1b. The given Student ID is not in the list.
 
-    * 1b1. AddressBook shows an error message.
+    * 1b1. Address Book shows an error message.
 
       Use case resumes at step 1.
 ___
@@ -412,7 +448,7 @@ ___
 
 1.  User requests to <u>list students</u>
 2.  User requests to view a specific student in the list
-3.  AddressBook displays the student's contact
+3.  Address Book displays the student's contact
 
     Use case ends.
 
@@ -424,7 +460,7 @@ ___
 
 * 2a. The given index is invalid.
 
-    * 2a1. AddressBook shows an error message.
+    * 2a1. Address Book shows an error message.
 
       Use case resumes at step 2.
 ___
@@ -433,7 +469,7 @@ ___
 **MSS**
 
 1.  User requests to view a specific student using Student ID
-2.  AddressBook displays the student's contact
+2.  Address Book displays the student's contact
 
     Use case ends.
 
@@ -441,13 +477,13 @@ ___
 
 * 1a. The given Student ID is invalid.
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. Address Book shows an error message.
 
       Use case resumes at step 2.
 
 * 1b. The given Student ID is not in the list.
 
-    * 1b1. AddressBook shows an error message.
+    * 1b1. Address Book shows an error message.
 
       Use case resumes at step 1.
 ___
@@ -457,8 +493,8 @@ ___
 
 1.  User requests to <u>list students</u>
 2.  User requests to record grade of a specific student in the list, inputting test name and score
-3.  AddressBook updates student's record
-4.  AddressBook displays student's grade
+3.  Address Book updates student's record
+4.  Address Book displays student's grade
 
     Use case ends.
 
@@ -470,19 +506,19 @@ ___
 
 * 2a. The given index is invalid.
 
-    * 2a1. AddressBook shows an error message.
+    * 2a1. Address Book shows an error message.
 
       Use case resumes at step 2.
 
 * 2b. Details missing in input.
 
-    * 2b1. AddressBook shows an error message.
+    * 2b1. Address Book shows an error message.
 
       Use case resumes at step 2.
 
 * 2c. Details are not in an acceptable format.
 
-    * 2c1. AddressBook shows an error message.
+    * 2c1. Address Book shows an error message.
 
       Use case resumes at step 2.
 
@@ -492,8 +528,8 @@ ___
 **MSS**
 
 1.  User requests to record grade of a specific student using Student ID, inputting test name and score
-2.  AddressBook updates student's record
-3.  AddressBook displays student's grade
+2.  Address Book updates student's record
+3.  Address Book displays student's grade
 
     Use case ends.
 
@@ -501,25 +537,25 @@ ___
 
 * 1a. The given Student ID is invalid.
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. Address Book shows an error message.
 
       Use case resumes at step 1.
 
 * 1b. The given Student ID is not in the list.
 
-    * 1b1. AddressBook shows an error message.
+    * 1b1. Address Book shows an error message.
 
       Use case resumes at step 1.
 
 * 1c. Details missing in input.
 
-    * 1c1. AddressBook shows an error message.
+    * 1c1. Address Book shows an error message.
 
       Use case resumes at step 1.
 
 * 1d. Details are not in an acceptable format.
 
-    * 1d1. AddressBook shows an error message.
+    * 1d1. Address Book shows an error message.
 
       Use case resumes at step 1.
 ___
@@ -529,8 +565,8 @@ ___
 
 1.  User requests to <u>list students</u>
 2.  User requests to record attendance of a specific student in the list, inputting tutorial number
-3.  AddressBook inverts student's attendance
-4.  AddressBook displays student's attendance
+3.  Address Book inverts student's attendance
+4.  Address Book displays student's attendance
 
     Use case ends.
 
@@ -542,13 +578,13 @@ ___
 
 * 2a. The given index is invalid.
 
-    * 2a1. AddressBook shows an error message.
+    * 2a1. Address Book shows an error message.
 
       Use case resumes at step 2.
 
 * 2b. Details missing in input.
 
-    * 2b1. AddressBook shows an error message.
+    * 2b1. Address Book shows an error message.
 
       Use case resumes at step 2.
 ___
@@ -557,8 +593,8 @@ ___
 **MSS**
 
 1.  User requests to record attendance of a specific student using Student ID, inputting tutorial number
-2.  AddressBook inverts student's attendance 
-3.  AddressBook displays student's attendance
+2.  Address Book inverts student's attendance 
+3.  Address Book displays student's attendance
 
     Use case ends.
 
@@ -566,13 +602,13 @@ ___
 
 * 1a. The given index is invalid.
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. Address Book shows an error message.
 
       Use case resumes at step 1.
 
 * 1b. Details missing in input.
 
-    * 1b1. AddressBook shows an error message.
+    * 1b1. Address Book shows an error message.
 
       Use case resumes at step 1.
 ___
@@ -581,7 +617,7 @@ ___
 **MSS**
 
 1.  User requests to list students
-2.  AddressBook shows a list of persons
+2.  Address Book shows a list of persons
 
     Use case ends.
 
@@ -590,7 +626,7 @@ ___
 **MSS**
 
 1.  User requests to sort students by a specified exam.
-2.  AddressBook shows a sorted list of persons from lowest score to highest. Those with unrecorded scores for the specified exam will have their names pushed to the bottom of the list.
+2.  Address Book shows a sorted list of persons from lowest score to highest. Those with unrecorded scores for the specified exam will have their names pushed to the bottom of the list.
 
     Use case ends.
 ___
@@ -599,7 +635,7 @@ ___
 **MSS**
 
 1.  User requests to sort students by name
-2.  AddressBook shows a sorted list of persons in ascending alphabetical order
+2.  Address Book shows a sorted list of persons in ascending alphabetical order
 
     Use case ends.
 ___
@@ -614,7 +650,7 @@ ___
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Should work without installing an installer.
-5.  Should be usable by a Avenger that has never used similar address book applications before.
+5.  Should be usable by a Avenger that has never used similar Address Book applications before.
 6.  Should be for a single user only (i.e. not a multi-user product, no shared file storage mechanism, no application running in a shared computer)
 7.  A user should be able to access command help information at any time.
 
@@ -622,12 +658,11 @@ ___
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **CLI**: Command-Line Interface - A text-based interface for interacting with the AddressBook by typing commands
+* **Address Book**: The application used to manage student contacts, attendance and grades. In this document, it refers specifically to the CadetHQ system.
+* **CLI**: Command-Line Interface - A text-based interface for interacting with the Address Book by typing commands
 * **GUI**: Graphical User Interface - A visual interface that uses windows, buttons and menus, which is not the primary interface of the app
 * **CS1101S**: Programming Methodology module for NUS Computer Science students.
 * **TA**: Teaching Assistant - The target users of the app
-* **Avenger**: CS1101S TA
-* **Cadet**: CS1101S Student
 
 --------------------------------------------------------------------------------------------------------------------
 
