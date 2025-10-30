@@ -83,15 +83,15 @@ Note that throughout this document, we will often refer to CadetHQ as Address Bo
 ## Contact Details
 A table of all the information that can be associated with a contact
 
-| Name             | Prefix | Example         | Constraints                                                                                                                                                                                                            |
-|------------------|--------|-----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Index            |        | 1               | - Must be a positive integer                                                                                                                                 |
-| Student ID (SID) |        | A0123456A       | - Must be 9-characters long <br> - First character must be "A" or “a” <br> - Second to eighth characters must be a number<br> - Last character must be an alphabet <br> (case-insensitive)                             |
-| Name             | n/     | John Doe        | - Only alphanumeric characters and spaces                                                                                                                                                                              |
-| Phone number     | p/     | 98765432        | - Must consist of 8 digits <br> - Must start with the number "8" or "9"                                                                                                                                                |
-| Email            | e/     | johnd@u.nus.edu | - Must be of the format *local-part* @u.nus.edu<br>  - *local-part* should only contain alphanumeric characters  and these special characters:  + _ . - <br> - *local-part* may not start or end with special characters |
-| Telegram handle  | h/     | JohnDoe         | - Must start with "@" <br> - Remaining characters must be alphanumeric or underscores                                                                                                                                  |
-| Tag              | t/     | Friend          | - Should be alphanumeric                                                                                                                                                                                               |
+| Name             | Prefix | Example         | Constraints                                                                                                                                                                                |
+|------------------|--------|-----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Index            |        | 1               | - Must be a positive integer                                                                                                                                                               |
+| Student ID (SID) |        | A0123456A       | - Must be 9-characters long <br> - First character must be "A" or “a” <br> - Second to eighth characters must be a number<br> - Last character must be an alphabet <br> (case-insensitive) |
+| Name             | n/     | John Doe        | - Only alphanumeric characters and spaces                                                                                                                                                  |
+| Phone number     | p/     | 98765432        | - Must consist of 8 digits <br> - Must start with the number "8" or "9"                                                                                                                    |
+| Email            | e/     | johnd@u.nus.edu | - Must be of the format *local-part* @u.nus.edu<br>  - *local-part* should only contain alphanumeric characters                                                           |
+| Telegram handle  | h/     | JohnDoe         | - Must start with "@" <br> - Remaining characters must be alphanumeric or underscores                                                                                                      |
+| Tag              | t/     | Friend          | - Should be alphanumeric                                                                                                                                                                   |
 
 
 The index refers to the index number shown in the displayed person list.
@@ -196,7 +196,7 @@ You can remove all the student’s tags by typing `t/` without specifying any ta
 </div>
 
 Examples:
-*  `edit 1 p/91234567 e/alex_yeoh@u.nus.edu` Edits the phone number and email address of the 1st student to be `91234567` and `alex_yeoh@u.nus.edu` respectively.
+*  `edit 1 p/91234567 e/alexyeohh@u.nus.edu` Edits the phone number and email address of the 1st student to be `91234567` and `alexyeohh@u.nus.edu` respectively.
 *  `edit A0000000A n/Betsy Crower t/ p/92345678 h/@BetsyC` Edits the name of the student with SID `A0000000A` to be `Betsy Crower`, with phone number `92345678` and Telegram handle `@BetsyC`, and clears all existing tags.
 ![result for `edit A0000000A n/Betsy Crower t/ p/92345678 h/@BetsyC`](images/editSid.png)
 
