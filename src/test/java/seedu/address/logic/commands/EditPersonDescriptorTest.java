@@ -5,10 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB_STR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EXAM_SCORES_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB_STR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB_STR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB_STR;
 
 import org.junit.jupiter.api.Test;
 
@@ -47,8 +50,20 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB_STR).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
+        // different telegram handle -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB_STR).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
         // different tags -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different attendance -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAttendance(VALID_ATTENDANCE_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different exam scores -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withExamScores(VALID_EXAM_SCORES_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
@@ -60,7 +75,8 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", telegramHandle="
                 + editPersonDescriptor.getTelegramHandle().orElse(null) + ", tags="
-                + editPersonDescriptor.getTags().orElse(null) + ", exam scores="
+                + editPersonDescriptor.getTags().orElse(null) + ", attendance="
+                + editPersonDescriptor.getAttendance().orElse(null) + ", exam scores="
                 + editPersonDescriptor.getExamScores().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
