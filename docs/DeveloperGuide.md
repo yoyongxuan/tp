@@ -192,7 +192,7 @@ Below is the sequence diagram that describes how sorting is done. The example be
 Sorting is implemented through 3 comparators (`Comparator<Person>`) in the `Person` class as below:
 * `NAME_COMPARATOR`: Used to sort in ascending alphabetical order.
 * `MIDTERM_COMPARATOR`: Used to sort in ascending midterm score order. Students with no recorded midterm scores will be flushed to the end of the list.
-* `FINAL_COMPARATOR`: Same as MIDTERM_COMPARATOR, but compares final score instead
+* `FINAL_COMPARATOR`: Same as MIDTERM_COMPARATOR, but compares final score instead.
 
 `Model` also contains a method to sort by exam (`sortPersonsByExam(EXAM)`) and by name (`sortPersonsByName()`).
 
