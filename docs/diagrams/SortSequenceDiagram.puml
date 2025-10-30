@@ -50,7 +50,7 @@ deactivate AddressBookParser
 LogicManager -> SortCommand : execute(m)
 activate SortCommand
 
-SortCommand -> Model : sortPersonsByExam(MIDTERM)
+SortCommand -> Model : sortPersonsByExam(midterm)
 activate Model
 
 Model -> AddressBook : sortPersonsByMidterm()
