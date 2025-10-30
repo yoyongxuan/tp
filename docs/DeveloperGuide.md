@@ -187,7 +187,7 @@ Below is the sequence diagram that describes how sorting is done. The example be
 
 ![SortSequenceDiagram](images/SortSequenceDiagram.png)
 
-**Details of implementation**
+**Details**:
 
 Sorting is implemented through 3 comparators (`Comparator<Person>`) in the `Person` class as below:
 * `NAME_COMPARATOR`: Used to sort in ascending alphabetical order.
