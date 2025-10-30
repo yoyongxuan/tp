@@ -175,6 +175,7 @@ public class EditCommand extends Command {
             setStudentId(toCopy.studentId);
             setTelegramHandle(toCopy.telegramHandle);
             setTags(toCopy.tags);
+            setAttendance(toCopy.attendance);
             setExamScores(toCopy.examScores);
         }
 
@@ -276,6 +277,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(telegramHandle, otherEditPersonDescriptor.telegramHandle)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(attendance, otherEditPersonDescriptor.attendance)
                     && Objects.equals(examScores, otherEditPersonDescriptor.examScores);
         }
 
@@ -287,6 +289,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("telegramHandle", telegramHandle)
                     .add("tags", tags)
+                    .add("attendance", attendance)
                     .add("exam scores", examScores)
                     .toString();
         }
