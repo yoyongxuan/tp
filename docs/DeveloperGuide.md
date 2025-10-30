@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Developer Guide
+title: CadetHQ Developer Guide
 ---
 * Table of Contents
 {:toc}
@@ -10,7 +10,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
-* The automated GUI tests using TestFX was adapted from the AddressBook-Level4 project by the same creator
+* The automated GUI tests using TestFX was adapted from the AddressBook-Level4 project by the same creator.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -59,7 +59,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -289,12 +289,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -343,12 +337,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | concerned TA                              | sort my students by grade                    | easily identify who needs more support                                |
 | `*`      | concerned TA                              | set up alerts for low participation          | help struggling students                                              |
 
-*{More to be added}*
-
 ### Use cases
 
 (For all use cases below, the **System** is the `Address Book` and the **Actor** is the `user`, unless specified otherwise)
+
+
 ___
+
 **Use case: Add a student contact**
 
 **MSS**
@@ -371,8 +366,8 @@ ___
 
       Use case ends.
 
-
 ___
+
 **Use case: Delete a student contact using list index**
 
 **MSS**
@@ -394,7 +389,9 @@ ___
     * 2a1. Address Book shows an error message.
 
       Use case resumes at step 2.
+
 ___
+
 **Use case: Delete a student contact using Student ID**
 
 **MSS**
@@ -417,7 +414,9 @@ ___
     * 1b1. Address Book shows an error message.
 
       Use case resumes at step 1.
+
 ___
+
 **Use case: View a student contact via list index**
 
 **MSS**
@@ -439,7 +438,9 @@ ___
     * 2a1. Address Book shows an error message.
 
       Use case resumes at step 2.
+
 ___
+
 **Use case: View a student contact via Student ID**
 
 **MSS**
@@ -462,7 +463,9 @@ ___
     * 1b1. Address Book shows an error message.
 
       Use case resumes at step 1.
+
 ___
+
 **Use case: Record a student's grade via list index**
 
 **MSS**
@@ -499,6 +502,7 @@ ___
       Use case resumes at step 2.
 
 ___
+
 **Use case: Record a student's grade via Student ID**
 
 **MSS**
@@ -534,7 +538,9 @@ ___
     * 1d1. Address Book shows an error message.
 
       Use case resumes at step 1.
+
 ___
+
 **Use case: Record a student's attendance via list index**
 
 **MSS**
@@ -563,7 +569,9 @@ ___
     * 2b1. Address Book shows an error message.
 
       Use case resumes at step 2.
+
 ___
+
 **Use case: Record a student's attendance via Student ID**
 
 **MSS**
@@ -588,6 +596,7 @@ ___
 
       Use case resumes at step 1.
 ___
+
 **Use case: list all students**
 
 **MSS**
@@ -597,6 +606,8 @@ ___
 
     Use case ends.
 
+___
+
 **Use case: sort all students by exam score**
 
 **MSS**
@@ -605,7 +616,9 @@ ___
 2.  Address Book shows a sorted list of persons from highest score to lowest
 
     Use case ends.
+
 ___
+
 **Use case: sort all students by name**
 
 **MSS**
@@ -614,21 +627,25 @@ ___
 2.  Address Book shows a sorted list of persons alphabetically
 
     Use case ends.
-___
-*{More to be added}*
 
+___
 
 
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Should work without installing an installer.
-5.  Should be usable by a Avenger that has never used similar Address Book applications before.
-6.  Should be for a single user only (i.e. not a multi-user product, no shared file storage mechanism, no application running in a shared computer)
-7.  A user should be able to access command help information at any time.
+2.  Should be able to work with different screen resolutions as long as it meets the minimum window size of 450 x 600px.
+3.  Should be able to start up within **3 seconds** on modern computer hardware (within the last 10 years).
+4.  Should be able to hold up to **1000 persons** without a noticeable sluggishness in performance for typical usage.
+5.  Command execution should not take more than **2 seconds**. For example, editing or adding a person should not take more than 2 seconds for the changes to be reflected in CadetHQ.
+6.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+7.  Should work without installing an installer.
+8.  Should be usable by a Avenger that has never used similar Address Book applications before.
+9.  Should be for a single user only (i.e. not a multi-user product, no shared file storage mechanism, no application running in a shared computer).
+10. Invalid commands should not crash CadetHQ, but show an error message instead.
+11. A user should be able to access command help information at any time.
+12. The source code should be open source.
 
 ### Glossary
 
@@ -639,6 +656,18 @@ ___
 * **GUI**: Graphical User Interface - A visual interface that uses windows, buttons and menus, which is not the primary interface of the app
 * **CS1101S**: Programming Methodology module for NUS Computer Science students.
 * **TA**: Teaching Assistant - The target users of the app
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+1. **Implement more exams/assessments**: CadetHQ currently only supports the recording of midterm and final scores. Adding the ability to record more assessments such as <u>reading assessments</u> and <u>practical exams</u> allows TAs to monitor their students progress better throughout the semester.
+
+2. **Improve GUI for displaying of exam scores**: The current GUI displays the midterm and exam scores under each student. As more assessments are added, this may clutter the screen. A **dropdown menu** can be added to only show the exam scores when clicked.
+
+3. **Mass attendance marking**: CadetHQ currently only allows the user to mark each student's attendance one at a time. Adding the ability to mass record attendance makes it easier to mark all students in a tutorial. Some proposed implementations are shown below:
+    * `massattend 1-10 1`: marks attendance for students from index 1 to 10 in the list for tutorial 1.
+    * `massattend t/TAG 5`: marks attendance for students with the specified `TAG` for tutorial 5.
 
 --------------------------------------------------------------------------------------------------------------------
 
