@@ -175,6 +175,7 @@ public class EditCommand extends Command {
             setStudentId(toCopy.studentId);
             setTelegramHandle(toCopy.telegramHandle);
             setTags(toCopy.tags);
+            setAttendance(toCopy.attendance);
             setExamScores(toCopy.examScores);
         }
 
