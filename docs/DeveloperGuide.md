@@ -625,6 +625,7 @@ ___
     * 1b1. Address Book shows an error message.
 
       Use case resumes at step 1.
+
 ___
 
 **Use case: list all students**
