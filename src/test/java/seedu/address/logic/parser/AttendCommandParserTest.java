@@ -72,6 +72,6 @@ public class AttendCommandParserTest {
     @Test
     public void parse_numberFormatException_failure() {
         assertParseFailure(parser, AttendCommand.COMMAND_WORD + " 1" + " random words instead of number",
-                MESSAGE_INVALID_FORMAT);
+                MESSAGE_WRONG_TUTORIAL);
     }
 }
