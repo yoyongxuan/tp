@@ -31,7 +31,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of CadetHQ.
 
 Given below is a quick overview of main components and how they interact with each other.
 
@@ -43,9 +43,9 @@ Given below is a quick overview of main components and how they interact with ea
 
 The bulk of the app's work is done by the following four components:
 
-* [**`UI`**](#ui-component): The UI of the App.
+* [**`UI`**](#ui-component): The UI of CadetHQ.
 * [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`Model`**](#model-component): Holds the data of the CadetHQ in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
@@ -118,7 +118,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2526S1-CS2103T-T11-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="600" />
 
 
 The `Model` component,
@@ -130,7 +130,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" width="600" />
 
 </div>
 
@@ -158,7 +158,7 @@ Persistent data is stored as local JSON files, located in the same folder where 
 
 If a JSON file is malformed, the contents will not be loaded and a log message will be printed. A malformed JSON file includes files that have invalid JSON syntax or files that are missing crucial user data.
 
-No proactive measures are taken to rectify the issue, such as deleting the file or fixing the error. This decision was made to avoid prescribing a fixed approach to resolving malformed JSON files. Instead, we simply load sensible defaults, such as an empty Address Book when the user loads the application, and overwrite the malformed JSON file when the user inputs data.
+No proactive measures are taken to rectify the issue, such as deleting the file or fixing the error. This decision was made to avoid prescribing a fixed approach to resolving malformed JSON files. Instead, we simply load sensible defaults, such as placeholder data when the user loads the application, and overwrite the malformed JSON file when the user inputs data.
 
 For `data/cadethq.json`, this occurs when adding, editing or deleting the student contact list.
 
@@ -175,6 +175,31 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Sort Command
+**Overview**
+
+Sort command sorts the list of students according to the argument `n/` or `ex/`.
+
+Below is the sequence diagram that describes how sorting is done. The example below uses `sort ex/midterm` as an example:
+
+**Logic Component**
+
+![SortSequenceDiagram](images/SortSequenceDiagram.png)
+
+**Details**:
+
+Sorting is implemented through 3 comparators (`Comparator<Person>`) in the `Person` class as below:
+* `NAME_COMPARATOR`: Used to sort in ascending alphabetical order.
+* `MIDTERM_COMPARATOR`: Used to sort in ascending midterm score order. Students with no recorded midterm scores will be flushed to the end of the list.
+* `FINAL_COMPARATOR`: Same as MIDTERM_COMPARATOR, but compares final score instead.
+
+`Model` also contains a method to sort by exam (`sortPersonsByExam(EXAM)`) and by name (`sortPersonsByName()`).
+
+`AddressBook` has 3 sorting methods that utilise the 3 `Comparator<Person>` above for sorting:
+* `sortPersonsbyName()`
+* `sortPersonsByMidterm()`
+* `sortPersonsByFinal()`
 
 ### Edit the maximum score of an exam
 **Overview**
@@ -306,36 +331,41 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: CS1101S TAs
 
-* CS1101S tutors who need to manage a significant number of student contacts
-* are more active on their laptops/desktops than other devices
+* has a need to manage a significant number of student contacts, attendance and grades
+* is more active on their laptop/desktop than other devices
 * can type fast
 * prefers typing to mouse interactions
-* is very comfortable using CLI apps
+* is very comfortable using CLI applications
 * enjoy a minimalistic GUI
 
-**Value proposition**: Our app can help busy CS1101S tutors manage their students' contacts, submissions, and exam scores. The mix of CLI and GUI allows information to be delivered clearly and for quick interaction with the app.
+**Value proposition**: CadetHQ can help busy CS1101S TAs manage their students' contacts, tutorial attendance, and exam scores. The mix of CLI and GUI allows information to be delivered clearly and for quick interaction with CadetHQ.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                  | So that I can…​                                                        |
-| -------- | ----------------------------------------- | -------------------------------------------- | --------------------------------------------------------------------- |
-| `* * *`  | CS1101S TA                                | add a new student's contact                  | keep track of all my students in my course                            |
-| `* * *`  | CS1101S TA                                | view a student's contact information         | contact a student directly if needed                                  |
-| `* * *`  | CS1101S TA                                | view a student's grades                      | have a comprehensive overview of each student's performance           |
-| `* * *`  | CS1101S TA                                | record a student's grades                    | keep accurate records of their performance                            |
-| `* * *`  | CS1101S TA                                | delete a student's profile                   | remove it when it is not needed anymore                               |
-| `* * *`  | CS1101S TA                                | list out all students                        | see whose contacts I have saved                                       |
-| `* * *`  | CS1101S TA                                | view students' attendance                    | keep track of when a student has not shown up to class                |
-| `* * *`  | CS1101S TA                                | mark students' attendance                    | keep track of who goes to class        |
-| `* * *`  | CS1101S TA                                | edit the maximum score of different exams    | change the maximum score of exams if there are any changes to the format made by the professors |
-| `* *`    | first time user                           | view a help message with all commands        | learn how to use the app                                              |
-| `* *`    | concerned TA                              | sort my students by grade                    | easily identify who needs more support                                |
-| `*`      | concerned TA                              | set up alerts for low participation          | help struggling students                                              |
+| Priority | As a …​              | I want to …​                                                | So that I can…​                                                        |
+|----------|----------------------|-------------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | CS1101S TA           | add a new student's profile                                 | keep track of all my students in my course                             |
+| `* * *`  | CS1101S TA           | edit a student's profile                                    | update the records when corrections are needed                         |
+| `* * *`  | CS1101S TA           | delete a student's profile                                  | remove the student's profile when it is not needed anymore             |
+| `* * *`  | CS1101S TA           | list out all students                                       | see whose contacts I have saved                                        |
+| `* * *`  | CS1101S TA           | view a student's contact information                        | contact a student directly if needed                                   |
+| `* * *`  | CS1101S TA           | view a student's grades                                     | have a comprehensive overview of each student's performance            |
+| `* * *`  | CS1101S TA           | view students' attendance                                   | keep track of when a student has not shown up to class                 |
+| `* * *`  | CS1101S TA           | search for a student's profile by name, index or student ID | quickly locate a student and access their information                  |
+| `* * *`  | CS1101S TA           | record a student's grades                                   | keep accurate records of their performance                             |
+| `* * *`  | CS1101S TA           | edit the maximum score of the exams                         | edit the maximum score of exams, in the event of any changes           |
+| `* * *`  | CS1101S TA           | mark students' attendance                                   | keep track of who attends the tutorial class                           |
+| `* * *`  | CS1101S TA           | backup the recorded student information                     | retain the data I recorded after the application is closed             |
+| `* *`    | first time user      | view a help message with all commands                       | easily learn how to use CadetHQ                                        |
+| `* *`    | concerned CS1101S TA | sort my students by grade                                   | easily identify which students need more support                       |
+| `* *`    | concerned CS1101S TA | tag students with labels                                    | keep track of which students need more help with particular topics     |
+| `*`      | CS1101S TA           | use CadetHQ to manage my students contacts                  | keep my work and personal contacts separate                            |
+| `*`      | first time user      | view CadetHQ populated with sample data                     | understand how CadetHQ is structured before I customise it to my needs |
 
 ### Use cases
 
@@ -595,6 +625,7 @@ ___
     * 1b1. Address Book shows an error message.
 
       Use case resumes at step 1.
+
 ___
 
 **Use case: list all students**
@@ -612,8 +643,8 @@ ___
 
 **MSS**
 
-1.  User requests to sort students by a specified exam score
-2.  Address Book shows a sorted list of persons from highest score to lowest
+1.  User requests to sort students by a specified exam.
+2.  Address Book shows a sorted list of persons from the lowest score to highest. Those with unrecorded scores for the specified exam will have their names pushed to the bottom of the list.
 
     Use case ends.
 
@@ -624,7 +655,7 @@ ___
 **MSS**
 
 1.  User requests to sort students by name
-2.  Address Book shows a sorted list of persons alphabetically
+2.  Address Book shows a sorted list of persons in ascending alphabetical order
 
     Use case ends.
 
@@ -637,11 +668,11 @@ ___
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to work with different screen resolutions as long as it meets the minimum window size of 450 x 600px.
 3.  Should be able to start up within **3 seconds** on modern computer hardware (within the last 10 years).
-4.  Should be able to hold up to **1000 persons** without a noticeable sluggishness in performance for typical usage.
+4.  Should be able to hold up to **1000 people** without a noticeable sluggishness in performance for typical usage.
 5.  Command execution should not take more than **2 seconds**. For example, editing or adding a person should not take more than 2 seconds for the changes to be reflected in CadetHQ.
 6.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 7.  Should work without installing an installer.
-8.  Should be usable by a Avenger that has never used similar Address Book applications before.
+8.  Should be usable by a CS1101S TA that has never used similar Address Book applications before.
 9.  Should be for a single user only (i.e. not a multi-user product, no shared file storage mechanism, no application running in a shared computer).
 10. Invalid commands should not crash CadetHQ, but show an error message instead.
 11. A user should be able to access command help information at any time.
@@ -649,13 +680,18 @@ ___
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Mainstream OS**: Windows, Linux, Unix, MacOS.
+* **Private contact detail**: A contact detail that is not meant to be shared with others.
 * **Address Book**: The application used to manage student contacts, attendance and grades. In this document, it refers specifically to the CadetHQ system.
-* **CLI**: Command-Line Interface - A text-based interface for interacting with the Address Book by typing commands
-* **GUI**: Graphical User Interface - A visual interface that uses windows, buttons and menus, which is not the primary interface of the app
+* **CLI**: Command-Line Interface - A text-based interface for interacting with the Address Book by typing commands.
+* **GUI**: Graphical User Interface - A visual interface that uses windows, buttons and menus, which is not the primary interface of the app.
+* **NUS**: National University of Singapore.
 * **CS1101S**: Programming Methodology module for NUS Computer Science students.
-* **TA**: Teaching Assistant - The target users of the app
+* **TA**: Teaching Assistant - The target users of CadetHQ.
+* **Student ID**: A unique identifier assigned to each student in NUS.
+* **Index**: The position of the student in the displayed list, starting from 1.
+* **JSON**: JavaScript Object Notation - A data format used to store and transfer information. CadetHQ stores data in JSON files.
+* **JAR**: Java Archive - The packaged form of the application that can be distributed and executed.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -675,7 +711,7 @@ ___
 
 ## **Appendix: Instructions for manual testing**
 
-Given below are instructions to test the app manually.
+Given below are instructions to test the application manually.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
@@ -688,16 +724,42 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   2. Re-launch the application by double-clicking the jar file.<br>
+      Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
+
+### Adding a person
+
+1. Adding a person
+
+   1. Test case: `add A0235410A n/John Doe p/98765432 e/johnd@u.nus.edu h/@John t/friends t/owesMoney`<br>
+      Expected: Contact is added to the list. Details of added contact shown in the status message.
+
+   2. Test case: `add A0235411A n/Jon Doe p/98765431 e/jond@u.nus.edu t/friends t/owesMoney`<br>
+      Expected: Contact is not added to the list. Error details shown in the status message.
+
+   3. Test case: `add A0235411A n/Jon Doe p/98765431 e/jond@gmail.com`<br>
+      Expected: Contact is not added to the list. Error details shown in the status message.
+
+   4. Other incorrect add commands to try: `add`, `add ...`(Any combination of missing fields), `...`<br>
+      Expected: Similar to previous.
+
+2. Adding a person with non-unique fields
+
+   1. Prerequisites: List all persons using the `list` command. Person with Student ID 'A0000000A', email 'alexyeoh@u.nus.edu' in the list.
+
+   2. Test case: `add A0000000A n/Billy p/98765432 e/billybatson@u.nus.edu h/@Billy123`<br>
+      Expected: Contact is not added to the list. Error details shown in the status message.
+
+   3. Test case: `add A1234567B n/Billy p/98765432 e/alexyeoh@u.nus.edu h/@Billy123`<br>
+      Expected: Contact is not added to the list. Error details shown in the status message.
 
 ### Deleting a person
 
@@ -705,43 +767,148 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `delete 0`<br>
+      Expected: No person is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Editing a person
+
+1. Editing a person
+
+    1. Prerequisites: List all persons using the `list` command. One person in list with Student ID 'A0000000A'. Another person in list with email 'berniceyu@u.nus.edu'.
+
+    2. Test case: `edit A0000000A p/98765432`<br>
+       Expected: Contact with Student ID A0000000A is edited. Details of edited contact shown in the status message.
+
+    3. Test case: `edit A0000000A e/berniceyu@u.nus.edu`<br>
+       Expected: Contact is not edited. Error details shown in the status message.
+
+    4. Other incorrect edit commands to try: `edit`, `edit 1 e/abc@gmail.com`, `...`<br>
+       Expected: Similar to previous.
+
+### Updating Attendance
+
+1. Updating Attendance for a tutorial using list index
+
+   1. Prerequisites: List all persons using the `list` command. At least one person in the list
+
+   2. Test case: `attend 1 1`<br>
+      Expected: Attendance is inverted for Tutorial 1 for the first contact. Details of attend shown in the status message.
+
+   3. Test case: `attend 1 0`<br>
+      Expected: No attendance is taken. Error details shown in the status message.
+    
+   4. Test case: `attend`<br>
+      Expected: No attendance is taken. Error details shown in the status message.
+
+   5. Other incorrect attend commands to try: `attend 1 x`, `attend y 1`, `...` (where x is larger than the number of tutorials and y is larger than the list size)<br>
+      Expected: Similar to previous.
+
+2. Updating Attendance for a tutorial using Student ID
+
+   1. Prerequisites: List all persons using the `list` command. One person with Student ID 'A0000000A'
+
+   2. Test case: `attend A0000000A 1`<br>
+      Expected: Attendance is inverted for Tutorial 1 for the contact with Student ID A0000000A. Details of attend shown in the status message.
+
+   3. Test case: `attend A0000000A 0`<br>
+      Expected: No attendance is taken. Error details shown in the status message.
+
+   4. Other incorrect attend commands to try: `attend A0000000A x`, `attend y 1`, `...` (where x is larger than the number of tutorials and y is a Student ID not belonging to any contact)<br>
+      Expected: Similar to previous.
+
+### Updating Exam Score
+
+1. Updating exam score for a exam using list index
+
+    1. Prerequisites: List all persons using the `list` command. At least one person in the list. Midterm max score is at least 1.
+
+    2. Test case: `score 1 ex/midterm s/1`<br>
+       Expected: Midterm exam score of first contact is updated to 1. Details of score shown in the status message.
+
+    3. Test case: `score 1 ex/midterm s/-1`<br>
+       Expected: No score is updated. Error details shown in the status message.
+
+    4. Test case: `score`<br>
+       Expected: No score is taken. Error details shown in the status message.
+
+    5. Other incorrect attend commands to try: `score x ex/midterm s/0`, `score 1 ex/y s/0`, `score 1 ex/midterm s/z`, `...` 
+       (where x is larger than the list size, y is not in the exam list and z is a score above the max score)<br>
+       Expected: Similar to previous.
+
+2. Updating Attendance for a tutorial using Student ID
+
+    1. Prerequisites: List all persons using the `list` command. One person with Student ID 'A0000000A'
+
+    2. Test case: `score A0000000A ex/midterm s/1`<br>
+       Expected: Midterm exam score of contact with Student ID A0000000A is updated to 1. Details of score shown in the status message.
+
+    3. Test case: `score A0000000A ex/midterm s/-1`<br>
+       Expected: No score is updated. Error details shown in the status message.
+
+    4. Test case: `score`<br>
+       Expected: No score is taken. Error details shown in the status message.
+
+    5. Other incorrect attend commands to try: `score x ex/midterm s/0`, `score A0000000A ex/y s/0`, `score A0000000A ex/midterm s/z`, `...`
+       (where x is a Student ID not belonging to any contact, y is not in the exam list and z is a score above the max score)<br>
+       Expected: Similar to previous.
+
+### Updating Max Exam Score
+
+1. Updating the max exam score
+
+   1. Prerequisites: Current max score of midterm is 70. One student in contacts has a midterm score of 60.
+
+   2. Test case: `maxscore ex/midterm ms/100`<br>
+      Expected: Max score of Midterm exam is updated to 100. Details of maxscore shown in the status message.
+
+   3. Test case: `maxscore ex/midterm ms/50` <br>
+      Expected: Max score is not updated. Error details shown in the status message.
+
+   4. Test case: `maxscore ex/midterm ms/-1` <br>
+      Expected: Max score is not updated. Error details shown in the status message.
 
 ### Sorting the list
 
 1. Sorting the list of people
 
-    1. Test case: `sort n/`
-      Expected: List is sorted in ascending alphabetical order. Details of sort shown in the status message. Timestamps in the status bar are updated.
+    1. Test case: `sort n/`<br>
+       Expected: List is sorted in ascending alphabetical order. Details of sort shown in the status message.
     
-    2. Test case: `sort ex/midterm`
-      Expected: List is sorted in ascending order of midterm scores, students with no recorded scores are pushed to the end of the list. Status message and timestamps in the status bar are updated as above.
+    2. Test case: `sort ex/midterm`<br>
+       Expected: List is sorted in ascending order of midterm scores, students with no recorded scores are pushed to the end of the list. Details of sort shown in the status message.
     
-    3. Test case: `sort ex/final`
-      Expected: List is sorted similar to midterm above, but sorted by final scores instead. Status message and timestamps in the status bar are updated as above.
+    3. Test case: `sort ex/final`<br>
+       Expected: List is sorted similar to midterm above, but sorted by final scores instead. Details of sort shown in the status message.
 
-    4. Test case: `sort`
-      Expected: No sorting is done. Error details shown in the status message, status bar remains the same.
+    4. Test case: `sort`<br>
+       Expected: No sorting is done. Error details shown in the status message.
 
-    5. Test case: `sort ex/invalid exam`
-      Expected: No sorting is done. Error details shown in the status message, status bar remains the same.
+    5. Test case: `sort ex/invalid exam`<br>
+       Expected: No sorting is done. Error details shown in the status message.
 
     6. Other incorrect sort commands to try: `sort x`, `sort ex/`, `...` (where x is any arbitrary argument/word not mentioned above)
-      Expected: Similar to previous.
+       Expected: Similar to previous.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Launch the application from the .jar file.
 
-1. _{ more test cases …​ }_
+   2. Perform an action that saves data (e.g., add a new contact, delete a contact).
+
+   3. Verify that a data folder has been created in the same directory.
+
+   4. Close the application.
+
+   5. Manually delete the data folder from the file system.
+
+   6. Relaunch the application.
+
+   7. Expected: The application should launch without errors and initialize the default contact list.

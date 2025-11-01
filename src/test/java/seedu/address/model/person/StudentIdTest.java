@@ -30,9 +30,14 @@ public class StudentIdTest {
         assertFalse(StudentId.isValidStudentId(" ")); // spaces only
 
         // incorrect length
-        assertFalse(StudentId.isValidStudentId("a00000000z"));
-        assertFalse(StudentId.isValidStudentId("aa0000000z"));
-        assertFalse(StudentId.isValidStudentId("a0000000zz"));
+        assertFalse(StudentId.isValidStudentId("a000000z")); // digits 1 below boundary
+        assertFalse(StudentId.isValidStudentId("a00000000z")); // digits 1 above boundary
+
+        assertFalse(StudentId.isValidStudentId("aa0000000z")); // starting letter 1 above boundary
+        assertFalse(StudentId.isValidStudentId("0000000z")); // no starting letter
+
+        assertFalse(StudentId.isValidStudentId("a0000000zz")); // ending letter 1 above boundary
+        assertFalse(StudentId.isValidStudentId("a0000000zz")); // no ending letter
 
         // incorrect character type
         assertFalse(StudentId.isValidStudentId("a00c0000z"));

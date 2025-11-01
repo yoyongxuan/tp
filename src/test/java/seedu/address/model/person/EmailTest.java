@@ -37,13 +37,16 @@ public class EmailTest {
         // positive tests for local and u.nus.edu domain
         assertTrue(Email.isValidEmail("peterjack@u.nus.edu"));
         assertTrue(Email.isValidEmail("jothamwong@u.nus.edu"));
+
         // negative tests for local
         assertFalse(Email.isValidEmail(" jothamwong@u.nus.edu")); // leading space
+        assertFalse(Email.isValidEmail("jotham______wong@u.nus.edu")); // no underscores
         assertFalse(Email.isValidEmail("jotham-wong@u.nus.edu")); // dash not allowed
         assertFalse(Email.isValidEmail("jothamwong@u.nus.edu ")); // trailing space
         assertFalse(Email.isValidEmail("jotham+wong@u.nus.edu")); // + in local
         assertFalse(Email.isValidEmail("jotham@wong@u.nus.edu")); // additional @
         assertFalse(Email.isValidEmail("jotham//wong@u.nus.edu")); // // in local
+
         // negative tests for u.nus.edu domain
         assertFalse(Email.isValidEmail("peterjack@u.nus.edu ")); // trailing space
         assertFalse(Email.isValidEmail("peterjack@.u.nus.edu")); // not nus domain
@@ -53,6 +56,7 @@ public class EmailTest {
         assertTrue(Email.isValidEmail("a@u.nus.edu")); // minimal
         assertTrue(Email.isValidEmail("test@u.nus.edu")); // alphabets only
         assertTrue(Email.isValidEmail("123@u.nus.edu")); // numeric local part and domain name
+        assertTrue(Email.isValidEmail("EDWARD@u.nus.edu")); // uppercase
         assertTrue(Email.isValidEmail("e1234567@u.nus.edu"));
     }
 
