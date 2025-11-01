@@ -378,7 +378,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `Address Book` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `CadetHQ` and the **Actor** is the `user`, unless specified otherwise)
 
 
 ___
@@ -388,20 +388,20 @@ ___
 **MSS**
 
 1.  User requests to add student contact, inputting student's ID, name and contact details
-2.  Address Book creates student contact
-3.  Address Book displays student contact
+2.  CadetHQ creates student contact
+3.  CadetHQ displays student contact
 
     Use case ends.
 
 **Extensions**
 
 * 1a. Student details missing in input.
-    * 1a1. Address Book shows an error message
+    * 1a1. CadetHQ shows an error message
 
       Use case ends.
 
 * 1b. A contact with the given student ID already exists.
-    * 1b1. Address Book shows an error message
+    * 1b1. CadetHQ shows an error message
 
       Use case ends.
 
@@ -413,7 +413,7 @@ ___
 
 1.  User requests to <u>list students</u>
 2.  User requests to delete a specific student in the list using index in list
-3.  Address Book deletes the student's contact
+3.  CadetHQ deletes the student's contact
 
     Use case ends.
 
@@ -425,7 +425,7 @@ ___
 
 * 2a. The given index is invalid.
 
-    * 2a1. Address Book shows an error message.
+    * 2a1. CadetHQ shows an error message.
 
       Use case resumes at step 2.
 
@@ -436,7 +436,7 @@ ___
 **MSS**
 
 1.  User requests to delete a specific student in the list using Student ID
-2.  Address Book deletes the student's contact
+2.  CadetHQ deletes the student's contact
 
     Use case ends.
 
@@ -444,13 +444,13 @@ ___
 
 * 1a. The given Student ID is invalid.
 
-    * 1a1. Address Book shows an error message.
+    * 1a1. CadetHQ shows an error message.
 
       Use case resumes at step 1.
 
 * 1b. The given Student ID is not in the list.
 
-    * 1b1. Address Book shows an error message.
+    * 1b1. CadetHQ shows an error message.
 
       Use case resumes at step 1.
 
@@ -462,7 +462,7 @@ ___
 
 1.  User requests to <u>list students</u>
 2.  User requests to view a specific student in the list
-3.  Address Book displays the student's contact
+3.  CadetHQ displays the student's contact
 
     Use case ends.
 
@@ -474,7 +474,7 @@ ___
 
 * 2a. The given index is invalid.
 
-    * 2a1. Address Book shows an error message.
+    * 2a1. CadetHQ shows an error message.
 
       Use case resumes at step 2.
 
@@ -485,7 +485,7 @@ ___
 **MSS**
 
 1.  User requests to view a specific student using Student ID
-2.  Address Book displays the student's contact
+2.  CadetHQ displays the student's contact
 
     Use case ends.
 
@@ -493,13 +493,13 @@ ___
 
 * 1a. The given Student ID is invalid.
 
-    * 1a1. Address Book shows an error message.
+    * 1a1. CadetHQ shows an error message.
 
       Use case resumes at step 2.
 
 * 1b. The given Student ID is not in the list.
 
-    * 1b1. Address Book shows an error message.
+    * 1b1. CadetHQ shows an error message.
 
       Use case resumes at step 1.
 
@@ -511,8 +511,8 @@ ___
 
 1.  User requests to <u>list students</u>
 2.  User requests to record grade of a specific student in the list, inputting test name and score
-3.  Address Book updates student's record
-4.  Address Book displays student's grade
+3.  CadetHQ updates student's record
+4.  CadetHQ displays student's grade
 
     Use case ends.
 
@@ -524,19 +524,19 @@ ___
 
 * 2a. The given index is invalid.
 
-    * 2a1. Address Book shows an error message.
+    * 2a1. CadetHQ shows an error message.
 
       Use case resumes at step 2.
 
 * 2b. Details missing in input.
 
-    * 2b1. Address Book shows an error message.
+    * 2b1. CadetHQ shows an error message.
 
       Use case resumes at step 2.
 
 * 2c. Details are not in an acceptable format.
 
-    * 2c1. Address Book shows an error message.
+    * 2c1. CadetHQ shows an error message.
 
       Use case resumes at step 2.
 
@@ -547,8 +547,8 @@ ___
 **MSS**
 
 1.  User requests to record grade of a specific student using Student ID, inputting test name and score
-2.  Address Book updates student's record
-3.  Address Book displays student's grade
+2.  CadetHQ updates student's record
+3.  CadetHQ displays student's grade
 
     Use case ends.
 
@@ -556,25 +556,25 @@ ___
 
 * 1a. The given Student ID is invalid.
 
-    * 1a1. Address Book shows an error message.
+    * 1a1. CadetHQ shows an error message.
 
       Use case resumes at step 1.
 
 * 1b. The given Student ID is not in the list.
 
-    * 1b1. Address Book shows an error message.
+    * 1b1. CadetHQ shows an error message.
 
       Use case resumes at step 1.
 
 * 1c. Details missing in input.
 
-    * 1c1. Address Book shows an error message.
+    * 1c1. CadetHQ shows an error message.
 
       Use case resumes at step 1.
 
 * 1d. Details are not in an acceptable format.
 
-    * 1d1. Address Book shows an error message.
+    * 1d1. CadetHQ shows an error message.
 
       Use case resumes at step 1.
 
@@ -586,8 +586,8 @@ ___
 
 1.  User requests to <u>list students</u>
 2.  User requests to record attendance of a specific student in the list, inputting tutorial number
-3.  Address Book inverts student's attendance
-4.  Address Book displays student's attendance
+3.  CadetHQ inverts student's attendance
+4.  CadetHQ displays student's attendance
 
     Use case ends.
 
@@ -599,13 +599,13 @@ ___
 
 * 2a. The given index is invalid.
 
-    * 2a1. Address Book shows an error message.
+    * 2a1. CadetHQ shows an error message.
 
       Use case resumes at step 2.
 
 * 2b. Details missing in input.
 
-    * 2b1. Address Book shows an error message.
+    * 2b1. CadetHQ shows an error message.
 
       Use case resumes at step 2.
 
@@ -616,8 +616,8 @@ ___
 **MSS**
 
 1.  User requests to record attendance of a specific student using Student ID, inputting tutorial number
-2.  Address Book inverts student's attendance 
-3.  Address Book displays student's attendance
+2.  CadetHQ inverts student's attendance 
+3.  CadetHQ displays student's attendance
 
     Use case ends.
 
@@ -625,13 +625,13 @@ ___
 
 * 1a. The given index is invalid.
 
-    * 1a1. Address Book shows an error message.
+    * 1a1. CadetHQ shows an error message.
 
       Use case resumes at step 1.
 
 * 1b. Details missing in input.
 
-    * 1b1. Address Book shows an error message.
+    * 1b1. CadetHQ shows an error message.
 
       Use case resumes at step 1.
 
@@ -642,7 +642,7 @@ ___
 **MSS**
 
 1.  User requests to list students
-2.  Address Book shows a list of persons
+2.  CadetHQ shows a list of persons
 
     Use case ends.
 
@@ -653,7 +653,7 @@ ___
 **MSS**
 
 1.  User requests to sort students by a specified exam.
-2.  Address Book shows a sorted list of persons from the lowest score to highest. Those with unrecorded scores for the specified exam will have their names pushed to the bottom of the list.
+2.  CadetHQ shows a sorted list of persons from the lowest score to highest. Those with unrecorded scores for the specified exam will have their names pushed to the bottom of the list.
 
     Use case ends.
 
@@ -664,7 +664,7 @@ ___
 **MSS**
 
 1.  User requests to sort students by name
-2.  Address Book shows a sorted list of persons in ascending alphabetical order
+2.  CadetHQ shows a sorted list of persons in ascending alphabetical order
 
     Use case ends.
 
@@ -681,7 +681,7 @@ ___
 5.  Command execution should not take more than **2 seconds**. For example, editing or adding a person should not take more than 2 seconds for the changes to be reflected in CadetHQ.
 6.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 7.  Should work without installing an installer.
-8.  Should be usable by a CS1101S TA that has never used similar Address Book applications before.
+8.  Should be usable by a CS1101S TA that has never used similar contact management applications before.
 9.  Should be for a single user only (i.e. not a multi-user product, no shared file storage mechanism, no application running in a shared computer).
 10. Invalid commands should not crash CadetHQ, but show an error message instead.
 11. A user should be able to access command help information at any time.
@@ -691,8 +691,7 @@ ___
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS.
 * **Private contact detail**: A contact detail that is not meant to be shared with others.
-* **Address Book**: The application used to manage student contacts, attendance and grades. In this document, it refers specifically to the CadetHQ system.
-* **CLI**: Command-Line Interface - A text-based interface for interacting with the Address Book by typing commands.
+* **CLI**: Command-Line Interface - A text-based interface for interacting with CadetHQ by typing commands.
 * **GUI**: Graphical User Interface - A visual interface that uses windows, buttons and menus, which is not the primary interface of the app.
 * **NUS**: National University of Singapore.
 * **CS1101S**: Programming Methodology module for NUS Computer Science students.
