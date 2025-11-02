@@ -663,13 +663,37 @@ ___
 
 **MSS**
 
-1.  User requests to sort students by name
-2.  CadetHQ shows a sorted list of persons in ascending alphabetical order
+1.  User requests to sort students by name.
+2.  CadetHQ shows a sorted list of persons in ascending alphabetical order.
 
     Use case ends.
 
 ___
 
+**Use case: Edit max score of exam**
+
+**MSS**
+
+1. User requests to edit max score of a specified exam.
+2. CadetHQ updates the max score of the exam. All students with recorded scores for that exam will display the new max score.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User inputs an invalid max score (0 or less, or lower than the current highest recorded score)
+
+    * 1a1. CadetHQ shows an error message.
+
+     Use case resumes at step 1.
+
+* 1b. User inputs an invalid exam not supported in CadetHQ
+
+    * 1b1. CadetHq shows an error message.
+
+     Use Case resumes at step 1.
+
+___
 
 
 ### Non-Functional Requirements
