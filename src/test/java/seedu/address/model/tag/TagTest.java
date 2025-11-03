@@ -26,6 +26,34 @@ public class TagTest {
     }
 
     @Test
+    public void isValidTagName_validTagNames_returnsTrue() {
+        // alphanumeric tag names
+        assertTrue(Tag.isValidTagName("friend"));
+        assertTrue(Tag.isValidTagName("colleague123"));
+        assertTrue(Tag.isValidTagName("best friend"));
+        assertTrue(Tag.isValidTagName("a1 b2 c3"));
+
+        // long tag name
+        assertTrue(Tag.isValidTagName("beepboopbingbong with spaces 123456 r a   nd o m"));
+    }
+
+    @Test
+    public void isValidTagName_invalidTagNames_returnsFalse() {
+        // empty tag name
+        assertFalse(Tag.isValidTagName(""));
+
+        // spaces only
+        assertFalse(Tag.isValidTagName("     "));
+
+        // non-alphanumeric characters
+        assertFalse(Tag.isValidTagName("friend!"));
+        assertFalse(Tag.isValidTagName("colleague@123"));
+        assertFalse(Tag.isValidTagName("best#friend"));
+        assertFalse(Tag.isValidTagName("hello_world"));
+        assertFalse(Tag.isValidTagName("tag-with-dash"));
+    }
+
+    @Test
     public void equals() {
         Tag tag = new Tag("test");
 
