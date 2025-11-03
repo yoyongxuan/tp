@@ -320,12 +320,13 @@ Adds the specified score for the specified exam for the specified student from t
 Format: `score INDEX ex/EXAM s/SCORE` or `score SID ex/EXAM s/SCORE`
 
 * Adds the specified score `SCORE` for the specified exam `EXAM`, for the person at the specified `INDEX` or with the given `SID`.
+* If input `SCORE` is `unrecorded`, will set score of specified person and exam to `unrecoded` instead
 * `INDEX` and `SID` parameters must adhere to constraints detailed in [Contact Details](#contact-details)
 
 
-| Field | Requirement                                                                                                                                                                 |
-|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Score | Refers to the score attained by the specified student for the specified exam. <br> Must be a **non-negative integer that is not larger than the max score** of the specified exam. |
+| Field | Requirement                                                                                                                                                                                                                      |
+|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Score | Refers to the score attained by the specified student for the specified exam. <br> Must be `unrecorded` or a **non-negative integer that is not larger than the max score** of the specified exam.                                |
 | Exam | Refers to the exam name. <br> Must **match the exams recorded in the Address Book exactly**. <br> e.g. If the exam name in the Address Book is `midterm`, the specified exam name must be `midterm`, not `MIDTERM` or `mid term`. |
 
 Examples:
