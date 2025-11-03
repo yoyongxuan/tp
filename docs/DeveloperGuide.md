@@ -123,7 +123,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the Address Book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the `AddressBook` data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -142,7 +142,7 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both Address Book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both `AddressBook` data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -185,7 +185,19 @@ Below is the sequence diagram that describes how sorting is done. The example be
 
 **Logic Component**
 
-![SortSequenceDiagram](images/SortSequenceDiagram.png)
+![SortSequenceLogicDiagram](images/SortSequenceDiagram-Logic.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SortCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The reference frame name should be at the top left corner, but due to a limitation with PlantUML, it is at the bottom middle.
+</div>
+
+
+**Model Component**
+
+![SortSequenceModelDiagram](images/SortSequenceDiagram-Model.png)
 
 **Details**:
 
@@ -204,18 +216,26 @@ Sorting is implemented through 3 comparators (`Comparator<Person>`) in the `Pers
 ### Edit the maximum score of an exam
 **Overview**
 
-The `maxscore` command allows the user to edit the maximum score of an exam in the Address Book.
+The `maxscore` command allows the user to edit the maximum score of an exam in the `AddressBook`.
 
-The sequence diagrams below illustrates the interactions within the `Logic` and `Model` components, taking `execute("maxscore 1 ex/midterm ms/90")` API call as an example.
+The sequence diagrams below illustrates the interactions within the `Logic` and `Model` components, taking `execute("maxscore ex/final ms/105")` API call as an example.
 
 **Logic Component**
 
 ![EditScoreCommand Sequence Diagram Logic Component](images/EditScoreCommandSequenceDiagram-Logic.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditScoreCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The reference frame name should be at the top left corner, but due to a limitation with PlantUML, it is at the bottom middle.
+</div>
+
+
 **Details**:
 1. The `LogicManager` object will be called to execute the input.
 2. The `AddressBookParser` object will identify the command as `EditScoreCommand`, and create an `EditScoreCommandParser`.
-3. The `EditScoreCommandParser` will parse `1 ex/midterm ms/90` and create an `EditCommand` which is returned to the `LogicManager`.
+3. The `EditScoreCommandParser` will parse `ex/final ms/105` and create an `EditCommand` which is returned to the `LogicManager`.
 4. The `LogicManager` calls `execute` on the `EditScoreCommand` object, which interacts with the Model component. (drawn as a single step for simplicity)
 5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -225,8 +245,8 @@ The sequence diagrams below illustrates the interactions within the `Logic` and 
 
 **Details**:
 1. The `execute` method in `EditScoreCommand` runs.
-2. The `EditScoreCommand` object calls `isValidExam` and `isNewMaxScoreValid` to verify that `midterm` exists, and that the new max score meets all constraints.
-- (Not shown in diagram) The `isNewMaxScoreValid` method compares the new max score `90` against all the recorded scores for all students, for the exam `midterm`. The new max score must be greater than or equal to all recorded scores for it to be valid.
+2. The `EditScoreCommand` object calls `isValidExam` and `isNewMaxScoreValid` to verify that `final` exists, and that the new max score meets all constraints.
+- (Not shown in diagram) The `isNewMaxScoreValid` method compares the new max score `105` against all the recorded scores for all students, for the exam `final`. The new max score must be greater than or equal to all recorded scores for it to be valid.
 3. The `EditScoreCommand` object calls `setMaxScore` on `Exam` to change the max score.
 4. The `EditScoreCommand` object calls `getFilteredPersonList` on `Model` to retrieve all displayed people.
 5. (Simplified in diagram) For each `Person` in the person list, a clone is created with the same information. The method `setPerson` of `Model` replaces each `Person` with the cloned `Person`, ensuring that the updated max score is reflected in the UI.
@@ -237,31 +257,31 @@ The sequence diagrams below illustrates the interactions within the `Logic` and 
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current Address Book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous Address Book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone Address Book state from its history.
+* `VersionedAddressBook#commit()` — Saves the current `AddressBook` state in its history.
+* `VersionedAddressBook#undo()` — Restores the previous `AddressBook` state from its history.
+* `VersionedAddressBook#redo()` — Restores a previously undone `AddressBook` state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial Address Book state, and the `currentStatePointer` pointing to that single Address Book state.
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial `AddressBook` state, and the `currentStatePointer` pointing to that single `AddressBook` state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the Address Book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the Address Book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted Address Book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the `AddressBook`. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the `AddressBook` after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted `AddressBook` state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified Address Book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified `AddressBook` state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the Address Book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the `AddressBook` state will not be saved into the `addressBookStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous Address Book state, and restores the Address Book to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous `AddressBook` state, and restores the `AdressBook` to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -282,17 +302,17 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the Address Book to that state.
+The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the `AddressBook` to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest Address Book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest `AddressBook` state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the Address Book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the `AddressBook`, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all Address Book
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all `AddressBook`
 states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
@@ -305,7 +325,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire Address Book.
+* **Alternative 1 (current choice):** Saves the entire `AddressBook`.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
@@ -369,216 +389,408 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `Address Book` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `CadetHQ` and the **Actor** is the `user`, unless specified otherwise)
 
 
 ___
 
-**Use case: Add a student contact**
+**Use case: UC01 - Add a student contact**
 
 **MSS**
 
 1.  User requests to add student contact, inputting student's ID, name and contact details
-2.  Address Book creates student contact
-3.  Address Book displays student contact
+2.  CadetHQ creates student contact
+3.  CadetHQ displays student contact
 
     Use case ends.
 
 **Extensions**
 
 * 1a. Student details missing in input.
-    * 1a1. Address Book shows an error message
+    * 1a1. CadetHQ shows an error message.
+    * 1a2. User makes the request again with updated details.
 
-      Use case ends.
+      Steps 1a1 - 1a2 are repeated until the input is valid.
+
+      Use case resumes from step 1.
 
 * 1b. A contact with the given student ID already exists.
-    * 1b1. Address Book shows an error message
+    * 1b1. CadetHQ shows an error message.
+    * 1b2. User makes the request again with updated details.
 
-      Use case ends.
+      Steps 1b1 - 1b2 are repeated until the input is valid.
+
+      Use case resumes from step 1.
+
+* 1c. A contact with the given email already exists.
+    * 1c1. CadetHQ shows an error message.
+    * 1c2. User makes the request again with updated details.
+
+      Steps 1c1 - 1c2 are repeated until the input is valid.
+
+      Use case resumes from step 1.
+
+* 1d. Details are not in an acceptable format.
+    * 1d1. CadetHQ shows an error message.
+    * 1d2. User makes the request again with updated format.
+
+      Steps 1d1 - 1d2 are repeated until the format is accepted.
+
+      Use case resumes from step 1.
 
 ___
 
-**Use case: Delete a student contact using list index**
+**Use case: UC02 - List all students**
 
 **MSS**
 
-1.  User requests to <u>list students</u>
-2.  User requests to delete a specific student in the list using index in list
-3.  Address Book deletes the student's contact
+1.  User requests to list students.
+2.  CadetHQ shows the full list of students.
+
+    Use case ends.
+
+___
+
+**Use case: UC03 - Find students(s)**
+
+**MSS**
+
+1. User requests to find student(s).
+2. CadetHQ shows the list of found students.
+
+    Use case ends.
+
+
+___
+
+**Use case: UC04 - Delete a student contact using list index**
+
+**MSS**
+
+1.  User requests to delete a specific student in the list using index in list
+2.  CadetHQ deletes the student's contact
 
     Use case ends.
 
 **Extensions**
 
 * 1a. The list is empty.
+    * 1a1. CadetHQ shows an error message.
 
-  Use case ends.
+      Use case ends.
 
-* 2a. The given index is invalid.
+* 1b. The given index is invalid and/or out of bounds.
+    * 1b1. CadetHQ shows an error message.
+    * 1b2. User makes the request again with updated index.
 
-    * 2a1. Address Book shows an error message.
+      Steps 1b1 - 1b2 repeat until the index is valid and in bounds.
 
       Use case resumes at step 2.
 
 ___
 
-**Use case: Delete a student contact using Student ID**
+**Use case: UC05 - Delete a student contact using Student ID**
 
 **MSS**
 
 1.  User requests to delete a specific student in the list using Student ID
-2.  Address Book deletes the student's contact
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The given Student ID is invalid.
-
-    * 1a1. Address Book shows an error message.
-
-      Use case resumes at step 1.
-
-* 1b. The given Student ID is not in the list.
-
-    * 1b1. Address Book shows an error message.
-
-      Use case resumes at step 1.
-
-___
-
-**Use case: View a student contact via list index**
-
-**MSS**
-
-1.  User requests to <u>list students</u>
-2.  User requests to view a specific student in the list
-3.  Address Book displays the student's contact
+2.  CadetHQ deletes the student's contact
 
     Use case ends.
 
 **Extensions**
 
 * 1a. The list is empty.
+    * CadetHQ shows an error message.
+      Use case ends.
 
-  Use case ends.
+* 1b. The given Student ID is invalid.
+    * 1b1. CadetHQ shows an error message.
+    * 1b2. User makes the request again with updated Student ID.
 
-* 2a. The given index is invalid.
+      Steps 1b1 - 1b2 repeat until the Student ID is valid.
 
-    * 2a1. Address Book shows an error message.
+      Use case resumes at step 1.
+
+* 1c. The given Student ID is not in the list.
+    * 1c1. CadetHQ shows an error message.
+    * 1c2. User makes the request again with updated Student ID.
+
+      Steps 1c1 - 1c2 repeat until the Student ID is one found in the list.
 
       Use case resumes at step 2.
 
 ___
 
-**Use case: View a student contact via Student ID**
+**Use case: UC06 - Edit a student contact via list index**
+
+**MSS**
+
+1. User requests to edit a specific contact in the list using index in list.
+2. CadetHQ edits the contact and displays updated information.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+    * 1a1. CadetHQ shows an error message.
+
+      Use case ends.
+
+* 1b. The index is invalid and/or out of bounds.
+    * 1b1. CadetHQ shows an error message.
+    * 1b2. User makes request again with updated index.
+
+      Steps 1b1 - 1b2 repeat until the index is valid.
+
+      Use case resumes from step 1.
+
+* 1c. User did not specify any information to update.
+    * 1c1. CadetHQ shows an error message.
+    * 1c2. User makes request again with updated information.
+
+      Steps 1c1 - 1c2 repeat until there is information to update.
+
+      Use case resumes from step 1.
+
+* 1d. User's requested edit contains a duplicate email.
+    * 1d1. CadetHQ shows an error message.
+    * 1d2. User makes request again with updated information.
+
+      Steps 1d1 - 1d2 repeat until the edit does not contain a duplicate email.
+
+      Use case resumes from step 1.
+
+* 1e. Details are not in an acceptable format.
+    * 1e1. CadetHQ shows an error message.
+    * 1e2. User makes the request again with updated format.
+
+      Steps 1e1 - 1e2 are repeated until the format is accepted.
+
+      Use case resumes from step 1.
+
+___
+
+**Use case: UC07 - Edit a student contact via Student ID**
+
+**MSS**
+
+1. User requests to edit a specific contact in the list using Student ID.
+2. CadetHQ edits the contact and displays updated information.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+    * 1a1. CadetHQ shows an error message.
+
+      Use case ends.
+
+* 1b. The student ID is invalid.
+    * 1b1. CadetHQ shows an error message.
+    * 1b2. User makes request again with updated index.
+
+      Steps 1b1 - 1b2 repeat until the index is valid.
+
+      Use case resumes from step 1.
+
+* 1c. The given Student ID is not in the list.
+    * 1c1. CadetHQ shows an error message.
+    * 1c2. User makes the request again with updated Student ID.
+
+      Steps 1c1 - 1c2 repeat until the Student ID is one found in the list.
+
+      Use case resumes at step 1.
+
+* 1d. User did not specify any information to update.
+    * 1d1. CadetHQ shows an error message.
+    * 1d2. User makes request again with updated information.
+
+      Steps 1d1 - 1d2 repeat until there is information to update.
+
+      Use case resumes from step 1.
+
+* 1e. User's requested edit contains a duplicate email.
+    * 1e1. CadetHQ shows an error message.
+    * 1e2. User makes request again with updated information.
+
+      Steps 1e1 - 1e2 repeat until the edit does not contain a duplicate email.
+
+      Use case resumes from step 1.
+
+* 1f. Details are not in an acceptable format.
+    * 1f1. CadetHQ shows an error message.
+    * 1f2. User makes the request again with updated format.
+
+      Steps 1f1 - 1f2 are repeated until the format is accepted.
+
+      Use case resumes from step 1.
+
+___
+
+**Use case: UC08 - View a student contact via list index**
+
+**MSS**
+
+1.  User requests to view a specific student in the list
+2.  CadetHQ displays the student's contact
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+    * 1a1. CadetHQ shows an error message.
+
+      Use case ends.
+
+* 1b. The given index is invalid and/or out of bounds.
+    * 1b1. CadetHQ shows an error message.
+    * 1b2. User makes the request again with updated index.
+
+      Steps 1b1 - 1b2 repeat until the index is valid and in bounds.
+
+      Use case resumes at step 2.
+
+___
+
+**Use case: UC09 - View a student contact via Student ID**
 
 **MSS**
 
 1.  User requests to view a specific student using Student ID
-2.  Address Book displays the student's contact
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The given Student ID is invalid.
-
-    * 1a1. Address Book shows an error message.
-
-      Use case resumes at step 2.
-
-* 1b. The given Student ID is not in the list.
-
-    * 1b1. Address Book shows an error message.
-
-      Use case resumes at step 1.
-
-___
-
-**Use case: Record a student's grade via list index**
-
-**MSS**
-
-1.  User requests to <u>list students</u>
-2.  User requests to record grade of a specific student in the list, inputting test name and score
-3.  Address Book updates student's record
-4.  Address Book displays student's grade
+2.  CadetHQ displays the student's contact
 
     Use case ends.
 
 **Extensions**
 
 * 1a. The list is empty.
+    * 1a1. CadetHQ shows an error message.
 
-  Use case ends.
+      Use case ends.
 
-* 2a. The given index is invalid.
+* 1b. The student ID is invalid.
+    * 1b1. CadetHQ shows an error message.
+    * 1b2. User makes request again with updated index.
 
-    * 2a1. Address Book shows an error message.
+      Steps 1b1 - 1b2 repeat until the index is valid.
 
-      Use case resumes at step 2.
+      Use case resumes from step 1.
 
-* 2b. Details missing in input.
+* 1c. The given Student ID is not in the list.
+    * 1c1. CadetHQ shows an error message.
+    * 1c2. User makes the request again with updated Student ID.
 
-    * 2b1. Address Book shows an error message.
-
-      Use case resumes at step 2.
-
-* 2c. Details are not in an acceptable format.
-
-    * 2c1. Address Book shows an error message.
+      Steps 1c1 - 1c2 repeat until the Student ID is one found in the list.
 
       Use case resumes at step 2.
 
 ___
 
-**Use case: Record a student's grade via Student ID**
+**Use case: UC10 - Record a student's grade via list index**
 
 **MSS**
 
-1.  User requests to record grade of a specific student using Student ID, inputting test name and score
-2.  Address Book updates student's record
-3.  Address Book displays student's grade
+1.  User requests to record grade of a specific student in the list, inputting test name and score
+2.  CadetHQ updates student's record
+3.  CadetHQ displays student's grade
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The given Student ID is invalid.
+* 1a. The list is empty.
+    * 1a1. CadetHQ shows an error message.
 
-    * 1a1. Address Book shows an error message.
+      Use case ends.
 
-      Use case resumes at step 1.
+* 1b. The given index is invalid and/or out of bounds.
+    * 1b1. CadetHQ shows an error message.
+    * 1b2. User makes the request again with updated index.
 
-* 1b. The given Student ID is not in the list.
-
-    * 1b1. Address Book shows an error message.
+      Steps 1b1 - 1b2 repeat until the index is valid and in bounds.
 
       Use case resumes at step 1.
 
 * 1c. Details missing in input.
+    * 1c1. CadetHQ shows an error message.
+    * 1c2. User makes request again with updated information.
 
-    * 1c1. Address Book shows an error message.
+      Steps 1c1 - 1c2 repeat until there are no missing details.
 
       Use case resumes at step 1.
 
 * 1d. Details are not in an acceptable format.
+    * 1d1. CadetHQ shows an error message.
+    * 1d2. User makes request again with updated format.
 
-    * 1d1. Address Book shows an error message.
+      Steps 1d1 - 1d2 repeat until formatting is acceptable.
 
       Use case resumes at step 1.
 
 ___
 
-**Use case: Record a student's attendance via list index**
+**Use case: UC11 - Record a student's grade via Student ID**
 
 **MSS**
 
-1.  User requests to <u>list students</u>
-2.  User requests to record attendance of a specific student in the list, inputting tutorial number
-3.  Address Book inverts student's attendance
-4.  Address Book displays student's attendance
+1.  User requests to record grade of a specific student using Student ID, inputting test name and score
+2.  CadetHQ updates student's record
+3.  CadetHQ displays student's grade
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+    * 1a1. CadetHQ shows an error message.
+
+      Use case ends.
+
+* 1b. The student ID is invalid.
+    * 1b1. CadetHQ shows an error message.
+    * 1b2. User makes request again with updated index.
+
+      Steps 1b1 - 1b2 repeat until the index is valid.
+
+      Use case resumes from step 1.
+
+* 1c. The given Student ID is not in the list.
+    * 1c1. CadetHQ shows an error message.
+    * 1c2. User makes the request again with updated Student ID.
+
+      Steps 1c1 - 1c2 repeat until the Student ID is one found in the list.
+
+      Use case resumes at step 1.
+
+* 1d. Details missing in input.
+    * 1d1. CadetHQ shows an error message.
+    * 1d2. User makes request again with updated information.
+
+      Steps 1d1 - 1d2 repeat until there are no missing details.
+
+      Use case resumes at step 1.
+
+* 1e. Details are not in an acceptable format.
+    * 1e1. CadetHQ shows an error message.
+    * 1e2. User makes request again with updated format.
+
+      Steps 1e1 - 1e2 repeat until formatting is acceptable.
+
+      Use case resumes at step 1.
+
+___
+
+**Use case: UC12 - Record a student's attendance via list index**
+
+**MSS**
+
+1.  User requests to record attendance of a specific student in the list, inputting tutorial number
+2.  CadetHQ inverts student's attendance
+3.  CadetHQ displays student's attendance
 
     Use case ends.
 
@@ -588,76 +800,146 @@ ___
 
   Use case ends.
 
-* 2a. The given index is invalid.
+* 1b. The given index is invalid and/or out of bounds.
+    * 1b1. CadetHQ shows an error message.
+    * 1b2. User makes request again with updated index.
 
-    * 2a1. Address Book shows an error message.
-
-      Use case resumes at step 2.
-
-* 2b. Details missing in input.
-
-    * 2b1. Address Book shows an error message.
+      Steps 1b1 - 1b2 repeat until index is valid and in bounds.
 
       Use case resumes at step 2.
+
+* 1c. Details missing in input.
+    * 1c1. CadetHQ shows an error message.
+    * 1c2. User makes request again with updated details.
+
+      Steps 1c1 - 1c2 repeat until the details are all complete.
+
+      Use case resumes at step 1.
+
+* 1d. Details are not in an acceptable format.
+    * 1d1. CadetHQ shows an error message.
+    * 1d2. User makes the request again with updated details.
+
+      Steps 1d1 - 1d2 are repeated until the format is accepted.
+
+      Use case resumes from step 1.
 
 ___
 
-**Use case: Record a student's attendance via Student ID**
+**Use case: UC13 - Record a student's attendance via Student ID**
 
 **MSS**
 
 1.  User requests to record attendance of a specific student using Student ID, inputting tutorial number
-2.  Address Book inverts student's attendance 
-3.  Address Book displays student's attendance
+2.  CadetHQ inverts student's attendance
+3.  CadetHQ displays student's attendance
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The given index is invalid.
+* 1a. The list is empty.
 
-    * 1a1. Address Book shows an error message.
+  Use case ends.
+
+* 1b. The student ID is invalid.
+    * 1b1. CadetHQ shows an error message.
+    * 1b2. User makes request again with updated index.
+
+      Steps 1b1 - 1b2 repeat until the index is valid.
+
+      Use case resumes from step 1.
+
+* 1c. The given Student ID is not in the list.
+    * 1c1. CadetHQ shows an error message.
+    * 1c2. User makes the request again with updated Student ID.
+
+      Steps 1c1 - 1c2 repeat until the Student ID is one found in the list.
 
       Use case resumes at step 1.
 
-* 1b. Details missing in input.
+* 1d. Details missing in input.
+    * 1d1. CadetHQ shows an error message.
+    * 1d2. User makes request again with updated details.
 
-    * 1b1. Address Book shows an error message.
+      Steps 1d1 - 1d2 repeat until the details are complete.
 
       Use case resumes at step 1.
 
-___
+* 1e. Details are not in an acceptable format.
+    * 1e1. CadetHQ shows an error message.
+    * 1e2. User makes the request again with updated details.
 
-**Use case: list all students**
+      Steps 1e1 - 1e2 are repeated until the format is accepted.
 
-**MSS**
-
-1.  User requests to list students
-2.  Address Book shows a list of persons
-
-    Use case ends.
+      Use case resumes from step 1.
 
 ___
 
-**Use case: sort all students by exam score**
+**Use case: UC14 - Sort all students by exam score**
 
 **MSS**
 
 1.  User requests to sort students by a specified exam.
-2.  Address Book shows a sorted list of persons from the lowest score to highest. Those with unrecorded scores for the specified exam will have their names pushed to the bottom of the list.
+2.  CadetHQ shows a sorted list of persons from the lowest score to highest. Those with unrecorded scores for the specified exam will have their names pushed to the bottom of the list.
 
     Use case ends.
 
 ___
 
-**Use case: sort all students by name**
+**Use case: UC15 - Sort all students by name**
 
 **MSS**
 
-1.  User requests to sort students by name
-2.  Address Book shows a sorted list of persons in ascending alphabetical order
+1.  User requests to sort students by name.
+2.  CadetHQ shows a sorted list of persons in ascending alphabetical order.
 
     Use case ends.
+
+___
+
+**Use case: UC16 - Edit max score of exam**
+
+**MSS**
+
+1. User requests to edit max score of a specified exam.
+2. CadetHQ updates the max score of the exam. All students with recorded scores for that exam will display the new max score.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User inputs an invalid max score
+    * 1a1. CadetHQ shows an error message.
+    * 1a2. User makes request again with updated max score.
+
+      Steps 1a1 - 1a2 repeat until the max score is valid.
+
+     Use case resumes at step 1.
+
+* 1b. User inputs an invalid exam not supported in CadetHQ
+    * 1b1. CadetHQ shows an error message.
+    * 1b2. User makes request again with updated exam.
+
+      Steps 1b1 - 1b2 repeat until the exam is valid.
+
+     Use case resumes at step 1.
+
+* 1c. Details missing in input.
+    * 1c1. CadetHQ shows an error message.
+    * 1c2. User makes request again with updated details.
+
+      Steps 1c1 - 1c2 repeat until the details are complete.
+
+      Use case resumes at step 1.
+
+* 1d. Details are not in an acceptable format.
+    * 1d1. CadetHQ shows an error message.
+    * 1d2. User makes the request again with updated details.
+
+      Steps 1d1 - 1d2 are repeated until the format is accepted.
+
+      Use case resumes from step 1.
 
 ___
 
@@ -667,12 +949,12 @@ ___
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to work with different screen resolutions as long as it meets the minimum window size of 450 x 600px.
-3.  Should be able to start up within **3 seconds** on modern computer hardware (within the last 10 years).
-4.  Should be able to hold up to **1000 people** without a noticeable sluggishness in performance for typical usage.
-5.  Command execution should not take more than **2 seconds**. For example, editing or adding a person should not take more than 2 seconds for the changes to be reflected in CadetHQ.
+3.  Should be able to start up within **5 seconds** on modern computer hardware (within the last 10 years).
+4.  Should be able to hold up to **200 people** without a noticeable sluggishness in performance for typical usage.
+5.  Command execution should not take more than **5 seconds**. For example, editing or adding a person should not take more than 5 seconds for the changes to be reflected in CadetHQ.
 6.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-7.  Should work without installing an installer.
-8.  Should be usable by a CS1101S TA that has never used similar Address Book applications before.
+7.  Should work without installation.
+8.  Should be usable by a CS1101S TA that has never used similar contact management applications before.
 9.  Should be for a single user only (i.e. not a multi-user product, no shared file storage mechanism, no application running in a shared computer).
 10. Invalid commands should not crash CadetHQ, but show an error message instead.
 11. A user should be able to access command help information at any time.
@@ -681,9 +963,7 @@ ___
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS.
-* **Private contact detail**: A contact detail that is not meant to be shared with others.
-* **Address Book**: The application used to manage student contacts, attendance and grades. In this document, it refers specifically to the CadetHQ system.
-* **CLI**: Command-Line Interface - A text-based interface for interacting with the Address Book by typing commands.
+* **CLI**: Command-Line Interface - A text-based interface for interacting with CadetHQ by typing commands.
 * **GUI**: Graphical User Interface - A visual interface that uses windows, buttons and menus, which is not the primary interface of the app.
 * **NUS**: National University of Singapore.
 * **CS1101S**: Programming Methodology module for NUS Computer Science students.
@@ -697,13 +977,16 @@ ___
 
 ## **Appendix: Planned Enhancements**
 
-1. **Implement more exams/assessments**: CadetHQ currently only supports the recording of midterm and final scores. Adding the ability to record more assessments such as <u>reading assessments</u> and <u>practical exams</u> allows TAs to monitor their students progress better throughout the semester.
+1. **Add/edit/delete exams**: CadetHQ currently only supports the recording of 2 static exams (midterm and final). Adding the ability to add more assessments manually such as <u>reading assessments</u> and <u>practical exams</u> allows TAs to monitor their students progress better throughout the semester. Being able to edit and delete exams allows TAs to have more flexibility in exam tracking if the curriculum changes in the future.
 
 2. **Improve GUI for displaying of exam scores**: The current GUI displays the midterm and exam scores under each student. As more assessments are added, this may clutter the screen. A **dropdown menu** can be added to only show the exam scores when clicked.
 
 3. **Mass attendance marking**: CadetHQ currently only allows the user to mark each student's attendance one at a time. Adding the ability to mass record attendance makes it easier to mark all students in a tutorial. Some proposed implementations are shown below:
     * `massattend 1-10 1`: marks attendance for students from index 1 to 10 in the list for tutorial 1.
     * `massattend t/TAG 5`: marks attendance for students with the specified `TAG` for tutorial 5.
+
+4. **More sorting**: Currently, CadetHQ only supports sorting in ascending order of names and exams. Add more sorting options like sorting in descending order or by attendance allows TAs to have more flexibility in list management.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -724,14 +1007,22 @@ testers are expected to do more *exploratory* testing.
 
    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-2. Saving window preferences
+2. Shutdown
+
+   1. Prerequisites: CadetHQ is currently still running.
+
+   2. Test case: Click on the <code style="color : name_color">X button</code> at the top right of CadetHQ.<br>
+      Expected: CadetHQ closes.
+
+   3. Test case: Use the `exit` command in the text box.<br>
+      Expected: CadetHQ closes.
+
+3. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    2. Re-launch the application by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
-
-3. _{ more test cases …​ }_
 
 ### Adding a person
 
@@ -800,7 +1091,7 @@ testers are expected to do more *exploratory* testing.
 
    3. Test case: `attend 1 0`<br>
       Expected: No attendance is taken. Error details shown in the status message.
-    
+
    4. Test case: `attend`<br>
       Expected: No attendance is taken. Error details shown in the status message.
 
@@ -835,7 +1126,7 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `score`<br>
        Expected: No score is taken. Error details shown in the status message.
 
-    5. Other incorrect attend commands to try: `score x ex/midterm s/0`, `score 1 ex/y s/0`, `score 1 ex/midterm s/z`, `...` 
+    5. Other incorrect attend commands to try: `score x ex/midterm s/0`, `score 1 ex/y s/0`, `score 1 ex/midterm s/z`, `...`
        (where x is larger than the list size, y is not in the exam list and z is a score above the max score)<br>
        Expected: Similar to previous.
 
@@ -877,10 +1168,10 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `sort n/`<br>
        Expected: List is sorted in ascending alphabetical order. Details of sort shown in the status message.
-    
+
     2. Test case: `sort ex/midterm`<br>
        Expected: List is sorted in ascending order of midterm scores, students with no recorded scores are pushed to the end of the list. Details of sort shown in the status message.
-    
+
     3. Test case: `sort ex/final`<br>
        Expected: List is sorted similar to midterm above, but sorted by final scores instead. Details of sort shown in the status message.
 

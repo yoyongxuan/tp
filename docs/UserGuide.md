@@ -3,7 +3,7 @@ layout: page
 title: CadetHQ User Guide
 ---
 
-CadetHQ is a **desktop app for managing student contacts, for CS1101S Teaching Assistants (TAs) at National University of Singapore (NUS)**. 
+CadetHQ is a **desktop app for managing student contacts, for CS1101S Teaching Assistants (TAs) at National University of Singapore (NUS)**.
 
 It is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
@@ -162,8 +162,8 @@ Examples:
 ![result for `add A1234567B n/Betsy Crowe t/friend e/betsycrowe@u.nus.edu p/89891206 t/needshelp h/@BetsyC`](images/addBetsyCrowe.png)
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
-Duplicate students cannot be added to the Address Book. A student is considered a duplicate student if either the SID or the email are the same as another existing student in the Address Book.
-</div>
+Duplicate students cannot be added to the Address Book. A student is considered a duplicate student if either the SID or the email are the same as another existing student in the Address Book.  
+</div>`
 
 ### Editing a student: `edit`
 
@@ -171,7 +171,7 @@ Edits an existing student in the Address Book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…​` or `edit SID [n/NAME] [p/PHONE] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX` or with the given `SID`. 
+* Edits the person at the specified `INDEX` or with the given `SID`.
 * All parameters must not be blank
 * All parameters must adhere to constraints detailed in [Contact Details](#contact-details)
 
@@ -398,15 +398,10 @@ _Details coming soon ..._
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **When a person's details are very long**, e.g. their name, telegram handle, and **CadetHQ is set to a small window width size**, some details may be truncated `(...)` as the text does not wrap around. The remedy is to expand the window width to see the full details.
-4. **Names that contain `/` characters cannot be added** in CadetHQ. An error message will be shown instead. CadetHQ uses `/` characters in the internal implementation of command parsing.
-    <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
-    A remedy is to save the name without the `/` characters. For example, `Sumail S/O Subramaniam` can be saved as `Sumail SO Subramaniam` instead.
-    </div>
+4. **Names that contain `/`, `,`, `-`, `@`, or other special characters cannot be added** in CadetHQ. An error message will be shown instead. CadetHQ currently does not support the use of special characters in names as some of these characters such as `/` are used internally in commands.
 
-5. **Names that contain `,`, `-`, `@`, or other special characters cannot be added in CadetHQ. An error message will be shown instead. CadetHQ currently does not support the use of special characters in names. 
-
-    <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
-    A remedy is to save the name without the special characters. For example, `Tan Ah Meng, John` can be saved as `Tan Ah Meng John` instead. `Al-Amaan` can be saved as `AlAmaan` instead. `Tan Kah Ming @ Cheng Jia Ming` can be saved simply as `Tan Kah Ming`, or however the user decides to.
+    <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+    A remedy is to save the name without the special characters. For example, `Sumail S/O Subramaniam` can be saved as `Sumail SO Subramaniam` instead.`Tan Ah Meng, John` can be saved as `Tan Ah Meng John` instead. `Al-Amaan` can be saved as `AlAmaan` instead. `Tan Kah Ming @ Cheng Jia Ming` can be saved simply as `Tan Kah Ming`, or however the user decides to.
     </div>
 
 --------------------------------------------------------------------------------------------------------------------

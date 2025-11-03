@@ -1,0 +1,40 @@
+@startuml SortSequenceDiagram-Model.puml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam DefaultFontSize 20
+
+mainframe <size:20>sd Model Component Sequence</size>
+
+box Logic LOGIC_COLOR_T1
+participant "s:SortCommand" as SortCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+participant "a:AddressBook" as AddressBook MODEL_COLOR
+participant "persons:UniquePersonList" as UniquePersonList MODEL_COLOR
+end box
+
+activate SortCommand
+
+SortCommand -> Model : sortPersonsByExam(midterm)
+activate Model
+
+Model -> AddressBook : sortPersonsByMidterm()
+activate AddressBook
+
+AddressBook -> UniquePersonList : sort(Person.MIDTERM_COMPARATOR)
+activate UniquePersonList
+
+UniquePersonList --> AddressBook
+deactivate UniquePersonList
+
+AddressBook --> Model
+deactivate AddressBook
+
+Model --> SortCommand
+deactivate Model
+
+deactivate SortCommand
+
+@enduml
