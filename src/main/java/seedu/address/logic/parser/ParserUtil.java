@@ -210,6 +210,10 @@ public class ParserUtil {
 
         Exam exam = ExamList.getExamFromName(trimmedExam);
 
+        if (trimmedScore.equals("unrecorded")) {
+            return Score.getUnrecordedScore(exam);
+        }
+
         if (!exam.isValidScore(trimmedScore)) {
             throw new ParseException(exam.getMessageScoreConstraints());
         }
