@@ -1,7 +1,9 @@
 @startuml SortSequenceDiagram-Model.puml
 !include style.puml
 skinparam ArrowFontStyle plain
-mainframe sd Model Component Sequence
+skinparam DefaultFontSize 20 
+
+mainframe <size:20>sd Model Component Sequence</size>
 
 box Logic LOGIC_COLOR_T1
 participant "s:SortCommand" as SortCommand LOGIC_COLOR

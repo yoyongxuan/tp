@@ -187,14 +187,17 @@ Below is the sequence diagram that describes how sorting is done. The example be
 
 ![SortSequenceLogicDiagram](images/SortSequenceDiagram-Logic.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SortCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The reference frame name should be at the top left corner, but due to a limitation with PlantUML, it is at the bottom middle.
+</div>
+
+
 **Model Component**
 
 ![SortSequenceModelDiagram](images/SortSequenceDiagram-Model.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SortCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
 
 **Details**:
 
@@ -215,16 +218,24 @@ Sorting is implemented through 3 comparators (`Comparator<Person>`) in the `Pers
 
 The `maxscore` command allows the user to edit the maximum score of an exam in the `AddressBook`.
 
-The sequence diagrams below illustrates the interactions within the `Logic` and `Model` components, taking `execute("maxscore 1 ex/midterm ms/90")` API call as an example.
+The sequence diagrams below illustrates the interactions within the `Logic` and `Model` components, taking `execute("maxscore ex/final ms/105")` API call as an example.
 
 **Logic Component**
 
 ![EditScoreCommand Sequence Diagram Logic Component](images/EditScoreCommandSequenceDiagram-Logic.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditScoreCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The reference frame name should be at the top left corner, but due to a limitation with PlantUML, it is at the bottom middle.
+</div>
+
+
 **Details**:
 1. The `LogicManager` object will be called to execute the input.
 2. The `AddressBookParser` object will identify the command as `EditScoreCommand`, and create an `EditScoreCommandParser`.
-3. The `EditScoreCommandParser` will parse `1 ex/midterm ms/90` and create an `EditCommand` which is returned to the `LogicManager`.
+3. The `EditScoreCommandParser` will parse `ex/final ms/105` and create an `EditCommand` which is returned to the `LogicManager`.
 4. The `LogicManager` calls `execute` on the `EditScoreCommand` object, which interacts with the Model component. (drawn as a single step for simplicity)
 5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -234,8 +245,8 @@ The sequence diagrams below illustrates the interactions within the `Logic` and 
 
 **Details**:
 1. The `execute` method in `EditScoreCommand` runs.
-2. The `EditScoreCommand` object calls `isValidExam` and `isNewMaxScoreValid` to verify that `midterm` exists, and that the new max score meets all constraints.
-- (Not shown in diagram) The `isNewMaxScoreValid` method compares the new max score `90` against all the recorded scores for all students, for the exam `midterm`. The new max score must be greater than or equal to all recorded scores for it to be valid.
+2. The `EditScoreCommand` object calls `isValidExam` and `isNewMaxScoreValid` to verify that `final` exists, and that the new max score meets all constraints.
+- (Not shown in diagram) The `isNewMaxScoreValid` method compares the new max score `105` against all the recorded scores for all students, for the exam `final`. The new max score must be greater than or equal to all recorded scores for it to be valid.
 3. The `EditScoreCommand` object calls `setMaxScore` on `Exam` to change the max score.
 4. The `EditScoreCommand` object calls `getFilteredPersonList` on `Model` to retrieve all displayed people.
 5. (Simplified in diagram) For each `Person` in the person list, a clone is created with the same information. The method `setPerson` of `Model` replaces each `Person` with the cloned `Person`, ensuring that the updated max score is reflected in the UI.
@@ -383,7 +394,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ___
 
-**Use case: Add a student contact**
+**Use case: UC01 - Add a student contact**
 
 **MSS**
 
@@ -396,42 +407,81 @@ ___
 **Extensions**
 
 * 1a. Student details missing in input.
-    * 1a1. CadetHQ shows an error message
+    * 1a1. CadetHQ shows an error message.
+    * 1a2. User makes the request again with updated details.
+      
+      Steps 1a1 - 1a2 are repeated until the input is valid.
 
-      Use case ends.
+      Use case resumes from step 1.
 
 * 1b. A contact with the given student ID already exists.
-    * 1b1. CadetHQ shows an error message
+    * 1b1. CadetHQ shows an error message.
+    * 1b2. User makes the request again with updated details.
+      
+      Steps 1b1 - 1b2 are repeated until the input is valid.
 
-      Use case ends.
+      Use case resumes from step 2.
+
+* 1c. A contact with the given email already exists.
+    * 1c1. CadetHQ shows an error message.
+    * 1c2. User makes the request again with updated details.
+      
+      Steps 1c1 - 1c2 are repeated until the input is valid.
+
+      Use case resumes from step 2.
 
 ___
 
-**Use case: Delete a student contact using list index**
+**Use case: UC02 - List all students**
 
 **MSS**
 
-1.  User requests to <u>list students</u>
-2.  User requests to delete a specific student in the list using index in list
-3.  CadetHQ deletes the student's contact
+1.  User requests to list students.
+2.  CadetHQ shows the full list of students.
+
+    Use case ends.
+
+___
+
+**Use case: UC03 - Find students(s)**
+
+**MSS**
+
+1. User requests to find student(s).
+2. CadetHQ shows the list of found students.
+    
+    Use case ends.
+
+
+___
+
+**Use case: UC04 - Delete a student contact using list index**
+
+**MSS**
+
+1.  User requests to delete a specific student in the list using index in list
+2.  CadetHQ deletes the student's contact
 
     Use case ends.
 
 **Extensions**
 
 * 1a. The list is empty.
+    * 1a1. CadetHQ shows an error message.
 
-  Use case ends.
+      Use case ends.
 
-* 2a. The given index is invalid.
-
-    * 2a1. CadetHQ shows an error message.
+* 1b. The given index is invalid and/or out of bounds.
+    * 1b1. CadetHQ shows an error message.
+    * 1b2. User makes the request again with updated index.
+      
+      Steps 1b1 - 1b2 repeat until the index is valid and in bounds.
 
       Use case resumes at step 2.
 
 ___
 
-**Use case: Delete a student contact using Student ID**
+**Use case: UC05 - Delete a student contact using Student ID**
 
 **MSS**
 
@@ -442,45 +492,147 @@ ___
 
 **Extensions**
 
-* 1a. The given Student ID is invalid.
+* 1a. The list is empty.
+    * CadetHQ shows an error message.
+      Use case ends.
 
-    * 1a1. CadetHQ shows an error message.
-
-      Use case resumes at step 1.
-
-* 1b. The given Student ID is not in the list.
-
+* 1b. The given Student ID is invalid.
     * 1b1. CadetHQ shows an error message.
+    * 1b2. User makes the request again with updated Student ID.
+
+      Steps 1b1 - 1b2 repeat until the Student ID is valid.
 
       Use case resumes at step 1.
+
+* 1c. The given Student ID is not in the list.
+    * 1c1. CadetHQ shows an error message.
+    * 1c2. User makes the request again with updated Student ID.
+      
+      Steps 1c1 - 1c2 repeat until the Student ID is one found in the list.
+
+      Use case resumes at step 2.
 
 ___
 
-**Use case: View a student contact via list index**
+**Use case: UC06 - Edit a student contact via list index**
 
 **MSS**
 
-1.  User requests to <u>list students</u>
-2.  User requests to view a specific student in the list
-3.  CadetHQ displays the student's contact
+1. User requests to edit a specific contact in the list using index in list.
+2. CadetHQ edits the contact and displays updated information.
+
+    Use case ends.
+   
+**Extensions**
+
+* 1a. The list is empty.
+    * 1a1. CadetHQ shows an error message.
+
+      Use case ends.
+
+* 1b. The index is invalid and/or out of bounds.
+    * 1b1. CadetHQ shows an error message.
+    * 1b2. User makes request again with updated index.
+
+      Steps 1b1 - 1b2 repeat until the index is valid.
+
+      Use case resumes from step 1.
+
+* 1c. User did not specify any information to update.
+    * 1c1. CadetHQ shows an error message.
+    * 1c2. User makes request again with updated information.
+
+      Steps 1c1 - 1c2 repeat until there is information to update.
+
+      Use case resumes from step 1.
+
+* 1d. User's requested edit contains a duplicate email.
+    * 1d1. CadetHQ shows an error message.
+    * 1d2. User makes request again with updated information.
+
+      Steps 1d1 - 1d2 repeat until the edit does not contain a duplicate email.
+
+      Use case resumes from step 1. 
+
+___
+
+**Use case: UC07 - Edit a student contact via Student ID**
+
+**MSS**
+
+1. User requests to edit a specific contact in the list using Student ID.
+2. CadetHQ edits the contact and displays updated information.
+
+    Use case ends.
+   
+**Extensions**
+
+* 1a. The list is empty.
+    * 1a1. CadetHQ shows an error message.
+
+      Use case ends.
+
+* 1b. The student ID is invalid.
+    * 1b1. CadetHQ shows an error message.
+    * 1b2. User makes request again with updated index.
+
+      Steps 1b1 - 1b2 repeat until the index is valid.
+
+      Use case resumes from step 1.
+
+* 1c. The given Student ID is not in the list.
+    * 1c1. CadetHQ shows an error message.
+    * 1c2. User makes the request again with updated Student ID.
+      
+      Steps 1c1 - 1c2 repeat until the Student ID is one found in the list.
+
+      Use case resumes at step 1.
+
+* 1d. User did not specify any information to update.
+    * 1d1. CadetHQ shows an error message.
+    * 1d2. User makes request again with updated information.
+
+      Steps 1d1 - 1d2 repeat until there is information to update.
+
+      Use case resumes from step 1.
+
+* 1e. User's requested edit contains a duplicate email.
+    * 1e1. CadetHQ shows an error message.
+    * 1e2. User makes request again with updated information.
+
+      Steps 1e1 - 1e2 repeat until the edit does not contain a duplicate email.
+
+      Use case resumes from step 1. 
+
+___
+
+**Use case: UC08 - View a student contact via list index**
+
+**MSS**
+
+1.  User requests to view a specific student in the list
+2.  CadetHQ displays the student's contact
 
     Use case ends.
 
 **Extensions**
 
 * 1a. The list is empty.
+    * 1a1. CadetHQ shows an error message.
 
-  Use case ends.
+      Use case ends.
 
-* 2a. The given index is invalid.
+* 1b. The given index is invalid and/or out of bounds.
+    * 1b1. CadetHQ shows an error message.
+    * 1b2. User makes the request again with updated index.
 
-    * 2a1. CadetHQ shows an error message.
+      Steps 1b1 - 1b2 repeat until the index is valid and in bounds.
 
       Use case resumes at step 2.
 
 ___
 
-**Use case: View a student contact via Student ID**
+**Use case: UC09 - View a student contact via Student ID**
 
 **MSS**
 
@@ -491,58 +643,73 @@ ___
 
 **Extensions**
 
-* 1a. The given Student ID is invalid.
-
+* 1a. The list is empty.
     * 1a1. CadetHQ shows an error message.
+
+      Use case ends.
+
+* 1b. The student ID is invalid.
+    * 1b1. CadetHQ shows an error message.
+    * 1b2. User makes request again with updated index.
+
+      Steps 1b1 - 1b2 repeat until the index is valid.
+
+      Use case resumes from step 1.
+
+* 1c. The given Student ID is not in the list.
+    * 1c1. CadetHQ shows an error message.
+    * 1c2. User makes the request again with updated Student ID.
+      
+      Steps 1c1 - 1c2 repeat until the Student ID is one found in the list.
 
       Use case resumes at step 2.
 
-* 1b. The given Student ID is not in the list.
-
-    * 1b1. CadetHQ shows an error message.
-
-      Use case resumes at step 1.
-
 ___
 
-**Use case: Record a student's grade via list index**
+**Use case: UC10 - Record a student's grade via list index**
 
 **MSS**
 
-1.  User requests to <u>list students</u>
-2.  User requests to record grade of a specific student in the list, inputting test name and score
-3.  CadetHQ updates student's record
-4.  CadetHQ displays student's grade
+1.  User requests to record grade of a specific student in the list, inputting test name and score
+2.  CadetHQ updates student's record
+3.  CadetHQ displays student's grade
 
     Use case ends.
 
 **Extensions**
 
 * 1a. The list is empty.
+    * 1a1. CadetHQ shows an error message.
 
-  Use case ends.
+      Use case ends.
 
-* 2a. The given index is invalid.
+* 1b. The given index is invalid and/or out of bounds.
+    * 1b1. CadetHQ shows an error message.
+    * 1b2. User makes the request again with updated index.
 
-    * 2a1. CadetHQ shows an error message.
+      Steps 1b1 - 1b2 repeat until the index is valid and in bounds.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
-* 2b. Details missing in input.
+* 1c. Details missing in input.
+    * 1c1. CadetHQ shows an error message.
+    * 1c2. User makes request again with updated information.
 
-    * 2b1. CadetHQ shows an error message.
+      Steps 1c1 - 1c2 repeat until there are no missing details.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
-* 2c. Details are not in an acceptable format.
+* 1d. Details are not in an acceptable format.
+    * 1d1. CadetHQ shows an error message.
+    * 1d2. User makes request again with updated format.
 
-    * 2c1. CadetHQ shows an error message.
+      Steps 1d1 - 1d2 repeat until formatting is acceptable.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 ___
 
-**Use case: Record a student's grade via Student ID**
+**Use case: UC11 - Record a student's grade via Student ID**
 
 **MSS**
 
@@ -554,40 +721,52 @@ ___
 
 **Extensions**
 
-* 1a. The given Student ID is invalid.
-
+* 1a. The list is empty.
     * 1a1. CadetHQ shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
-* 1b. The given Student ID is not in the list.
-
+* 1b. The student ID is invalid.
     * 1b1. CadetHQ shows an error message.
+    * 1b2. User makes request again with updated index.
 
-      Use case resumes at step 1.
+      Steps 1b1 - 1b2 repeat until the index is valid.
 
-* 1c. Details missing in input.
+      Use case resumes from step 1.
 
+* 1c. The given Student ID is not in the list.
     * 1c1. CadetHQ shows an error message.
+    * 1c2. User makes the request again with updated Student ID.
+      
+      Steps 1c1 - 1c2 repeat until the Student ID is one found in the list.
 
       Use case resumes at step 1.
 
-* 1d. Details are not in an acceptable format.
-
+* 1d. Details missing in input.
     * 1d1. CadetHQ shows an error message.
+    * 1d2. User makes request again with updated information.
+
+      Steps 1d1 - 1d2 repeat until there are no missing details.
+
+      Use case resumes at step 1.
+
+* 1e. Details are not in an acceptable format.
+    * 1e1. CadetHQ shows an error message.
+    * 1e2. User makes request again with updated format.
+
+      Steps 1e1 - 1e2 repeat until formatting is acceptable.
 
       Use case resumes at step 1.
 
 ___
 
-**Use case: Record a student's attendance via list index**
+**Use case: UC12 - Record a student's attendance via list index**
 
 **MSS**
 
-1.  User requests to <u>list students</u>
-2.  User requests to record attendance of a specific student in the list, inputting tutorial number
-3.  CadetHQ inverts student's attendance
-4.  CadetHQ displays student's attendance
+1.  User requests to record attendance of a specific student in the list, inputting tutorial number
+2.  CadetHQ inverts student's attendance
+3.  CadetHQ displays student's attendance
 
     Use case ends.
 
@@ -597,21 +776,25 @@ ___
 
   Use case ends.
 
-* 2a. The given index is invalid.
+* 1b. The given index is invalid and/or out of bounds.
+    * 1b1. CadetHQ shows an error message.
+    * 1b2. User makes request again with updated index.
 
-    * 2a1. CadetHQ shows an error message.
-
-      Use case resumes at step 2.
-
-* 2b. Details missing in input.
-
-    * 2b1. CadetHQ shows an error message.
+      Steps 1b1 - 1b2 repeat until index is valid and in bounds. 
 
       Use case resumes at step 2.
+
+* 1c. Details missing in input.
+    * 1c1. CadetHQ shows an error message.
+    * 1c2. User makes request again with updated details.
+
+      Steps 1c1 - 1c2 repeat until the details are all complete.
+
+      Use case resumes at step 1.
 
 ___
 
-**Use case: Record a student's attendance via Student ID**
+**Use case: UC13 - Record a student's attendance via Student ID**
 
 **MSS**
 
@@ -623,32 +806,37 @@ ___
 
 **Extensions**
 
-* 1a. The given index is invalid.
+* 1a. The list is empty.
 
-    * 1a1. CadetHQ shows an error message.
+  Use case ends.
 
-      Use case resumes at step 1.
-
-* 1b. Details missing in input.
-
+* 1b. The student ID is invalid.
     * 1b1. CadetHQ shows an error message.
+    * 1b2. User makes request again with updated index.
+
+      Steps 1b1 - 1b2 repeat until the index is valid.
+
+      Use case resumes from step 1.
+
+* 1c. The given Student ID is not in the list.
+    * 1c1. CadetHQ shows an error message.
+    * 1c2. User makes the request again with updated Student ID.
+      
+      Steps 1c1 - 1c2 repeat until the Student ID is one found in the list.
+
+      Use case resumes at step 1.
+
+* 1d. Details missing in input.
+    * 1d1. CadetHQ shows an error message.
+    * 1d2. User makes request again with updated details.
+
+      Steps 1d1 - 1d2 repeat until the details are complete.
 
       Use case resumes at step 1.
 
 ___
 
-**Use case: list all students**
-
-**MSS**
-
-1.  User requests to list students
-2.  CadetHQ shows a list of persons
-
-    Use case ends.
-
-___
-
-**Use case: sort all students by exam score**
+**Use case: UC14 - Sort all students by exam score**
 
 **MSS**
 
@@ -659,7 +847,7 @@ ___
 
 ___
 
-**Use case: sort all students by name**
+**Use case: UC15 - Sort all students by name**
 
 **MSS**
 
@@ -670,7 +858,7 @@ ___
 
 ___
 
-**Use case: Edit max score of exam**
+**Use case: UC16 - Edit max score of exam**
 
 **MSS**
 
@@ -682,16 +870,28 @@ ___
 **Extensions**
 
 * 1a. User inputs an invalid max score (0 or less, or lower than the current highest recorded score)
-
     * 1a1. CadetHQ shows an error message.
+    * 1a2. User makes request again with updated max score.
+
+      Steps 1a1 - 1a2 repeat until the max score is valid.
 
      Use case resumes at step 1.
 
 * 1b. User inputs an invalid exam not supported in CadetHQ
+    * 1b1. CadetHQ shows an error message.
+    * 1b2. User makes request again with updated exam.
 
-    * 1b1. CadetHq shows an error message.
+      Steps 1b1 - 1b2 repeat until the exam is valid.
 
-     Use Case resumes at step 1.
+     Use case resumes at step 1.
+
+* 1c. Details missing in input.
+    * 1c1. CadetHQ shows an error message.
+    * 1c2. User makes request again with updated details.
+
+      Steps 1c1 - 1c2 repeat until the details are complete.
+
+      Use case resumes at step 1. 
 
 ___
 
