@@ -91,7 +91,7 @@ A table of all the information that can be associated with a contact
 | Phone number     | p/     | 98765432        | - Must consist of 8 digits <br> - Must start with the number "6", "8" or "9"                                                                                                                    |
 | Email            | e/     | johnd@u.nus.edu | - Must be of the format *local-part* @u.nus.edu<br>  - *local-part* should only contain alphanumeric characters                                                           |
 | Telegram handle  | h/     | JohnDoe         | - Must start with "@" <br> - Remaining characters must be alphanumeric or underscores                                                                                                      |
-| Tag              | t/     | Friend          | - Should be alphanumeric                                                                                                                                                                   |
+| Tag              | t/     | Friend          | - Should contain only alphanumeric characters and whitespaces <br> - Leading and trailing whitespaces are ignored <br> - There can be no more than 1 whitespace between each alphanumeric character                                                                                                                                                                     |
 
 
 The index refers to the index number shown in the displayed person list.
