@@ -265,7 +265,7 @@ Examples:
 
 ### Sorting students: `sort`
 
-Sorts the students either by name or exam score.
+Sorts the list of students either by name or exam score.
 
 Format: `sort n/` or `sort ex/EXAM`
 
@@ -274,6 +274,19 @@ Format: `sort n/` or `sort ex/EXAM`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Students with no recorded scores will be shifted to the bottom of the displayed student list when sorted by exam scores.
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+
+* To guard against accidental inputs/typos, `sort` <u>ignores</u> certain parts of the command that are <u>not needed in execution</u>.
+
+* For `sort n/`, you can also input (though discouraged) `sort [preamble] n/[argument]`. Any extraneous inputs **that are not prefixes and/or command parameters** in the `[preamble]` and `[argument]` sections will be ignored.
+
+    E.g. `sort blahblah n/`, `sort n/blah` will work, but `sort ex/ n/` will not.
+
+* For `sort ex/EXAM`, you can also input (though discouraged) `sort [preamble] ex/EXAM`. Any extraneous inputs **that are not prefixes and/or command parameters** in the `[preamble]` section will be ignored.
+
+    E.g. `sort blahblah ex/final` will work, but `sort n/ ex/final` will not work.
 </div>
 
 Examples:
