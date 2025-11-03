@@ -147,10 +147,14 @@ public class ExamScores {
      * @param newMaxScore the new max score to compare the recorded scores against
      * @return true if the new max score is valid, else false.
      */
-    public boolean newMaxScoreValid(Exam exam, int newMaxScore) {
+    public Optional<Integer> newMaxScoreValid(Exam exam, int newMaxScore) {
         for (int i = 0; i < arrayOfScores.length; i++) {
             if (arrayOfScores[i].getExam().equals(exam)) {
-                return arrayOfScores[i].isNewMaxScoreValid(newMaxScore);
+                if (!arrayOfScores[i].isNewMaxScoreValid(newMaxScore)) {
+                    return arrayOfScores[i].getScore();
+                } else {
+                    return Optional.empty();
+                }
             }
         }
         throw new IllegalArgumentException("Exam " + exam.getName() + "not found in ExamScores");
