@@ -909,7 +909,7 @@ ___
 
 **Extensions**
 
-* 1a. User inputs an invalid max score (0 or less, or lower than the current highest recorded score)
+* 1a. User inputs an invalid max score
     * 1a1. CadetHQ shows an error message.
     * 1a2. User makes request again with updated max score.
 
