@@ -1,7 +1,7 @@
 @startuml SortSequenceDiagram-Model.puml
 !include style.puml
 skinparam ArrowFontStyle plain
-skinparam DefaultFontSize 20 
+skinparam DefaultFontSize 20
 
 mainframe <size:20>sd Model Component Sequence</size>
 

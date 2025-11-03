@@ -409,7 +409,7 @@ ___
 * 1a. Student details missing in input.
     * 1a1. CadetHQ shows an error message.
     * 1a2. User makes the request again with updated details.
-      
+
       Steps 1a1 - 1a2 are repeated until the input is valid.
 
       Use case resumes from step 1.
@@ -417,7 +417,7 @@ ___
 * 1b. A contact with the given student ID already exists.
     * 1b1. CadetHQ shows an error message.
     * 1b2. User makes the request again with updated details.
-      
+
       Steps 1b1 - 1b2 are repeated until the input is valid.
 
       Use case resumes from step 1.
@@ -425,7 +425,7 @@ ___
 * 1c. A contact with the given email already exists.
     * 1c1. CadetHQ shows an error message.
     * 1c2. User makes the request again with updated details.
-      
+
       Steps 1c1 - 1c2 are repeated until the input is valid.
 
       Use case resumes from step 1.
@@ -457,7 +457,7 @@ ___
 
 1. User requests to find student(s).
 2. CadetHQ shows the list of found students.
-    
+
     Use case ends.
 
 
@@ -482,7 +482,7 @@ ___
 * 1b. The given index is invalid and/or out of bounds.
     * 1b1. CadetHQ shows an error message.
     * 1b2. User makes the request again with updated index.
-      
+
       Steps 1b1 - 1b2 repeat until the index is valid and in bounds.
 
       Use case resumes at step 2.
@@ -515,7 +515,7 @@ ___
 * 1c. The given Student ID is not in the list.
     * 1c1. CadetHQ shows an error message.
     * 1c2. User makes the request again with updated Student ID.
-      
+
       Steps 1c1 - 1c2 repeat until the Student ID is one found in the list.
 
       Use case resumes at step 2.
@@ -530,7 +530,7 @@ ___
 2. CadetHQ edits the contact and displays updated information.
 
     Use case ends.
-   
+
 **Extensions**
 
 * 1a. The list is empty.
@@ -560,7 +560,7 @@ ___
 
       Steps 1d1 - 1d2 repeat until the edit does not contain a duplicate email.
 
-      Use case resumes from step 1. 
+      Use case resumes from step 1.
 
 * 1e. Details are not in an acceptable format.
     * 1e1. CadetHQ shows an error message.
@@ -580,7 +580,7 @@ ___
 2. CadetHQ edits the contact and displays updated information.
 
     Use case ends.
-   
+
 **Extensions**
 
 * 1a. The list is empty.
@@ -599,7 +599,7 @@ ___
 * 1c. The given Student ID is not in the list.
     * 1c1. CadetHQ shows an error message.
     * 1c2. User makes the request again with updated Student ID.
-      
+
       Steps 1c1 - 1c2 repeat until the Student ID is one found in the list.
 
       Use case resumes at step 1.
@@ -618,7 +618,7 @@ ___
 
       Steps 1e1 - 1e2 repeat until the edit does not contain a duplicate email.
 
-      Use case resumes from step 1. 
+      Use case resumes from step 1.
 
 * 1f. Details are not in an acceptable format.
     * 1f1. CadetHQ shows an error message.
@@ -683,7 +683,7 @@ ___
 * 1c. The given Student ID is not in the list.
     * 1c1. CadetHQ shows an error message.
     * 1c2. User makes the request again with updated Student ID.
-      
+
       Steps 1c1 - 1c2 repeat until the Student ID is one found in the list.
 
       Use case resumes at step 2.
@@ -761,7 +761,7 @@ ___
 * 1c. The given Student ID is not in the list.
     * 1c1. CadetHQ shows an error message.
     * 1c2. User makes the request again with updated Student ID.
-      
+
       Steps 1c1 - 1c2 repeat until the Student ID is one found in the list.
 
       Use case resumes at step 1.
@@ -804,7 +804,7 @@ ___
     * 1b1. CadetHQ shows an error message.
     * 1b2. User makes request again with updated index.
 
-      Steps 1b1 - 1b2 repeat until index is valid and in bounds. 
+      Steps 1b1 - 1b2 repeat until index is valid and in bounds.
 
       Use case resumes at step 2.
 
@@ -831,7 +831,7 @@ ___
 **MSS**
 
 1.  User requests to record attendance of a specific student using Student ID, inputting tutorial number
-2.  CadetHQ inverts student's attendance 
+2.  CadetHQ inverts student's attendance
 3.  CadetHQ displays student's attendance
 
     Use case ends.
@@ -853,7 +853,7 @@ ___
 * 1c. The given Student ID is not in the list.
     * 1c1. CadetHQ shows an error message.
     * 1c2. User makes the request again with updated Student ID.
-      
+
       Steps 1c1 - 1c2 repeat until the Student ID is one found in the list.
 
       Use case resumes at step 1.
@@ -931,7 +931,7 @@ ___
 
       Steps 1c1 - 1c2 repeat until the details are complete.
 
-      Use case resumes at step 1. 
+      Use case resumes at step 1.
 
 * 1d. Details are not in an acceptable format.
     * 1d1. CadetHQ shows an error message.
@@ -953,7 +953,7 @@ ___
 4.  Should be able to hold up to **200 people** without a noticeable sluggishness in performance for typical usage.
 5.  Command execution should not take more than **5 seconds**. For example, editing or adding a person should not take more than 5 seconds for the changes to be reflected in CadetHQ.
 6.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-7.  Should work without installing an installer.
+7.  Should work without installation.
 8.  Should be usable by a CS1101S TA that has never used similar contact management applications before.
 9.  Should be for a single user only (i.e. not a multi-user product, no shared file storage mechanism, no application running in a shared computer).
 10. Invalid commands should not crash CadetHQ, but show an error message instead.
@@ -1013,7 +1013,7 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: Click on the <code style="color : name_color">X button</code> at the top right of CadetHQ.<br>
       Expected: CadetHQ closes.
-  
+
    3. Test case: Use the `exit` command in the text box.<br>
       Expected: CadetHQ closes.
 
@@ -1091,7 +1091,7 @@ testers are expected to do more *exploratory* testing.
 
    3. Test case: `attend 1 0`<br>
       Expected: No attendance is taken. Error details shown in the status message.
-    
+
    4. Test case: `attend`<br>
       Expected: No attendance is taken. Error details shown in the status message.
 
@@ -1126,7 +1126,7 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `score`<br>
        Expected: No score is taken. Error details shown in the status message.
 
-    5. Other incorrect attend commands to try: `score x ex/midterm s/0`, `score 1 ex/y s/0`, `score 1 ex/midterm s/z`, `...` 
+    5. Other incorrect attend commands to try: `score x ex/midterm s/0`, `score 1 ex/y s/0`, `score 1 ex/midterm s/z`, `...`
        (where x is larger than the list size, y is not in the exam list and z is a score above the max score)<br>
        Expected: Similar to previous.
 
@@ -1168,10 +1168,10 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `sort n/`<br>
        Expected: List is sorted in ascending alphabetical order. Details of sort shown in the status message.
-    
+
     2. Test case: `sort ex/midterm`<br>
        Expected: List is sorted in ascending order of midterm scores, students with no recorded scores are pushed to the end of the list. Details of sort shown in the status message.
-    
+
     3. Test case: `sort ex/final`<br>
        Expected: List is sorted similar to midterm above, but sorted by final scores instead. Details of sort shown in the status message.
 
