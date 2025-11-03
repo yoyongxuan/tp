@@ -420,7 +420,7 @@ ___
       
       Steps 1b1 - 1b2 are repeated until the input is valid.
 
-      Use case resumes from step 2.
+      Use case resumes from step 1.
 
 * 1c. A contact with the given email already exists.
     * 1c1. CadetHQ shows an error message.
@@ -428,7 +428,15 @@ ___
       
       Steps 1c1 - 1c2 are repeated until the input is valid.
 
-      Use case resumes from step 2.
+      Use case resumes from step 1.
+
+* 1d. Details are not in an acceptable format.
+    * 1d1. CadetHQ shows an error message.
+    * 1d2. User makes the request again with updated format.
+
+      Steps 1d1 - 1d2 are repeated until the format is accepted.
+
+      Use case resumes from step 1.
 
 ___
 
@@ -554,6 +562,14 @@ ___
 
       Use case resumes from step 1. 
 
+* 1e. Details are not in an acceptable format.
+    * 1e1. CadetHQ shows an error message.
+    * 1e2. User makes the request again with updated format.
+
+      Steps 1e1 - 1e2 are repeated until the format is accepted.
+
+      Use case resumes from step 1.
+
 ___
 
 **Use case: UC07 - Edit a student contact via Student ID**
@@ -603,6 +619,14 @@ ___
       Steps 1e1 - 1e2 repeat until the edit does not contain a duplicate email.
 
       Use case resumes from step 1. 
+
+* 1f. Details are not in an acceptable format.
+    * 1f1. CadetHQ shows an error message.
+    * 1f2. User makes the request again with updated format.
+
+      Steps 1f1 - 1f2 are repeated until the format is accepted.
+
+      Use case resumes from step 1.
 
 ___
 
@@ -792,6 +816,14 @@ ___
 
       Use case resumes at step 1.
 
+* 1d. Details are not in an acceptable format.
+    * 1d1. CadetHQ shows an error message.
+    * 1d2. User makes the request again with updated details.
+
+      Steps 1d1 - 1d2 are repeated until the format is accepted.
+
+      Use case resumes from step 1.
+
 ___
 
 **Use case: UC13 - Record a student's attendance via Student ID**
@@ -833,6 +865,14 @@ ___
       Steps 1d1 - 1d2 repeat until the details are complete.
 
       Use case resumes at step 1.
+
+* 1e. Details are not in an acceptable format.
+    * 1e1. CadetHQ shows an error message.
+    * 1e2. User makes the request again with updated details.
+
+      Steps 1e1 - 1e2 are repeated until the format is accepted.
+
+      Use case resumes from step 1.
 
 ___
 
@@ -893,16 +933,25 @@ ___
 
       Use case resumes at step 1. 
 
+* 1d. Details are not in an acceptable format.
+    * 1d1. CadetHQ shows an error message.
+    * 1d2. User makes the request again with updated details.
+
+      Steps 1d1 - 1d2 are repeated until the format is accepted.
+
+      Use case resumes from step 1.
+
 ___
+
 
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to work with different screen resolutions as long as it meets the minimum window size of 450 x 600px.
-3.  Should be able to start up within **3 seconds** on modern computer hardware (within the last 10 years).
-4.  Should be able to hold up to **1000 people** without a noticeable sluggishness in performance for typical usage.
-5.  Command execution should not take more than **2 seconds**. For example, editing or adding a person should not take more than 2 seconds for the changes to be reflected in CadetHQ.
+3.  Should be able to start up within **5 seconds** on modern computer hardware (within the last 10 years).
+4.  Should be able to hold up to **200 people** without a noticeable sluggishness in performance for typical usage.
+5.  Command execution should not take more than **5 seconds**. For example, editing or adding a person should not take more than 5 seconds for the changes to be reflected in CadetHQ.
 6.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 7.  Should work without installing an installer.
 8.  Should be usable by a CS1101S TA that has never used similar contact management applications before.
@@ -914,7 +963,6 @@ ___
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS.
-* **Private contact detail**: A contact detail that is not meant to be shared with others.
 * **CLI**: Command-Line Interface - A text-based interface for interacting with CadetHQ by typing commands.
 * **GUI**: Graphical User Interface - A visual interface that uses windows, buttons and menus, which is not the primary interface of the app.
 * **NUS**: National University of Singapore.
@@ -929,7 +977,7 @@ ___
 
 ## **Appendix: Planned Enhancements**
 
-1. **Implement more exams/assessments**: CadetHQ currently only supports the recording of midterm and final scores. Adding the ability to record more assessments such as <u>reading assessments</u> and <u>practical exams</u> allows TAs to monitor their students progress better throughout the semester.
+1. **Add/edit/delete exams**: CadetHQ currently only supports the recording of 2 static exams (midterm and final). Adding the ability to add more assessments manually such as <u>reading assessments</u> and <u>practical exams</u> allows TAs to monitor their students progress better throughout the semester. Being able to edit and delete exams allows TAs to have more flexibility in exam tracking if the curriculum changes in the future.
 
 2. **Improve GUI for displaying of exam scores**: The current GUI displays the midterm and exam scores under each student. As more assessments are added, this may clutter the screen. A **dropdown menu** can be added to only show the exam scores when clicked.
 
@@ -938,6 +986,7 @@ ___
     * `massattend t/TAG 5`: marks attendance for students with the specified `TAG` for tutorial 5.
 
 4. **More sorting**: Currently, CadetHQ only supports sorting in ascending order of names and exams. Add more sorting options like sorting in descending order or by attendance allows TAs to have more flexibility in list management.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
