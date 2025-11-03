@@ -152,6 +152,11 @@ Format: `add SID n/NAME p/PHONE_NUMBER e/EMAIL h/TELEGRAM_HANDLE [t/TAG]…​`
 A person can have 0 or more tags!
 </div>
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Tags can be used to take down a student's tutorial group!
+</div>
+
+
 * All parameters must not be blank
 * All parameters must adhere to constraints detailed in [Contact Details](#contact-details)
 

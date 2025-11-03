@@ -705,6 +705,7 @@ ___
     * `massattend 1-10 1`: marks attendance for students from index 1 to 10 in the list for tutorial 1.
     * `massattend t/TAG 5`: marks attendance for students with the specified `TAG` for tutorial 5.
 
+4. **Enhanced find functionality**: CadetHQ currently only allows the user to search by name. Adding the ability to search by tutorial attended or tags, and allowing partial matches makes it easier for the user to find the students they are looking for.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
