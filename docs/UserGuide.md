@@ -280,13 +280,13 @@ Students with no recorded scores will be shifted to the bottom of the displayed 
 
 * To guard against accidental inputs/typos, `sort` <u>ignores</u> certain parts of the command that are <u>not needed in execution</u>.
 
-* For `sort n/`, you can also input (though discouraged) `sort [preamble] n/[argument]`. Any extraneous inputs **that are not prefixes and/or command parameters** in the `[preamble]` and `[argument]` sections will be ignored.
+* For `sort n/`, you can also input (though discouraged) `sort [preamble] n/[argument]`. Any extraneous inputs **that are not prefixes and/or command parameters used in sort** in the `[preamble]` and `[argument]` sections will be ignored.
 
-    E.g. `sort blahblah n/`, `sort n/blah` will work, but `sort ex/ n/` will not.
+    E.g. `sort abcex/123!#@ n/`, `sort n/abcex/123!#@` will work, but `sort ex/ n/` will not.
 
-* For `sort ex/EXAM`, you can also input (though discouraged) `sort [preamble] ex/EXAM`. Any extraneous inputs **that are not prefixes and/or command parameters** in the `[preamble]` section will be ignored.
+* For `sort ex/EXAM`, you can also input (though discouraged) `sort [preamble] ex/EXAM`. Any extraneous inputs **that are not prefixes and/or command parameters used in sort** in the `[preamble]` section will be ignored.
 
-    E.g. `sort blahblah ex/final` will work, but `sort n/ ex/final` will not work.
+    E.g. `sort abcex/123!#@ ex/final` will work, but `sort n/ ex/final` will not work.
 </div>
 
 Examples:
