@@ -56,6 +56,15 @@ public class ArgumentMultimap {
     }
 
     /**
+     * Returns true if the map contains the given prefix.
+     * @param prefix
+     * @return true if the map contains the given prefix.
+     */
+    public boolean containsKey(Prefix prefix) {
+        return argMultimap.containsKey(prefix);
+    }
+
+    /**
      * Returns the preamble (text before the first valid prefix). Trims any leading/trailing spaces.
      */
     public String getPreamble() {
