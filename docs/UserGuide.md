@@ -50,14 +50,12 @@ For CS1101S TAs that are good at using the Command Line, CadetHQ gives you the p
 
 # Quick start
 
-Note that throughout this document, we will often refer to CadetHQ as Address Book whenever appropriate.
-
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-T11-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your CadetHQ.
+1. Copy the file to the folder you want to use as the _home folder_ for CadetHQ.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar cadethq.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some placeholder data.<br>
@@ -68,7 +66,7 @@ Note that throughout this document, we will often refer to CadetHQ as Address Bo
 
    * `list` : Lists all contacts.
 
-   * `add A1234567A n/John Doe p/98765432 e/johnd@u.nus.edu h/@JohnDoe` : Adds a contact named `John Doe` to the Address Book.
+   * `add A1234567A n/John Doe p/98765432 e/johnd@u.nus.edu h/@JohnDoe` : Adds a contact named `John Doe` to CadetHQ.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -90,7 +88,7 @@ A table of all the information that can be associated with a contact
 | Name             | n/     | John Doe        | - Only alphanumeric characters and spaces                                                                                                                                                  |
 | Phone number     | p/     | 98765432        | - Must consist of 8 digits <br> - Must start with the number "6", "8" or "9"                                                                                                                    |
 | Email            | e/     | johnd@u.nus.edu | - Must be of the format *local-part* @u.nus.edu<br>  - *local-part* should only contain alphanumeric characters                                                           |
-| Telegram handle  | h/     | JohnDoe         | - Must start with "@" <br> - Remaining characters must be alphanumeric or underscores                                                                                                      |
+| Telegram handle  | h/     | @JohnDoe        | - Must start with "@" <br> - Remaining characters must be alphanumeric or underscores                                                                                                      |
 | Tag              | t/     | Friend          | - Should contain only alphanumeric characters and whitespaces <br> - Leading and trailing whitespaces are ignored <br> - There can be no more than 1 whitespace between each alphanumeric character                                                                                                                                                                     |
 
 
@@ -115,8 +113,8 @@ When entering a contact detail as a parameter for any command:
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Parameters prefixed with a `/` can be in any order.<br>
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable. <br> The exceptions apply to the `SID/index` parameter. For example, the `add` command always expects the Student ID as the first parameter, the rest of the parameters can be in any order. The `edit` command always expects either the 1-based list index or the Student ID as the first parameter.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -126,6 +124,14 @@ When entering a contact detail as a parameter for any command:
 * All formats accept multiple spaces in between parameters. e.g. `score ‎ ‎  1 ‎ ‎ ‎   ex/  ‎ ‎  midterm  s/50` will be interpreted as `score 1 ex/midterm s/50`
 
 * `SID` refers to the Student ID.
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the screenshots:**<br>
+
+* Note: All screenshots in the User Guide have their commands manually inputted into the command box again to facilitate understanding. In practice, after entering the command, the command box will be empty.
+
 </div>
 
 ---
@@ -144,7 +150,7 @@ Format: `help`
 
 ### Adding a student: `add`
 
-Adds a student to the Address Book.
+Adds a student to CadetHQ.
 
 Format: `add SID n/NAME p/PHONE_NUMBER e/EMAIL h/TELEGRAM_HANDLE [t/TAG]…​`
 
@@ -158,6 +164,7 @@ Tags can be used to note a student's tutorial group!
 
 * All parameters must not be blank
 * All parameters must adhere to constraints detailed in [Contact Details](#contact-details)
+* The SID is uppercased after validation success.
 
 Examples:
 * `add A0123456A n/John Doe p/98765432 e/johnd@u.nus.edu h/@JohnDoe`
@@ -166,12 +173,12 @@ Examples:
 ![result for `add A1234567B n/Betsy Crowe t/friend e/betsycrowe@u.nus.edu p/89891206 t/needshelp h/@BetsyC`](images/addBetsyCrowe.png)
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
-Duplicate students cannot be added to the Address Book. A student is considered a duplicate student if either the SID or the email are the same as another existing student in the Address Book.  
+Duplicate students cannot be added to CadetHQ. A student is considered a duplicate student if either the SID or the email are the same as another existing student in CadetHQ. It is recommended to use the student's email starting with e, instead of his nus friendly mail. Rationale: SID and email are uniquely given by NUS, whereas it is possible for students to share phone contact for a brief period of time.
 </div>`
 
 ### Editing a student: `edit`
 
-Edits an existing student in the Address Book.
+Edits an existing student in CadetHQ.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…​` or `edit SID [n/NAME] [p/PHONE] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…​`
 
@@ -188,7 +195,7 @@ Existing values will be updated to the input values.
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
-If email is being edited, it must be a unique email not currently present in the Address Book.
+If email is being edited, it must be a unique email not currently present in CadetHQ.
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
@@ -206,7 +213,7 @@ Examples:
 
 ### Deleting a student: `delete`
 
-Deletes the specified student from the Address Book.
+Deletes the specified student from CadetHQ.
 
 Format: `delete INDEX` or `delete SID`
 
@@ -218,16 +225,16 @@ Use the `list` command to restore the full list of students before using a `dele
 </div>
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd student in the Address Book.
+* `list` followed by `delete 2` deletes the 2nd student in CadetHQ.
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
-* `list` followed by `delete A0123456Z` deletes the student in the Address Book with the student ID `A0123456Z`.
+* `list` followed by `delete A0123456Z` deletes the student in CadetHQ with the student ID `A0123456Z`.
 
 ---
 ## Viewing Students
 
 ### Listing all students: `list`
 
-Shows a list of all students in the Address Book.
+Shows a list of all students in CadetHQ.
 
 Format: `list`
 
@@ -255,7 +262,7 @@ Examples:
 
 ### Viewing a student: `view`
 
-Finds and displays the specified student from the Address Book.
+Finds and displays the specified student from CadetHQ.
 
 Format: `view INDEX` or `view SID`
 
@@ -267,7 +274,7 @@ You can use the `list` command to restore the full list of students after a `vie
 </div>
 
 Examples:
-* `view 2` displays the 2nd student in the Address Book.
+* `view 2` displays the 2nd student in CadetHQ.
   ![result for 'view 2'](images/viewIndex.png)
 * `view A0000000A` displays the student with SID A0000000A.
 
@@ -309,7 +316,7 @@ Examples:
 
 ### Marking the attendance for a student: `attend`
 
-Adds the attendance for the specified tutorial, for the specified student from the Address Book. If attendance for the specified tutorial has already been taken, attendance for that tutorial will be removed instead.
+Adds the attendance for the specified tutorial, for the specified student from CadetHQ. If attendance for the specified tutorial has already been taken, attendance for that tutorial will be removed instead.
 
 Format: `attend INDEX TUTORIAL` or `attend SID TUTORIAL`
 
@@ -324,10 +331,10 @@ Entering the same `attend` command inverts the attendance for the given `TUTORIA
 </div>
 
 Examples:
-* `attend 1 6` adds attendance for tutorial `6` for the 1st student in the Address Book.
+* `attend 1 6` adds attendance for tutorial `6` for the 1st student in CadetHQ.
   ![result for 'attend 1 6'](images/attendIndex.png)
 * `attend A0000001A 2` adds attendance for tutorial `2` for the student with SID `A0000001A`.
-* `attend 1 6` removes the attendance for tutorial `6` for the 1st student in the Address Book if attendance has already been taken for this tutorial and this student.
+* `attend 1 6` removes the attendance for tutorial `6` for the 1st student in CadetHQ if attendance has already been taken for this tutorial and this student.
   ![result for a second 'attend 1 6'](images/removeAttend.png)
 
 ---
@@ -336,23 +343,25 @@ Examples:
 
 ### Adding a score for an exam for a student: `score`
 
-Adds the specified score for the specified exam for the specified student from the Address Book. If a score already exists, it is overwritten by the most recent valid score command and the score is updated.
+Adds the specified score for the specified exam for the specified student from CadetHQ. If a score already exists, it is overwritten by the most recent valid score command and the score is updated.
 
 Format: `score INDEX ex/EXAM s/SCORE` or `score SID ex/EXAM s/SCORE`
 
 * Adds the specified score `SCORE` for the specified exam `EXAM`, for the person at the specified `INDEX` or with the given `SID`.
 * If input `SCORE` is `unrecorded`, will set score of specified person and exam to `unrecoded` instead
 * `INDEX` and `SID` parameters must adhere to constraints detailed in [Contact Details](#contact-details)
+* The default maximum marks for the midterm is 70 and the default maximum marks for the final is 100.
 
 
-| Field | Requirement                                                                                                                                                                                                                                                                                                                                               |
-|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Score | Refers to the score attained by the specified student for the specified exam. <br> Must be "unrecorded" (case-insensitive) or a **non-negative integer that is not larger than the max score** of the specified exam.                                                                                                            |
-| Exam | Refers to the exam name. <br> Only "midterm" and "final" are valid inputs for this field. <br> All other inputs will result in an error message. <br> Must **match the exams recorded in the Address Book exactly**. <br> e.g. If the exam name in the Address Book is `midterm`, the specified exam name must be `midterm`, not `MIDTERM` or `mid term`. |
+
+| Field | Requirement                                                                                                                                                                                                                                                                                                                             |
+|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Score | Refers to the score attained by the specified student for the specified exam. <br> Must be "unrecorded" (case-insensitive) or a **non-negative integer that is not larger than the max score** of the specified exam.                                                                                                                   |
+| Exam | Refers to the exam name. <br> Only "midterm" and "final" are valid inputs for this field. <br> All other inputs will result in an error message. <br> Must **match the exams recorded in CadetHQ exactly**. <br> e.g. If the exam name in CadetHQ is `midterm`, the specified exam name must be `midterm`, not `MIDTERM` or `mid term`. |
 
 Examples:
-* `score 1 ex/final s/80` sets the score of the 1st student in the Address Book to `80`, for the exam `final`.
-* `score A0000001A ex/midterm s/70` sets the score of the student with SID `A0000001A` in the Address Book to `70`, for the exam `midterm`.
+* `score 1 ex/final s/80` sets the score of the 1st student in CadetHQ to `80`, for the exam `final`.
+* `score A0000001A ex/midterm s/70` sets the score of the student with SID `A0000001A` in CadetHQ to `70`, for the exam `midterm`.
   ![result for 'score A0000001A ex/midterm s/70'](images/scoreSID.png)
 
 ### Editing the max score of an exam: `maxscore`
@@ -365,7 +374,7 @@ Format: `maxscore ex/EXAM ms/MAXSCORE`
 
 | Field | Requirement                                                                                                                                                                                                                                                                                                                                                 |
 |------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Exam | Refers to the exam name. <br> Only "midterm" and "final" are valid inputs for this field. <br> All other inputs will result in an error message. <br> Must **match the exams recorded in the Address Book exactly**. <br> e.g. If the exam name in the Address Book is `midterm`, the specified exam name must be `midterm`, not `MIDTERM` or `mid term`. |
+| Exam | Refers to the exam name. <br> Only "midterm" and "final" are valid inputs for this field. <br> All other inputs will result in an error message. <br> Must **match the exams recorded in CadetHQ exactly**. <br> e.g. If the exam name in CadetHQ is `midterm`, the specified exam name must be `midterm`, not `MIDTERM` or `mid term`. |
 | Max Score | Must be a **non-negative integer**, and it **must be more than or equal to any recorded score** for the specified exam. <br> e.g. If a student has score `70/80` for the exam, the new max score must be at least `70`.                                                                                                                                     |
 
 Examples:
@@ -378,7 +387,7 @@ Examples:
 
 ### Clearing all entries: `clear`
 
-Clears all entries from the Address Book.
+Clears all entries from CadetHQ.
 
 Format: `clear`
 
@@ -394,7 +403,7 @@ CadetHQ data are saved in the hard disk automatically after any command that cha
 
 ### Editing the data file
 
-CadetHQ data are saved automatically as a JSON file `[JAR file location]/data/cadethq.json`. Advanced users are welcome to update data directly by editing that data file.
+CadetHQ data are saved automatically as a JSON file `[JAR file location]/data/cadethq.json`. Advanced users are welcome to update data directly by editing that data file, however they must take note that they should not modify the data file while the app itself is running. Furthermore, successful commands from CadetHQ save the current data, possibly overriding manual changes made. Advanced users are therefore not recommended to edit the data file while the app is running as changes can be lost.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, cadethq.json will discard all data and start with a placeholder data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -417,13 +426,14 @@ _Details coming soon ..._
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window. Also, if you open the Help window while in full screen, it appears as a fullscreen window with a black background. If you open the Help window in windowed mode, it opens as a small popup. You are recommended to use the Help Window in the windowed mode.
 3. **When a person's details are very long**, e.g. their name, telegram handle, and **CadetHQ is set to a small window width size**, some details may be truncated `(...)` as the text does not wrap around. The remedy is to expand the window width to see the full details.
 4. **Names that contain `/`, `,`, `-`, `@`, or other special characters cannot be added** in CadetHQ. An error message will be shown instead. CadetHQ currently does not support the use of special characters in names as some of these characters such as `/` are used internally in commands.
 
     <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
     A remedy is to save the name without the special characters. For example, `Sumail S/O Subramaniam` can be saved as `Sumail SO Subramaniam` instead.`Tan Ah Meng, John` can be saved as `Tan Ah Meng John` instead. `Al-Amaan` can be saved as `AlAmaan` instead. `Tan Kah Ming @ Cheng Jia Ming` can be saved simply as `Tan Kah Ming`, or however the user decides to.
     </div>
+5. The local part of **emails** currently can only contain alphanumeric characters and cannot contain special characters. See planned enhancements in the Developer Guide.
 
 --------------------------------------------------------------------------------------------------------------------
 
