@@ -22,11 +22,12 @@ UniquePersonList -right-> Person
 Person -up-> "*" Tag
 Person *-right-> "1" ExamScores
 ExamScores *--> "2" Score
-Score *-right-> "1" Exam
+Score o-right-> "1" Exam
 
 Person *--> "1" Name
 Person *--> "1" StudentId
 Person *--> "1" Phone
 Person *--> "1" Email
 Person *--> "1" TelegramHandle
+Person *--> "1" Attendance
 @enduml
