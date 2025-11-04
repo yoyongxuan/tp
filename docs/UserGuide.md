@@ -116,7 +116,7 @@ When entering a contact detail as a parameter for any command:
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters prefixed with a `/` can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable. <br> The exceptions apply to the `SID/index` parameter. For example, the `add` comamnd always expects the Student ID as the first parameter, the rest of the parameters can be in any order. The `edit` command always expects either the 1-based list index or the Student ID as the first parameter.
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable. <br> The exceptions apply to the `SID/index` parameter. For example, the `add` command always expects the Student ID as the first parameter, the rest of the parameters can be in any order. The `edit` command always expects either the 1-based list index or the Student ID as the first parameter.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
