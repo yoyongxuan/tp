@@ -313,7 +313,7 @@ Format: `attend INDEX TUTORIAL` or `attend SID TUTORIAL`
 
 | Field | Requirement                                                                                                                                                                 |
 |------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Tutorial | Refers to the tutorial number. <br> Must be **within the range of the number of tutorials specified in the Address Book**. <br> Must be a **positive integer** 1, 2, 3, …​  |
+| Tutorial | Refers to the tutorial number. <br> Must be **between 1 and 11 (inclusive).** |
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Entering the same `attend` command inverts the attendance for the given `TUTORIAL` and student at `INDEX` or with `SID`.
