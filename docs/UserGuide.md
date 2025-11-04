@@ -339,7 +339,7 @@ Format: `score INDEX ex/EXAM s/SCORE` or `score SID ex/EXAM s/SCORE`
 | Field | Requirement                                                                                                                                                                 |
 |------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Score | Refers to the score attained by the specified student for the specified exam. <br> Must be a **non-negative integer that is not larger than the max score** of the specified exam. |
-| Exam | Refers to the exam name. <br> Must **match the exams recorded in the Address Book exactly**. <br> e.g. If the exam name in the Address Book is `midterm`, the specified exam name must be `midterm`, not `MIDTERM` or `mid term`. |
+| Exam | Refers to the exam name. <br> Only "midterm" and "final" are valid inputs for this field. <br> All other inputs will result in an error message. <br> Must **match the exams recorded in the Address Book exactly**. <br> e.g. If the exam name in the Address Book is `midterm`, the specified exam name must be `midterm`, not `MIDTERM` or `mid term`. |
 
 Examples:
 * `score 1 ex/final s/80` sets the score of the 1st student in the Address Book to `80`, for the exam `final`.
@@ -354,10 +354,10 @@ Format: `maxscore ex/EXAM ms/MAXSCORE`
 
 * Changes the max score of the specified exam `EXAM` to the specified max score `MAXSCORE`.
 
-| Field | Requirement                                                                                                                                                                 |
-|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Exam | Refers to the exam name. <br> Must **match the exams recorded in the Address Book exactly**. <br> e.g. If the exam name in the Address Book is `midterm`, the specified exam name must be `midterm`, not `MIDTERM` or `mid term`. |
-| Max Score | Must be a **non-negative integer**, and it **must be more than or equal to any recorded score** for the specified exam. <br> e.g. If a student has score `70/80` for the exam, the new max score must be at least `70`. |
+| Field | Requirement                                                                                                                                                                                                                                                                                                                                                 |
+|------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Exam | Refers to the exam name. <br> Only "midterm" and "final" are valid inputs for this field. <br> All other inputs will result in an error message. <br> Must **match the exams recorded in the Address Book exactly**. <br> e.g. If the exam name in the Address Book is `midterm`, the specified exam name must be `midterm`, not `MIDTERM` or `mid term`. |
+| Max Score | Must be a **non-negative integer**, and it **must be more than or equal to any recorded score** for the specified exam. <br> e.g. If a student has score `70/80` for the exam, the new max score must be at least `70`.                                                                                                                                     |
 
 Examples:
 * `maxscore ex/midterm ms/90` changes the max score of the exam `midterm` to `90`.
