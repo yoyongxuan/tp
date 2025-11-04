@@ -158,6 +158,7 @@ Tags can be used to note a student's tutorial group!
 
 * All parameters must not be blank
 * All parameters must adhere to constraints detailed in [Contact Details](#contact-details)
+* The SID is uppercased after validation success.
 
 Examples:
 * `add A0123456A n/John Doe p/98765432 e/johnd@u.nus.edu h/@JohnDoe`
