@@ -287,6 +287,11 @@ Format: `sort n/` or `sort ex/EXAM`
 * `sort n/` sorts the students in ascending order by name.
 * `sort ex/` sorts the students in ascending order by exam score for the specified exam.
 
+| Field | Requirement                                                                                                                                                             |
+|------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Exam | Refers to the exam name. <br> Only "midterm" and "final" (case-insensitive) are valid inputs for this field. <br> All other inputs will result in an error message. |                                                                                                                      |
+
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Students with no recorded scores will be shifted to the bottom of the displayed student list when sorted by exam scores.
 </div>
@@ -306,7 +311,7 @@ Students with no recorded scores will be shifted to the bottom of the displayed 
 
 Examples:
 * `sort n/` sorts in ascending order of names.
-* `sort ex/midterm` sorts in ascending order of midterm scores.
+* `sort ex/midTerm` sorts in ascending order of midterm scores.
 * `sort ex/final` sorts in ascending order of final scores.
   ![result for `sort ex/final`](images/sortByFinal.png)
 
@@ -354,10 +359,10 @@ Format: `score INDEX ex/EXAM s/SCORE` or `score SID ex/EXAM s/SCORE`
 
 
 
-| Field | Requirement                                                                                                                                                                                                                                                                                                                             |
-|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Score | Refers to the score attained by the specified student for the specified exam. <br> Must be "unrecorded" (case-insensitive) or a **non-negative integer that is not larger than the max score** of the specified exam.                                                                                                                   |
-| Exam | Refers to the exam name. <br> Only "midterm" and "final" are valid inputs for this field. <br> All other inputs will result in an error message. <br> Must **match the exams recorded in CadetHQ exactly**. <br> e.g. If the exam name in CadetHQ is `midterm`, the specified exam name must be `midterm`, not `MIDTERM` or `mid term`. |
+| Field | Requirement                                                                                                                                                                                                            |
+|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Score | Refers to the score attained by the specified student for the specified exam. <br> Must be "unrecorded" (case-insensitive) or a **non-negative integer that is not larger than the max score** of the specified exam.  |
+| Exam | Refers to the exam name. <br> Only "midterm" and "final" (case-insensitive) are valid inputs for this field. <br> All other inputs will result in an error message.                                                    |
 
 Examples:
 * `score 1 ex/final s/80` sets the score of the 1st student in CadetHQ to `80`, for the exam `final`.
@@ -374,7 +379,7 @@ Format: `maxscore ex/EXAM ms/MAXSCORE`
 
 | Field | Requirement                                                                                                                                                                                                                                                                                                                                                 |
 |------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Exam | Refers to the exam name. <br> Only "midterm" and "final" are valid inputs for this field. <br> All other inputs will result in an error message. <br> Must **match the exams recorded in CadetHQ exactly**. <br> e.g. If the exam name in CadetHQ is `midterm`, the specified exam name must be `midterm`, not `MIDTERM` or `mid term`. |
+| Exam | Refers to the exam name. <br> Only "midterm" and "final" (case-insensitive) are valid inputs for this field. <br> All other inputs will result in an error message. |
 | Max Score | Must be a **non-negative integer**, and it **must be more than or equal to any recorded score** for the specified exam. <br> e.g. If a student has score `70/80` for the exam, the new max score must be at least `70`.                                                                                                                                     |
 
 Examples:
