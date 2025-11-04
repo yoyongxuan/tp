@@ -426,6 +426,7 @@ _Details coming soon ..._
     <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
     A remedy is to save the name without the special characters. For example, `Sumail S/O Subramaniam` can be saved as `Sumail SO Subramaniam` instead.`Tan Ah Meng, John` can be saved as `Tan Ah Meng John` instead. `Al-Amaan` can be saved as `AlAmaan` instead. `Tan Kah Ming @ Cheng Jia Ming` can be saved simply as `Tan Kah Ming`, or however the user decides to.
     </div>
+5. The local part of **emails** currently can only contain alphanumeric characters and cannot contain special characters. CadetHQ will eventually support the use of special characters such that the email still remains compliant with the nus friendly mail validations.
 
 --------------------------------------------------------------------------------------------------------------------
 
