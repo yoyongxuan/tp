@@ -81,15 +81,15 @@ For CS1101S TAs that are good at using the Command Line, CadetHQ gives you the p
 ## Contact Details
 A table of all the information that can be associated with a contact
 
-| Name             | Prefix | Example         | Constraints                                                                                                                                                                                |
-|------------------|--------|-----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Index            |        | 1               | - Must be a positive integer                                                                                                                                                               |
-| Student ID (SID) |        | A0123456A       | - Must be 9-characters long <br> - First character must be "A" or “a” <br> - Second to eighth characters must be a number<br> - Last character must be an alphabet <br> (case-insensitive) |
-| Name             | n/     | John Doe        | - Only alphanumeric characters and spaces                                                                                                                                                  |
-| Phone number     | p/     | 98765432        | - Must consist of 8 digits <br> - Must start with the number "6", "8" or "9"                                                                                                                    |
-| Email            | e/     | johnd@u.nus.edu | - Must be of the format *local-part* @u.nus.edu<br>  - *local-part* should only contain alphanumeric characters                                                           |
-| Telegram handle  | h/     | @JohnDoe        | - Must start with "@" <br> - Remaining characters must be alphanumeric or underscores                                                                                                      |
-| Tag              | t/     | Friend          | - Should contain only alphanumeric characters and whitespaces <br> - Leading and trailing whitespaces are ignored <br> - There can be no more than 1 whitespace between each alphanumeric character                                                                                                                                                                     |
+| Name             | Prefix | Example         | Constraints                                                                                                                                                                                         |
+|------------------|--------|-----------------|-----------------------g------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Index            |        | 1               | - Must be a positive integer                                                                                                                                                                        |
+| Student ID (SID) |        | A0123456A       | - Must be 9-characters long <br> - First character must be "A" or “a” <br> - Second to eighth characters must be a number<br> - Last character must be an alphabet <br> (case-insensitive)          |
+| Name             | n/     | John Doe        | - Only alphanumeric characters and spaces <br> - Multiple whitespace characters between words will be condensed to a single space                                                                   |
+| Phone number     | p/     | 98765432        | - Must consist of 8 digits <br> - Must start with the number "6", "8" or "9"                                                                                                                        |
+| Email            | e/     | johnd@u.nus.edu | - Must be of the format *local-part* @u.nus.edu<br>  - *local-part* should only contain alphanumeric characters                                                                                     |
+| Telegram handle  | h/     | @JohnDoe        | - Must start with "@" <br> - Remaining characters must be alphanumeric or underscores                                                                                                               |
+| Tag              | t/     | Friend          | - Should contain only alphanumeric characters and whitespaces <br> - Leading and trailing whitespaces are ignored <br> - There can be no more than 1 whitespace between each alphanumeric character |
 
 
 The index refers to the index number shown in the displayed person list.
@@ -353,6 +353,7 @@ Adds the specified score for the specified exam for the specified student from C
 Format: `score INDEX ex/EXAM s/SCORE` or `score SID ex/EXAM s/SCORE`
 
 * Adds the specified score `SCORE` for the specified exam `EXAM`, for the person at the specified `INDEX` or with the given `SID`.
+* If input `SCORE` is `unrecorded`, will set score of specified person and exam to `unrecoded` instead
 * `INDEX` and `SID` parameters must adhere to constraints detailed in [Contact Details](#contact-details)
 * The default maximum marks for the midterm is 70 and the default maximum marks for the final is 100.
 
