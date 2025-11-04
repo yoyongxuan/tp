@@ -348,14 +348,15 @@ Adds the specified score for the specified exam for the specified student from C
 Format: `score INDEX ex/EXAM s/SCORE` or `score SID ex/EXAM s/SCORE`
 
 * Adds the specified score `SCORE` for the specified exam `EXAM`, for the person at the specified `INDEX` or with the given `SID`.
+* If input `SCORE` is `unrecorded`, will set score of specified person and exam to `unrecoded` instead
 * `INDEX` and `SID` parameters must adhere to constraints detailed in [Contact Details](#contact-details)
 * The default maximum marks for the midterm is 70 and the default maximum marks for the final is 100.
 
 
 
-| Field | Requirement                                                                                                                                                                 |
-|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Score | Refers to the score attained by the specified student for the specified exam. <br> Must be a **non-negative integer that is not larger than the max score** of the specified exam. |
+| Field | Requirement                                                                                                                                                                                                                                                                                                                             |
+|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Score | Refers to the score attained by the specified student for the specified exam. <br> Must be "unrecorded" (case-insensitive) or a **non-negative integer that is not larger than the max score** of the specified exam.                                                                                                                   |
 | Exam | Refers to the exam name. <br> Only "midterm" and "final" are valid inputs for this field. <br> All other inputs will result in an error message. <br> Must **match the exams recorded in CadetHQ exactly**. <br> e.g. If the exam name in CadetHQ is `midterm`, the specified exam name must be `midterm`, not `MIDTERM` or `mid term`. |
 
 Examples:
