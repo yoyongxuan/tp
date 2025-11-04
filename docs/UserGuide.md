@@ -209,6 +209,10 @@ Format: `delete INDEX` or `delete SID`
 * Deletes the student at the specified `INDEX` or with the given `SID`.
 * `INDEX` and `SID` parameters must adhere to constraints detailed in [Contact Details](#contact-details)
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
+Use the `list` command to restore the full list of students before using a `delete` command.
+</div>
+
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the Address Book.
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
