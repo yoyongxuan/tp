@@ -128,6 +128,12 @@ When entering a contact detail as a parameter for any command:
 * `SID` refers to the Student ID.
 </div>
 
+<div markdown="block" class="alert alert-info">
+
+* Note: All screenshots in the User Guide have their commands manually inputted into the command box again to facilitate understanding. In practice, after entering the command, the command box will be empty.
+
+</div>
+
 ---
 
 ### Viewing help: `help`
