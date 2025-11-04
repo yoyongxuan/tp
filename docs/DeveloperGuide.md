@@ -991,6 +991,7 @@ ___
 
 6. **More sorting**: Currently, CadetHQ only supports sorting in ascending order of names and exams. Add more sorting options like sorting in descending order or by attendance allows TAs to have more flexibility in list management.
 
+7. **Improved email validation**: Currently, CadetHQ only supports alphanumeric characters for the local part of the email. CadetHQ will eventually support the use of special characters such that the email still remains compliant with the nus friendly mail validations.
 
 --------------------------------------------------------------------------------------------------------------------
 
