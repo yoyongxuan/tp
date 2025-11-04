@@ -25,7 +25,8 @@ public class AttendCommand extends Command {
             + "by the index number used in the displayed person list or by student number\n"
             + "for the provided tutorial number. If attendance for that tutorial has already been taken,\n"
             + "attendance for that tutorial will be removed instead.\n"
-            + "Parameters: INDEX (must be a positive integer) OR STUDENT ID (must be a valid student id in contacts)\n"
+            + "Parameters: INDEX (must be a positive integer and < 2147483648) "
+            + "OR STUDENT ID (must be a valid student id in contacts)\n"
             + "TUTORIAL (must be between 1 and " + Attendance.NUMBER_OF_TUTORIALS + ") \n"
             + "Example: " + COMMAND_WORD + " 4 5\n"
             + "Example: " + COMMAND_WORD + " A0000000X 5";
