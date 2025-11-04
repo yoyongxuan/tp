@@ -1,6 +1,7 @@
 @startuml
 !include style.puml
 skinparam ArrowFontStyle plain
+skinparam DefaultFontSize 25
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
@@ -14,10 +15,10 @@ box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("maxscore 1 ex/midterm ms/90")
+[-> LogicManager : execute("maxscore ex/final ms/105")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("maxscore 1 ex/midterm ms/90")
+LogicManager -> AddressBookParser : parseCommand("maxscore ex/final ms/105")
 activate AddressBookParser
 
 create EditScoreCommandParser
@@ -27,7 +28,7 @@ activate EditScoreCommandParser
 EditScoreCommandParser --> AddressBookParser
 deactivate EditScoreCommandParser
 
-AddressBookParser -> EditScoreCommandParser : parse("1 ex/midterm ms/90")
+AddressBookParser -> EditScoreCommandParser : parse("ex/final ms/105")
 activate EditScoreCommandParser
 
 create EditScoreCommand

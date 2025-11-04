@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -61,7 +60,6 @@ public class SortCommand extends Command {
         case "n/":
             // If sorting by name, just call model to sort
             model.sortPersonsByName();
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(MESSAGE_SUCCESS_NAME);
         case "ex/":
             // If sorting by exam, call model to sort based on exam type
@@ -69,7 +67,6 @@ public class SortCommand extends Command {
                 throw new CommandException(MESSAGE_USAGE);
             }
             model.sortPersonsByExam(this.exam);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(MESSAGE_SUCCESS_EXAM);
         default:
             throw new CommandException(MESSAGE_USAGE);

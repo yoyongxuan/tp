@@ -26,7 +26,7 @@ public class Person {
      * Comparator of a person through their name
      */
     public static final Comparator<Person> NAME_COMPARATOR =
-            Comparator.<Person, String>comparing((Person p) -> p.getName().fullName);
+            Comparator.<Person, String>comparing((Person p) -> p.getName().fullName.toLowerCase());
 
     /**
      * Comparator of a person through their midterm
