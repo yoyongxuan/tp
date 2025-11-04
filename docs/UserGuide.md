@@ -50,14 +50,12 @@ For CS1101S TAs that are good at using the Command Line, CadetHQ gives you the p
 
 # Quick start
 
-Note that throughout this document, we will often refer to CadetHQ as Address Book whenever appropriate.
-
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-T11-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your CadetHQ.
+1. Copy the file to the folder you want to use as the _home folder_ for CadetHQ.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar cadethq.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some placeholder data.<br>
@@ -68,7 +66,7 @@ Note that throughout this document, we will often refer to CadetHQ as Address Bo
 
    * `list` : Lists all contacts.
 
-   * `add A1234567A n/John Doe p/98765432 e/johnd@u.nus.edu h/@JohnDoe` : Adds a contact named `John Doe` to the Address Book.
+   * `add A1234567A n/John Doe p/98765432 e/johnd@u.nus.edu h/@JohnDoe` : Adds a contact named `John Doe` to CadetHQ.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -152,7 +150,7 @@ Format: `help`
 
 ### Adding a student: `add`
 
-Adds a student to the Address Book.
+Adds a student to CadetHQ.
 
 Format: `add SID n/NAME p/PHONE_NUMBER e/EMAIL h/TELEGRAM_HANDLE [t/TAG]…​`
 
@@ -175,12 +173,12 @@ Examples:
 ![result for `add A1234567B n/Betsy Crowe t/friend e/betsycrowe@u.nus.edu p/89891206 t/needshelp h/@BetsyC`](images/addBetsyCrowe.png)
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
-Duplicate students cannot be added to the Address Book. A student is considered a duplicate student if either the SID or the email are the same as another existing student in the Address Book. It is recommended to use the student's email starting with e, instead of his nus friendly mail. Rationale: SID and email are uniquely given by NUS, whereas it is possible for students to share phone contact for a brief period of time.
+Duplicate students cannot be added to CadetHQ. A student is considered a duplicate student if either the SID or the email are the same as another existing student in CadetHQ. It is recommended to use the student's email starting with e, instead of his nus friendly mail. Rationale: SID and email are uniquely given by NUS, whereas it is possible for students to share phone contact for a brief period of time.
 </div>`
 
 ### Editing a student: `edit`
 
-Edits an existing student in the Address Book.
+Edits an existing student in CadetHQ.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…​` or `edit SID [n/NAME] [p/PHONE] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…​`
 
@@ -197,7 +195,7 @@ Existing values will be updated to the input values.
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
-If email is being edited, it must be a unique email not currently present in the Address Book.
+If email is being edited, it must be a unique email not currently present in CadetHQ.
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
@@ -215,7 +213,7 @@ Examples:
 
 ### Deleting a student: `delete`
 
-Deletes the specified student from the Address Book.
+Deletes the specified student from CadetHQ.
 
 Format: `delete INDEX` or `delete SID`
 
@@ -227,16 +225,16 @@ Use the `list` command to restore the full list of students before using a `dele
 </div>
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd student in the Address Book.
+* `list` followed by `delete 2` deletes the 2nd student in CadetHQ.
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
-* `list` followed by `delete A0123456Z` deletes the student in the Address Book with the student ID `A0123456Z`.
+* `list` followed by `delete A0123456Z` deletes the student in CadetHQ with the student ID `A0123456Z`.
 
 ---
 ## Viewing Students
 
 ### Listing all students: `list`
 
-Shows a list of all students in the Address Book.
+Shows a list of all students in CadetHQ.
 
 Format: `list`
 
@@ -264,7 +262,7 @@ Examples:
 
 ### Viewing a student: `view`
 
-Finds and displays the specified student from the Address Book.
+Finds and displays the specified student from CadetHQ.
 
 Format: `view INDEX` or `view SID`
 
@@ -276,7 +274,7 @@ You can use the `list` command to restore the full list of students after a `vie
 </div>
 
 Examples:
-* `view 2` displays the 2nd student in the Address Book.
+* `view 2` displays the 2nd student in CadetHQ.
   ![result for 'view 2'](images/viewIndex.png)
 * `view A0000000A` displays the student with SID A0000000A.
 
@@ -318,7 +316,7 @@ Examples:
 
 ### Marking the attendance for a student: `attend`
 
-Adds the attendance for the specified tutorial, for the specified student from the Address Book. If attendance for the specified tutorial has already been taken, attendance for that tutorial will be removed instead.
+Adds the attendance for the specified tutorial, for the specified student from CadetHQ. If attendance for the specified tutorial has already been taken, attendance for that tutorial will be removed instead.
 
 Format: `attend INDEX TUTORIAL` or `attend SID TUTORIAL`
 
@@ -333,10 +331,10 @@ Entering the same `attend` command inverts the attendance for the given `TUTORIA
 </div>
 
 Examples:
-* `attend 1 6` adds attendance for tutorial `6` for the 1st student in the Address Book.
+* `attend 1 6` adds attendance for tutorial `6` for the 1st student in CadetHQ.
   ![result for 'attend 1 6'](images/attendIndex.png)
 * `attend A0000001A 2` adds attendance for tutorial `2` for the student with SID `A0000001A`.
-* `attend 1 6` removes the attendance for tutorial `6` for the 1st student in the Address Book if attendance has already been taken for this tutorial and this student.
+* `attend 1 6` removes the attendance for tutorial `6` for the 1st student in CadetHQ if attendance has already been taken for this tutorial and this student.
   ![result for a second 'attend 1 6'](images/removeAttend.png)
 
 ---
@@ -345,7 +343,7 @@ Examples:
 
 ### Adding a score for an exam for a student: `score`
 
-Adds the specified score for the specified exam for the specified student from the Address Book. If a score already exists, it is overwritten by the most recent valid score command and the score is updated.
+Adds the specified score for the specified exam for the specified student from CadetHQ. If a score already exists, it is overwritten by the most recent valid score command and the score is updated.
 
 Format: `score INDEX ex/EXAM s/SCORE` or `score SID ex/EXAM s/SCORE`
 
@@ -358,11 +356,11 @@ Format: `score INDEX ex/EXAM s/SCORE` or `score SID ex/EXAM s/SCORE`
 | Field | Requirement                                                                                                                                                                 |
 |------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Score | Refers to the score attained by the specified student for the specified exam. <br> Must be a **non-negative integer that is not larger than the max score** of the specified exam. |
-| Exam | Refers to the exam name. <br> Only "midterm" and "final" are valid inputs for this field. <br> All other inputs will result in an error message. <br> Must **match the exams recorded in the Address Book exactly**. <br> e.g. If the exam name in the Address Book is `midterm`, the specified exam name must be `midterm`, not `MIDTERM` or `mid term`. |
+| Exam | Refers to the exam name. <br> Only "midterm" and "final" are valid inputs for this field. <br> All other inputs will result in an error message. <br> Must **match the exams recorded in CadetHQ exactly**. <br> e.g. If the exam name in CadetHQ is `midterm`, the specified exam name must be `midterm`, not `MIDTERM` or `mid term`. |
 
 Examples:
-* `score 1 ex/final s/80` sets the score of the 1st student in the Address Book to `80`, for the exam `final`.
-* `score A0000001A ex/midterm s/70` sets the score of the student with SID `A0000001A` in the Address Book to `70`, for the exam `midterm`.
+* `score 1 ex/final s/80` sets the score of the 1st student in CadetHQ to `80`, for the exam `final`.
+* `score A0000001A ex/midterm s/70` sets the score of the student with SID `A0000001A` in CadetHQ to `70`, for the exam `midterm`.
   ![result for 'score A0000001A ex/midterm s/70'](images/scoreSID.png)
 
 ### Editing the max score of an exam: `maxscore`
@@ -375,7 +373,7 @@ Format: `maxscore ex/EXAM ms/MAXSCORE`
 
 | Field | Requirement                                                                                                                                                                                                                                                                                                                                                 |
 |------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Exam | Refers to the exam name. <br> Only "midterm" and "final" are valid inputs for this field. <br> All other inputs will result in an error message. <br> Must **match the exams recorded in the Address Book exactly**. <br> e.g. If the exam name in the Address Book is `midterm`, the specified exam name must be `midterm`, not `MIDTERM` or `mid term`. |
+| Exam | Refers to the exam name. <br> Only "midterm" and "final" are valid inputs for this field. <br> All other inputs will result in an error message. <br> Must **match the exams recorded in CadetHQ exactly**. <br> e.g. If the exam name in CadetHQ is `midterm`, the specified exam name must be `midterm`, not `MIDTERM` or `mid term`. |
 | Max Score | Must be a **non-negative integer**, and it **must be more than or equal to any recorded score** for the specified exam. <br> e.g. If a student has score `70/80` for the exam, the new max score must be at least `70`.                                                                                                                                     |
 
 Examples:
@@ -388,7 +386,7 @@ Examples:
 
 ### Clearing all entries: `clear`
 
-Clears all entries from the Address Book.
+Clears all entries from CadetHQ.
 
 Format: `clear`
 
