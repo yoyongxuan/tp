@@ -345,9 +345,9 @@ Format: `score INDEX ex/EXAM s/SCORE` or `score SID ex/EXAM s/SCORE`
 * `INDEX` and `SID` parameters must adhere to constraints detailed in [Contact Details](#contact-details)
 
 
-| Field | Requirement                                                                                                                                                                 |
-|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Score | Refers to the score attained by the specified student for the specified exam. <br> Must be `unrecorded` or a **non-negative integer that is not larger than the max score** of the specified exam. |
+| Field | Requirement                                                                                                                                                                                                                                                                                                                                              |
+|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Score | Refers to the score attained by the specified student for the specified exam. <br> Must be "unrecorded" or a **non-negative integer that is not larger than the max score** of the specified exam. <br> Case-insensitive                                                                                                                                  |
 | Exam | Refers to the exam name. <br> Only "midterm" and "final" are valid inputs for this field. <br> All other inputs will result in an error message. <br> Must **match the exams recorded in the Address Book exactly**. <br> e.g. If the exam name in the Address Book is `midterm`, the specified exam name must be `midterm`, not `MIDTERM` or `mid term`. |
 
 Examples:
