@@ -957,7 +957,7 @@ ___
 8.  Should be usable by a CS1101S TA that has never used similar contact management applications before.
 9.  Should be for a single user only (i.e. not a multi-user product, no shared file storage mechanism, no application running in a shared computer).
 10. Invalid commands should not crash CadetHQ, but show an error message instead.
-11. A user should be able to access command help information at any time.
+11. A user should be able to access command help information at any time as long as they have an internet connection.
 12. The source code should be open source.
 
 ### Glossary
@@ -985,8 +985,13 @@ ___
     * `massattend 1-10 1`: marks attendance for students from index 1 to 10 in the list for tutorial 1.
     * `massattend t/TAG 5`: marks attendance for students with the specified `TAG` for tutorial 5.
 
-4. **More sorting**: Currently, CadetHQ only supports sorting in ascending order of names and exams. Add more sorting options like sorting in descending order or by attendance allows TAs to have more flexibility in list management.
+4. **Enhanced find functionality**: CadetHQ currently only allows the user to search by name. Adding the ability to search by tutorial attended or tags, and allowing partial matches makes it easier for the user to find the students they are looking for.
 
+5. **Improve GUI for displaying attendance**: The current GUI only displays tutorials that students have attended. Instead, it could show all the tutorials, and colour them red and green based on whether students have attended or not.
+
+6. **More sorting**: Currently, CadetHQ only supports sorting in ascending order of names and exams. Add more sorting options like sorting in descending order or by attendance allows TAs to have more flexibility in list management.
+
+7. **Improved email validation**: Currently, CadetHQ only supports alphanumeric characters for the local part of the email. CadetHQ will eventually support the use of special characters such that the email still remains compliant with the nus friendly mail validations.
 
 --------------------------------------------------------------------------------------------------------------------
 

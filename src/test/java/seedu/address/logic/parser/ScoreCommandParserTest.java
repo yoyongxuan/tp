@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.EXAM_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EXAM_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SCORE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.SCORE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.UNRECORDED_SCORE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXAM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCORE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY_STR;
@@ -106,5 +107,10 @@ public class ScoreCommandParserTest {
         expectedCommand = new ScoreCommand(new Identifier(VALID_STUDENT_ID_AMY_STR),
                 Score.getRecordedScore(ExamList.getExamFromName(VALID_EXAM), VALID_SCORE));
         assertParseSuccess(parser, VALID_STUDENT_ID_AMY_STR + mixedCaseExamDesc + SCORE_DESC, expectedCommand);
+      
+        expectedCommand = new ScoreCommand(new Identifier(VALID_STUDENT_ID_AMY_STR),
+                Score.getUnrecordedScore(ExamList.getExamFromName(VALID_EXAM)));
+        assertParseSuccess(parser, VALID_STUDENT_ID_AMY_STR + EXAM_DESC + UNRECORDED_SCORE_DESC,
+                expectedCommand);
     }
 }
