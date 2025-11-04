@@ -3,7 +3,7 @@ layout: page
 title: CadetHQ User Guide
 ---
 
-CadetHQ is a **desktop app for managing student contacts, for CS1101S Teaching Assistants (TAs) at National University of Singapore (NUS)**. 
+CadetHQ is a **desktop app for managing student contacts, for CS1101S Teaching Assistants (TAs) at National University of Singapore (NUS)**.
 
 It is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
@@ -91,7 +91,7 @@ A table of all the information that can be associated with a contact
 | Phone number     | p/     | 98765432        | - Must consist of 8 digits <br> - Must start with the number "6", "8" or "9"                                                                                                                    |
 | Email            | e/     | johnd@u.nus.edu | - Must be of the format *local-part* @u.nus.edu<br>  - *local-part* should only contain alphanumeric characters                                                           |
 | Telegram handle  | h/     | JohnDoe         | - Must start with "@" <br> - Remaining characters must be alphanumeric or underscores                                                                                                      |
-| Tag              | t/     | Friend          | - Should be alphanumeric                                                                                                                                                                   |
+| Tag              | t/     | Friend          | - Should contain only alphanumeric characters and whitespaces <br> - Leading and trailing whitespaces are ignored <br> - There can be no more than 1 whitespace between each alphanumeric character                                                                                                                                                                     |
 
 
 The index refers to the index number shown in the displayed person list.
@@ -152,6 +152,10 @@ Format: `add SID n/NAME p/PHONE_NUMBER e/EMAIL h/TELEGRAM_HANDLE [t/TAG]…​`
 A person can have 0 or more tags!
 </div>
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Tags can be used to note a student's tutorial group!
+</div>
+
 * All parameters must not be blank
 * All parameters must adhere to constraints detailed in [Contact Details](#contact-details)
 
@@ -162,8 +166,8 @@ Examples:
 ![result for `add A1234567B n/Betsy Crowe t/friend e/betsycrowe@u.nus.edu p/89891206 t/needshelp h/@BetsyC`](images/addBetsyCrowe.png)
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
-Duplicate students cannot be added to the Address Book. A student is considered a duplicate student if either the SID or the email are the same as another existing student in the Address Book.
-</div>
+Duplicate students cannot be added to the Address Book. A student is considered a duplicate student if either the SID or the email are the same as another existing student in the Address Book.  
+</div>`
 
 ### Editing a student: `edit`
 
@@ -171,7 +175,7 @@ Edits an existing student in the Address Book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…​` or `edit SID [n/NAME] [p/PHONE] [e/EMAIL] [h/TELEGRAM_HANDLE] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX` or with the given `SID`. 
+* Edits the person at the specified `INDEX` or with the given `SID`.
 * All parameters must not be blank
 * All parameters must adhere to constraints detailed in [Contact Details](#contact-details)
 
@@ -208,6 +212,10 @@ Format: `delete INDEX` or `delete SID`
 
 * Deletes the student at the specified `INDEX` or with the given `SID`.
 * `INDEX` and `SID` parameters must adhere to constraints detailed in [Contact Details](#contact-details)
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
+Use the `list` command to restore the full list of students before using a `delete` command.
+</div>
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the Address Book.
@@ -265,7 +273,7 @@ Examples:
 
 ### Sorting students: `sort`
 
-Sorts the students either by name or exam score.
+Sorts the list of students either by name or exam score.
 
 Format: `sort n/` or `sort ex/EXAM`
 
@@ -274,6 +282,19 @@ Format: `sort n/` or `sort ex/EXAM`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Students with no recorded scores will be shifted to the bottom of the displayed student list when sorted by exam scores.
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+
+* To guard against accidental inputs/typos, `sort` <u>ignores</u> certain parts of the command that are <u>not needed in execution</u>.
+
+* For `sort n/`, you can also input (though discouraged) `sort [preamble] n/[argument]`. Any extraneous inputs **that are not prefixes and/or command parameters used in sort** in the `[preamble]` and `[argument]` sections will be ignored.
+
+    E.g. `sort abcex/123!#@ n/`, `sort n/abcex/123!#@` will work, but `sort ex/ n/` will not.
+
+* For `sort ex/EXAM`, you can also input (though discouraged) `sort [preamble] ex/EXAM`. Any extraneous inputs **that are not prefixes and/or command parameters used in sort** in the `[preamble]` section will be ignored.
+
+    E.g. `sort abcex/123!#@ ex/final` will work, but `sort n/ ex/final` will not work.
 </div>
 
 Examples:
@@ -296,7 +317,7 @@ Format: `attend INDEX TUTORIAL` or `attend SID TUTORIAL`
 
 | Field | Requirement                                                                                                                                                                 |
 |------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Tutorial | Refers to the tutorial number. <br> Must be **within the range of the number of tutorials specified in the Address Book**. <br> Must be a **positive integer** 1, 2, 3, …​  |
+| Tutorial | Refers to the tutorial number. <br> Must be **between 1 and 11 (inclusive).** |
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Entering the same `attend` command inverts the attendance for the given `TUTORIAL` and student at `INDEX` or with `SID`.
@@ -324,10 +345,10 @@ Format: `score INDEX ex/EXAM s/SCORE` or `score SID ex/EXAM s/SCORE`
 * `INDEX` and `SID` parameters must adhere to constraints detailed in [Contact Details](#contact-details)
 
 
-| Field | Requirement                                                                                                                                                                                                                      |
-|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Score | Refers to the score attained by the specified student for the specified exam. <br> Must be `unrecorded` or a **non-negative integer that is not larger than the max score** of the specified exam.                                |
-| Exam | Refers to the exam name. <br> Must **match the exams recorded in the Address Book exactly**. <br> e.g. If the exam name in the Address Book is `midterm`, the specified exam name must be `midterm`, not `MIDTERM` or `mid term`. |
+| Field | Requirement                                                                                                                                                                 |
+|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Score | Refers to the score attained by the specified student for the specified exam. <br> Must be `unrecorded` or a **non-negative integer that is not larger than the max score** of the specified exam. |
+| Exam | Refers to the exam name. <br> Only "midterm" and "final" are valid inputs for this field. <br> All other inputs will result in an error message. <br> Must **match the exams recorded in the Address Book exactly**. <br> e.g. If the exam name in the Address Book is `midterm`, the specified exam name must be `midterm`, not `MIDTERM` or `mid term`. |
 
 Examples:
 * `score 1 ex/final s/80` sets the score of the 1st student in the Address Book to `80`, for the exam `final`.
@@ -338,15 +359,14 @@ Examples:
 
 Changes the max score of the specified exam to the specified max score. It overwrites the pre-existing max score.
 
-Format: `maxscore INDEX ex/EXAM ms/MAXSCORE` or `maxscore SID ex/EXAM ms/MAXSCORE`
+Format: `maxscore ex/EXAM ms/MAXSCORE`
 
 * Changes the max score of the specified exam `EXAM` to the specified max score `MAXSCORE`.
-* `INDEX` and `SID` parameters must adhere to constraints detailed in [Contact Details](#contact-details)
 
-| Field | Requirement                                                                                                                                                                 |
-|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Exam | Refers to the exam name. <br> Must **match the exams recorded in the Address Book exactly**. <br> e.g. If the exam name in the Address Book is `midterm`, the specified exam name must be `midterm`, not `MIDTERM` or `mid term`. |
-| Max Score | Must be a **non-negative integer**, and it **must be more than or equal to any recorded score** for the specified exam. <br> e.g. If a student has score `70/80` for the exam, the new max score must be at least `70`. |
+| Field | Requirement                                                                                                                                                                                                                                                                                                                                                 |
+|------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Exam | Refers to the exam name. <br> Only "midterm" and "final" are valid inputs for this field. <br> All other inputs will result in an error message. <br> Must **match the exams recorded in the Address Book exactly**. <br> e.g. If the exam name in the Address Book is `midterm`, the specified exam name must be `midterm`, not `MIDTERM` or `mid term`. |
+| Max Score | Must be a **non-negative integer**, and it **must be more than or equal to any recorded score** for the specified exam. <br> e.g. If a student has score `70/80` for the exam, the new max score must be at least `70`.                                                                                                                                     |
 
 Examples:
 * `maxscore ex/midterm ms/90` changes the max score of the exam `midterm` to `90`.
@@ -399,15 +419,10 @@ _Details coming soon ..._
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **When a person's details are very long**, e.g. their name, telegram handle, and **CadetHQ is set to a small window width size**, some details may be truncated `(...)` as the text does not wrap around. The remedy is to expand the window width to see the full details.
-4. **Names that contain `/` characters cannot be added** in CadetHQ. An error message will be shown instead. CadetHQ uses `/` characters in the internal implementation of command parsing.
-    <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
-    A remedy is to save the name without the `/` characters. For example, `Sumail S/O Subramaniam` can be saved as `Sumail SO Subramaniam` instead.
-    </div>
+4. **Names that contain `/`, `,`, `-`, `@`, or other special characters cannot be added** in CadetHQ. An error message will be shown instead. CadetHQ currently does not support the use of special characters in names as some of these characters such as `/` are used internally in commands.
 
-5. **Names that contain `,`, `-`, `@`, or other special characters cannot be added in CadetHQ. An error message will be shown instead. CadetHQ currently does not support the use of special characters in names. 
-
-    <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
-    A remedy is to save the name without the special characters. For example, `Tan Ah Meng, John` can be saved as `Tan Ah Meng John` instead. `Al-Amaan` can be saved as `AlAmaan` instead. `Tan Kah Ming @ Cheng Jia Ming` can be saved simply as `Tan Kah Ming`, or however the user decides to.
+    <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+    A remedy is to save the name without the special characters. For example, `Sumail S/O Subramaniam` can be saved as `Sumail SO Subramaniam` instead.`Tan Ah Meng, John` can be saved as `Tan Ah Meng John` instead. `Al-Amaan` can be saved as `AlAmaan` instead. `Tan Kah Ming @ Cheng Jia Ming` can be saved simply as `Tan Kah Ming`, or however the user decides to.
     </div>
 
 --------------------------------------------------------------------------------------------------------------------
