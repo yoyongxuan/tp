@@ -272,13 +272,18 @@ Format: `sort n/` or `sort ex/EXAM`
 * `sort n/` sorts the students in ascending order by name.
 * `sort ex/` sorts the students in ascending order by exam score for the specified exam.
 
+| Field | Requirement                                                                                                                                                             |
+|------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Exam | Refers to the exam name, and is case-insensitive.                                                                                                                       |
+
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Students with no recorded scores will be shifted to the bottom of the displayed student list when sorted by exam scores.
 </div>
 
 Examples:
 * `sort n/` sorts in ascending order of names.
-* `sort ex/midterm` sorts in ascending order of midterm scores.
+* `sort ex/midTerm` sorts in ascending order of midterm scores.
 * `sort ex/final` sorts in ascending order of final scores.
   ![result for `sort ex/final`](images/sortByFinal.png)
 
@@ -323,13 +328,13 @@ Format: `score INDEX ex/EXAM s/SCORE` or `score SID ex/EXAM s/SCORE`
 * `INDEX` and `SID` parameters must adhere to constraints detailed in [Contact Details](#contact-details)
 
 
-| Field | Requirement                                                                                                                                                                 |
-|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Field | Requirement                                                                                                                                                             |
+|------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Score | Refers to the score attained by the specified student for the specified exam. <br> Must be a **non-negative integer that is not larger than the max score** of the specified exam. |
-| Exam | Refers to the exam name. <br> Must **match the exams recorded in the Address Book exactly**. <br> e.g. If the exam name in the Address Book is `midterm`, the specified exam name must be `midterm`, not `MIDTERM` or `mid term`. |
+| Exam | Refers to the exam name, and is case-insensitive.                                                                                                                       |
 
 Examples:
-* `score 1 ex/final s/80` sets the score of the 1st student in the Address Book to `80`, for the exam `final`.
+* `score 1 ex/FINAL s/80` sets the score of the 1st student in the Address Book to `80`, for the exam `final`.
 * `score A0000001A ex/midterm s/70` sets the score of the student with SID `A0000001A` in the Address Book to `70`, for the exam `midterm`.
   ![result for 'score A0000001A ex/midterm s/70'](images/scoreSID.png)
 
@@ -342,9 +347,9 @@ Format: `maxscore INDEX ex/EXAM ms/MAXSCORE` or `maxscore SID ex/EXAM ms/MAXSCOR
 * Changes the max score of the specified exam `EXAM` to the specified max score `MAXSCORE`.
 * `INDEX` and `SID` parameters must adhere to constraints detailed in [Contact Details](#contact-details)
 
-| Field | Requirement                                                                                                                                                                 |
-|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Exam | Refers to the exam name. <br> Must **match the exams recorded in the Address Book exactly**. <br> e.g. If the exam name in the Address Book is `midterm`, the specified exam name must be `midterm`, not `MIDTERM` or `mid term`. |
+| Field | Requirement                                                                                                                                                                                                             |
+|------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Exam | Refers to the exam name, and is case-insensitive.                                                                                                                                                                       |
 | Max Score | Must be a **non-negative integer**, and it **must be more than or equal to any recorded score** for the specified exam. <br> e.g. If a student has score `70/80` for the exam, the new max score must be at least `70`. |
 
 Examples:

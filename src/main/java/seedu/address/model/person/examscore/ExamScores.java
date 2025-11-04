@@ -143,9 +143,10 @@ public class ExamScores {
 
     /**
      * Checks if the new max score is valid, by comparing it with the corresponding score for the given exam.
+     * Returns {@Code Optional<Integer>} representing the recorded score for an exam, which is empty if the new
+     * max score is valid.
      * @param exam the exam to be edited
      * @param newMaxScore the new max score to compare the recorded scores against
-     * @return true if the new max score is valid, else false.
      */
     public Optional<Integer> newMaxScoreValid(Exam exam, int newMaxScore) {
         for (int i = 0; i < arrayOfScores.length; i++) {

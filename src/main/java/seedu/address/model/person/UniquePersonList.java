@@ -119,10 +119,10 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Checks if the given max score is valid for the given exam.
+     * Returns {@Code Optional<Integer>}> representing the highest recorded score for an exam, which is empty if the
+     * new max score is valid.
      * @param exam The exam to be updated
      * @param newMaxScore The new max score to be checked
-     * @return true if the new max score is valid, else false
      */
     public Optional<Integer> isNewMaxScoreValid(Exam exam, int newMaxScore) {
         requireAllNonNull(exam, newMaxScore);
