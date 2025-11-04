@@ -203,7 +203,7 @@ public class ParserUtil {
     public static Score parseScore(String examName, String score) throws ParseException {
         requireNonNull(examName);
         String trimmedExam = examName.trim();
-        String trimmedScore = score.trim();
+        String trimmedScore = score.trim().toLowerCase();
         if (!ExamList.isValidExamName(trimmedExam)) {
             throw new ParseException(ExamList.MESSAGE_CONSTRAINTS);
         }
