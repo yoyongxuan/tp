@@ -130,6 +130,8 @@ When entering a contact detail as a parameter for any command:
 
 <div markdown="block" class="alert alert-info">
 
+**:information_source: Notes about the screenshots:**<br>
+
 * Note: All screenshots in the User Guide have their commands manually inputted into the command box again to facilitate understanding. In practice, after entering the command, the command box will be empty.
 
 </div>
