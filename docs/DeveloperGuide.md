@@ -957,7 +957,7 @@ ___
 8.  Should be usable by a CS1101S TA that has never used similar contact management applications before.
 9.  Should be for a single user only (i.e. not a multi-user product, no shared file storage mechanism, no application running in a shared computer).
 10. Invalid commands should not crash CadetHQ, but show an error message instead.
-11. A user should be able to access command help information at any time.
+11. A user should be able to access command help information at any time as long as they have an internet connection.
 12. The source code should be open source.
 
 ### Glossary
@@ -991,6 +991,7 @@ ___
 
 6. **More sorting**: Currently, CadetHQ only supports sorting in ascending order of names and exams. Add more sorting options like sorting in descending order or by attendance allows TAs to have more flexibility in list management.
 
+7. **Improved email validation**: Currently, CadetHQ only supports alphanumeric characters for the local part of the email. CadetHQ will eventually support the use of special characters such that the email still remains compliant with the nus friendly mail validations.
 
 --------------------------------------------------------------------------------------------------------------------
 
