@@ -350,10 +350,9 @@ Examples:
 
 Changes the max score of the specified exam to the specified max score. It overwrites the pre-existing max score.
 
-Format: `maxscore INDEX ex/EXAM ms/MAXSCORE` or `maxscore SID ex/EXAM ms/MAXSCORE`
+Format: `maxscore ex/EXAM ms/MAXSCORE`
 
 * Changes the max score of the specified exam `EXAM` to the specified max score `MAXSCORE`.
-* `INDEX` and `SID` parameters must adhere to constraints detailed in [Contact Details](#contact-details)
 
 | Field | Requirement                                                                                                                                                                 |
 |------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
