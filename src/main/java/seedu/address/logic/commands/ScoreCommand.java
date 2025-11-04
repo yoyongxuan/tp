@@ -21,11 +21,11 @@ public class ScoreCommand extends Command {
     public static final String COMMAND_WORD = "score";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Records the exam score of the person identified "
-            + "by the index number or student ID used in the displayed person list and the given exam name. "
-            + "Parameters: "
-            + "INDEX / STUDENT ID "
+            + "by the index number or student ID used in the displayed person list and the given exam name.\n"
+            + "Parameters: INDEX (must be a positive integer and < 2147483648) "
+            + "OR STUDENT ID (must be a valid student id in contacts)\n"
             + PREFIX_EXAM + "EXAM "
-            + PREFIX_SCORE + "SCORE "
+            + PREFIX_SCORE + "SCORE\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_EXAM + "midterm "
             + PREFIX_SCORE + "50";

@@ -19,7 +19,8 @@ public class ViewCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Displays the student by student ID or the index.\n"
-            + " Parameters: INDEX (must be a positive integer) OR STUDENT ID (must be a valid student id in contacts)\n"
+            + "Parameters: INDEX (must be a positive integer and < 2147483648) "
+            + "OR STUDENT ID (must be a valid student id in contacts)\n"
             + "Example: " + COMMAND_WORD + " 4\n"
             + "Example: " + COMMAND_WORD + " A0000000X";
 

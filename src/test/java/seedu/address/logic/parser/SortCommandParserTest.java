@@ -69,18 +69,86 @@ public class SortCommandParserTest {
         assertEquals(sortByNameCommand, c);
     }
 
+    /**
+     * Tests parsing a sort command by name with extra arguments after the 'n/' prefix.
+     * @author ndhhh
+     * @throws ParseException
+     */
     @Test
-    public void parse_nameWithExtraArgs_throwsException() {
+    public void parse_nameWithExtraArgs_success() throws ParseException {
         // Make new SortCommand
-        Exception exception = assertThrows(ParseException.class, () -> {
-            parser.parse(" n/aeiou");
-        });
+        SortCommand c = parser.parse(" n/aeiou");
+        assertEquals(sortByNameCommand, c);
+    }
 
-        // Should have same error message
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE);
-        String actualMessage = exception.getMessage();
+    /**
+     * Tests parsing a sort command by name with extra spaces and arguments after the 'n/' prefix.
+     * @author ndhhh
+     * @throws ParseException
+     */
+    @Test
+    public void parse_nameWithExtraSpacesAndArgs_success() throws ParseException {
+        // Make new SortCommand
+        SortCommand c = parser.parse("   n/    aeiou   ");
+        assertEquals(sortByNameCommand, c);
+    }
 
-        assertTrue(actualMessage.contains(expectedMessage));
+    /**
+     * Tests parsing a sort command by name with preamble before the 'n/' prefix.
+     * @author ndhhh
+     * @throws ParseException
+     */
+    @Test
+    public void parse_nameWithPreamble_success() throws ParseException {
+        // Make new SortCommand
+        SortCommand c = parser.parse("some random preamble n/");
+        assertEquals(sortByNameCommand, c);
+    }
+
+    /**
+     * Tests parsing a sort command by name with preamble with extra spaces before the 'n/' prefix.
+     * @author ndhhh
+     * @throws ParseException
+     */
+    @Test
+    public void parse_nameWithPreambleWithSpaces_success() throws ParseException {
+        // Make new SortCommand
+        SortCommand c = parser.parse("some ran do       m pr  ea  mble    n/");
+        assertEquals(sortByNameCommand, c);
+    }
+
+    /**
+     * Tests parsing a sort command by name with preamble and extra arguments after the 'n/' prefix.
+     * @author ndhhh
+     * @throws ParseException
+     */
+    @Test
+    public void parse_nameWithPreambleAndExtraArgs_success() throws ParseException {
+        // Make new SortCommand
+        SortCommand c = parser.parse("some ran     n/ beepboop mmeee e oww  w");
+        assertEquals(sortByNameCommand, c);
+    }
+
+    @Test
+    public void parse_nameWithGibberish_success() throws ParseException {
+        // Make new SortCommand
+        SortCommand c = parser.parse("!@#$%^&*()_+ n/ <>?:\"{}|");
+        assertEquals(sortByNameCommand, c);
+    }
+
+    /**
+     * Tests parsing a sort command by exam scores with preamble before the 'ex/midterm' prefix.
+     * @author ndhhh
+     * @throws ParseException
+     */
+    @Test
+    public void parse_examWithPreamble() throws ParseException {
+        // Make new SortCommand
+        SortCommand c = parser.parse("ran  dom  pre   amble ex/midterm");
+        assertEquals(sortByMidtermCommand, c);
+
+        SortCommand c2 = parser.parse("!@#$%^&*()_+;,;.'/[=-098*&%$#%^&**]' ex/midterm");
+        assertEquals(sortByMidtermCommand, c2);
     }
 
     /**

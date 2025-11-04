@@ -24,21 +24,18 @@ public class SortCommandParser implements Parser<SortCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
-        // If just PREFIX_NAME, return SortCommand
-        if (args.trim().equals(PREFIX_NAME.getPrefix())) {
-            return new SortCommand(PREFIX_NAME);
-        }
-
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_EXAM);
 
-        if (isPrefixPresent(argMultimap, PREFIX_NAME) && isPrefixPresent(argMultimap, PREFIX_EXAM)) {
+        if (argMultimap.containsKey(PREFIX_NAME) && argMultimap.containsKey(PREFIX_EXAM)) {
             // Cannot have 2 or more existing prefixes!
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
-        } else if (isPrefixPresent(argMultimap, PREFIX_EXAM)) {
+        } else if (argMultimap.containsKey(PREFIX_EXAM)) {
             String examName = argMultimap.getValue(PREFIX_EXAM).get();
             Exam examType = ParserUtil.parseExam(examName);
             return new SortCommand(PREFIX_EXAM, examType);
+        } else if (argMultimap.containsKey(PREFIX_NAME)) {
+            return new SortCommand(PREFIX_NAME);
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }

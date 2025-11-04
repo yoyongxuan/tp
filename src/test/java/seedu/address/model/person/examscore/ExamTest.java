@@ -35,6 +35,9 @@ public class ExamTest {
 
         assertFalse(ExamList.MIDTERM.isValidScore(Integer.toString(-1)));
         assertFalse(ExamList.FINAL.isValidScore(Integer.toString(-1)));
+
+        assertFalse(ExamList.MIDTERM.isValidScore("1000000000000000000000000000000")); //Larger than integer limit
+        assertFalse(ExamList.FINAL.isValidScore("10000000000000000000000000000000")); //Larger than integer limit
     }
 
     @Test

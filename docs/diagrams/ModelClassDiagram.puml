@@ -52,7 +52,7 @@ Person *--> "1" Attendance
 Person *--> "*" Tag
 Person *-right-> "1" ExamScores
 ExamScores *--> "2" Score
-Score *-up-> "1" Exam
+Score o-up-> "1" Exam
 ExamList  -down-> "2" Exam
 
 Person -[hidden]up--> I
